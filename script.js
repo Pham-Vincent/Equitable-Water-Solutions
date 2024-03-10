@@ -7,6 +7,11 @@ function Load_Map(){
   (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
   ({key:config.apiKey, v: "weekly"});
 }
+
+//Calls function to load the map 
+Load_Map();
+
+
 async function initMap() {
   const { Map, Marker, InfoWindow } = await google.maps.importLibrary("maps");
 
@@ -15,6 +20,36 @@ async function initMap() {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
   });
+
+console.log("AJAX request started");
+
+$.ajax({
+    url: 'data.json',
+    dataType: 'json',
+    success: function(data) {
+        console.log("AJAX request completed successfully");
+
+        // Use the data to map points on the map
+        data.forEach(function(point) {
+            var mapCode = point.ic_site_id;
+            var desc1 = point.site_description1;
+            var latitude = parseFloat(point.lat_dd);
+            var longitude = parseFloat(point.long_dd);
+
+            // Now you can use latitude and longitude to map points on the map
+            // For example, if you're using Google Maps:
+            var marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: mapCode,
+                description: desc1
+            });
+        });
+    },
+    error: function(xhr, status, error) {
+        console.error('Error:', error);
+    }
+});
 
 
   /* Add markers to the map
@@ -122,29 +157,7 @@ window.switchGraph = switchGraph;
 window.openPopup = openPopup;
 window.closePopup = closePopup;
 
-//search function doesnt work???
-function search() {
-  //searchs HTML for element id "search-input" sets user input to lowercase
-  const searchInput = document.getElementById("search-input").value.toLowerCase();
 
-  //console.log("Marker title: ", markerInfo.getTitle);
-  //iterates through each marker, sets lowercase, then finds match with searchInput
-  marker.forEach(markerInfo => {
-      const markerTitle = markerInfo.title.toLowerCase();
 
-      if (markerTitle.includes(searchInput)) {
-          console.log("Match found!");
-          openPopup(marker);
-      } else {
-        console.log("not found");
-      }
-  });
-
-}
-document.getElementById("search-button").addEventListener("click", search);
-
-window.search = search;
-//Calls function to load the map 
-Load_Map();
 //Calls function to details to the map (Markers,Legend,etc)
 initMap();
