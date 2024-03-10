@@ -3,10 +3,21 @@ import config from '../config.js';
 let map;
 let customPopup;
 let markersData;
+let markers = []; //stores markers used in search()
+
 function Load_Map(){
   (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
   ({key:config.apiKey, v: "weekly"});
 }
+
+//object to store sets of images
+const imageSets = {
+  'images/Surry_Power_Station.png': ['images/linegraph1.png', 'images/Surry_Power_Station.png'],
+  'images/NorthAnnaNuclearPlant.png': ['images/linegraph2.png', 'images/NorthAnnaNuclearPlant.png'],
+  'images/powellcreek1.png': ['images/powellcreek2.png', 'images/powellcreek1.png'],
+  'images/walnutHill2.png': ['images/walnutHill1.png', 'images/walnutHill2.png']
+};
+
 async function initMap() {
   const { Map, Marker, InfoWindow } = await google.maps.importLibrary("maps");
 
@@ -20,10 +31,10 @@ async function initMap() {
   /* Add markers to the map
   array markersData that sets position(lng & lat) and the marker title */
   markersData = [
-    { position: { lat: 38.581805, lng: -77.268023 }, title: "Powells Creek", description: "this is fake data", graph: "images/powellcreek1.png"},
-    { position: { lat: 38.14749, lng: -76.98545 }, title: "walnut hill", description: "this is fake data", graph: "images/walnutHill2.png"},
-    { position: { lat: 37.17166667, lng: -76.70638889}, title: "Surry Power Station", description: "Source type: Surface Water Intake", graph: "images/Surry_Power_Station.png" },
-    { position: { lat: 38.063056, lng: -77.790556}, title: "NORTH ANNA NUCLEAR POWER PLANT", description: "Source type: Surface Water Intake", graph: "images/NorthAnnaNuclearPlant.png"},
+    { position: { lat: 38.581805, lng: -77.268023 }, title: "Powells Creek", description: "this is fake data", graph: "images/powellcreek1.png", state: "Prince William, VA"},
+    { position: { lat: 38.14749, lng: -76.98545 }, title: "walnut hill", description: "this is fake data", graph: "images/walnutHill2.png", state:"Westmoreland, VA"},
+    { position: { lat: 37.17166667, lng: -76.70638889}, title: "Surry Power Station", description: "Source type: Surface Water Intake", graph: "images/Surry_Power_Station.png", state: "Surry, VA"},
+    { position: { lat: 38.063056, lng: -77.790556}, title: "NORTH ANNA NUCLEAR POWER PLANT", description: "Source type: Surface Water Intake", graph: "images/NorthAnnaNuclearPlant.png", state:"Louisa, VA"},
     // Add more markers as needed
   ];
 
@@ -36,8 +47,10 @@ async function initMap() {
       title: markerInfo.title,
       description: markerInfo.description, 
       graph: markerInfo.graph,
+      state: markerInfo.state,
     });
-    
+
+    markers.push(marker);
     //infowindow for hover
     const infowindow = new InfoWindow({
       content: `
@@ -50,20 +63,48 @@ async function initMap() {
     //action for mouse hovering
     marker.addListener('mouseover', () => {
       infowindow.open(map, marker);
-    });
+    })
 
     marker.addListener('mouseout', () => {
       infowindow.close();
     });
     //adds interactive function to marker on click
     marker.addListener("click", () => {
-      openPopup(marker);
+      popUpLayer1(marker);
     });
   });
 }
 
+//first layer popup
+function popUpLayer1(marker){
+  //Close the currently open info window, if any
+  if (window.smallInfowindow) {
+    window.smallInfowindow.close();
+  }
+  const smallInfowindow = new google.maps.InfoWindow({
+    content: `
+      <div class="info-window">
+        <strong>${marker.getTitle()}</strong>
+        <p>${marker.state}</p>
+        <p>${marker.description}</p>
+        <button id="view-more-button" onclick="viewMore('${marker.graph}')">View More</button>
+      </div>
+    `,
+    maxWidth: 300,
+  });
+  
+  smallInfowindow.open(map, marker);
+  window.currentMarker = marker;
+  window.smallInfowindow = smallInfowindow;
+  
+}
+//Function to handle the view more button
+function viewMore(currentGraph) {
+  window.smallInfowindow.close();
+  openPopup(window.currentMarker, currentGraph);
+}
 //function finds id="popup" then sets HTML content inside the element with id="popup"
-function openPopup(marker) {
+function openPopup(marker, currentGraph) {
   customPopup = document.getElementById('popup');
   customPopup.innerHTML = `
     <h1>${marker.getTitle()}</h1>
@@ -86,62 +127,54 @@ function closePopup() {
   document.getElementById('overlay').style.display = 'none';
 }
 
-//fucntion to handle button graph
+//closes popup upon clicking overlay
+document.getElementById('overlay').addEventListener('click', closePopup);
+
+//fucntion to handle graph button
 function switchGraph(currentGraph) {
   const imgGraph = document.getElementById('img-graph');
-  
-  if (currentGraph === 'images/Surry_Power_Station.png') {
-    imgGraph.src = 'images/linegraph1.png';
-  } 
-  if(currentGraph === 'images/NorthAnnaNuclearPlant.png'){
-    imgGraph.src = 'images/linegraph2.png';
+  //Check if the currentGraph is in the imageSets object then toggle between images in the set
+  if (imageSets.hasOwnProperty(currentGraph)) {
+    const imageSet = imageSets[currentGraph];
+    imgGraph.src = (imgGraph.src.includes(imageSet[0])) ? imageSet[1] : imageSet[0];
   }
-  if(currentGraph === 'images/linegraph1.png'){
-    imgGraph.src = 'images/Surry_Power_Station.png';
-  }
-  if(currentGraph === 'images/linegraph2.png'){
-    imgGraph.src = 'images/NorthAnnaNuclearPlant.png';
-  }
-  if (currentGraph === 'images/powellcreek1.png') {
-    imgGraph.src = 'images/powellcreek2.png';
-  } 
-  if(currentGraph === 'images/powellcreek12.png'){
-    imgGraph.src = 'images/powellcreek1.png';
-  }
-  if(currentGraph === 'images/walnutHill2.png'){
-    imgGraph.src = 'images/walnutHill1.png';
-  }
-  if(currentGraph === 'images/walnutHill1.png'){
-    imgGraph.src = 'images/walnutHill2.png';
-  }
-  
 }
-window.switchGraph = switchGraph;
 
 //makes functions globally available
+window.switchGraph = switchGraph;
 window.openPopup = openPopup;
 window.closePopup = closePopup;
+window.popUpLayer1 = popUpLayer1;
+window.viewMore = viewMore;
 
-//search function doesnt work???
+//handles enter key for search()
+function handleKeyPress(event) {
+  if (event.keyCode === 13) {
+    const searchInput = document.getElementById("search-input").value.trim();
+    if (searchInput !== "") {
+      search();
+    }
+  }
+}
+
 function search() {
-  //searchs HTML for element id "search-input" sets user input to lowercase
+  // Search HTML for element id "search-input" and set user input to lowercase
   const searchInput = document.getElementById("search-input").value.toLowerCase();
 
-  //console.log("Marker title: ", markerInfo.getTitle);
-  //iterates through each marker, sets lowercase, then finds match with searchInput
-  marker.forEach(markerInfo => {
-      const markerTitle = markerInfo.title.toLowerCase();
+  // Iterate through each marker
+  markers.forEach(marker => {
+    const markerTitle = marker.getTitle().toLowerCase();
 
-      if (markerTitle.includes(searchInput)) {
-          console.log("Match found!");
-          openPopup(marker);
-      } else {
-        console.log("not found");
-      }
+    if (markerTitle.includes(searchInput)) {
+      console.log("Match found!");
+      openPopup(marker, marker.graph);
+    } else {
+      console.log("Not found");
+    }
   });
-
 }
-document.getElementById("search-button").addEventListener("click", search);
+//event listener for search enter press
+document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
 
 window.search = search;
 //Calls function to load the map 
