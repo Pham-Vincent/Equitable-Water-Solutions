@@ -67,7 +67,7 @@ body {
   display: none; 
 }
 
-/*styling for the button*/
+/*styling for the searchs*/
 .search{
   width: max-content;
   display: flex;
@@ -75,6 +75,11 @@ body {
   padding: 10px;
   border-radius: 20px;
   background: #f6f6f6;
+  margin-left: 600px;
+  margin-top: 15px;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .text{
