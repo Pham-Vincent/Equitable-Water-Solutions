@@ -1,5 +1,5 @@
 //Gets Google Maps APi Key
-import config from '../config.js';
+import config from './config.js';
 let map;
 let customPopup;
 let markersData;
@@ -36,13 +36,32 @@ $.ajax({
             var latitude = parseFloat(point.lat_dd);
             var longitude = parseFloat(point.long_dd);
 
-            // Now you can use latitude and longitude to map points on the map
-            // For example, if you're using Google Maps:
+            // Uses latitude and longitude to map points on the map
             var marker = new google.maps.Marker({
                 position: { lat: latitude, lng: longitude },
                 map: map,
                 title: mapCode,
                 description: desc1
+            });
+
+            const infowindow = new InfoWindow({
+              content: `
+              <div class = "info-window">
+              <strong>${marker.title}</strong>
+              </div>
+              `,
+              maxWidth: 300,
+            });
+
+            marker.addListener('mouseover', function() {
+              infowindow.open(map,marker);
+            });  
+            marker.addListener('mouseout', () => {
+              infowindow.close();
+            });
+            //adds interactive function to marker on click
+            marker.addListener("click", () => {
+              openPopup(marker);
             });
         });
     },
@@ -52,49 +71,6 @@ $.ajax({
 });
 
 
-  /* Add markers to the map
-  array markersData that sets position(lng & lat) and the marker title */
-  markersData = [
-    { position: { lat: 38.581805, lng: -77.268023 }, title: "Powells Creek", description: "this is fake data", graph: "images/powellcreek1.png"},
-    { position: { lat: 38.14749, lng: -76.98545 }, title: "walnut hill", description: "this is fake data", graph: "images/walnutHill2.png"},
-    { position: { lat: 37.17166667, lng: -76.70638889}, title: "Surry Power Station", description: "Source type: Surface Water Intake", graph: "images/Surry_Power_Station.png" },
-    { position: { lat: 38.063056, lng: -77.790556}, title: "NORTH ANNA NUCLEAR POWER PLANT", description: "Source type: Surface Water Intake", graph: "images/NorthAnnaNuclearPlant.png"},
-    // Add more markers as needed
-  ];
-
-  /* iterates through each marker and places position on map
-  (markersInfo => takes data from markersData and puts them into markersInfo */
-  markersData.forEach(markerInfo => {
-    const marker = new google.maps.Marker({ 
-      position: markerInfo.position, 
-      map: map,
-      title: markerInfo.title,
-      description: markerInfo.description, 
-      graph: markerInfo.graph,
-    });
-    
-    //infowindow for hover
-    const infowindow = new InfoWindow({
-      content: `
-      <div class = "info-window">
-      <strong>${markerInfo.title}</strong>
-      </div>
-      `,
-      maxWidth: 300,
-    });
-    //action for mouse hovering
-    marker.addListener('mouseover', () => {
-      infowindow.open(map, marker);
-    });
-
-    marker.addListener('mouseout', () => {
-      infowindow.close();
-    });
-    //adds interactive function to marker on click
-    marker.addListener("click", () => {
-      openPopup(marker);
-    });
-  });
 }
 
 //function finds id="popup" then sets HTML content inside the element with id="popup"
@@ -103,9 +79,6 @@ function openPopup(marker) {
   customPopup.innerHTML = `
     <h1>${marker.getTitle()}</h1>
     <div class="info-window">
-      <p>Latitude: ${marker.getPosition().lat()}   Longitude: ${marker.getPosition().lng()} </p>
-      <button id="graph-button" onclick="switchGraph('${marker.graph}')">Graphs</button>
-      <img id="img-graph" src="${marker.graph}" alt="graph" style="width:400px;height:370px;">
       <p>${marker.description}</p>
       <div id="close-button" onclick="closePopup()">X</div>
     </div>
@@ -120,38 +93,6 @@ function closePopup() {
   customPopup.style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }
-
-//fucntion to handle button graph
-function switchGraph(currentGraph) {
-  const imgGraph = document.getElementById('img-graph');
-  
-  if (currentGraph === 'images/Surry_Power_Station.png') {
-    imgGraph.src = 'images/linegraph1.png';
-  } 
-  if(currentGraph === 'images/NorthAnnaNuclearPlant.png'){
-    imgGraph.src = 'images/linegraph2.png';
-  }
-  if(currentGraph === 'images/linegraph1.png'){
-    imgGraph.src = 'images/Surry_Power_Station.png';
-  }
-  if(currentGraph === 'images/linegraph2.png'){
-    imgGraph.src = 'images/NorthAnnaNuclearPlant.png';
-  }
-  if (currentGraph === 'images/powellcreek1.png') {
-    imgGraph.src = 'images/powellcreek2.png';
-  } 
-  if(currentGraph === 'images/powellcreek12.png'){
-    imgGraph.src = 'images/powellcreek1.png';
-  }
-  if(currentGraph === 'images/walnutHill2.png'){
-    imgGraph.src = 'images/walnutHill1.png';
-  }
-  if(currentGraph === 'images/walnutHill1.png'){
-    imgGraph.src = 'images/walnutHill2.png';
-  }
-  
-}
-window.switchGraph = switchGraph;
 
 //makes functions globally available
 window.openPopup = openPopup;
