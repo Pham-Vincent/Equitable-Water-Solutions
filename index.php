@@ -24,7 +24,7 @@
 
   mysqli_set_charset($conn, 'utf8');
   
-  $sql = "SELECT ic_site_id, site_description1, lat_dd, long_dd FROM SurfaceWater_Withdrawals"; // Adjust table and column names as per your database schema
+  $sql = "SELECT ic_site_id, site_description1, state_name, county_name, lat_dd, long_dd FROM SurfaceWater_Withdrawals"; // Adjust table and column names as per your database schema
   $result = $conn->query($sql);
 
   $data = array();
@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
   $json = json_encode($data);
 
   //create json file with stored data
-  $file = 'data.json';
+  $file = 'Surface_Withdraw.json';
   file_put_contents($file, $json);
 
   echo "Data has been written to $file";

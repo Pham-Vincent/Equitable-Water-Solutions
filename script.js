@@ -24,7 +24,7 @@ async function initMap() {
 console.log("AJAX request started");
 
 $.ajax({
-    url: 'data.json',
+    url: 'Surface_Withdraw.json',
     dataType: 'json',
     success: function(data) {
         console.log("AJAX request completed successfully");
@@ -35,13 +35,19 @@ $.ajax({
             var desc1 = point.site_description1;
             var latitude = parseFloat(point.lat_dd);
             var longitude = parseFloat(point.long_dd);
+            var stateName = point.state_name;
+            var countyName = point.county_name;
 
             // Uses latitude and longitude to map points on the map
             var marker = new google.maps.Marker({
                 position: { lat: latitude, lng: longitude },
                 map: map,
                 title: mapCode,
-                description: desc1
+                descriptions: {
+                  description1: desc1,
+                  description2: stateName, 
+                  description3: countyName
+              }
             });
 
             const infowindow = new InfoWindow({
@@ -79,7 +85,8 @@ function openPopup(marker) {
   customPopup.innerHTML = `
     <h1>${marker.getTitle()}</h1>
     <div class="info-window">
-      <p>${marker.description}</p>
+      <p>${marker.descriptions.description1}</p>
+      <p>${marker.descriptions.description3} ${marker.descriptions.description2}</p>
       <div id="close-button" onclick="closePopup()">X</div>
     </div>
     
