@@ -5,6 +5,7 @@ let customPopup;
 let markersData;
 let markers = []; //stores markers used in search()
 
+
 function Load_Map(){
   (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"places");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
   ({key:config.apiKey, v: "weekly"});
@@ -64,21 +65,24 @@ async function initMap() {
     });
     //action for mouse hovering
     marker.addListener('mouseover', () => {
-      infowindow.open(map, marker);
+      if (!window.popupLayerOpen && marker.getTitle(0 != window.popupTitle)) {
+        infowindow.open(map, marker);
+      }
     });
 
     marker.addListener('mouseout', () => {
-      infowindow.close();
+      if (!window.popupLayerOpen) {
+        infowindow.close();
+      }
     });
     //adds interactive function to marker on click
     marker.addListener("click", () => {
       popUpLayer1(marker);
+      infowindow.close();
+      window.popupLayerOpen = true;
     });
   });
 
-  const input = document.getElementById("search-input");
-  const searchBox = new google.maps.places.SearchBox(input);
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 }
 
 //first layer popup
@@ -87,6 +91,9 @@ function popUpLayer1(marker){
   if (window.smallInfowindow) {
     window.smallInfowindow.close();
   }
+  
+  const popupTitle = marker.getTitle();
+
   const smallInfowindow = new google.maps.InfoWindow({
     content: `
       <div class="info-window">
@@ -98,10 +105,21 @@ function popUpLayer1(marker){
     `,
     maxWidth: 300,
   });
+  //closes window if clicking outside
+  google.maps.event.addListener(map, 'click', function () {
+    smallInfowindow.close();
+    window.popupLayerOpen = false;
+  });
   
   smallInfowindow.open(map, marker);
   window.currentMarker = marker;
   window.smallInfowindow = smallInfowindow;
+  window.popupTitle = popupTitle;
+
+  smallInfowindow.addListener('closeclick', () => {
+    window.popupLayerOpen = false;
+  });
+
   
 }
 //Function to handle the view more button
