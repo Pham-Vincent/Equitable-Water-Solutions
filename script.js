@@ -24,19 +24,18 @@ async function initMap() {
 console.log("AJAX request started");
 
 $.ajax({
-    url: 'Surface_Withdraw.json',
+    url: 'Va_Permit.json',
     dataType: 'json',
     success: function(data) {
         console.log("AJAX request completed successfully");
 
         // Use the data to map points on the map
         data.forEach(function(point) {
-            var mapCode = point.ic_site_id;
-            var desc1 = point.site_description1;
-            var latitude = parseFloat(point.lat_dd);
-            var longitude = parseFloat(point.long_dd);
-            var stateName = point.state_name;
-            var countyName = point.county_name;
+            var mapCode = point.Hydrocode;
+            var desc1 = point.Source_Type;
+            var latitude = parseFloat(point.Latitude);
+            var longitude = parseFloat(point.Longitude);
+            var locality = point.Locality;
 
             // Uses latitude and longitude to map points on the map
             var marker = new google.maps.Marker({
@@ -45,8 +44,7 @@ $.ajax({
                 title: mapCode,
                 descriptions: {
                   description1: desc1,
-                  description2: stateName, 
-                  description3: countyName
+                  description2: locality
               }
             });
 
@@ -59,15 +57,22 @@ $.ajax({
               maxWidth: 300,
             });
 
-            marker.addListener('mouseover', function() {
-              infowindow.open(map,marker);
-            });  
+            marker.addListener('mouseover', () => {
+              if (!window.popupLayerOpen && marker.getTitle(0 != window.popupTitle)) {
+                infowindow.open(map, marker);
+              }
+            });
+        
             marker.addListener('mouseout', () => {
-              infowindow.close();
+              if (!window.popupLayerOpen) {
+                infowindow.close();
+              }
             });
             //adds interactive function to marker on click
             marker.addListener("click", () => {
-              openPopup(marker);
+              popUpLayer1(marker);
+              infowindow.close();
+              window.popupLayerOpen = true;
             });
         });
     },
@@ -79,6 +84,79 @@ $.ajax({
 
 }
 
+//START HERE
+//first layer popup
+function popUpLayer1(marker){
+  //Close the currently open info window, if any
+  if (window.smallInfowindow) {
+    window.smallInfowindow.close();
+  }
+  
+  const popupTitle = marker.getTitle();
+
+  const smallInfowindow = new google.maps.InfoWindow({
+    content: `
+      <div class="info-window">
+        <strong>${marker.getTitle()}</strong>
+        <p>${marker.descriptions.description1}</p>
+        <p>${marker.descriptions.description2}</p>
+      </div>
+    `,
+    maxWidth: 300,
+  });
+  //closes window if clicking outside
+  google.maps.event.addListener(map, 'click', function () {
+    smallInfowindow.close();
+    window.popupLayerOpen = false;
+  });
+  
+  smallInfowindow.open(map, marker);
+  window.currentMarker = marker;
+  window.smallInfowindow = smallInfowindow;
+  window.popupTitle = popupTitle;
+
+  smallInfowindow.addListener('closeclick', () => {
+    window.popupLayerOpen = false;
+  });
+
+  
+}
+//Function to handle the view more button
+function viewMore(currentGraph) {
+  window.smallInfowindow.close();
+  openPopup(window.currentMarker, currentGraph);
+}
+//function finds id="popup" then sets HTML content inside the element with id="popup"
+function openPopup(marker, currentGraph) {
+  customPopup = document.getElementById('popup');
+  customPopup.innerHTML = `
+    <h1>${marker.getTitle()}</h1>
+    <div class="info-window">
+      <p>${marker.descriptions}</p>
+      <div id="close-button" onclick="closePopup()">X</div>
+    </div>
+  `;
+  customPopup.style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+}
+
+function closePopup() {
+  customPopup = document.getElementById('popup');
+  customPopup.style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+
+//closes popup upon clicking overlay
+document.getElementById('overlay').addEventListener('click', closePopup);
+
+
+
+
+//END HERE
+
+
+/*
+
 //function finds id="popup" then sets HTML content inside the element with id="popup"
 function openPopup(marker) {
   customPopup = document.getElementById('popup');
@@ -86,7 +164,7 @@ function openPopup(marker) {
     <h1>${marker.getTitle()}</h1>
     <div class="info-window">
       <p>${marker.descriptions.description1}</p>
-      <p>${marker.descriptions.description3} ${marker.descriptions.description2}</p>
+      <p>${marker.descriptions.description2}</p>
       <div id="close-button" onclick="closePopup()">X</div>
     </div>
     
@@ -100,6 +178,10 @@ function closePopup() {
   customPopup.style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }
+
+
+*/
+
 
 //makes functions globally available
 window.openPopup = openPopup;
