@@ -6,13 +6,23 @@
 
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <script type="module" src="./script.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   </head>
-  <body>
-    
-    <div id="map"></div>
-    <!-- popup -->
-    <div id="popup"></div>
-    <div id="overlay" class="overlay"></div>
+  <body>             
+    <!-- map container -->
+    <div id="map-container">
+      
+      <!-- search bar -->
+      <div class="search">
+       <span class="search-icon material-symbols-outlined">search</span>
+       <input class="text" id="search-input" placeholder="Enter Location">
+      </div>
+      <div id="map"></div>
+      
 
+    <!-- popup -->
+      <div id="popup"></div>
+      <div id="overlay" class="overlay"></div>
+    </div>
   </body>
 </html>
