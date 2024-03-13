@@ -1,5 +1,5 @@
 //Gets Google Maps APi Key
-import config from '../config.js';
+import config from './config.js';
 let map;
 let customPopup;
 let markersData;
@@ -11,14 +11,6 @@ function Load_Map(){
   ({key:config.apiKey, v: "weekly"});
 }
 
-//object to store sets of images
-const imageSets = {
-  'images/Surry_Power_Station.png': ['images/linegraph1.png', 'images/Surry_Power_Station.png'],
-  'images/NorthAnnaNuclearPlant.png': ['images/linegraph2.png', 'images/NorthAnnaNuclearPlant.png'],
-  'images/powellcreek1.png': ['images/powellcreek2.png', 'images/powellcreek1.png'],
-  'images/walnutHill2.png': ['images/walnutHill1.png', 'images/walnutHill2.png']
-};
-
 async function initMap() {
   const { Map, Marker, InfoWindow } = await google.maps.importLibrary("maps");
 
@@ -28,16 +20,63 @@ async function initMap() {
     zoom: 8,
   });
 
+console.log("AJAX request started");
 
-  /* Add markers to the map
-  array markersData that sets position(lng & lat) and the marker title */
-  markersData = [
-    { position: { lat: 38.581805, lng: -77.268023 }, title: "Powells Creek", description: "this is fake data", graph: "images/powellcreek1.png", state: "Prince William, VA"},
-    { position: { lat: 38.14749, lng: -76.98545 }, title: "walnut hill", description: "this is fake data", graph: "images/walnutHill2.png", state:"Westmoreland, VA"},
-    { position: { lat: 37.17166667, lng: -76.70638889}, title: "Surry Power Station", description: "Source type: Surface Water Intake", graph: "images/Surry_Power_Station.png", state: "Surry, VA"},
-    { position: { lat: 38.063056, lng: -77.790556}, title: "NORTH ANNA NUCLEAR POWER PLANT", description: "Source type: Surface Water Intake", graph: "images/NorthAnnaNuclearPlant.png", state:"Louisa, VA"},
-    // Add more markers as needed
-  ];
+$.ajax({
+    url: 'Surface_Withdraw.json',
+    dataType: 'json',
+    success: function(data) {
+        console.log("AJAX request completed successfully");
+
+        // Use the data to map points on the map
+        data.forEach(function(point) {
+            var mapCode = point.ic_site_id;
+            var desc1 = point.site_description1;
+            var latitude = parseFloat(point.lat_dd);
+            var longitude = parseFloat(point.long_dd);
+            var stateName = point.state_name;
+            var countyName = point.county_name;
+
+            // Uses latitude and longitude to map points on the map
+            var marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: mapCode,
+                descriptions: {
+                  description1: desc1,
+                  description2: stateName, 
+                  description3: countyName
+              }
+            });
+
+            const infowindow = new InfoWindow({
+              content: `
+              <div class = "info-window">
+              <strong>${marker.title}</strong>
+              </div>
+              `,
+              maxWidth: 300,
+            });
+
+            marker.addListener('mouseover', function() {
+              infowindow.open(map,marker);
+            });  
+            marker.addListener('mouseout', () => {
+              infowindow.close();
+            });
+            //adds interactive function to marker on click
+            marker.addListener("click", () => {
+              openPopup(marker);
+            });
+        });
+    },
+    error: function(xhr, status, error) {
+        console.error('Error:', error);
+    }
+});
+
+
+
 
   /* iterates through each marker and places position on map
   (markersInfo => takes data from markersData and puts them into markersInfo */
@@ -82,6 +121,7 @@ async function initMap() {
       window.popupLayerOpen = true;
     });
   });
+
 
 }
 
@@ -133,10 +173,8 @@ function openPopup(marker, currentGraph) {
   customPopup.innerHTML = `
     <h1>${marker.getTitle()}</h1>
     <div class="info-window">
-      <p>Latitude: ${marker.getPosition().lat()}   Longitude: ${marker.getPosition().lng()} </p>
-      <button id="graph-button" onclick="switchGraph('${marker.graph}')">Graphs</button>
-      <img id="img-graph" src="${marker.graph}" alt="graph" style="width:400px;height:370px;">
-      <p>${marker.description}</p>
+      <p>${marker.descriptions.description1}</p>
+      <p>${marker.descriptions.description3} ${marker.descriptions.description2}</p>
       <div id="close-button" onclick="closePopup()">X</div>
     </div>
   `;
@@ -149,6 +187,7 @@ function closePopup() {
   customPopup.style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }
+
 
 //closes popup upon clicking overlay
 document.getElementById('overlay').addEventListener('click', closePopup);
@@ -181,6 +220,7 @@ function handleKeyPress(event) {
 }
 
 
+
 function search() {
   //Search HTML for element id "search-input" and set user input to lowercase
   const searchInput = document.getElementById("search-input").value.toLowerCase();
@@ -200,7 +240,6 @@ function search() {
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
 
-window.search = search;
 //Calls function to load the map 
 Load_Map();
 //Calls function to details to the map (Markers,Legend,etc)
