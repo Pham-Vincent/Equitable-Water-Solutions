@@ -1,5 +1,5 @@
 <?php 
-  $envFile = __DIR__ . '/.env';
+  $envFile = __DIR__ . '/../env/.env';
   if (file_exists($envFile)) {
       $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       foreach ($lines as $line) {
@@ -14,7 +14,7 @@
   $user = getenv('DB_USER');
   $password = getenv('DB_PASS');
   $database = getenv('DB_NAME');
-  
+
 
   
   $conn=new mysqli($host, $user, $password, $database);
@@ -44,9 +44,13 @@ if ($result->num_rows > 0) {
   //encode data as json
   $json = json_encode($data);
 
+  //Directory its going to be stored as
+  $directory = __DIR__ . '/../json/';
   //create json file with stored data
-  $file = 'Va_Permit.json';
-  file_put_contents($file, $json);
+  $file = 'Va_Permit.json'; 
+  //create File Path where the data is going to be stored
+  $filepath = $directory . $file;
+  file_put_contents($filepath, $json);
 
   echo "Data has been written to $file";
   

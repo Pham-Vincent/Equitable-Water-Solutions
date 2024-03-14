@@ -23,7 +23,8 @@ async function initMap() {
 console.log("AJAX request started");
 
 $.ajax({
-    url: 'Va_Permit.json',
+    url: 'static/json/Va_Permit.json',
+    type:"GET",
     dataType: 'json',
     success: function(data) {
         console.log("AJAX request completed successfully");
