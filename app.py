@@ -4,7 +4,6 @@ import numpy as np
 import io
 import base64 
 
-
 app = Flask(__name__)
 plt.switch_backend('agg')
 @app.route('/create_graph',methods=['GET', 'POST'])

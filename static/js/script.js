@@ -74,60 +74,13 @@ $.ajax({
               infowindow.close();
               window.popupLayerOpen = true;
             });
+            
         });
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
     }
 });
-
-
-
-
-  /* iterates through each marker and places position on map
-  (markersInfo => takes data from markersData and puts them into markersInfo */
-  markersData.forEach(markerInfo => {
-    const marker = new google.maps.Marker({ 
-      position: markerInfo.position, 
-      map: map,
-      title: markerInfo.title,
-      description: markerInfo.description, 
-      graph: markerInfo.graph,
-      state: markerInfo.state,
-    }); 
-
-
-    //adds marker to array, used in search()
-    markers.push(marker);
-    //infowindow for hover
-    const infowindow = new InfoWindow({
-      content: `
-      <div class = "info-window">
-      <strong>${markerInfo.title}</strong>
-      </div>
-      `,
-      maxWidth: 300,
-    });
-    //action for mouse hovering
-    marker.addListener('mouseover', () => {
-      if (!window.popupLayerOpen && marker.getTitle(0 != window.popupTitle)) {
-        infowindow.open(map, marker);
-      }
-    });
-
-    marker.addListener('mouseout', () => {
-      if (!window.popupLayerOpen) {
-        infowindow.close();
-      }
-    });
-    //adds interactive function to marker on click
-    marker.addListener("click", () => {
-      popUpLayer1(marker);
-      infowindow.close();
-      window.popupLayerOpen = true;
-    });
-  });
-
 
 }
 
@@ -186,6 +139,8 @@ function openPopup(marker, currentGraph) {
     <div class="info-window">
       <p>${marker.descriptions.description1}</p>
       <p>${marker.descriptions.description2}</p>
+      <img id ="Graph">
+      <button id ="btn">Click to Graph</button>
       <div id="close-button" onclick="closePopup()">X</div>
     </div>
   `;
