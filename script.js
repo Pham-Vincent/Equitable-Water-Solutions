@@ -46,7 +46,7 @@ $.ajax({
                   description2: locality
               }
             });
-
+            markers.push(marker);
             const infowindow = new InfoWindow({
               content: `
               <div class = "info-window">
