@@ -30,23 +30,36 @@ $.ajax({
         console.log("AJAX request completed successfully");
 
         // Use the data to map points on the map
-        data.forEach(function(point) {
-            var mapCode = point.Hydrocode;
-            var desc1 = point.Source_Type;
-            var latitude = parseFloat(point.Latitude);
-            var longitude = parseFloat(point.Longitude);
-            var locality = point.Locality;
+         // Use the data given in json file
+      data.forEach(function(point) {
+        var mapCode = point.Hydrocode;
+        var desc1 = point.Source_Type;
+        var latitude = parseFloat(point.Latitude);
+        var longitude = parseFloat(point.Longitude);
+        var locality = point.Locality;
+        var point1 = parseFloat(point.Year_2016);
+        var point2 = parseFloat(point.Year_2017);
+        var point3 = parseFloat(point.Year_2018);
+        var point4 = parseFloat(point.Year_2019);
+        var point5 = parseFloat(point.Year_2020);
 
-            // Uses latitude and longitude to map points on the map
-            var marker = new google.maps.Marker({
-                position: { lat: latitude, lng: longitude },
-                map: map,
-                title: mapCode,
-                descriptions: {
-                  description1: desc1,
-                  description2: locality
-              }
-            });
+        // Uses latitude and longitude to map points on the map
+        var marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+            title: mapCode,
+            descriptions: {
+              description1: desc1,
+              description2: locality
+          },
+          points: {
+            point1: point1,
+            point2: point2,
+            point3: point3,
+            point4: point4,
+            point5: point5
+          }
+        });
             markers.push(marker);
             const infowindow = new InfoWindow({
               content: `
@@ -74,6 +87,7 @@ $.ajax({
               infowindow.close();
               window.popupLayerOpen = true;
             });
+           
             
         });
     },
@@ -146,6 +160,23 @@ function openPopup(marker, currentGraph) {
   `;
   customPopup.style.display = 'block';
   document.getElementById('overlay').style.display = 'block';
+  
+  $("#btn").click(preformPost);
+
+  function preformPost(){
+   $.ajax({ 
+    type:"POST",
+    url:"http://127.0.0.1:5000/create_graph",
+    data: marker.points,
+     success: function(response){
+      $('#Graph').attr('src', response.src);
+      $('#Graph').attr('alt', response.alt);
+    }
+  });
+  
+};
+
+  
 }
 
 function closePopup() {
