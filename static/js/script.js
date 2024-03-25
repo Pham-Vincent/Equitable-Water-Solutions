@@ -23,29 +23,43 @@ async function initMap() {
 console.log("AJAX request started");
 
 $.ajax({
-    url: 'Va_Permit.json',
+    url: 'static/json/Va_Permit.json',
+    type:"GET",
     dataType: 'json',
     success: function(data) {
         console.log("AJAX request completed successfully");
 
         // Use the data to map points on the map
-        data.forEach(function(point) {
-            var mapCode = point.Hydrocode;
-            var desc1 = point.Source_Type;
-            var latitude = parseFloat(point.Latitude);
-            var longitude = parseFloat(point.Longitude);
-            var locality = point.Locality;
+         // Use the data given in json file
+      data.forEach(function(point) {
+        let mapCode = point.Hydrocode;
+        let desc1 = point.Source_Type;
+        let latitude = parseFloat(point.Latitude);
+        let longitude = parseFloat(point.Longitude);
+        let locality = point.Locality;
+        let point1 = parseFloat(point.Year_2016);
+        let point2 = parseFloat(point.Year_2017);
+        let point3 = parseFloat(point.Year_2018);
+        let point4 = parseFloat(point.Year_2019);
+        let point5 = parseFloat(point.Year_2020);
 
-            // Uses latitude and longitude to map points on the map
-            var marker = new google.maps.Marker({
-                position: { lat: latitude, lng: longitude },
-                map: map,
-                title: mapCode,
-                descriptions: {
-                  description1: desc1,
-                  description2: locality
-              }
-            });
+        // Uses latitude and longitude to map points on the map
+        var marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+            title: mapCode,
+            descriptions: {
+              description1: desc1,
+              description2: locality
+          },
+          points: {
+            point1: point1,
+            point2: point2,
+            point3: point3,
+            point4: point4,
+            point5: point5
+          }
+        });
             markers.push(marker);
             const infowindow = new InfoWindow({
               content: `
@@ -73,60 +87,14 @@ $.ajax({
               infowindow.close();
               window.popupLayerOpen = true;
             });
+           
+            
         });
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
     }
 });
-
-
-
-
-  /* iterates through each marker and places position on map
-  (markersInfo => takes data from markersData and puts them into markersInfo */
-  markersData.forEach(markerInfo => {
-    const marker = new google.maps.Marker({ 
-      position: markerInfo.position, 
-      map: map,
-      title: markerInfo.title,
-      description: markerInfo.description, 
-      graph: markerInfo.graph,
-      state: markerInfo.state,
-    }); 
-
-
-    //adds marker to array, used in search()
-    markers.push(marker);
-    //infowindow for hover
-    const infowindow = new InfoWindow({
-      content: `
-      <div class = "info-window">
-      <strong>${markerInfo.title}</strong>
-      </div>
-      `,
-      maxWidth: 300,
-    });
-    //action for mouse hovering
-    marker.addListener('mouseover', () => {
-      if (!window.popupLayerOpen && marker.getTitle(0 != window.popupTitle)) {
-        infowindow.open(map, marker);
-      }
-    });
-
-    marker.addListener('mouseout', () => {
-      if (!window.popupLayerOpen) {
-        infowindow.close();
-      }
-    });
-    //adds interactive function to marker on click
-    marker.addListener("click", () => {
-      popUpLayer1(marker);
-      infowindow.close();
-      window.popupLayerOpen = true;
-    });
-  });
-
 
 }
 
@@ -185,11 +153,34 @@ function openPopup(marker, currentGraph) {
     <div class="info-window">
       <p>${marker.descriptions.description1}</p>
       <p>${marker.descriptions.description2}</p>
+
+     
+      <img id ="Graph">
+      <button id ="btn">Click to Graph</button>
+
       <div id="close-button" onclick="closePopup()">X</div>
     </div>
   `;
   customPopup.style.display = 'block';
   document.getElementById('overlay').style.display = 'block';
+  
+  $("#btn").click(preformPost);
+
+  // Function to handle button click event for generating the graph
+  function preformPost(){
+   $.ajax({ 
+    type:"POST",
+    url:config.hostname + "/create_graph",
+    data: marker.points,
+     success: function(response){
+      $('#Graph').attr('src', response.src);
+      $('#Graph').attr('alt', response.alt);
+    }
+  });
+  
+};
+
+  
 }
 
 function closePopup() {
