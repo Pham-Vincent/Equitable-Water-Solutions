@@ -154,7 +154,7 @@ function openPopup(marker, currentGraph) {
       <p>${marker.descriptions.description1}</p>
       <p>${marker.descriptions.description2}</p>
 
-      // Id that will be replaced by image
+     
       <img id ="Graph">
       <button id ="btn">Click to Graph</button>
 
@@ -170,7 +170,7 @@ function openPopup(marker, currentGraph) {
   function preformPost(){
    $.ajax({ 
     type:"POST",
-    url:"http://127.0.0.1:5000/create_graph",
+    url:config.hostname + "/create_graph",
     data: marker.points,
      success: function(response){
       $('#Graph').attr('src', response.src);
