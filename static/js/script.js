@@ -32,16 +32,16 @@ $.ajax({
         // Use the data to map points on the map
          // Use the data given in json file
       data.forEach(function(point) {
-        var mapCode = point.Hydrocode;
-        var desc1 = point.Source_Type;
-        var latitude = parseFloat(point.Latitude);
-        var longitude = parseFloat(point.Longitude);
-        var locality = point.Locality;
-        var point1 = parseFloat(point.Year_2016);
-        var point2 = parseFloat(point.Year_2017);
-        var point3 = parseFloat(point.Year_2018);
-        var point4 = parseFloat(point.Year_2019);
-        var point5 = parseFloat(point.Year_2020);
+        let mapCode = point.Hydrocode;
+        let desc1 = point.Source_Type;
+        let latitude = parseFloat(point.Latitude);
+        let longitude = parseFloat(point.Longitude);
+        let locality = point.Locality;
+        let point1 = parseFloat(point.Year_2016);
+        let point2 = parseFloat(point.Year_2017);
+        let point3 = parseFloat(point.Year_2018);
+        let point4 = parseFloat(point.Year_2019);
+        let point5 = parseFloat(point.Year_2020);
 
         // Uses latitude and longitude to map points on the map
         var marker = new google.maps.Marker({
@@ -153,8 +153,11 @@ function openPopup(marker, currentGraph) {
     <div class="info-window">
       <p>${marker.descriptions.description1}</p>
       <p>${marker.descriptions.description2}</p>
+
+     
       <img id ="Graph">
       <button id ="btn">Click to Graph</button>
+
       <div id="close-button" onclick="closePopup()">X</div>
     </div>
   `;
@@ -163,10 +166,11 @@ function openPopup(marker, currentGraph) {
   
   $("#btn").click(preformPost);
 
+  // Function to handle button click event for generating the graph
   function preformPost(){
    $.ajax({ 
     type:"POST",
-    url:"http://127.0.0.1:5000/create_graph",
+    url:config.hostname + "/create_graph",
     data: marker.points,
      success: function(response){
       $('#Graph').attr('src', response.src);
