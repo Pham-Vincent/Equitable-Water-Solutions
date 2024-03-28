@@ -71,13 +71,13 @@ $.ajax({
             });
 
             marker.addListener('mouseover', () => {
-              if (!window.popupLayerOpen && marker.getTitle(0 != window.popupTitle)) {
+              if (!window.popupLayerOpen || marker !== window.currentMarker) {
                 infowindow.open(map, marker);
               }
             });
         
             marker.addListener('mouseout', () => {
-              if (!window.popupLayerOpen) {
+              if (!window.popupLayerOpen || marker !== window.currentMarker) {
                 infowindow.close();
               }
             });
@@ -111,7 +111,7 @@ function popUpLayer1(marker){
   const smallInfowindow = new google.maps.InfoWindow({
     content: `
       <div class="info-window">
-        <strong>${marker.getTitle()}</strong>
+        <strong style="color:green">${marker.getTitle()}</strong>
 
         <p>${marker.descriptions.description1}</p>
         <p>${marker.descriptions.description2}</p>
@@ -223,10 +223,9 @@ function handleKeyPress(event) {
 }
 
 
-
 function search() {
   //Search HTML for element id "search-input" and set user input to lowercase
-  const searchInput = document.getElementById("search-input").value.toLowerCase();
+  const searchInput = document.getElementById("search-input").value.trim().toLowerCase();
 
   //Iterate through each marker
   markers.forEach(marker => {
@@ -234,7 +233,11 @@ function search() {
 
     if (markerTitle.includes(searchInput)) {
       console.log("Match found!");
-      openPopup(marker, marker.graph);
+      map.panTo(marker.getPosition());
+      map.setZoom(12);
+      popUpLayer1(marker);
+      infowindow.close();
+      window.popupLayerOpen = true;
     } else {
       console.log("Not found");
     }

@@ -75,8 +75,8 @@ body {
   padding: 10px;
   border-radius: 20px;
   background: #f6f6f6;
-  margin-left: 600px;
-  margin-top: 15px;
+  margin-left: 200px;
+  margin-top: 8px;
   position: absolute;
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -91,6 +91,7 @@ body {
   border: none;
   background: transparent;
 }
+
 
 
 
