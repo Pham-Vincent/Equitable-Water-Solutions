@@ -101,6 +101,35 @@ $.ajax({
           gridSize: 50, // Adjust as needed
           maxZoom: 15 // Adjust as needed
         });
+
+        google.maps.event.addListener(markerCluster, 'clusterclick', function(cluster) {
+          var markers = cluster.getMarkers();
+          var averageLat = 0;
+          var averageLng = 0;
+        
+          //Calculate the average position of markers in the cluster
+          for(var i = 0; i < markers.length; i++) {
+            averageLat += markers[i].getPosition().lat();
+            averageLng += markers[i].getPosition().lng();
+          }
+
+          averageLat /= markers.length;
+          averageLng /= markers.length;
+
+          //Draw polylines from average position to each marker
+          for(var i = 0; i < markers.length; i++) {
+            var polyline = new google.maps.Polyline({
+              path: [
+                { lat: averageLat, lng: averageLng },
+                markers[i].getPosition()
+              ],
+              strokeColor: 'FF000',
+              strokeOpacity: 0.5,
+              strokeWeight: 2,
+              map: map
+            });
+          }
+        });
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
