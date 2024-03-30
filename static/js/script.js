@@ -22,6 +22,11 @@ async function initMap() {
 
 console.log("AJAX request started");
 
+
+/*
+AJAX connects to VA json file and extracts data
+Uses data to populate map with markers at specific Longitude/Latitude
+*/
 $.ajax({
     url: 'static/json/Va_Permit.json',
     type:"GET",
@@ -89,6 +94,12 @@ $.ajax({
             });
            
             
+        });
+
+        const markerCluster = new MarkerClusterer(map, markers, {
+          imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+          gridSize: 50, // Adjust as needed
+          maxZoom: 15 // Adjust as needed
         });
     },
     error: function(xhr, status, error) {
