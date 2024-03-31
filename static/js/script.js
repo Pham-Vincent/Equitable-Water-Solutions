@@ -1,8 +1,8 @@
 //Gets Google Maps APi Key
 import config from './config.js';
+import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
+import { search } from './search.js';
 let map;
-let customPopup;
-let markersData;
 let markers = []; //stores markers used in search()
 
 
@@ -21,7 +21,6 @@ async function initMap() {
   });
 
 console.log("AJAX request started");
-
 
 /*
 AJAX connects to VA json file and extracts data
@@ -88,7 +87,7 @@ $.ajax({
             });
             //adds interactive function to marker on click
             marker.addListener("click", () => {
-              popUpLayer1(marker);
+              popUpLayer1(marker, map);
               infowindow.close();
               window.popupLayerOpen = true;
             });
@@ -109,154 +108,20 @@ $.ajax({
 
 }
 
-
-//first layer popup
-function popUpLayer1(marker){
-  //Close the currently open info window, if any
-  if (window.smallInfowindow) {
-    window.smallInfowindow.close();
-  }
-  
-  const popupTitle = marker.getTitle();
-
-  const smallInfowindow = new google.maps.InfoWindow({
-    content: `
-      <div class="info-window">
-        <strong style="color:green">${marker.getTitle()}</strong>
-
-        <p>${marker.descriptions.description1}</p>
-        <p>${marker.descriptions.description2}</p>
-
-        <button id="view-more-button" onclick="viewMore('${marker.graph}')">View More</button>
-
-      </div>
-    `,
-    maxWidth: 300,
-  });
-  //closes window if clicking outside
-  google.maps.event.addListener(map, 'click', function () {
-    smallInfowindow.close();
-    window.popupLayerOpen = false;
-  });
-  
-  smallInfowindow.open(map, marker);
-  window.currentMarker = marker;
-  window.smallInfowindow = smallInfowindow;
-  window.popupTitle = popupTitle;
-
-  smallInfowindow.addListener('closeclick', () => {
-    window.popupLayerOpen = false;
-  });
-
-  
-}
-//Function to handle the view more button
-function viewMore(currentGraph) {
-  window.smallInfowindow.close();
-  openPopup(window.currentMarker, currentGraph);
-}
-
-//function finds id="popup" then sets HTML content inside the element with id="popup"
-function openPopup(marker, currentGraph) {
-  customPopup = document.getElementById('popup');
-  customPopup.innerHTML = `
-    <h1>${marker.getTitle()}</h1>
-    <div class="info-window">
-      <p>${marker.descriptions.description1}</p>
-      <p>${marker.descriptions.description2}</p>
-
-     
-      <img id ="Graph">
-      <button id ="btn">Click to Graph</button>
-
-      <div id="close-button" onclick="closePopup()">X</div>
-    </div>
-  `;
-  customPopup.style.display = 'block';
-  document.getElementById('overlay').style.display = 'block';
-  
-  $("#btn").click(preformPost);
-
-  // Function to handle button click event for generating the graph
-  function preformPost(){
-   $.ajax({ 
-    type:"POST",
-    url:config.hostname + "/create_graph",
-    data: marker.points,
-     success: function(response){
-      $('#Graph').attr('src', response.src);
-      $('#Graph').attr('alt', response.alt);
-    }
-  });
-  
-};
-
-  
-}
-
-function closePopup() {
-  customPopup = document.getElementById('popup');
-  customPopup.style.display = 'none';
-  document.getElementById('overlay').style.display = 'none';
-}
-
-
-
 //closes popup upon clicking overlay
 document.getElementById('overlay').addEventListener('click', closePopup);
-
-//fucntion to handle graph button
-function switchGraph(currentGraph) {
-  const imgGraph = document.getElementById('img-graph');
-  //Check if the currentGraph is in the imageSets object then toggle between images in the set
-  if (imageSets.hasOwnProperty(currentGraph)) {
-    const imageSet = imageSets[currentGraph];
-    imgGraph.src = (imgGraph.src.includes(imageSet[0])) ? imageSet[1] : imageSet[0];
-  }
-}
-
-
-//makes functions globally available
-window.switchGraph = switchGraph;
-window.openPopup = openPopup;
-window.closePopup = closePopup;
-window.popUpLayer1 = popUpLayer1;
-window.viewMore = viewMore;
 
 //handles enter key for search()
 function handleKeyPress(event) {
   if (event.keyCode === 13) {
     const searchInput = document.getElementById("search-input").value.trim();
     if (searchInput !== "") {
-      search();
+      search(markers, map);
     }
   }
 }
-
-
-function search() {
-  //Search HTML for element id "search-input" and set user input to lowercase
-  const searchInput = document.getElementById("search-input").value.trim().toLowerCase();
-
-  //Iterate through each marker
-  markers.forEach(marker => {
-    const markerTitle = marker.getTitle().toLowerCase();
-
-    if (markerTitle.includes(searchInput)) {
-      console.log("Match found!");
-      map.panTo(marker.getPosition());
-      map.setZoom(12);
-      popUpLayer1(marker);
-      infowindow.close();
-      window.popupLayerOpen = true;
-    } else {
-      console.log("Not found");
-    }
-  });
-}
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
-
 //Calls function to load the map 
 Load_Map();
 //Calls function to details to the map (Markers,Legend,etc)
