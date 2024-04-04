@@ -1,3 +1,15 @@
+""" 
+Title:app.py
+Author: Vincent Pham
+
+Functionality: This Python program utilizes the google maps API Key to geoencode the Addresses -> Latitude and Longitude. This Program will take a csv file and turn it into a Dataframe. After this program will make an Google maps API call to geoencode the code and insert those values into a dataframe. After it has geoencoded all the addresses it will create a csv file with all the new Longitude and Latitude data
+
+Output: CSV file 
+Date:4/4/2024
+"""
+
+
+
 #Import necessary libraries
 from flask import Flask,jsonify,render_template,request
 import matplotlib.pyplot as plt
