@@ -1,3 +1,7 @@
+/* 
+title: popup.js
+Description: Contains all methods for handling marker popups
+*/
 import config from './config.js';
 let customPopup;
 
@@ -8,12 +12,12 @@ export function popUpLayer1(marker, map){
       window.smallInfowindow.close();
     }
     
-    const popupTitle = marker.getTitle();
+    const popupTitle = marker.title;
   
     const smallInfowindow = new google.maps.InfoWindow({
       content: `
         <div class="info-window">
-          <strong style="color:green">${marker.getTitle()}</strong>
+          <strong style="color:green">${marker.title}</strong>
   
           <p>${marker.descriptions.description1}</p>
           <p>${marker.descriptions.description2}</p>
@@ -42,11 +46,11 @@ export function popUpLayer1(marker, map){
   
 }
 
-// Function to open the popup
+//Function to open the popup
 export function openPopup(marker, currentGraph) {
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
-      <h1>${marker.getTitle()}</h1>
+      <h1>${marker.title}</h1>
       <div class="info-window">
         <p>${marker.descriptions.description1}</p>
         <p>${marker.descriptions.description2}</p>
@@ -62,7 +66,7 @@ export function openPopup(marker, currentGraph) {
     
     $("#btn").click(preformPost);
   
-    // Function to handle button click event for generating the graph
+    //Function to handle button click event for generating the graph
     function preformPost(){
       $.ajax({ 
         type:"POST",
@@ -76,6 +80,7 @@ export function openPopup(marker, currentGraph) {
     };
 }
 
+
 export function closePopup() {
     customPopup = document.getElementById('popup');
     customPopup.style.display = 'none';
@@ -88,6 +93,7 @@ export function viewMore(currentGraph) {
     openPopup(window.currentMarker, currentGraph);
 }
 
+//Makes functions globally available
 window.openPopup = openPopup;
 window.closePopup = closePopup;
 window.viewMore = viewMore;
