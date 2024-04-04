@@ -1,3 +1,16 @@
+""" 
+Title:app.py
+Author: Vincent Pham
+
+Functionality: This File purpose is to display different HTML files and allow for us to utilize python in our project. We will be able to send signals through javascript to Python to dynamically Load up different images or open up different html files. Currently it works to dynamically load Graphs. 
+
+
+Output: Python Generated Images,Displays Webpage
+Date:4/4/2024
+"""
+
+
+
 #Import necessary libraries
 from flask import Flask,jsonify,render_template,request
 import matplotlib.pyplot as plt
