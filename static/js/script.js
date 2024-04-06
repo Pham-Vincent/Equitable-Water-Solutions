@@ -21,8 +21,9 @@ function Load_Map(){
 }
 
 async function initMap() {
-  const { Map, InfoWindow } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+  await Load_Map()
+  const { Map, InfoWindow, MarkerClusterer} = await google.maps.importLibrary("maps", "markerclusterer");
+  const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.5, lng: -76.5 },
@@ -57,6 +58,7 @@ $.ajax({
         let point3 = parseFloat(point.Year_2018);
         let point4 = parseFloat(point.Year_2019);
         let point5 = parseFloat(point.Year_2020);
+        let mType = 'm';
 
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
@@ -69,6 +71,7 @@ $.ajax({
         marker.descriptions = {
           description1: desc1,
           description2: locality,
+          description3: mType
         };
 
         marker.points = {
@@ -115,13 +118,9 @@ $.ajax({
            
             
       });
-/*
-        const markerCluster = new MarkerClusterer(map, markers, {
-          imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-          gridSize: 50, // Adjust as needed
-          maxZoom: 15 // Adjust as needed
-        });
-        */
+
+      const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+        
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
