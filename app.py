@@ -16,7 +16,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import io
 import base64 
-
+import pandas as pd
+import plotly.express as px
+import  plotly.io as pio
+import plotly
 #Flask Instance
 app = Flask(__name__)
 #Allows to generate Graph Image 
@@ -30,20 +33,30 @@ def create_graph():
   #Getting the JSON values 
   WithdrawValues = list(request.form.values())
   #Turns JSON Values Strings -> Floats
-  WithdrawValues =[float(Floats) for Floats in WithdrawValues] 
+  WithdrawValues =[float(Floats) for Floats in WithdrawValues]
+  WithdrawValues_data = [['Year_2016',WithdrawValues[0]],['Year_2017',WithdrawValues[1]],['Year_2018',WithdrawValues[2]],['Year_2019',WithdrawValues[3]],['Year_2020',WithdrawValues[4]]]
+  WithdrawValues_df = pd.DataFrame(WithdrawValues_data,columns=['Years','Values'])
 
-  #creating the Plotting Style 
-  plt.plot(years, WithdrawValues, marker='o',color='g',linestyle='-')
-  plt.xlabel('Years')
-  plt.ylabel('Water Withdraw')
+
+  print(WithdrawValues_df)
+  
+
+  barchart=px.bar(
+    data_frame = WithdrawValues_df,
+    y='Values',
+    x='Years',
+    color = 'Values',
+    opacity=.9,
+    orientation ="v",
+     width=800, 
+     height=900
+  )
+  
 
   #Generating and Saving Image to display 
-  img = io.BytesIO()
-  plt.savefig(img,format="png")
-  img.seek(0)
-  plot_data = base64.b64encode(img.getvalue()).decode("utf-8")
-  plt.close()
-  return jsonify({'src': f'data:image/png;base64,{plot_data}', 'alt': 'Graph'})
+  graph_html = pio.to_html(barchart, full_html=False)
+  graph_json='<div id="graph_html">' + graph_html + '<div>'
+  return jsonify({'graph_json': graph_json})
 
 #This will Render Our "HomePage" aka our Map 
 @app.route('/',methods=['GET', 'POST'])
