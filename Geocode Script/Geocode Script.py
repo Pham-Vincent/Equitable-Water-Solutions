@@ -1,44 +1,30 @@
 
 
-""" 
-Title: Geocode.py
-Author: Vincent Pham
+""" Author: Vincent Pham
 
 Functionality: This Python program utilizes the google maps API Key to geoencode the Addresses -> Latitude and Longitude. This Program will take a csv file and turn it into a Dataframe. After this program will make an Google maps API call to geoencode the code and insert those values into a dataframe. After it has geoencoded all the addresses it will create a csv file with all the new Longitude and Latitude data
 
-Output: CSV file
-Last Edited: 4/4/2024
- """
+Output: CSV file """
 
 #Imported Libraries 
 import googlemaps
-import os
-from dotenv import load_dotenv
 import pandas as pd
 import numpy as np
 def main():
   
-  #Loads Information from env and runs code
-  load_dotenv()
-  API_KEY= os.environ.get('MAP_KEY')
 
- 
+  API_KEY = "Insert Your API KEY HERE"
+
   #Loads the Google Maps Api by Checking API key
   map_client = googlemaps.Client(API_KEY)
 
 #Turns the csv into dataframe and gets the first 894
-  Data_df = pd.read_csv('Data.csv')
-  Data_df = Data_df.head(895)
+  Data_df = pd.read_csv('ENTER YOUR CSV FILE HERE')
+
+  Data_df = Data_df.head("Enter How many Rows you want to geoencode minus 1 ")
 
 #Creates a Dataframe of only the Locations and creates and empty dataframe to input longitude and latitude
-  Address_df = Data_df[['Location']]
-
-#Turns the csv into dataframe and gets the first 894
-  Data_df = pd.read_csv('(imp)MD_Surface Water Permits 12JUL2021.csv')
-  Data_df = Data_df.head(895)
-
-#Creates a Dataframe of only the Locations and creates and empty dataframe to input longitude and latitude
-  Address_df = Data_df[['Location']]
+  Address_df = Data_df[['Enter the Name of the Column (Ex: Location)']]
   GeoLocation = pd.DataFrame()
 
 
@@ -46,14 +32,14 @@ def main():
   #Will iterate through the entire dataframe and turn Address -> Longitude and Latitude
   for i in range(len(Data_df)):
     #Gets Address From dataframe
-    Address = Address_df.iloc[i]['Location']
+    Address = Address_df.iloc[i]['Enter the Name of the Column (Ex: Location)']
     #Api Call and turns Address -> Coordinates
     response = map_client.geocode(Address)
 
     #If finds Coordinates Will insert into Geolocation DataFrame and if not found will input N/A
     if response: 
-      Latitude = response[0]['geometry']['location']['lat']
-      Longitude = response[0]['geometry']['location']['lng']
+      Latitude = response[0]['geometry']['Enter the Name of the Column (Ex: Location)']['lat']
+      Longitude = response[0]['geometry']['Enter the Name of the Column (Ex: Location)']['lng']
       GeoLocation.loc[i, 'Latitude'] = Latitude
       GeoLocation.loc[i, 'Longitude'] = Longitude
     else:
@@ -61,7 +47,7 @@ def main():
        GeoLocation.loc[i, 'Longitude'] = 'N/A'
       
     #Turns into csv 
-    GeoLocation.to_csv('GeoLocation.csv',index=False)  
+    GeoLocation.to_csv('Geoencode.csv)',index=False)  
 
     
 if __name__ == '__main__':

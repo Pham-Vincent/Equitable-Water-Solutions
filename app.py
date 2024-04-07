@@ -2,9 +2,10 @@
 Title:app.py
 Author: Vincent Pham
 
-Functionality: This Python program utilizes the google maps API Key to geoencode the Addresses -> Latitude and Longitude. This Program will take a csv file and turn it into a Dataframe. After this program will make an Google maps API call to geoencode the code and insert those values into a dataframe. After it has geoencoded all the addresses it will create a csv file with all the new Longitude and Latitude data
+Functionality: This File purpose is to display different HTML files and allow for us to utilize python in our project. We will be able to send signals through javascript to Python to dynamically Load up different images or open up different html files. Currently it works to dynamically load Graphs. 
 
-Output: CSV file 
+
+Output: Python Generated Images,Displays Webpage
 Date:4/4/2024
 """
 
