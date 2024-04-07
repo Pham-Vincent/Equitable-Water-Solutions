@@ -1,4 +1,5 @@
 /*
+Title: script.js
 Author: Nicholas Gammel, William Lamuth, Vincent Pham
 
 Functionality: This javascript file will load the Google Maps API, create a map centered on Chesapeake Bay, 
@@ -6,6 +7,8 @@ fetch data from a JSON file, create Advanced Markers for each data point, and ad
 mouseout, and click events on each marker. Additionally, it handles search functionality and closing popups.
 
 Output: JavaScript file
+
+Date: 04/04/24
 
 */
 //Gets Google Maps APi Key
@@ -58,11 +61,17 @@ $.ajax({
         let point4 = parseFloat(point.Year_2019);
         let point5 = parseFloat(point.Year_2020);
 
+        const pinBackground = new PinElement({
+          background: '#0443fb',
+          borderColor: '#000000',
+          glyphColor: 'white',
+        });
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
+            content: pinBackground.element,
         });
 
         // Attach custom properties to the marker object
@@ -76,7 +85,7 @@ $.ajax({
           point2: point2,
           point3: point3,
           point4: point4,
-          point5: point5
+          point5: point5,
         };
         
         //marker pushed into markers array, used in search()
@@ -115,13 +124,6 @@ $.ajax({
            
             
       });
-/*
-        const markerCluster = new MarkerClusterer(map, markers, {
-          imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-          gridSize: 50, // Adjust as needed
-          maxZoom: 15 // Adjust as needed
-        });
-        */
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
@@ -142,6 +144,7 @@ function handleKeyPress(event) {
     }
   }
 }
+
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
 //Calls function to load the map 

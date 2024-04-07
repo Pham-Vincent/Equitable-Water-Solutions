@@ -1,6 +1,14 @@
 /* 
 title: popup.js
-Description: Contains all methods for handling marker popups
+
+Authors: William Lamuth, Vincent Pham, Nicholas Gammel
+
+Description: This file contains methods for handling marker popups and exports them to script.js. 
+It defines functions for displaying various layers of information associated with markers on a Google Map, 
+including a basic popup, a detailed popup with additional content and a graph, and a view more button to toggle between popups. 
+The functions allow users to interact with markers on the map by displaying relevant information and additional details when clicked.
+
+Date: 04/06/24
 */
 import config from './config.js';
 let customPopup;
@@ -14,6 +22,7 @@ export function popUpLayer1(marker, map){
     
     const popupTitle = marker.title;
   
+    //creates first layer infowindow
     const smallInfowindow = new google.maps.InfoWindow({
       content: `
         <div class="info-window">
@@ -46,7 +55,7 @@ export function popUpLayer1(marker, map){
   
 }
 
-//Function to open the popup
+//Function to open the full popup
 export function openPopup(marker, currentGraph) {
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
