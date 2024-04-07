@@ -49,8 +49,9 @@ def create_graph():
     color = 'Values',
     opacity=.9,
     orientation ="v",
-     width=800, 
-     height=900
+    width=700, 
+    height=550
+     
   )
   
 

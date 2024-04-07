@@ -49,6 +49,7 @@ export function popUpLayer1(marker, map){
 //Function to open the popup
 export function openPopup(marker, currentGraph) {
     customPopup = document.getElementById('popup');
+    preformPost()
     customPopup.innerHTML = `
       <h1>${marker.title}</h1>
       <div class="info-window">
@@ -56,7 +57,7 @@ export function openPopup(marker, currentGraph) {
         <p>${marker.descriptions.description2}</p>
        
         <div id="graph_html"></div>
-        ${preformPost()}
+        
   
         <div id="close-button" onclick="closePopup()">X</div>
       </div>
