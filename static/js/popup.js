@@ -58,14 +58,15 @@ export function popUpLayer1(marker, map){
 //Function to open the full popup
 export function openPopup(marker, currentGraph) {
     customPopup = document.getElementById('popup');
+    preformPost()
     customPopup.innerHTML = `
       <h1>${marker.title}</h1>
       <div class="info-window">
         <p>${marker.descriptions.description1}</p>
         <p>${marker.descriptions.description2}</p>
-  
-        <img id ="Graph">
-        <button id ="btn">Click to Graph</button>
+        <div id="graph_html"> </div>
+       
+        
   
         <div id="close-button" onclick="closePopup()">X</div>
       </div>
@@ -73,7 +74,7 @@ export function openPopup(marker, currentGraph) {
     customPopup.style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
     
-    $("#btn").click(preformPost);
+    
   
     //Function to handle button click event for generating the graph
     function preformPost(){
@@ -81,10 +82,10 @@ export function openPopup(marker, currentGraph) {
         type:"POST",
         url:config.hostname + "/create_graph",
         data: marker.points,
-        success: function(response){
-          $('#Graph').attr('src', response.src);
-          $('#Graph').attr('alt', response.alt);
-        }
+       success: function(response){
+        $('#graph_html').html(response.graph_json)
+
+        } 
       });
     };
 }

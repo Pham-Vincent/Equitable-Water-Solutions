@@ -32,6 +32,13 @@ def main():
 
 #Creates a Dataframe of only the Locations and creates and empty dataframe to input longitude and latitude
   Address_df = Data_df[['Location']]
+
+#Turns the csv into dataframe and gets the first 894
+  Data_df = pd.read_csv('(imp)MD_Surface Water Permits 12JUL2021.csv')
+  Data_df = Data_df.head(895)
+
+#Creates a Dataframe of only the Locations and creates and empty dataframe to input longitude and latitude
+  Address_df = Data_df[['Location']]
   GeoLocation = pd.DataFrame()
 
 

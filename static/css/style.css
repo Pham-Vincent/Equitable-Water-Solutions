@@ -26,6 +26,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  
 }
 
 /* sets title color to black*/
@@ -46,6 +48,7 @@ body {
   height: 700px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll; /* Enable vertical scrollbar always */
 }
 
 #close-button {
@@ -211,6 +214,7 @@ body {
   transform: rotate(135deg); 
   -webkit-transform: rotate(135deg);
 }
+
 
 
 

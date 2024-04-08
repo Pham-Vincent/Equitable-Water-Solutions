@@ -19,13 +19,15 @@ let map;
 let markers = []; //stores markers used in search()
 
 function Load_Map(){
-  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r,"places","marker"].join(","));for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+
+  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r,"places","marker"].join(","));for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:"):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
   ({key:config.apiKey, v: "weekly"});
 }
 
 async function initMap() {
-  const { Map, InfoWindow } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+  await Load_Map()
+  const { Map, InfoWindow, MarkerClusterer} = await google.maps.importLibrary("maps", "markerclusterer");
+  const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.5, lng: -76.5 },
@@ -60,6 +62,7 @@ $.ajax({
         let point3 = parseFloat(point.Year_2018);
         let point4 = parseFloat(point.Year_2019);
         let point5 = parseFloat(point.Year_2020);
+        let mType = 'm';
 
         const pinBackground = new PinElement({
           background: '#0443fb',
@@ -78,6 +81,7 @@ $.ajax({
         marker.descriptions = {
           description1: desc1,
           description2: locality,
+          description3: mType
         };
 
         marker.points = {
@@ -124,6 +128,9 @@ $.ajax({
            
             
       });
+
+      const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+        
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
