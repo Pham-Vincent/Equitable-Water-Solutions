@@ -27,6 +27,7 @@ body {
   border-radius: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   word-wrap: break-word;
+  
 }
 
 /* sets title color to black*/
@@ -47,6 +48,7 @@ body {
   height: 700px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll; /* Enable vertical scrollbar always */
 }
 
 #close-button {
@@ -92,13 +94,8 @@ body {
   border: none;
   background: transparent;
 }
-/* Sets the Style of the Dynamic Graph*/
-#graph_html{
-  overflow-y: scroll; /* Enable vertical scrollbar always */
-  max-height: 70vh; /* Set a maximum height to limit overflow */
 
-  
-}
+
 
 
 
