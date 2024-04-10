@@ -64,9 +64,8 @@ export function openPopup(marker, currentGraph) {
       <div class="info-window">
         <p>${marker.descriptions.description1}</p>
         <p>${marker.descriptions.description2}</p>
-        <div id="graph_html"> </div>
-       
         
+        <div id="graph_html"> </div>
   
         <div id="close-button" onclick="closePopup()">X</div>
       </div>

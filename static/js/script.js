@@ -69,12 +69,14 @@ $.ajax({
           borderColor: '#000000',
           glyphColor: 'white',
         });
+        const glyphImg = document.createElement("img");
+        glyphImg.src = "http://127.0.0.1:5000/EWS/images/triangle.png"
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
-            content: pinBackground.element,
+            content: glyphImg,
         });
 
         // Attach custom properties to the marker object
