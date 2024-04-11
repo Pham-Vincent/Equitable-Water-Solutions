@@ -47,10 +47,15 @@ def create_graph():
   graph_json='<div id="graph_html">' + graph_html + '<div>'
   return jsonify({'graph_json': graph_json})
 
+@app.route('/triangle')
+
+
 #This will Render Our "HomePage" aka our Map 
 @app.route('/',methods=['GET', 'POST'])
 def index():
+  
   return render_template('index.html')
+
 
 
 

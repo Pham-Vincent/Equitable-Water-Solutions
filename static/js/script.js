@@ -70,7 +70,8 @@ $.ajax({
           glyphColor: 'white',
         });
         const glyphImg = document.createElement("img");
-        glyphImg.src = "http://127.0.0.1:5000/EWS/images/triangle.png"
+        glyphImg.src = "static/images/triangle.png"
+
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
