@@ -1,6 +1,15 @@
 /* 
 title: search.js
-Description: Handles search bar functionality
+
+Authors: William Lamuth, Vincent Pham, Nicholas Gammel
+
+Description: This file contains functions for handling the search bar functionality in the application. 
+It exports search(), to script.js. The search() function takes an array of markers 
+and the map object as input and performs a case-insensitive search for a specified keyword in the titles of markers. 
+If a match is found, it zooms and centers the map on the matching marker's position and opens an info window to highlight the marker. 
+Otherwise, it logs a message indicating that no match was found.
+
+Date: 04/06/24
 */
 
 export function search(markers, map) {

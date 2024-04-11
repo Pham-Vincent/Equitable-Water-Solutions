@@ -1,4 +1,5 @@
 /*
+Title: script.js
 Author: Nicholas Gammel, William Lamuth, Vincent Pham
 
 Functionality: This javascript file will load the Google Maps API, create a map centered on Chesapeake Bay, 
@@ -6,6 +7,8 @@ fetch data from a JSON file, create Advanced Markers for each data point, and ad
 mouseout, and click events on each marker. Additionally, it handles search functionality and closing popups.
 
 Output: JavaScript file
+
+Date: 04/04/24
 
 */
 //Gets Google Maps APi Key
@@ -61,11 +64,20 @@ $.ajax({
         let point5 = parseFloat(point.Year_2020);
         let mType = 'm';
 
+        const pinBackground = new PinElement({
+          background: '#0443fb',
+          borderColor: '#000000',
+          glyphColor: 'white',
+        });
+        const glyphImg = document.createElement("img");
+        glyphImg.src = "static/images/triangle.png"
+
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
+            content: glyphImg,
         });
 
         // Attach custom properties to the marker object
@@ -80,7 +92,7 @@ $.ajax({
           point2: point2,
           point3: point3,
           point4: point4,
-          point5: point5
+          point5: point5,
         };
         
         //marker pushed into markers array, used in search()
@@ -220,6 +232,7 @@ function handleKeyPress(event) {
     }
   }
 }
+
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
 //Calls function to load the map 

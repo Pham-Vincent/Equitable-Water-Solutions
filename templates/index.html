@@ -19,6 +19,48 @@
        <span class="search-icon material-symbols-outlined">search</span>
        <input class="text" id="search-input" placeholder="Enter Location">
       </div>
+      <!-- search bar end -->
+
+      <!-- legend -->
+      <div class="legend">
+        <h3>Station Type</h3>
+        <label class="container">Water Quality
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+        </label>
+        
+        <label class="container">Salt Contamination
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+        </label>
+
+        <hr class="rounded">
+
+        <h3>States</h3>
+        <label class="container">Maryland
+          <input type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+        
+        <label class="container">Virginia
+          <input type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+
+        <button class="legend-button" onclick="toggleSidebar()">
+          <i class="arrow"></i>
+        </button>
+      </div>
+      <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.legend');
+            sidebar.classList.toggle('hidden');
+            const arrow = document.querySelector('.arrow');
+            arrow.classList.toggle('rotate180');
+        }
+      </script>
+      <!-- legend end -->
+
       <div id="map"></div>
       
 

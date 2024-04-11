@@ -1,16 +1,3 @@
-""" 
-Title:app.py
-Author: Vincent Pham
-
-Functionality: This File purpose is to display different HTML files and allow for us to utilize python in our project. We will be able to send signals through javascript to Python to dynamically Load up different images or open up different html files. Currently it works to dynamically load Graphs. 
-
-
-Output: Python Generated Images,Displays Webpage
-Date:4/4/2024
-"""
-
-
-
 #Import necessary libraries
 from flask import Flask,jsonify,render_template,request
 import matplotlib.pyplot as plt
@@ -60,10 +47,15 @@ def create_graph():
   graph_json='<div id="graph_html">' + graph_html + '<div>'
   return jsonify({'graph_json': graph_json})
 
+@app.route('/triangle')
+
+
 #This will Render Our "HomePage" aka our Map 
 @app.route('/',methods=['GET', 'POST'])
 def index():
+  
   return render_template('index.html')
+
 
 
 

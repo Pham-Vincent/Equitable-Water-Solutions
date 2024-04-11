@@ -1,5 +1,6 @@
 <?php 
 /*
+Title: index.php
 Author: Nicholas Gammel
 
 Functionality: This php program uses environment variables to sign into an AWS database. Inside of the 'env' file are 
