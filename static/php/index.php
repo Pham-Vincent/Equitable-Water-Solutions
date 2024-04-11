@@ -15,7 +15,7 @@ Output: JSON file
 This chunk of code sorts through the environment variable file we set up 'env'
 and allows us to access all of the associated variables for database login
 */
-  $envFile = __DIR__ . '/../.env';
+  $envFile = __DIR__ . '/../env/.env';
   if (file_exists($envFile)) {
       $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       foreach ($lines as $line) {
