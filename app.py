@@ -39,23 +39,27 @@ def create_graph():
 
   #Formats the Data correctly for the DataFrame to Plot
   WithdrawValues_data = [[2016,WithdrawValues[0]],[2017,WithdrawValues[1]],[2018,WithdrawValues[2]],[2019,WithdrawValues[3]],[2020,WithdrawValues[4]]]
-  WithdrawValues_df = pd.DataFrame(WithdrawValues_data,columns=['Years','Values'])
+  WithdrawValues_df = pd.DataFrame(WithdrawValues_data,columns=['Years','WaterWithdraw'])
  
   #Creates a Scatter Plot 
-  WithdrawPlotted = px.scatter(
+  WithdrawPlotted = px.line(
     data_frame=WithdrawValues_df,
-    y='Values',
+    y='WaterWithdraw',
     x='Years',
     orientation="v",
     width=700,
     height=550,
-    #Creates the Line for the line of best fit 
-    trendline="lowess", 
+   
+    markers = True    
    
     
+    
 )
+  WithdrawPlotted.update_layout(title="Water Withdrawal Per Year", title_x=0.5,)
   #Visual Changes 
-  WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='blue') 
+  WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='black') 
+
+
 
   #Generating and Saving Image to display 
   graph_html = pio.to_html(WithdrawPlotted, full_html=False)
