@@ -64,11 +64,14 @@ $.ajax({
         let point5 = parseFloat(point.Year_2020);
         let mType = 'm';
 
+        //custom colored marker
         const pinBackground = new PinElement({
           background: '#0443fb',
           borderColor: '#000000',
           glyphColor: 'white',
         });
+        
+        //uses triangle.png as marker
         const glyphImg = document.createElement("img");
         glyphImg.src = "static/images/triangle.png"
 
@@ -128,7 +131,6 @@ $.ajax({
           infowindow.close();
           window.popupLayerOpen = true;
         });
-           
             
       });
 
