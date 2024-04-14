@@ -142,6 +142,84 @@ $.ajax({
     }
 });
 
+$.ajax({
+  url: 'static/json/MD_Tidal.json',
+  type:"GET",
+  dataType: 'json',
+  success: function(data) {
+      console.log("AJAX request completed successfully");
+
+      // Use the data to map points on the map
+       // Use the data given in json file
+    data.forEach(function(point) {
+      let mapCode = point.PermitNumber;
+      let desc1 = point.DesignatedUse;
+      let latitude = parseFloat(point.FixedLatitudes);
+      let longitude = parseFloat(point.FixedLongitudes);
+      let locality = point.County;
+      let fresh = point.FreshwaterOrSaltwater;
+      let tidal = point.TidalorNontidal;
+
+      // Uses latitude and longitude to map points on the map
+      var marker = new AdvancedMarkerElement({
+          position: { lat: latitude, lng: longitude },
+          map,
+          title: mapCode,
+      });
+
+      // Attach custom properties to the marker object
+      marker.descriptions = {
+        description1: locality,
+        description2: fresh,
+        description3: tidal,
+        description4: desc1
+      };
+      
+      //marker pushed into markers array, used in search()
+      markers.push(marker); 
+          
+      //creates infowindow used in hover listeners
+      const infowindow = new InfoWindow({
+        content: `
+          <div class = "info-window">
+          <strong>${marker.title}</strong>
+          </div>
+          `,
+          maxWidth: 300,
+      });
+
+      //Event listener for hovering
+      marker.content.addEventListener('mouseenter', ({ domEvent }) => {
+        if (!window.popupLayerOpen || marker !== window.currentMarker) {
+          infowindow.open(map, marker);
+        }
+      });
+      
+      //Event listener for closing hovering
+      marker.content.addEventListener('mouseleave', () => {
+        if (!window.popupLayerOpen || marker !== window.currentMarker) {
+          infowindow.close();
+        }
+      });
+          
+      //adds interactive function to marker on click
+      marker.addListener("click", () => {
+        popUpLayer1(marker, map);
+        infowindow.close();
+        window.popupLayerOpen = true;
+      });
+         
+          
+    });
+
+    const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+      
+  },
+  error: function(xhr, status, error) {
+      console.error('Error:', error);
+  }
+});
+
 }
 
 //closes popup upon clicking overlay
