@@ -35,8 +35,11 @@ export function popUpLayer1(marker, map){
   
         </div>
       `,
+      
       maxWidth: 300,
+      
     });
+    
 
     //closes window if clicking outside
     google.maps.event.addListener(map, 'click', function () {
@@ -49,6 +52,7 @@ export function popUpLayer1(marker, map){
     window.smallInfowindow = smallInfowindow;
     window.popupTitle = popupTitle;
   
+  
     smallInfowindow.addListener('closeclick', () => {
       window.popupLayerOpen = false;
     });
@@ -57,8 +61,8 @@ export function popUpLayer1(marker, map){
 
 //Function to open the full popup
 export function openPopup(marker, currentGraph) {
+    preformPost();
     customPopup = document.getElementById('popup');
-    preformPost()
     customPopup.innerHTML = `
       <div class="popup-window">
         <h1 class="popup-title">Hydrocode: ${marker.title}</h1>
