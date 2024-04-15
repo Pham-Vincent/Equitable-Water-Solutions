@@ -119,9 +119,11 @@ $.ajax({
            
             
       });
-
-      const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
-        
+      const markerCluster = new markerClusterer.MarkerClusterer({ 
+        map,
+        markers:markers,
+        algorithmOptions:{radius:150}
+       });
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);

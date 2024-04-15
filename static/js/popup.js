@@ -13,7 +13,7 @@ export function popUpLayer1(marker, map){
     }
     
     const popupTitle = marker.title;
-  
+   
     const smallInfowindow = new google.maps.InfoWindow({
       content: `
         <div class="info-window">
@@ -26,8 +26,11 @@ export function popUpLayer1(marker, map){
   
         </div>
       `,
+      
       maxWidth: 300,
+      
     });
+    
 
     //closes window if clicking outside
     google.maps.event.addListener(map, 'click', function () {
@@ -40,6 +43,7 @@ export function popUpLayer1(marker, map){
     window.smallInfowindow = smallInfowindow;
     window.popupTitle = popupTitle;
   
+  
     smallInfowindow.addListener('closeclick', () => {
       window.popupLayerOpen = false;
     });
@@ -48,7 +52,7 @@ export function popUpLayer1(marker, map){
 
 //Function to open the popup
 export function openPopup(marker, currentGraph) {
-    preformPost()
+    preformPost();
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
       <h1>${marker.title}</h1>
