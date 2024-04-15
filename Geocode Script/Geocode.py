@@ -27,22 +27,13 @@ def main():
   map_client = googlemaps.Client(API_KEY)
 
 #Turns the csv into dataframe and gets the first 894
-  Data_df = pd.read_csv('Data.csv')
-  Data_df = Data_df.head(895)
-
-#Creates a Dataframe of only the Locations and creates and empty dataframe to input longitude and latitude
-  Address_df = Data_df[['Location']]
-
-#Turns the csv into dataframe and gets the first 894
-  Data_df = pd.read_csv('(imp)MD_Surface Water Permits 12JUL2021.csv')
-  Data_df = Data_df.head(895)
+  Data_df = pd.read_csv('Maryland_Tidal_Locations_ShortList(in).csv')
+ 
 
 #Creates a Dataframe of only the Locations and creates and empty dataframe to input longitude and latitude
   Address_df = Data_df[['Location']]
   GeoLocation = pd.DataFrame()
 
-
-  
   #Will iterate through the entire dataframe and turn Address -> Longitude and Latitude
   for i in range(len(Data_df)):
     #Gets Address From dataframe
@@ -68,3 +59,4 @@ if __name__ == '__main__':
   main()
 
 
+ 

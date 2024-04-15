@@ -144,19 +144,15 @@ $.ajax({
         });
 
         //if infowindow wont close on 'mouseleave' clicking the map will close
-        google.maps.event.addListener(map, 'click', function() {
-          // Check if the info window is open
-          if (infowindow) {
-              // Close the info window
-              infowindow.close();
-          }
-        });
-
+      google.maps.event.addListener(map, 'click', function() {
+        if (infowindow) {
+            infowindow.close();
+        }
+      });
+           
             
       });
-
-      const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
-        
+    
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
@@ -252,8 +248,11 @@ $.ajax({
           
     });
 
-    const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
-    
+    const markerCluster = new markerClusterer.MarkerClusterer({ 
+      map,
+      markers:markers,
+      algorithmOptions:{radius:150}
+     });
       
   },
   error: function(xhr, status, error) {
