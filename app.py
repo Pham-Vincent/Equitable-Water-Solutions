@@ -21,7 +21,6 @@ import pandas as pd
 import plotly.express as px
 import  plotly.io as pio
 import plotly
-import statsmodels.api as smpip
 #Flask Instance
 app = Flask(__name__)
 #Allows to generate Graph Image 
@@ -57,7 +56,8 @@ def create_graph():
 )
   WithdrawPlotted.update_layout(title="Water Withdrawal Per Year", title_x=0.5,)
   #Visual Changes 
-  WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='black') 
+  WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='black')
+  WithdrawPlotted.update_xaxes(title_font_family="Times New Roman")
 
 
 
