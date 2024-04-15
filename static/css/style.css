@@ -16,7 +16,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-x: hidden; 
 }
 
 /* finds class="info-window" ands sets styling*/
@@ -27,7 +28,6 @@ body {
   border-radius: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   word-wrap: break-word;
-  
 }
 
 /* sets title color to black*/
@@ -70,6 +70,7 @@ body {
   background-color: rgba(0, 0, 0, 0.5); 
   z-index: 2; 
   display: none; 
+  cursor: pointer;
 }
 
 /*styling for the searchs*/
@@ -81,7 +82,7 @@ body {
   border-radius: 20px;
   background: #f6f6f6;
   margin-left: 15%;
-  margin-top: .7%;
+  margin-top: .5%;
   position: absolute;
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -198,6 +199,7 @@ body {
 /*Slides the legend off-screen*/
 .legend.hidden {
   transform: translateX(105%); 
+
 }
 
 /*arrow styling for legend button*/
@@ -243,6 +245,7 @@ body {
   text-align: left;
   color: rgb(70, 86, 126);
   margin: 20px;
+  
 }
 
 .header-paragraph p{
@@ -252,6 +255,7 @@ body {
   color: black;
   margin-top: 0;
 }
+
 
 
 
