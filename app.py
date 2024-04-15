@@ -57,7 +57,8 @@ def create_graph():
 )
   WithdrawPlotted.update_layout(title="Water Withdrawal Per Year", title_x=0.5,)
   #Visual Changes 
-  WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='black') 
+  WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='black')
+  WithdrawPlotted.update_xaxes(title_font_family="Times New Roman")
 
 
 
