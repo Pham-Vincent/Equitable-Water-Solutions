@@ -8,7 +8,9 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-Date: 04/15/24
+
+Date: 04/16/24
+
 
 */
 //Gets Google Maps APi Key
@@ -35,9 +37,13 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
+    
     mapId: "DEMO_MAP_ID",
+    scrollwheel:true, //bypasses command+scroll to zoom
   });
-  
+
+  /* Sets the Maximum Zoom out Value */
+  map.setOptions({ minZoom: 3});
 
 console.log("AJAX request started");
 
@@ -144,6 +150,7 @@ $.ajax({
         });
 
         //if infowindow wont close on 'mouseleave' clicking the map will close
+
         google.maps.event.addListener(map, 'click', function() {
           // Check if the info window is open
           if (infowindow) {
@@ -152,8 +159,10 @@ $.ajax({
           }
         });
 
+
             
       });
+      
     
     },
     error: function(xhr, status, error) {
@@ -249,6 +258,7 @@ $.ajax({
          
           
     });
+
       
   },
   error: function(xhr, status, error) {
