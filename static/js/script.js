@@ -8,7 +8,7 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-Date: 04/15/24
+Date: 04/16/24
 
 */
 //Gets Google Maps APi Key
@@ -36,6 +36,7 @@ async function initMap() {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
     mapId: "DEMO_MAP_ID",
+    scrollwheel:true, //bypasses command+scroll to zoom
   });
   
 
@@ -149,9 +150,10 @@ $.ajax({
             infowindow.close();
         }
       });
-           
+       
             
       });
+      
     
     },
     error: function(xhr, status, error) {
@@ -244,7 +246,7 @@ $.ajax({
             infowindow.close();
         }
       });
-         
+
           
     });
 
@@ -252,7 +254,7 @@ $.ajax({
       map,
       markers:markers,
       algorithmOptions:{radius:150}
-     });
+     }); 
       
   },
   error: function(xhr, status, error) {
