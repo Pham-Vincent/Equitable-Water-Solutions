@@ -24,13 +24,15 @@
       <!-- legend -->
       <div class="legend">
         <h3>Station Type</h3>
-        <label class="container">Water Quality
-          <input type="checkbox" checked="checked">
+        <label class="container" id="legend-Withdrawal">Water Withdrawal
+          <img src="static/images/triangle.png" alt="Water Withdrawal Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showVA()">
           <span class="checkmark"></span>
         </label>
         
-        <label class="container">Salt Contamination
-          <input type="checkbox" checked="checked">
+        <label class="container" id="legend-Mining">Mining
+          <img src="static/images/hexagon.png" alt="Mining Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
           <span class="checkmark"></span>
         </label>
 

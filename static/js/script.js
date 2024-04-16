@@ -8,7 +8,7 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-Date: 04/04/24
+Date: 04/15/24
 
 */
 //Gets Google Maps APi Key
@@ -17,6 +17,9 @@ import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
 import { search } from './search.js';
 let map;
 let markers = []; //stores markers used in search()
+let markersMD = []; //array used in legend function showVA()
+let markersVA = []; //array used in legend function showMD()
+
 
 function Load_Map(){
 
@@ -64,13 +67,23 @@ $.ajax({
         let point5 = parseFloat(point.Year_2020);
         let mType = 'm';
 
+        //custom colored marker
         const pinBackground = new PinElement({
           background: '#0443fb',
           borderColor: '#000000',
           glyphColor: 'white',
         });
+        
+        //uses triangle.png as marker
         const glyphImg = document.createElement("img");
         glyphImg.src = "static/images/triangle.png"
+
+        //marker with image icon
+        const glyphElement = new PinElement({
+          background: '#0443fb',
+          borderColor: '#000000',
+          glyph: glyphImg,
+        });
 
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
@@ -97,7 +110,8 @@ $.ajax({
         
         //marker pushed into markers array, used in search()
         markers.push(marker); 
-            
+        
+        markersVA.push(marker);  
         //creates infowindow used in hover listeners
         const infowindow = new InfoWindow({
           content: `
@@ -121,14 +135,23 @@ $.ajax({
             infowindow.close();
           }
         });
-            
+           
         //adds interactive function to marker on click
         marker.addListener("click", () => {
           popUpLayer1(marker, map);
           infowindow.close();
           window.popupLayerOpen = true;
         });
-           
+
+        //if infowindow wont close on 'mouseleave' clicking the map will close
+        google.maps.event.addListener(map, 'click', function() {
+          // Check if the info window is open
+          if (infowindow) {
+              // Close the info window
+              infowindow.close();
+          }
+        });
+
             
       });
     
@@ -138,6 +161,11 @@ $.ajax({
     }
 });
 
+
+/*
+AJAX connects to MD json file and extracts data
+Uses data to populate map with markers at specific Longitude/Latitude
+*/
 $.ajax({
   url: 'static/json/MD_Tidal.json',
   type:"GET",
@@ -156,11 +184,16 @@ $.ajax({
       let fresh = point.FreshwaterOrSaltwater;
       let tidal = point.TidalorNontidal;
 
+
+      //uses triangle.png as marker
+      const glyphImg = document.createElement("img");
+      glyphImg.src = "static/images/hexagon.png"
       // Uses latitude and longitude to map points on the map
       var marker = new AdvancedMarkerElement({
           position: { lat: latitude, lng: longitude },
           map,
           title: mapCode,
+          content: glyphImg,
       });
 
       // Attach custom properties to the marker object
@@ -173,6 +206,8 @@ $.ajax({
       
       //marker pushed into markers array, used in search()
       markers.push(marker); 
+      // temp array to store MD points
+      markersMD.push(marker); 
           
       //creates infowindow used in hover listeners
       const infowindow = new InfoWindow({
@@ -204,15 +239,16 @@ $.ajax({
         infowindow.close();
         window.popupLayerOpen = true;
       });
+
+      //if infowindow wont close on 'mouseleave' clicking the map will close
+      google.maps.event.addListener(map, 'click', function() {
+        if (infowindow) {
+            infowindow.close();
+        }
+      });
          
           
     });
-
-    const markerCluster = new markerClusterer.MarkerClusterer({ 
-      map,
-      markers:markers,
-      algorithmOptions:{radius:150}
-     });
       
   },
   error: function(xhr, status, error) {
@@ -220,6 +256,14 @@ $.ajax({
   }
 });
 
+
+$(document).ajaxStop(function() {
+  const markerCluster = new markerClusterer.MarkerClusterer({ 
+    map,
+    markers:markers,
+    algorithmOptions:{radius:150}
+  });
+});
 }
 
 //closes popup upon clicking overlay
@@ -234,6 +278,53 @@ function handleKeyPress(event) {
     }
   }
 }
+
+//sets all markers in given array to visible or invisible(used for legend)
+function setMapOnAll(map, markers) {
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+//hides markers for MD(used for legend)
+function showMD() {
+
+  //finds checkbox with id = "legend-Mining"
+  const checkbox = document.getElementById("legend-Mining").querySelector('input[type="checkbox"]');
+    
+    //if checked -> show markers
+    if (checkbox.checked) {
+      setMapOnAll(map, markersMD);
+      console.log("Checkbox is checked");
+    } 
+    //if unchecked -> hide markers
+    else {
+      console.log("Checkbox is unchecked");
+      setMapOnAll(null, markersMD);
+    }
+}
+
+//hides markers for VA(used for legend)
+function showVA() {
+
+  //finds checkbox with id = "legend-Withdrawal"
+  const checkbox = document.getElementById("legend-Withdrawal").querySelector('input[type="checkbox"]');
+    
+    //if checked -> show markers
+    if (checkbox.checked) {
+      setMapOnAll(map, markersVA);
+      console.log("Checkbox is checked");
+    } 
+    //if unchecked -> hide markers
+    else {
+      console.log("Checkbox is unchecked");
+      setMapOnAll(null, markersVA);
+    }
+}
+
+window.showMD = showMD;
+window.showVA = showVA;
+window.setMapOnAll = setMapOnAll;
 
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);

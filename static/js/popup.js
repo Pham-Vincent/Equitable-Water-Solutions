@@ -64,14 +64,21 @@ export function openPopup(marker, currentGraph) {
     preformPost();
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
-      <h1>${marker.title}</h1>
-      <div class="info-window">
-        <p>${marker.descriptions.description1}</p>
-        <p>${marker.descriptions.description2}</p>
+      <div class="popup-window">
+        <h1 class="popup-title">Hydrocode: ${marker.title}</h1>
+
+        <div class="header-paragraph">
+          <h3 class="popup-description">Water Source Type:</h3>
+          <p>${marker.descriptions.description1}</p>
+        </div>
+        <div class="header-paragraph">
+          <h3 class="popup-description">Area:</h3>
+          <p>${marker.descriptions.description2}</p>
+        </div>
         
         <div id="graph_html"> </div>
   
-        <div id="close-button" onclick="closePopup()">X</div>
+        <div id="close-button" onclick="closePopup()"><img src="static/images/close-button.png" alt="Close"></div>
       </div>
     `;
     customPopup.style.display = 'block';
