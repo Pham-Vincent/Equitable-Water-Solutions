@@ -8,7 +8,9 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
+
 Date: 04/16/24
+
 
 */
 //Gets Google Maps APi Key
@@ -148,12 +150,16 @@ $.ajax({
         });
 
         //if infowindow wont close on 'mouseleave' clicking the map will close
-      google.maps.event.addListener(map, 'click', function() {
-        if (infowindow) {
-            infowindow.close();
-        }
-      });
-       
+
+        google.maps.event.addListener(map, 'click', function() {
+          // Check if the info window is open
+          if (infowindow) {
+              // Close the info window
+              infowindow.close();
+          }
+        });
+
+
             
       });
       
@@ -249,15 +255,10 @@ $.ajax({
             infowindow.close();
         }
       });
-
+         
           
     });
 
-    const markerCluster = new markerClusterer.MarkerClusterer({ 
-      map,
-      markers:markers,
-      algorithmOptions:{radius:150}
-     }); 
       
   },
   error: function(xhr, status, error) {
@@ -265,6 +266,14 @@ $.ajax({
   }
 });
 
+
+$(document).ajaxStop(function() {
+  const markerCluster = new markerClusterer.MarkerClusterer({ 
+    map,
+    markers:markers,
+    algorithmOptions:{radius:150}
+  });
+});
 }
 
 //closes popup upon clicking overlay
