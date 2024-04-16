@@ -35,9 +35,12 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
+    
     mapId: "DEMO_MAP_ID",
   });
-  
+
+  /* Sets the Maximum Zoom out Value */
+  map.setOptions({ minZoom: 3});
 
 console.log("AJAX request started");
 
