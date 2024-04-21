@@ -96,7 +96,7 @@ $.ajax({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
-            content: glyphImg,
+            //content: glyphImg,
         });
 
         // Attach custom properties to the marker object
@@ -141,6 +141,7 @@ $.ajax({
             infowindow.close();
           }
         });
+
            
         //adds interactive function to marker on click
         marker.addListener("click", () => {
@@ -150,7 +151,6 @@ $.ajax({
         });
 
         //if infowindow wont close on 'mouseleave' clicking the map will close
-
         google.maps.event.addListener(map, 'click', function() {
           // Check if the info window is open
           if (infowindow) {
@@ -159,7 +159,14 @@ $.ajax({
           }
         });
 
-
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+          var isVisible = marker.getVisible()
+          if (isVisible) {
+              infowindow.close;
+              console.log("marker no longer visible")
+          }      
+        });
+        
             
       });
       
@@ -318,7 +325,7 @@ function showMD() {
 function showVA() {
 
   //finds checkbox with id = "legend-Withdrawal"
-  const checkbox = document.getElementById("legend-Withdrawal").querySelector('input[type="checkbox"]');
+  const checkbox = document.getElementById("Virginia").querySelector('input[type="checkbox"]');
     
     //if checked -> show markers
     if (checkbox.checked) {

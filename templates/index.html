@@ -23,15 +23,51 @@
 
       <!-- legend -->
       <div class="legend">
-        <h3>Station Type</h3>
-        <label class="container" id="legend-Withdrawal">Water Withdrawal
-          <img src="static/images/triangle.png" alt="Water Withdrawal Icon" class="icon">
-          <input type="checkbox" checked="checked" onchange="showVA()">
+        <h3>Water Withdrawal</h3>
+        <label class="container" id="Mining">Mining
+          <img src="static/images/triangle.png" alt="Mining icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
           <span class="checkmark"></span>
         </label>
         
-        <label class="container" id="legend-Mining">Mining
-          <img src="static/images/hexagon.png" alt="Mining Icon" class="icon">
+        <label class="container" id="Fire & Hydrostatic">Fire & Hydrostatic
+          <img src="static/images/hexagon.png" alt="Fire & Hydrostatic Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container" id="Fire & Hydrostatic">Crop Irrigation
+          <img src="static/images/star.png" alt="Crop Irrigation Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container" id="Fire & Hydrostatic">Other Irrigation
+          <img src="static/images/star-2.png" alt="Other Irrigation Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container" id="Fire & Hydrostatic">Power Related
+          <img src="static/images/square.png" alt="Power Related Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container" id="Fire & Hydrostatic">Institutional Use
+          <img src="static/images/circle.png" alt="Institutional Use Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container" id="Fire & Hydrostatic">Industrial Use
+          <img src="static/images/diamond.png" alt="Industrial Use Icon" class="icon">
+          <input type="checkbox" checked="checked" onchange="showMD()">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container" id="Fire & Hydrostatic">Commercial Use
+          <img src="static/images/pentagon.png" alt="Commercial Use Icon" class="icon">
           <input type="checkbox" checked="checked" onchange="showMD()">
           <span class="checkmark"></span>
         </label>
@@ -39,13 +75,9 @@
         <hr class="rounded">
 
         <h3>States</h3>
-        <label class="container">Maryland
-          <input type="checkbox">
-          <span class="checkmark"></span>
-        </label>
         
-        <label class="container">Virginia
-          <input type="checkbox">
+        <label class="container" id="Virginia">Virginia
+          <input type="checkbox" checked="checked" onchange="showVA()">
           <span class="checkmark"></span>
         </label>
 
