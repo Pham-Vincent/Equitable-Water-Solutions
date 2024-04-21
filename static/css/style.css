@@ -181,7 +181,7 @@ body {
 /* styles the legend button */
 .legend-button{
   position: absolute;
-  top: 0;
+  top: 37%;
   left: -40px; 
   height: 20%; 
   width: 40px; 

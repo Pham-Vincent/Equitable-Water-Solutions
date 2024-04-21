@@ -76,7 +76,7 @@ export function openPopup(marker, currentGraph) {
           <p>${marker.descriptions.description2}</p>
         </div>
         
-        <div id="graph_html"> </div>
+        <div id="graph_html"></div>
   
         <div id="close-button" onclick="closePopup()"><img src="static/images/close-button.png" alt="Close"></div>
       </div>

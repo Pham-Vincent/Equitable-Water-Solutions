@@ -11,12 +11,13 @@ Output: JavaScript file
 
 Date: 04/16/24
 
-
 */
 //Gets Google Maps APi Key
 import config from './config.js';
 import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
 import { search } from './search.js';
+import { setMarkerIcon } from './markerFunctions.js';
+
 let map;
 let markers = []; //stores markers used in search()
 let markersMD = []; //array used in legend function showVA()
@@ -96,7 +97,7 @@ $.ajax({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
-            //content: glyphImg,
+            //content: glyphImg, // revert marker to default
         });
 
         // Attach custom properties to the marker object
@@ -129,7 +130,7 @@ $.ajax({
         });
 
         //Event listener for hovering
-        marker.content.addEventListener('mouseenter', ({ domEvent }) => {
+        marker.content.addEventListener('mouseenter', () => {
           if (!window.popupLayerOpen || marker !== window.currentMarker) {
             infowindow.open(map, marker);
           }
@@ -141,7 +142,6 @@ $.ajax({
             infowindow.close();
           }
         });
-
            
         //adds interactive function to marker on click
         marker.addListener("click", () => {
@@ -158,18 +158,8 @@ $.ajax({
               infowindow.close();
           }
         });
-
-        google.maps.event.addListener(map, 'zoom_changed', function() {
-          var isVisible = marker.getVisible()
-          if (isVisible) {
-              infowindow.close;
-              console.log("marker no longer visible")
-          }      
-        });
-        
             
       });
-      
     
     },
     error: function(xhr, status, error) {
@@ -193,7 +183,7 @@ $.ajax({
        // Use the data given in json file
     data.forEach(function(point) {
       let mapCode = point.PermitNumber;
-      let desc1 = point.DesignatedUse;
+      let desc1 = point.DesignatedUse; //use type
       let latitude = parseFloat(point.FixedLatitudes);
       let longitude = parseFloat(point.FixedLongitudes);
       let locality = point.County;
@@ -201,9 +191,9 @@ $.ajax({
       let tidal = point.TidalorNontidal;
 
 
-      //uses triangle.png as marker
+      //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
-      glyphImg.src = "static/images/hexagon.png"
+
       // Uses latitude and longitude to map points on the map
       var marker = new AdvancedMarkerElement({
           position: { lat: latitude, lng: longitude },
@@ -219,7 +209,11 @@ $.ajax({
         description3: tidal,
         description4: desc1
       };
-      
+
+      console.log(marker.descriptions.description4);
+      //sets unique marker icon depending on designated use type
+      marker.content.src = setMarkerIcon(marker.descriptions.description4);
+          
       //marker pushed into markers array, used in search()
       markers.push(marker); 
       // temp array to store MD points
@@ -236,7 +230,9 @@ $.ajax({
       });
 
       //Event listener for hovering
-      marker.content.addEventListener('mouseenter', ({ domEvent }) => {
+      //handleHover(map, marker, infowindow);
+      
+      marker.content.addEventListener('mouseenter', () => {
         if (!window.popupLayerOpen || marker !== window.currentMarker) {
           infowindow.open(map, marker);
         }
@@ -262,7 +258,6 @@ $.ajax({
             infowindow.close();
         }
       });
-         
           
     });
 
@@ -281,6 +276,7 @@ $(document).ajaxStop(function() {
     algorithmOptions:{radius:150}
   });
 });
+
 }
 
 //closes popup upon clicking overlay
