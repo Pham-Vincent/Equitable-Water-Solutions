@@ -31,7 +31,7 @@ function Load_Map(){
 
 async function initMap() {
   await Load_Map()
-  const { Map, InfoWindow, MarkerClusterer} = await google.maps.importLibrary("maps", "markerclusterer");
+  const { Map, InfoWindow, Markerclusterer} = await google.maps.importLibrary("maps", "markerclusterer");
   const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
@@ -61,17 +61,13 @@ $.ajax({
         // Use the data to map points on the map
          // Use the data given in json file
       data.forEach(function(point) {
-        let mapCode = point.Hydrocode;
-        let desc1 = point.Source_Type;
-        let latitude = parseFloat(point.Latitude);
-        let longitude = parseFloat(point.Longitude);
-        let locality = point.Locality;
-        let point1 = parseFloat(point.Year_2016);
-        let point2 = parseFloat(point.Year_2017);
-        let point3 = parseFloat(point.Year_2018);
-        let point4 = parseFloat(point.Year_2019);
-        let point5 = parseFloat(point.Year_2020);
-        let mType = 'm';
+        let mapCode = point.Hydrocode,
+        desc1 = point.Source_Type,
+        latitude = parseFloat(point.Latitude),
+        longitude = parseFloat(point.Longitude),
+        locality = point.Locality,
+        point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
+        mType = 'm';
 
         //custom colored marker
         const pinBackground = new PinElement({
@@ -128,38 +124,7 @@ $.ajax({
             maxWidth: 300,
         });
 
-        //Event listener for hovering
-        marker.content.addEventListener('mouseenter', ({ domEvent }) => {
-          if (!window.popupLayerOpen || marker !== window.currentMarker) {
-            infowindow.open(map, marker);
-          }
-        });
-        
-        //Event listener for closing hovering
-        marker.content.addEventListener('mouseleave', () => {
-          if (!window.popupLayerOpen || marker !== window.currentMarker) {
-            infowindow.close();
-          }
-        });
-           
-        //adds interactive function to marker on click
-        marker.addListener("click", () => {
-          popUpLayer1(marker, map);
-          infowindow.close();
-          window.popupLayerOpen = true;
-        });
-
-        //if infowindow wont close on 'mouseleave' clicking the map will close
-
-        google.maps.event.addListener(map, 'click', function() {
-          // Check if the info window is open
-          if (infowindow) {
-              // Close the info window
-              infowindow.close();
-          }
-        });
-
-
+        addListeners(marker, infowindow, map);
             
       });
       
@@ -185,13 +150,13 @@ $.ajax({
       // Use the data to map points on the map
        // Use the data given in json file
     data.forEach(function(point) {
-      let mapCode = point.PermitNumber;
-      let desc1 = point.DesignatedUse;
-      let latitude = parseFloat(point.FixedLatitudes);
-      let longitude = parseFloat(point.FixedLongitudes);
-      let locality = point.County;
-      let fresh = point.FreshwaterOrSaltwater;
-      let tidal = point.TidalorNontidal;
+      let mapCode = point.PermitNumber,
+      desc1 = point.DesignatedUse,
+      latitude = parseFloat(point.FixedLatitudes),
+      longitude = parseFloat(point.FixedLongitudes),
+      locality = point.County,
+      fresh = point.FreshwaterOrSaltwater,
+      tidal = point.TidalorNontidal;
 
 
       //uses triangle.png as marker
@@ -227,35 +192,8 @@ $.ajax({
           `,
           maxWidth: 300,
       });
-
-      //Event listener for hovering
-      marker.content.addEventListener('mouseenter', ({ domEvent }) => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
-          infowindow.open(map, marker);
-        }
-      });
-      
-      //Event listener for closing hovering
-      marker.content.addEventListener('mouseleave', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
-          infowindow.close();
-        }
-      });
-          
-      //adds interactive function to marker on click
-      marker.addListener("click", () => {
-        popUpLayer1(marker, map);
-        infowindow.close();
-        window.popupLayerOpen = true;
-      });
-
-      //if infowindow wont close on 'mouseleave' clicking the map will close
-      google.maps.event.addListener(map, 'click', function() {
-        if (infowindow) {
-            infowindow.close();
-        }
-      });
          
+      addListeners(marker, infowindow, map);
           
     });
 
@@ -268,12 +206,14 @@ $.ajax({
 
 
 $(document).ajaxStop(function() {
-  const markerCluster = new markerClusterer.MarkerClusterer({ 
+  markerClusterer = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
     algorithmOptions:{radius:150}
   });
+
 });
+
 }
 
 //closes popup upon clicking overlay
@@ -291,9 +231,16 @@ function handleKeyPress(event) {
 
 //sets all markers in given array to visible or invisible(used for legend)
 function setMapOnAll(map, markers) {
+  if(map==null){
+    markerClusterer.clearMarkers(markers);
+  }
+  else {
+    markerClusterer.addMarkers(markers);
+  }
   for (let i = 0; i < markers.length; i++) {
     markers[i].setMap(map);
   }
+  
 }
 
 //hides markers for MD(used for legend)
@@ -330,6 +277,38 @@ function showVA() {
       console.log("Checkbox is unchecked");
       setMapOnAll(null, markersVA);
     }
+}
+
+
+//Simplified Function to add listeners to every marker
+function addListeners(marker, infowindow, map) {
+  //Event listener for hovering
+  marker.content.addEventListener('mouseenter', ({ domEvent }) => {
+    if (!window.popupLayerOpen || marker !== window.currentMarker) {
+      infowindow.open(map, marker);
+    }
+  });
+  
+  //Event listener for closing hovering
+  marker.content.addEventListener('mouseleave', () => {
+    if (!window.popupLayerOpen || marker !== window.currentMarker) {
+      infowindow.close();
+    }
+  });
+      
+  //adds interactive function to marker on click
+  marker.addListener("click", () => {
+    popUpLayer1(marker, map);
+    infowindow.close();
+    window.popupLayerOpen = true;
+  });
+
+  //if infowindow wont close on 'mouseleave' clicking the map will close
+  google.maps.event.addListener(map, 'click', function() {
+    if (infowindow) {
+        infowindow.close();
+    }
+  });
 }
 
 window.showMD = showMD;
