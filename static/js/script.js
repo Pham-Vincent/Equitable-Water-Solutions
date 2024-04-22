@@ -16,7 +16,7 @@ Date: 04/16/24
 import config from './config.js';
 import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
 import { search } from './search.js';
-import { setMarkerIcon } from './markerFunctions.js';
+import { setMarkerIcon, handleHoverOver, handleHoverOut, handleMarkerClick, handleInfowindowClick } from './markerFunctions.js';
 
 let map;
 let markers = []; //stores markers used in search()
@@ -129,35 +129,17 @@ $.ajax({
             maxWidth: 300,
         });
 
-        //Event listener for hovering
-        marker.content.addEventListener('mouseenter', () => {
-          if (!window.popupLayerOpen || marker !== window.currentMarker) {
-            infowindow.open(map, marker);
-          }
-        });
+        //function handles marker hover
+        handleHoverOver(map, marker, infowindow);
         
         //Event listener for closing hovering
-        marker.content.addEventListener('mouseleave', () => {
-          if (!window.popupLayerOpen || marker !== window.currentMarker) {
-            infowindow.close();
-          }
-        });
-           
+        handleHoverOut(map, marker, infowindow);
+            
         //adds interactive function to marker on click
-        marker.addListener("click", () => {
-          popUpLayer1(marker, map);
-          infowindow.close();
-          window.popupLayerOpen = true;
-        });
-
+        handleMarkerClick(map, marker, infowindow)
+        
         //if infowindow wont close on 'mouseleave' clicking the map will close
-        google.maps.event.addListener(map, 'click', function() {
-          // Check if the info window is open
-          if (infowindow) {
-              // Close the info window
-              infowindow.close();
-          }
-        });
+        handleInfowindowClick(map, infowindow);
             
       });
     
@@ -229,35 +211,17 @@ $.ajax({
           maxWidth: 300,
       });
 
-      //Event listener for hovering
-      //handleHover(map, marker, infowindow);
-      
-      marker.content.addEventListener('mouseenter', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
-          infowindow.open(map, marker);
-        }
-      });
+      //function handles marker hover
+      handleHoverOver(map, marker, infowindow);
       
       //Event listener for closing hovering
-      marker.content.addEventListener('mouseleave', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
-          infowindow.close();
-        }
-      });
+      handleHoverOut(map, marker, infowindow);
           
       //adds interactive function to marker on click
-      marker.addListener("click", () => {
-        popUpLayer1(marker, map);
-        infowindow.close();
-        window.popupLayerOpen = true;
-      });
-
+      handleMarkerClick(map, marker, infowindow)
+      
       //if infowindow wont close on 'mouseleave' clicking the map will close
-      google.maps.event.addListener(map, 'click', function() {
-        if (infowindow) {
-            infowindow.close();
-        }
-      });
+      handleInfowindowClick(map, infowindow);
           
     });
 

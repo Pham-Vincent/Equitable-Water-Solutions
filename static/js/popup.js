@@ -105,6 +105,7 @@ export function closePopup() {
     customPopup = document.getElementById('popup');
     customPopup.style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
+    window.popupLayerOpen=false;
 }
 
 //Function to handle the view more button
