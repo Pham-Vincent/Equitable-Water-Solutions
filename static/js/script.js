@@ -21,6 +21,7 @@ let map;
 let markers = []; //stores markers used in search()
 let markersMD = []; //array used in legend function showVA()
 let markersVA = []; //array used in legend function showMD()
+let markersShown = []; //array used to show all visible markers
 
 
 function Load_Map(){
@@ -230,17 +231,18 @@ function handleKeyPress(event) {
 }
 
 //sets all markers in given array to visible or invisible(used for legend)
-function setMapOnAll(map, markers) {
+function setMapOnAll(map, Tmarkers) {
   if(map==null){
-    markerClusterer.clearMarkers(markers);
+    markerClusterer.removeMarkers(Tmarkers);
   }
-  else {
-    markerClusterer.addMarkers(markers);
+
+  for (let i = 0; i < Tmarkers.length; i++) {
+    Tmarkers[i].setMap(map);
   }
-  for (let i = 0; i < markers.length; i++) {
-    markers[i].setMap(map);
+
+  if(map!=null){
+    markerClusterer.addMarkers(Tmarkers);
   }
-  
 }
 
 //hides markers for MD(used for legend)
