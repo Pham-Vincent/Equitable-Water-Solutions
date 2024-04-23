@@ -22,7 +22,7 @@ export function search(markers, map) {
       if (markerTitle.includes(searchInput)) {
         console.log("Match found!");
         map.panTo(marker.position);
-        map.setZoom(15);
+        map.setZoom(20);
         popUpLayer1(marker, map);
         window.popupLayerOpen = true;
       } else {
