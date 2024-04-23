@@ -124,6 +124,7 @@ $.ajax({
             </div>
             `,
             maxWidth: 300,
+            disableAutoPan: true,
         });
 
         addListeners(marker, infowindow, map);
@@ -196,6 +197,7 @@ $.ajax({
           </div>
           `,
           maxWidth: 300,
+          disableAutoPan: true,
       });
          
       addListeners(marker, infowindow, map);
