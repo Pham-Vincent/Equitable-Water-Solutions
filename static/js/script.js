@@ -127,6 +127,7 @@ $.ajax({
             </div>
             `,
             maxWidth: 300,
+            disableAutoPan: true,
         });
 
         //function handles marker hover
@@ -209,6 +210,7 @@ $.ajax({
           </div>
           `,
           maxWidth: 300,
+          disableAutoPan: true,
       });
 
       //function handles marker hover
@@ -222,6 +224,7 @@ $.ajax({
       
       //if infowindow wont close on 'mouseleave' clicking the map will close
       handleInfowindowClick(map, infowindow);
+
           
     });
 
@@ -239,6 +242,8 @@ $(document).ajaxStop(function() {
     markers:markers,
     algorithmOptions:{radius:150}
   });
+
+
 });
 
 }

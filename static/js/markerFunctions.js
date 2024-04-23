@@ -38,9 +38,10 @@ export function setMarkerIcon(designatedUse){
     }
 }
 
+
 export function handleHoverOver(map, marker, infowindow){
     marker.content.addEventListener('mouseenter', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
+        if (!window.popupLayerOpen || marker !== window.currentMarker || !infowindow) {
           infowindow.open(map, marker);
         }
       });
@@ -48,7 +49,7 @@ export function handleHoverOver(map, marker, infowindow){
 
 export function handleHoverOut(map, marker, infowindow){
     marker.content.addEventListener('mouseleave', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
+        if (!window.popupLayerOpen || marker !== window.currentMarker) {  
           infowindow.close();
         }
       });
