@@ -2,4 +2,4 @@
 config.js
 *.json
 *.csv
-*xlsx
+*.xlsx
