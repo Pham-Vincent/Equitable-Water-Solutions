@@ -8,8 +8,7 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-
-Date: 04/16/24
+Date: 04/23/24
 
 */
 //Gets Google Maps APi Key
@@ -124,6 +123,7 @@ $.ajax({
             </div>
             `,
             maxWidth: 300,
+            disableAutoPan: true,
         });
 
         addListeners(marker, infowindow, map);
@@ -196,6 +196,7 @@ $.ajax({
           </div>
           `,
           maxWidth: 300,
+          disableAutoPan: true,
       });
          
       addListeners(marker, infowindow, map);
