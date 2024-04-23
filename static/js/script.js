@@ -39,8 +39,8 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
-    
-    mapId: "DEMO_MAP_ID",
+  //Customizes the Styling of your Map
+    mapId: "45c77a2db5a260c8",
     scrollwheel:true, //bypasses command+scroll to zoom
   });
 
