@@ -38,35 +38,33 @@ export function setMarkerIcon(designatedUse){
     }
 }
 
-export function handleHoverOver(map, marker, infowindow){
-    marker.content.addEventListener('mouseenter', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
-          infowindow.open(map, marker);
-        }
-      });
-}
+//Simplified Function to add listeners to every marker
+export function addListeners(marker, infowindow, map) {
+  //Event listener for hovering
+  marker.content.addEventListener('mouseenter', ({ domEvent }) => {
+    if (!window.popupLayerOpen || marker !== window.currentMarker) {
+      infowindow.open(map, marker);
+    }
+  });
+  
+  //Event listener for closing hovering
+  marker.content.addEventListener('mouseleave', () => {
+    if (!window.popupLayerOpen || marker !== window.currentMarker) {
+      infowindow.close();
+    }
+  });
+      
+  //adds interactive function to marker on click
+  marker.addListener("click", () => {
+    popUpLayer1(marker, map);
+    infowindow.close();
+    window.popupLayerOpen = true;
+  });
 
-export function handleHoverOut(map, marker, infowindow){
-    marker.content.addEventListener('mouseleave', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {
-          infowindow.close();
-        }
-      });
-}
-
-export function handleMarkerClick(map, marker, infowindow){
-    marker.addListener("click", () => {
-        popUpLayer1(marker, map);
+  //if infowindow wont close on 'mouseleave' clicking the map will close
+  google.maps.event.addListener(map, 'click', function() {
+    if (infowindow) {
         infowindow.close();
-        window.popupLayerOpen = true;
-      });
+    }
+  });
 }
-
-export function handleInfowindowClick(map, infowindow){
-    google.maps.event.addListener(map, 'click', function() {
-        if (infowindow) {
-            infowindow.close();
-        }
-      });
-}
-

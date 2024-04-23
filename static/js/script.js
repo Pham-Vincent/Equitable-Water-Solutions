@@ -16,7 +16,7 @@ Date: 04/16/24
 import config from './config.js';
 import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
 import { search } from './search.js';
-import { setMarkerIcon, handleHoverOver, handleHoverOut, handleMarkerClick, handleInfowindowClick } from './markerFunctions.js';
+import { setMarkerIcon, addListeners} from './markerFunctions.js';
 
 let map;
 let markers = []; //stores markers used in search()
@@ -235,10 +235,11 @@ function handleKeyPress(event) {
 }
 
 //sets all markers in given array to visible or invisible(used for legend)
-function setMapOnAll(map, Tmarkers) {
-  if(map==null){
-    markerClusterer.removeMarkers(Tmarkers);
-  }
+function setMapOnAll(map, Tmarkers, id=null) {
+  //this removes Virginia points, as id == null and removes clustering on all Virginia
+    if(map==null){
+      markerClusterer.removeMarkers(Tmarkers);
+    }
 
   for (let i = 0; i < Tmarkers.length; i++) {
     Tmarkers[i].setMap(map);
@@ -250,20 +251,21 @@ function setMapOnAll(map, Tmarkers) {
 }
 
 //hides markers for MD(used for legend)
-function showMD() {
+function showMD(id) {
 
   //finds checkbox with id = "legend-Mining"
-  const checkbox = document.getElementById("legend-Mining").querySelector('input[type="checkbox"]');
+  const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
     
+  const tempMarkers = markersMD.filter(marker => marker.descriptions && marker.descriptions.description4 === id);
     //if checked -> show markers
     if (checkbox.checked) {
-      setMapOnAll(map, markersMD);
+      setMapOnAll(map, tempMarkers, id);
       console.log("Checkbox is checked");
     } 
     //if unchecked -> hide markers
     else {
       console.log("Checkbox is unchecked");
-      setMapOnAll(null, markersMD);
+      setMapOnAll(null, tempMarkers, id);
     }
 }
 
@@ -283,38 +285,6 @@ function showVA() {
       console.log("Checkbox is unchecked");
       setMapOnAll(null, markersVA);
     }
-}
-
-
-//Simplified Function to add listeners to every marker
-function addListeners(marker, infowindow, map) {
-  //Event listener for hovering
-  marker.content.addEventListener('mouseenter', ({ domEvent }) => {
-    if (!window.popupLayerOpen || marker !== window.currentMarker) {
-      infowindow.open(map, marker);
-    }
-  });
-  
-  //Event listener for closing hovering
-  marker.content.addEventListener('mouseleave', () => {
-    if (!window.popupLayerOpen || marker !== window.currentMarker) {
-      infowindow.close();
-    }
-  });
-      
-  //adds interactive function to marker on click
-  marker.addListener("click", () => {
-    popUpLayer1(marker, map);
-    infowindow.close();
-    window.popupLayerOpen = true;
-  });
-
-  //if infowindow wont close on 'mouseleave' clicking the map will close
-  google.maps.event.addListener(map, 'click', function() {
-    if (infowindow) {
-        infowindow.close();
-    }
-  });
 }
 
 window.showMD = showMD;
