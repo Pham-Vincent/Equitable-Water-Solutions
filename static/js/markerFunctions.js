@@ -38,24 +38,6 @@ export function setMarkerIcon(designatedUse){
     }
 }
 
-<<<<<<< HEAD
-
-export function handleHoverOver(map, marker, infowindow){
-    marker.content.addEventListener('mouseenter', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker || !infowindow) {
-          infowindow.open(map, marker);
-        }
-      });
-}
-
-export function handleHoverOut(map, marker, infowindow){
-    marker.content.addEventListener('mouseleave', () => {
-        if (!window.popupLayerOpen || marker !== window.currentMarker) {  
-          infowindow.close();
-        }
-      });
-}
-=======
 //Simplified Function to add listeners to every marker
 export function addListeners(marker, infowindow, map) {
   //Event listener for hovering
@@ -78,7 +60,6 @@ export function addListeners(marker, infowindow, map) {
     infowindow.close();
     window.popupLayerOpen = true;
   });
->>>>>>> origin/Integrating-MD
 
   //if infowindow wont close on 'mouseleave' clicking the map will close
   google.maps.event.addListener(map, 'click', function() {
