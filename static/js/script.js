@@ -11,12 +11,13 @@ Output: JavaScript file
 
 Date: 04/16/24
 
-
 */
 //Gets Google Maps APi Key
 import config from './config.js';
 import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
 import { search } from './search.js';
+import { setMarkerIcon, handleHoverOver, handleHoverOut, handleMarkerClick, handleInfowindowClick } from './markerFunctions.js';
+
 let map;
 let markers = []; //stores markers used in search()
 let markersMD = []; //array used in legend function showVA()
@@ -93,7 +94,7 @@ $.ajax({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
-            content: glyphImg,
+            //content: glyphImg, // revert marker to default
         });
 
         // Attach custom properties to the marker object
@@ -128,7 +129,6 @@ $.ajax({
         addListeners(marker, infowindow, map);
             
       });
-      
     
     },
     error: function(xhr, status, error) {
@@ -160,9 +160,9 @@ $.ajax({
       tidal = point.TidalorNontidal;
 
 
-      //uses triangle.png as marker
+      //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
-      glyphImg.src = "static/images/hexagon.png"
+
       // Uses latitude and longitude to map points on the map
       var marker = new AdvancedMarkerElement({
           position: { lat: latitude, lng: longitude },
@@ -178,7 +178,11 @@ $.ajax({
         description3: tidal,
         description4: desc1
       };
-      
+
+      console.log(marker.descriptions.description4);
+      //sets unique marker icon depending on designated use type
+      marker.content.src = setMarkerIcon(marker.descriptions.description4);
+          
       //marker pushed into markers array, used in search()
       markers.push(marker); 
       // temp array to store MD points
@@ -267,7 +271,7 @@ function showMD() {
 function showVA() {
 
   //finds checkbox with id = "legend-Withdrawal"
-  const checkbox = document.getElementById("legend-Withdrawal").querySelector('input[type="checkbox"]');
+  const checkbox = document.getElementById("Virginia").querySelector('input[type="checkbox"]');
     
     //if checked -> show markers
     if (checkbox.checked) {
