@@ -20,9 +20,6 @@ import { setMarkerIcon, addListeners} from './markerFunctions.js';
 
 let map;
 let markers = []; //stores markers used in search()
-let markersMD = []; //array used in legend function showVA()
-let markersVA = []; //array used in legend function showMD()
-let markersShown = []; //array used to show all visible markers
 
 
 function Load_Map(){
@@ -69,7 +66,7 @@ $.ajax({
         longitude = parseFloat(point.Longitude),
         locality = point.Locality,
         point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
-        mType = 'm';
+        legendType = 'Virginia';
 
         //custom colored marker
         const pinBackground = new PinElement({
@@ -101,7 +98,7 @@ $.ajax({
         marker.descriptions = {
           description1: desc1,
           description2: locality,
-          description3: mType
+          tag: legendType
         };
 
         marker.points = {
@@ -115,7 +112,6 @@ $.ajax({
         //marker pushed into markers array, used in search()
         markers.push(marker); 
         
-        markersVA.push(marker);  
         //creates infowindow used in hover listeners
         const infowindow = new InfoWindow({
           content: `
@@ -176,17 +172,15 @@ $.ajax({
         description1: locality,
         description2: fresh,
         description3: tidal,
-        description4: desc1
+        tag: desc1
       };
 
-      console.log(marker.descriptions.description4);
+      console.log(marker.descriptions.tag);
       //sets unique marker icon depending on designated use type
-      marker.content.src = setMarkerIcon(marker.descriptions.description4);
+      marker.content.src = setMarkerIcon(marker.descriptions.tag);
           
       //marker pushed into markers array, used in search()
       markers.push(marker); 
-      // temp array to store MD points
-      markersMD.push(marker); 
           
       //creates infowindow used in hover listeners
       const infowindow = new InfoWindow({
@@ -250,13 +244,18 @@ function setMapOnAll(map, Tmarkers, id=null) {
   }
 }
 
-//hides markers for MD(used for legend)
-function showMD(id) {
+/*
+Name: legendFunc
+Usage: Pass in an id that matches with corresponding tag associated with each marker.
+       Using this we can use a single function to make a fully functioning legend.
+*/
+function legendFunc(id) {
 
   //finds checkbox with id = "legend-Mining"
   const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    
-  const tempMarkers = markersMD.filter(marker => marker.descriptions && marker.descriptions.description4 === id);
+  console.log(id);
+
+  const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
     //if checked -> show markers
     if (checkbox.checked) {
       setMapOnAll(map, tempMarkers, id);
@@ -269,26 +268,7 @@ function showMD(id) {
     }
 }
 
-//hides markers for VA(used for legend)
-function showVA() {
-
-  //finds checkbox with id = "legend-Withdrawal"
-  const checkbox = document.getElementById("Virginia").querySelector('input[type="checkbox"]');
-    
-    //if checked -> show markers
-    if (checkbox.checked) {
-      setMapOnAll(map, markersVA);
-      console.log("Checkbox is checked");
-    } 
-    //if unchecked -> hide markers
-    else {
-      console.log("Checkbox is unchecked");
-      setMapOnAll(null, markersVA);
-    }
-}
-
-window.showMD = showMD;
-window.showVA = showVA;
+window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
 
 //event listener for search enter press
