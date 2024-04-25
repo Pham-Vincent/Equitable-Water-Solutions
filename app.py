@@ -1,3 +1,16 @@
+
+""" 
+Title:app.py
+Author: Vincent Pham
+
+Functionality: The purpose of this file is to showcase various HTML files and enable the integration of Python into our project. Through JavaScript, we can transmit signals to Python, facilitating the dynamic loading of images or opening of different HTML files. Presently, it effectively supports the dynamic loading of graphs.
+
+
+Output: Python Generated Images,Displays Webpage
+Date:4/25/2024
+"""
+
+
 #Import necessary libraries
 from flask import Flask,jsonify,render_template,request
 import matplotlib.pyplot as plt
@@ -8,6 +21,8 @@ import pandas as pd
 import plotly.express as px
 import  plotly.io as pio
 import plotly
+from datetime import datetime
+
 #Flask Instance
 app = Flask(__name__)
 #Allows to generate Graph Image 
@@ -22,9 +37,10 @@ def create_graph():
   #Turns JSON Values Strings -> Floats
   WithdrawValues =[float(Floats) for Floats in WithdrawValues]
 
+  year_strings =['2016','2017','2018','2019','2020']
 
-  #Formats the Data correctly for the DataFrame to Plot
-  WithdrawValues_data = [[2016,WithdrawValues[0]],[2017,WithdrawValues[1]],[2018,WithdrawValues[2]],[2019,WithdrawValues[3]],[2020,WithdrawValues[4]]]
+
+  WithdrawValues_data = [[datetime.strptime(year, '%Y'), WithdrawValues[i]] for i, year in enumerate(year_strings)]
   WithdrawValues_df = pd.DataFrame(WithdrawValues_data,columns=['Years','WaterWithdraw'])
  
   #Creates a Scatter Plot 
@@ -45,6 +61,37 @@ def create_graph():
   #Visual Changes 
   WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='black')
   WithdrawPlotted.update_xaxes(title_font_family="Times New Roman")
+
+  #Adding Slider Window And Buttons on top of the graph
+  WithdrawPlotted.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label="1m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=6,
+                     label="6m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=1,
+                     label="YTD",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="backward"),
+                dict(step="all")
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+)
 
 
 
