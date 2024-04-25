@@ -1,0 +1,59 @@
+/*
+title: legend.js
+
+Description: This file holds all the methods for handling legend functionality then exporting to 'script.js'.
+Functions handle removing markers and adding back markers using specified usetype 'id'
+
+Authors: W. Lamuth, N. Gammel
+
+Date: 04/25/24
+*/
+
+import { markers, map } from './script.js';
+
+
+//sets all markers in given array to visible or invisible(used for legend)
+export function setMapOnAll(map, Tmarkers, id=null) {
+    //this removes Virginia points, as id == null and removes clustering on all Virginia
+    if(map==null){
+        markerClusterer.removeMarkers(Tmarkers);
+        console.log('markeres removed');
+    }
+  
+    for (let i = 0; i < Tmarkers.length; i++) {
+      Tmarkers[i].setMap(map);
+    }
+  
+    if(map!=null){
+      markerClusterer.addMarkers(Tmarkers);
+      console.log('markeres added');
+    }
+  }
+  
+/*
+Name: legendFunc
+Usage: Pass in an id that matches with corresponding tag associated with each marker.
+        Using this we can use a single function to make a fully functioning legend.
+*/
+export function legendFunc(id) {
+
+//finds checkbox with id = "legend-Mining"
+    const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
+    console.log(id);
+
+    const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
+        //if checked -> show markers
+        if (checkbox.checked) {
+            setMapOnAll(map, tempMarkers, id);
+            console.log("Checkbox is checked");
+        } 
+        //if unchecked -> hide markers
+        else {
+            console.log("Checkbox is unchecked");
+            setMapOnAll(null, tempMarkers, id);
+        }
+}
+
+//makes functions globally accessible
+window.legendFunc = legendFunc;
+window.setMapOnAll = setMapOnAll;

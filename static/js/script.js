@@ -8,18 +8,18 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-Date: 04/23/24
+Date: 04/25/24
 
 */
 //Gets Google Maps APi Key
 import config from './config.js';
-import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
+import { closePopup} from './popup.js';
 import { search } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
+import { legendFunc } from './legend.js';
 
-let map;
-let markers = []; //stores markers used in search()
-
+export let map;
+export let markers = []; //stores markers used in search()
 
 function Load_Map(){
 
@@ -43,7 +43,7 @@ async function initMap() {
   /* Sets the Maximum Zoom out Value */
   map.setOptions({ minZoom: 3});
 
-console.log("AJAX request started");
+  console.log("AJAX request started");
 
 /*
 AJAX connects to VA json file and extracts data
@@ -122,11 +122,10 @@ $.ajax({
             disableAutoPan: true,
         });
 
-        addListeners(marker, infowindow, map);
-            
+        //import from 'markerFunction.js' and contains all marker event listeners
+        addListeners(marker, infowindow, map);    
         
       });
-    
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
@@ -155,7 +154,6 @@ $.ajax({
       locality = point.County,
       fresh = point.FreshwaterOrSaltwater,
       tidal = point.TidalorNontidal;
-
 
       //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
@@ -200,18 +198,16 @@ $.ajax({
           maxWidth: 300,
           disableAutoPan: true,
       });
-         
+      
+      //import from 'markerFunction.js' and contains all marker event listeners
       addListeners(marker, infowindow, map);
           
     });
-
-      
   },
   error: function(xhr, status, error) {
       console.error('Error:', error);
   }
 });
-
 
 $(document).ajaxStop(function() {
   markerClusterer = new markerClusterer.MarkerClusterer({ 
@@ -219,9 +215,7 @@ $(document).ajaxStop(function() {
     markers:markers,
     algorithmOptions:{radius:150}
   });
-
 });
-
 
 }
 
@@ -238,50 +232,11 @@ function handleKeyPress(event) {
   }
 }
 
-
-//sets all markers in given array to visible or invisible(used for legend)
-function setMapOnAll(map, Tmarkers, id=null) {
-  //this removes Virginia points, as id == null and removes clustering on all Virginia
-    if(map==null){
-      markerClusterer.removeMarkers(Tmarkers);
-    }
-
-  for (let i = 0; i < Tmarkers.length; i++) {
-    Tmarkers[i].setMap(map);
-  }
-
-  if(map!=null){
-    markerClusterer.addMarkers(Tmarkers);
-  }
+//handles calling legend functions();
+function callFunction(id){
+  legendFunc(id);
 }
-
-/*
-Name: legendFunc
-Usage: Pass in an id that matches with corresponding tag associated with each marker.
-       Using this we can use a single function to make a fully functioning legend.
-*/
-function legendFunc(id) {
-
-  //finds checkbox with id = "legend-Mining"
-  const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
-  console.log(id);
-
-  const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
-    //if checked -> show markers
-    if (checkbox.checked) {
-      setMapOnAll(map, tempMarkers, id);
-      console.log("Checkbox is checked");
-    } 
-    //if unchecked -> hide markers
-    else {
-      console.log("Checkbox is unchecked");
-      setMapOnAll(null, tempMarkers, id);
-    }
-}
-
-window.legendFunc = legendFunc;
-window.setMapOnAll = setMapOnAll;
-
+window.callFunction = callFunction;
 
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
