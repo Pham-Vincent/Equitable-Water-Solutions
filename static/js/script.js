@@ -39,7 +39,7 @@ async function initMap() {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
   //Customizes the Styling of your Map
-    mapId: "45c77a2db5a260c8 ",
+    mapId: "45c77a2db5a260c8",
     scrollwheel:true, //bypasses command+scroll to zoom
   });
 
@@ -83,7 +83,7 @@ $.ajax({
 
         //marker with image icon
         const glyphElement = new PinElement({
-          background: '#0443fb',
+          background: 'white',
           borderColor: '#000000',
           glyph: glyphImg,
         });
@@ -93,7 +93,7 @@ $.ajax({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
-            //content: glyphImg, // revert marker to default
+            //content: glyphElement.element, // revert marker to default
         });
 
         // Attach custom properties to the marker object
@@ -128,6 +128,7 @@ $.ajax({
 
         addListeners(marker, infowindow, map);
             
+        
       });
     
     },
@@ -163,6 +164,13 @@ $.ajax({
       //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
 
+      //custom marker
+      const glyphElement = new PinElement({
+        background: 'white',
+        borderColor: '#000000',
+        glyph: glyphImg,
+      });
+      
       // Uses latitude and longitude to map points on the map
       var marker = new AdvancedMarkerElement({
           position: { lat: latitude, lng: longitude },
@@ -220,6 +228,7 @@ $(document).ajaxStop(function() {
 
 });
 
+
 }
 
 //closes popup upon clicking overlay
@@ -234,6 +243,7 @@ function handleKeyPress(event) {
     }
   }
 }
+
 
 //sets all markers in given array to visible or invisible(used for legend)
 function setMapOnAll(map, Tmarkers, id=null) {
@@ -288,9 +298,11 @@ function showVA() {
     }
 }
 
+//makes functions globally accessible
 window.showMD = showMD;
 window.showVA = showVA;
 window.setMapOnAll = setMapOnAll;
+
 
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
