@@ -16,7 +16,7 @@ import config from './config.js';
 import { closePopup} from './popup.js';
 import { search } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
-import { legendFunc } from './legend.js';
+import { legendFunc, selectAll } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
@@ -80,7 +80,7 @@ $.ajax({
 
         //marker with image icon
         const glyphElement = new PinElement({
-          background: 'white',
+          background: 'orange',
           borderColor: '#000000',
           glyph: glyphImg,
         });
@@ -110,7 +110,7 @@ $.ajax({
         
         //marker pushed into markers array, used in search()
         markers.push(marker); 
-        
+        console.log(marker.descriptions.tag);
         //creates infowindow used in hover listeners
         const infowindow = new InfoWindow({
           content: `
@@ -170,7 +170,7 @@ $.ajax({
           position: { lat: latitude, lng: longitude },
           map,
           title: mapCode,
-          content: glyphImg,
+          content: glyphElement.element,
       });
 
       // Attach custom properties to the marker object
@@ -183,7 +183,7 @@ $.ajax({
 
       console.log(marker.descriptions.tag);
       //sets unique marker icon depending on designated use type
-      marker.content.src = setMarkerIcon(marker.descriptions.tag);
+      glyphImg.src = setMarkerIcon(marker.descriptions.tag);
           
       //marker pushed into markers array, used in search()
       markers.push(marker); 
@@ -233,8 +233,9 @@ function handleKeyPress(event) {
 }
 
 //handles calling legend functions();
-function callFunction(id){
+function callFunction(id, source){
   legendFunc(id);
+  selectAll(id, source);
 }
 window.callFunction = callFunction;
 

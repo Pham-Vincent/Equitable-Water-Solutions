@@ -37,23 +37,51 @@ Usage: Pass in an id that matches with corresponding tag associated with each ma
 */
 export function legendFunc(id) {
 
-//finds checkbox with id = "legend-Mining"
+    //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
 
     const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
-        //if checked -> show markers
-        if (checkbox.checked) {
-            setMapOnAll(map, tempMarkers, id);
-            console.log("Checkbox is checked");
-        } 
-        //if unchecked -> hide markers
-        else {
-            console.log("Checkbox is unchecked");
-            setMapOnAll(null, tempMarkers, id);
-        }
+
+    //if checked -> show markers
+    if (checkbox.checked) {
+        setMapOnAll(map, tempMarkers, id);
+        console.log("Checkbox is checked");
+    } 
+    //if unchecked -> hide markers
+    else {
+        console.log("Checkbox is unchecked");
+        setMapOnAll(null, tempMarkers, id);
+    }
+}
+
+/*
+Name: selectAll
+
+Usage: if select all is checked all boxes checked and all markers shown. 
+If unchecked it unchecks all checkboxes and removes all markers
+*/
+export function selectAll(id, source){
+
+    const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
+    console.log(id);
+
+    //finds all checkboxes with name attritbute = box
+    const checkboxes = document.getElementsByName("box");
+    const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag != 'Virginia');
+
+    //checks/unchecks all boxes depending on 'Select All' box status 
+    for(var i=0;i<checkboxes.length;i++) 
+        checkboxes[i].checked = source.checked;
+
+    //if checked -> show markers, else -> hide markers
+    if(selectAllBox.checked)
+        setMapOnAll(map, markers);
+    else
+        setMapOnAll(null, markers);
 }
 
 //makes functions globally accessible
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
+window.selectAll = selectAll;

@@ -13,10 +13,10 @@ import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
 //sets marker image depending on designated use
 export function setMarkerIcon(designatedUse){
     if (designatedUse === "Mining") {
-        return "static/images/triangle.png";
+        return "static/images/pickaxe.png";
     }
     if (designatedUse === "Fire and Hyrdrostatic") {
-        return "static/images/hexagon.png";
+        return "static/images/flame.png";
     }
     if (designatedUse === "Power Related") {
         return "static/images/square.png";
@@ -34,7 +34,13 @@ export function setMarkerIcon(designatedUse){
         return "static/images/star-2.png";
     }
     if (designatedUse === "Crop Irrigation") {
-        return "static/images/star.png";
+        return "static/images/corn.png";
+    }
+    if (designatedUse === "Drinking") {
+        return "static/images/hexagon.png";
+    }
+    if(designatedUse === "Aquaculture"){
+        return "static/images/triangle.png";
     }
 }
 
