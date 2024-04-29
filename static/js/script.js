@@ -213,7 +213,7 @@ $(document).ajaxStop(function() {
   markerClusterer = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
-    algorithmOptions:{radius:150, minPoints: 3},
+    algorithmOptions:{radius:175, minPoints: 3},
   });
 });
 
