@@ -36,7 +36,7 @@ async function initMap() {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
   //Customizes the Styling of your Map
-    mapId: "45c77a2db5a260c8",
+    mapId: "366d3e13ce470bd7", //366d3e13ce470bd7 alternate map style
     scrollwheel:true, //bypasses command+scroll to zoom
   });
 
@@ -160,7 +160,7 @@ $.ajax({
 
       //custom marker
       const glyphElement = new PinElement({
-        background: 'white',
+        background: 'orange',
         borderColor: '#000000',
         glyph: glyphImg,
       });

@@ -21,9 +21,19 @@
       </div>
       <!-- search bar end -->
 
-      <!-- legend -->
+
+      
+    <!-- legend -->
+    <div class="legend-container">
+      <h3>Legend</h3>
+      <hr class="rounded">
       <div class="legend">
         <h3>Water Withdrawal</h3>
+        <label class="container" id="Select All">Select All
+          <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
+          <span class="checkmark"></span>
+        </label>
+        
         <label class="container" id="Mining">Mining
           <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
           <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Mining')">
@@ -92,19 +102,15 @@
           <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Virginia')">
           <span class="checkmark"></span>
         </label>
-
-        <label class="container" id="Select All">Select All
-          <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
-          <span class="checkmark"></span>
-        </label>
-
-        <button class="legend-button" onclick="toggleSidebar()">
-          <i class="arrow"></i>
-        </button>
+        
       </div>
+      <button class="legend-button" onclick="toggleSidebar()">
+        <i class="arrow"></i>
+      </button>
+    </div>
       <script>
         function toggleSidebar() {
-            const sidebar = document.querySelector('.legend');
+            const sidebar = document.querySelector('.legend-container');
             sidebar.classList.toggle('hidden');
             const arrow = document.querySelector('.arrow');
             arrow.classList.toggle('rotate180');
