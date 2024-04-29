@@ -26,7 +26,7 @@ export function popUpLayer1(marker, map){
     const smallInfowindow = new google.maps.InfoWindow({
       content: `
         <div class="info-window">
-          <strong style="color:green">${marker.title}</strong>
+          <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
   
           <p>${marker.descriptions.description1}</p>
           <p>${marker.descriptions.description2}</p>

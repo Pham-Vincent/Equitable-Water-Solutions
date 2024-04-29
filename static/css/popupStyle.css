@@ -10,7 +10,7 @@
     z-index: 1000;
     height: 700px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     overflow-y: scroll; /*Enable vertical scrollbar always*/
 }
 
@@ -20,7 +20,7 @@
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 1px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     word-wrap: break-word;
 }
   
@@ -77,7 +77,6 @@
     text-align: left;
     color: rgb(70, 86, 126);
     margin: 20px;
-
 }
 
 .header-paragraph p{
@@ -100,7 +99,7 @@
     margin-top: .5%;
     position: absolute;
     z-index: 1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
     
 .text{
