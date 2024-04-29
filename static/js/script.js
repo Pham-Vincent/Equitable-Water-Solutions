@@ -8,22 +8,18 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-
-Date: 04/16/24
+Date: 04/25/24
 
 */
 //Gets Google Maps APi Key
 import config from './config.js';
-import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
+import { closePopup} from './popup.js';
 import { search } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
+import { legendFunc, selectAll } from './legend.js';
 
-let map;
-let markers = []; //stores markers used in search()
-let markersMD = []; //array used in legend function showVA()
-let markersVA = []; //array used in legend function showMD()
-let markersShown = []; //array used to show all visible markers
-
+export let map;
+export let markers = []; //stores markers used in search()
 
 function Load_Map(){
 
@@ -47,7 +43,7 @@ async function initMap() {
   /* Sets the Maximum Zoom out Value */
   map.setOptions({ minZoom: 3});
 
-console.log("AJAX request started");
+  console.log("AJAX request started");
 
 /*
 AJAX connects to VA json file and extracts data
@@ -69,7 +65,7 @@ $.ajax({
         longitude = parseFloat(point.Longitude),
         locality = point.Locality,
         point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
-        mType = 'm';
+        legendType = 'Virginia';
 
         //custom colored marker
         const pinBackground = new PinElement({
@@ -84,7 +80,7 @@ $.ajax({
 
         //marker with image icon
         const glyphElement = new PinElement({
-          background: '#0443fb',
+          background: 'orange',
           borderColor: '#000000',
           glyph: glyphImg,
         });
@@ -94,14 +90,14 @@ $.ajax({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
-            //content: glyphImg, // revert marker to default
+            //content: glyphElement.element, // revert marker to default
         });
 
         // Attach custom properties to the marker object
         marker.descriptions = {
           description1: desc1,
           description2: locality,
-          description3: mType
+          tag: legendType
         };
 
         marker.points = {
@@ -114,8 +110,7 @@ $.ajax({
         
         //marker pushed into markers array, used in search()
         markers.push(marker); 
-        
-        markersVA.push(marker);  
+        console.log(marker.descriptions.tag);
         //creates infowindow used in hover listeners
         const infowindow = new InfoWindow({
           content: `
@@ -124,12 +119,13 @@ $.ajax({
             </div>
             `,
             maxWidth: 300,
+            disableAutoPan: true,
         });
 
-        addListeners(marker, infowindow, map);
-            
+        //import from 'markerFunction.js' and contains all marker event listeners
+        addListeners(marker, infowindow, map);    
+        
       });
-    
     },
     error: function(xhr, status, error) {
         console.error('Error:', error);
@@ -159,16 +155,22 @@ $.ajax({
       fresh = point.FreshwaterOrSaltwater,
       tidal = point.TidalorNontidal;
 
-
       //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
 
+      //custom marker
+      const glyphElement = new PinElement({
+        background: 'white',
+        borderColor: '#000000',
+        glyph: glyphImg,
+      });
+      
       // Uses latitude and longitude to map points on the map
       var marker = new AdvancedMarkerElement({
           position: { lat: latitude, lng: longitude },
           map,
           title: mapCode,
-          content: glyphImg,
+          content: glyphElement.element,
       });
 
       // Attach custom properties to the marker object
@@ -176,17 +178,15 @@ $.ajax({
         description1: locality,
         description2: fresh,
         description3: tidal,
-        description4: desc1
+        tag: desc1
       };
 
-      console.log(marker.descriptions.description4);
+      console.log(marker.descriptions.tag);
       //sets unique marker icon depending on designated use type
-      marker.content.src = setMarkerIcon(marker.descriptions.description4);
+      glyphImg.src = setMarkerIcon(marker.descriptions.tag);
           
       //marker pushed into markers array, used in search()
       markers.push(marker); 
-      // temp array to store MD points
-      markersMD.push(marker); 
           
       //creates infowindow used in hover listeners
       const infowindow = new InfoWindow({
@@ -196,27 +196,25 @@ $.ajax({
           </div>
           `,
           maxWidth: 300,
+          disableAutoPan: true,
       });
-         
+      
+      //import from 'markerFunction.js' and contains all marker event listeners
       addListeners(marker, infowindow, map);
           
     });
-
-      
   },
   error: function(xhr, status, error) {
       console.error('Error:', error);
   }
 });
 
-
 $(document).ajaxStop(function() {
   markerClusterer = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
-    algorithmOptions:{radius:150}
+    algorithmOptions:{radius:150, minPoints: 3},
   });
-
 });
 
 }
@@ -234,62 +232,12 @@ function handleKeyPress(event) {
   }
 }
 
-//sets all markers in given array to visible or invisible(used for legend)
-function setMapOnAll(map, Tmarkers, id=null) {
-  //this removes Virginia points, as id == null and removes clustering on all Virginia
-    if(map==null){
-      markerClusterer.removeMarkers(Tmarkers);
-    }
-
-  for (let i = 0; i < Tmarkers.length; i++) {
-    Tmarkers[i].setMap(map);
-  }
-
-  if(map!=null){
-    markerClusterer.addMarkers(Tmarkers);
-  }
+//handles calling legend functions();
+function callFunction(id, source){
+  legendFunc(id);
+  selectAll(id, source);
 }
-
-//hides markers for MD(used for legend)
-function showMD(id) {
-
-  //finds checkbox with id = "legend-Mining"
-  const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    
-  const tempMarkers = markersMD.filter(marker => marker.descriptions && marker.descriptions.description4 === id);
-    //if checked -> show markers
-    if (checkbox.checked) {
-      setMapOnAll(map, tempMarkers, id);
-      console.log("Checkbox is checked");
-    } 
-    //if unchecked -> hide markers
-    else {
-      console.log("Checkbox is unchecked");
-      setMapOnAll(null, tempMarkers, id);
-    }
-}
-
-//hides markers for VA(used for legend)
-function showVA() {
-
-  //finds checkbox with id = "legend-Withdrawal"
-  const checkbox = document.getElementById("Virginia").querySelector('input[type="checkbox"]');
-    
-    //if checked -> show markers
-    if (checkbox.checked) {
-      setMapOnAll(map, markersVA);
-      console.log("Checkbox is checked");
-    } 
-    //if unchecked -> hide markers
-    else {
-      console.log("Checkbox is unchecked");
-      setMapOnAll(null, markersVA);
-    }
-}
-
-window.showMD = showMD;
-window.showVA = showVA;
-window.setMapOnAll = setMapOnAll;
+window.callFunction = callFunction;
 
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
