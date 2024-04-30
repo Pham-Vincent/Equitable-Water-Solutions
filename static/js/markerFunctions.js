@@ -19,28 +19,28 @@ export function setMarkerIcon(designatedUse){
         return "static/images/flame.png";
     }
     if (designatedUse === "Power Related") {
-        return "static/images/square.png";
+        return "static/images/power.png";
     }
     if (designatedUse === "Institutional Use") {
-        return "static/images/circle.png";
+        return "static/images/institution.png";
     }
     if (designatedUse === "Industrial Use") {
-        return "static/images/diamond.png";
+        return "static/images/factory.png";
     }
     if (designatedUse === "Commercial Use") {
-        return "static/images/pentagon.png";
+        return "static/images/dollar.png";
     }
     if (designatedUse === "Other Irrigation") {
-        return "static/images/star-2.png";
+        return "static/images/irrigation.png";
     }
     if (designatedUse === "Crop Irrigation") {
-        return "static/images/corn.png";
+        return "static/images/crop.png";
     }
     if (designatedUse === "Drinking") {
-        return "static/images/hexagon.png";
+        return "static/images/water-bottle.png";
     }
     if(designatedUse === "Aquaculture"){
-        return "static/images/triangle.png";
+        return "static/images/waterdroplet.png";
     }
 }
 
