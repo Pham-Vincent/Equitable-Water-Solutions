@@ -20,6 +20,7 @@ import { legendFunc, selectAll } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
+let featureLayer;
 
 function Load_Map(){
 
@@ -36,9 +37,24 @@ async function initMap() {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
   //Customizes the Styling of your Map
-    mapId: "366d3e13ce470bd7", //366d3e13ce470bd7 alternate map style
+    mapId: "45c77a2db5a260c8", //366d3e13ce470bd7 alternate map style
     scrollwheel:true, //bypasses command+scroll to zoom
   });
+  featureLayer = map.getFeatureLayer("COUNTRY");
+
+  const featureStyleOptions = {
+    strokeColor: "#810FCB",
+    strokeOpacity: 1.0,
+    strokeWeight: 3.0,
+    fillColor: "#810FCB",
+    fillOpacity: 0.5,
+  };
+
+  featureLayer.style = (options) => {
+    if (options.feature.placeId == "ChIJCzYy5IS16lQRQrfeQ5K5Oxw") {
+      return featureStyleOptions;
+    }
+  };
 
   /* Sets the Maximum Zoom out Value */
   map.setOptions({ minZoom: 3});
@@ -216,7 +232,6 @@ $(document).ajaxStop(function() {
     algorithmOptions:{radius:175, minPoints: 3},
   });
 });
-
 }
 
 //closes popup upon clicking overlay
