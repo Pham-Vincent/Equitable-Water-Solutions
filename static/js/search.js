@@ -19,18 +19,17 @@ export function search(markers, map) {
       const markerTitle = marker.title.toLowerCase();
   
       //currently zooms and centers on marker. opens infowindow to highlight
-      if (markerTitle.includes(searchInput) && !matchfound) {
+      if (markerTitle.includes(searchInput)) {
+        console.log("Match found!");
         map.panTo(marker.position);
         map.setZoom(20);
         popUpLayer1(marker, map);
         window.popupLayerOpen = true;
-        //When Finds a Map it won't search anymore
-        matchfound = true
-        return;
+        
+      } else {
+        console.log("Not found");
       }
-      });
-      
- 
+    });
   } 
 
 //this takes 2 arguements, the text field and array of possible markers 
