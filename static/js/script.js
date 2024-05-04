@@ -14,7 +14,7 @@ Date: 04/25/24
 //Gets Google Maps APi Key
 import config from './config.js';
 import { closePopup} from './popup.js';
-import { search } from './search.js';
+import { search,autocomplete } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
 
@@ -236,12 +236,10 @@ document.getElementById('overlay').addEventListener('click', closePopup);
 
 //handles enter key for search()
 function handleKeyPress(event) {
-  if (event.keyCode === 13) {
-    const searchInput = document.getElementById("search-input").value.trim();
-    if (searchInput !== "") {
-      search(markers, map);
-    }
-  }
+  //Gets Input field of Search bar
+  var inputField =  document.getElementById("search-input")
+  //Handles Search
+  autocomplete(inputField,markers,map)
 }
 
 //handles calling legend functions();
