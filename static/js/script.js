@@ -238,14 +238,8 @@ document.getElementById('overlay').addEventListener('click', closePopup);
 function handleKeyPress(event) {
   //Gets Input field of Search bar
   var inputField =  document.getElementById("search-input")
-
+  //Handles Search
   autocomplete(inputField,markers,map)
-  if (event.keyCode === 13) {
-    const searchInput = document.getElementById("search-input").value.trim();
-    if (searchInput !== "") {
-      search(markers, map);
-    }
-  } 
 }
 
 //handles calling legend functions();

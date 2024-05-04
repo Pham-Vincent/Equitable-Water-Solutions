@@ -14,22 +14,23 @@ Date: 04/06/24
 
 export function search(markers, map) {
     const searchInput = document.getElementById("search-input").value.trim().toLowerCase();
-  
+    let matchfound=false;
     markers.forEach(marker => {
       const markerTitle = marker.title.toLowerCase();
   
       //currently zooms and centers on marker. opens infowindow to highlight
-      if (markerTitle.includes(searchInput)) {
-        console.log("Match found!");
+      if (markerTitle.includes(searchInput) && !matchfound) {
         map.panTo(marker.position);
         map.setZoom(20);
         popUpLayer1(marker, map);
         window.popupLayerOpen = true;
-        
-      } else {
-        console.log("Not found");
+        //When Finds a Map it won't search anymore
+        matchfound = true
+        return;
       }
-    });
+      });
+      
+ 
   } 
 
 //this takes 2 arguements, the text field and array of possible markers 
@@ -111,6 +112,7 @@ export function autocomplete(inp, arr,map) {
         /*and simulate a click on the "active" item:*/
         if (x) x[currentFocus].click();
       }
+      search(arr,map)
       
     }
     const focusedItem = x[currentFocus];
