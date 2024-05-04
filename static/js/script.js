@@ -47,6 +47,11 @@ async function initMap() {
   //Loads GeoJSON Data from JSON file
   map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_Low_Resolution.json');
 
+  map.data.setStyle({
+    fillColor: 'purple',
+    fillOpacity : .4,
+
+  });
   /* Sets the Maximum Zoom out Value */
   map.setOptions({ minZoom: 3});
 
