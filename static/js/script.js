@@ -36,25 +36,16 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
-  //Customizes the Styling of your Map
-    mapId: "45c77a2db5a260c8", //366d3e13ce470bd7 alternate map style
+  
+    //Mappitng Styles:
+    //366d3e13ce470bd7 -> No Background Signs/Feature Styling Disabled
+    //45c77a2db5a260c8 -> Background Signs/Feature Styling Enabled
+    mapId: "366d3e13ce470bd7", 
     scrollwheel:true, //bypasses command+scroll to zoom
   });
-  featureLayer = map.getFeatureLayer("COUNTRY");
 
-  const featureStyleOptions = {
-    strokeColor: "#810FCB",
-    strokeOpacity: 1.0,
-    strokeWeight: 3.0,
-    fillColor: "#810FCB",
-    fillOpacity: 0.5,
-  };
-
-  featureLayer.style = (options) => {
-    if (options.feature.placeId == "ChIJCzYy5IS16lQRQrfeQ5K5Oxw") {
-      return featureStyleOptions;
-    }
-  };
+  //Loads GeoJSON Data from JSON file
+  map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_Low_Resolution.json');
 
   /* Sets the Maximum Zoom out Value */
   map.setOptions({ minZoom: 3});

@@ -1,5 +1,6 @@
 .env
 config.js
 *.json
+!Chesapeake_Bay_Shoreline_Low_Resolution.json
 *.csv
 *.xlsx
