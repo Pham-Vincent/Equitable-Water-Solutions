@@ -14,12 +14,15 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
   display: inline-block;
 
+
 }
+/*Relates To The Entire Autocomplete Search Box*/ 
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -31,20 +34,26 @@
   left: 0;
   right: 0;
   max-height: 200px;
+  border-radius: 20px;
   overflow-y: auto;
   overflow-x: hidden;
 }
+  /*refers to each indivdual block within AutoComplete Search Box*/
 .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
   background-color: #fff;
   border-bottom: 1px solid #d4d4d4;
+
+  
   
 }
+ 
 .autocomplete-items div:hover {
   /*when hovering an item:*/
   background-color: #e9e9e9;
 }
+/*relates to Current Focus*/
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
