@@ -97,14 +97,7 @@ export function autocomplete(inp, arr,map) {
       currentFocus++;
       /*and and make the current item more visible:*/
       addActive(x);
-      const focusedItem = x[currentFocus];
-
-        // Scroll to the position of the currently focused item
-        if (focusedItem) {
-            focusedItem.scrollIntoView({
-                block: 'nearest'
-            });
-          }
+      
     } else if (e.keyCode == 38) { //up
       /*If the arrow UP key is pressed,
       decrease the currentFocus variable:*/
@@ -118,7 +111,16 @@ export function autocomplete(inp, arr,map) {
         /*and simulate a click on the "active" item:*/
         if (x) x[currentFocus].click();
       }
+      
     }
+    const focusedItem = x[currentFocus];
+
+        // Scroll to the position of the currently focused item
+        if (focusedItem) {
+            focusedItem.scrollIntoView({
+                block: 'nearest'
+            });
+          }
 });
 function addActive(x) {
   /*a function to classify an item as "active":*/
