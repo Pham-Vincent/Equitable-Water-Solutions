@@ -14,7 +14,7 @@ Date: 04/25/24
 //Gets Google Maps APi Key
 import config from './config.js';
 import { closePopup} from './popup.js';
-import { search,autocomplete } from './search.js';
+import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
 
@@ -128,9 +128,12 @@ $.ajax({
           `,  
           maxWidth: 300,
         });
+        //Associate the infowindow with the marker
+        marker.infowindow = infowindow2;
 
         //import from 'markerFunction.js' and contains all marker event listeners
         addListeners(marker, infowindow, map, infowindow2);    
+
         
       });
     },
@@ -215,9 +218,11 @@ $.ajax({
             <p>${marker.descriptions.description2}</p>
             <button id="view-more-button" onclick="viewMore()">View More</button>
           </div>
-        `,   
+        `,  
         maxWidth: 300,
       });
+      //Associate the infowindow with the marker
+      marker.infowindow = infowindow2;
       
       //import from 'markerFunction.js' and contains all marker event listeners
       addListeners(marker, infowindow, map, infowindow2, glyphElement);
@@ -236,18 +241,11 @@ $(document).ajaxStop(function() {
     algorithmOptions:{radius:175, minPoints: 3},
   });
 });
+
 }
 
 //closes popup upon clicking overlay
 document.getElementById('overlay').addEventListener('click', closePopup);
-
-//handles enter key for search()
-function handleKeyPress(event) {
-  //Gets Input field of Search bar
-  var inputField =  document.getElementById("search-input")
-  //Handles Search
-  autocomplete(inputField,markers,map)
-}
 
 //handles calling legend functions();
 function callFunction(id, source){
@@ -255,6 +253,14 @@ function callFunction(id, source){
   selectAll(id, source);
 }
 window.callFunction = callFunction;
+
+//handles enter key for search()
+function handleKeyPress(event) {
+  //Gets Input field of Search bar
+  var inputField =  document.getElementById("search-input")
+  //Handles Search
+  autocomplete(inputField,markers,map);
+}
 
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
