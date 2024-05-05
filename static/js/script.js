@@ -8,20 +8,19 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-Date: 04/25/24
+Date: 05/05/24
 
 */
 //Gets Google Maps APi Key
 import config from './config.js';
 import { closePopup} from './popup.js';
-import { search,autocomplete } from './search.js';
+import {autocomplete } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
-let featureLayer;
 
 function Load_Map(){
 
@@ -69,7 +68,6 @@ $.ajax({
     type:"GET",
     dataType: 'json',
     success: function(data) {
-        console.log("AJAX request completed successfully");
 
         // Use the data to map points on the map
          // Use the data given in json file
