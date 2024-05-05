@@ -1,46 +1,40 @@
 /* 
 title: search.js
 
-Authors: William Lamuth, Vincent Pham, Nicholas Gammel
+Authors: William Lamuth, Vincent Pham
 
 Description: This file contains functions for handling the search bar functionality in the application. 
-It exports search(), to script.js. The search() function takes an array of markers 
-and the map object as input and performs a case-insensitive search for a specified keyword in the titles of markers. 
-If a match is found, it zooms and centers the map on the matching marker's position and opens an info window to highlight the marker. 
-Otherwise, it logs a message indicating that no match was found.
+It exports autocomplete,to scriptjs. The autocomplete() function is responsible for creating a container.
+This container will display markers that match with what is currently being searched. This Autocomplete search feature
+will call search(). If a match is found, it zooms and centers the map on the matching marker's position and opens an info window to highlight the marker. 
 
-Date: 04/06/24
+Date: 05/05/24
 */
 
 export function search(markers, map) {
+    //Looks inside the input box and gets value inside 
     const searchInput = document.getElementById("search-input").value.trim().toLowerCase();
+    //It will only open the first marker found 
     let matchfound=false;
+
+    //Looks at Each marker to compare input
     markers.forEach(marker => {
+      
+      //Changes marker to lowercase to compare with Searchinput 
       const markerTitle = marker.title.toLowerCase();
   
       //currently zooms and centers on marker. opens infowindow to highlight
       if (markerTitle.includes(searchInput) && !matchfound) {
-        console.log("Match found!");
         map.panTo(marker.position);
         map.setZoom(20);
         popUpLayer1(marker, map);
         window.popupLayerOpen = true;
-        
-      } else {
-        console.log("Not found");
-      }
-    });
+        matchfound = true
+    }
+  });
   } 
 
-//this takes 2 arguements, the text field and array of possible markers 
-/* export function autocomplete(inp,arr){
 
-  inp.addEventListener("input", function() {
-  console.log(this.value)
-  });
-
-}
- */
 export function autocomplete(inp, arr,map) {
  
   /*the autocomplete function takes two arguments,
@@ -114,14 +108,22 @@ export function autocomplete(inp, arr,map) {
       search(arr,map)
       
     }
-    const focusedItem = x[currentFocus];
 
-        // Scroll to the position of the currently focused item
-        if (focusedItem) {
-            focusedItem.scrollIntoView({
-                block: 'nearest'
-            });
-          }
+    //Only will Scroll to the nearest block when hitting Arrow Keys or Enter
+    if(e.keyCode == 38 || e.keyCode == 40)
+      {
+      if(currentFocus != -1)
+        {
+        const focusedItem = x[currentFocus];
+
+          // Scroll to the position of the currently focused item
+          if (focusedItem) {
+              focusedItem.scrollIntoView({
+                  block: 'nearest'
+              });
+            }
+      }
+      }
 });
 function addActive(x) {
   /*a function to classify an item as "active":*/
