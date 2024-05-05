@@ -1,6 +1,6 @@
 @import 'legendStyle.css';
 @import 'popupStyle.css';
-
+@import 'searchbar.css';
 /* 
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 

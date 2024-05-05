@@ -14,12 +14,13 @@ Date: 04/25/24
 //Gets Google Maps APi Key
 import config from './config.js';
 import { closePopup} from './popup.js';
-import { search } from './search.js';
+import { search,autocomplete } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
+let featureLayer;
 
 function Load_Map(){
 
@@ -35,11 +36,23 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.5, lng: -76.5 },
     zoom: 8,
-  //Customizes the Styling of your Map
-    mapId: "366d3e13ce470bd7", //366d3e13ce470bd7 alternate map style
+  
+    //Mappitng Styles:
+    //366d3e13ce470bd7 -> No Background Signs/Feature Styling Disabled
+    //45c77a2db5a260c8 -> Background Signs/Feature Styling Enabled
+    mapId: "366d3e13ce470bd7", 
     scrollwheel:true, //bypasses command+scroll to zoom
   });
 
+  //Loads GeoJSON Data from JSON file
+  map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_Low_Resolution.json');
+
+  //Changes The Styling Within Map Boundaries
+  map.data.setStyle({
+    fillColor: 'purple',
+    fillOpacity : .4,
+
+  });
   /* Sets the Maximum Zoom out Value */
   map.setOptions({ minZoom: 3});
 
@@ -220,10 +233,9 @@ $(document).ajaxStop(function() {
   markerClusterer = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
-    algorithmOptions:{radius:150, minPoints: 3},
+    algorithmOptions:{radius:175, minPoints: 3},
   });
 });
-
 }
 
 //closes popup upon clicking overlay
@@ -231,12 +243,10 @@ document.getElementById('overlay').addEventListener('click', closePopup);
 
 //handles enter key for search()
 function handleKeyPress(event) {
-  if (event.keyCode === 13) {
-    const searchInput = document.getElementById("search-input").value.trim();
-    if (searchInput !== "") {
-      search(markers, map);
-    }
-  }
+  //Gets Input field of Search bar
+  var inputField =  document.getElementById("search-input")
+  //Handles Search
+  autocomplete(inputField,markers,map)
 }
 
 //handles calling legend functions();
