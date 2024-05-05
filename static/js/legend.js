@@ -68,6 +68,7 @@ export function selectAll(id, source){
 
     //finds all checkboxes with name attritbute = box
     const checkboxes = document.getElementsByName("box");
+    //parses for MD markers only
     const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag != 'Virginia');
 
     //checks/unchecks all boxes depending on 'Select All' box status 
@@ -76,9 +77,9 @@ export function selectAll(id, source){
 
     //if checked -> show markers, else -> hide markers
     if(selectAllBox.checked)
-        setMapOnAll(map, markers);
+        setMapOnAll(map, tempMarkers);
     else
-        setMapOnAll(null, markers);
+        setMapOnAll(null, tempMarkers);
 }
 
 //makes functions globally accessible
