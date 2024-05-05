@@ -20,6 +20,7 @@ import { legendFunc, selectAll } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
+export let markerCluster;
 let featureLayer;
 
 function Load_Map(){
@@ -30,7 +31,7 @@ function Load_Map(){
 
 async function initMap() {
   await Load_Map()
-  const { Map, InfoWindow, Markerclusterer} = await google.maps.importLibrary("maps", "markerclusterer");
+  const { Map, InfoWindow} = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
@@ -223,8 +224,8 @@ $.ajax({
   }
 });
 
-$(document).ajaxStop(function() {
-  markerClusterer = new markerClusterer.MarkerClusterer({ 
+$(document).one("ajaxStop",function() {
+  markerCluster = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
     algorithmOptions:{radius:175, minPoints: 3},
