@@ -8,19 +8,19 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-Date: 04/25/24
+Date: 05/05/24
 
 */
 //Gets Google Maps APi Key
 import config from './config.js';
 import { closePopup} from './popup.js';
-import { autocomplete } from './search.js';
+import {autocomplete } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
-let featureLayer;
+export let markerCluster;
 
 function Load_Map(){
 
@@ -30,7 +30,7 @@ function Load_Map(){
 
 async function initMap() {
   await Load_Map()
-  const { Map, InfoWindow, Markerclusterer} = await google.maps.importLibrary("maps", "markerclusterer");
+  const { Map, InfoWindow} = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
@@ -45,12 +45,12 @@ async function initMap() {
   });
 
   //Loads GeoJSON Data from JSON file
-  map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_Low_Resolution.json');
+  map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
 
-  //Changes The Styling Within Map Boundaries
   map.data.setStyle({
     fillColor: 'purple',
     fillOpacity : .4,
+    strokeWeight: 0,
 
   });
   /* Sets the Maximum Zoom out Value */
@@ -67,7 +67,6 @@ $.ajax({
     type:"GET",
     dataType: 'json',
     success: function(data) {
-        console.log("AJAX request completed successfully");
 
         // Use the data to map points on the map
          // Use the data given in json file
@@ -234,14 +233,13 @@ $.ajax({
   }
 });
 
-$(document).ajaxStop(function() {
-  markerClusterer = new markerClusterer.MarkerClusterer({ 
+$(document).one("ajaxStop",function() {
+  markerCluster = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
     algorithmOptions:{radius:175, minPoints: 3},
   });
 });
-
 }
 
 //closes popup upon clicking overlay

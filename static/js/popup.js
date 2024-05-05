@@ -8,7 +8,7 @@ It defines functions for displaying various layers of information associated wit
 including a basic popup, a detailed popup with additional content and a graph, and a view more button to toggle between popups. 
 The functions allow users to interact with markers on the map by displaying relevant information and additional details when clicked.
 
-Date: 04/06/24
+Date: 05/05/24
 */
 import config from './config.js';
 let customPopup;
@@ -46,8 +46,8 @@ export function popUpLayer1(marker, map, infowindow2){
 }
 
 //Function to open the full popup
-export function openPopup(marker) {
-    preformPost();
+export function openPopup(marker, currentGraph) {
+    preformPost(marker);
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
       <div class="popup-window">
@@ -73,7 +73,10 @@ export function openPopup(marker) {
     
   
     //Function to handle button click event for generating the graph
-    function preformPost(){
+    function preformPost(marker){
+      //Only will create Graphs for Virginia
+      if(marker.descriptions.tag == 'Virginia')
+      {
       $.ajax({ 
         type:"POST",
         url:config.hostname + "/create_graph",
@@ -83,6 +86,7 @@ export function openPopup(marker) {
 
         } 
       });
+    }
     };
 }
 
