@@ -20,6 +20,7 @@ import { legendFunc, selectAll } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
+export let markerCluster;
 let featureLayer;
 
 function Load_Map(){
@@ -30,7 +31,7 @@ function Load_Map(){
 
 async function initMap() {
   await Load_Map()
-  const { Map, InfoWindow, Markerclusterer} = await google.maps.importLibrary("maps", "markerclusterer");
+  const { Map, InfoWindow} = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
@@ -45,12 +46,12 @@ async function initMap() {
   });
 
   //Loads GeoJSON Data from JSON file
-  map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_Low_Resolution.json');
+  map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
 
-  //Changes The Styling Within Map Boundaries
   map.data.setStyle({
     fillColor: 'purple',
     fillOpacity : .4,
+    strokeWeight: 0,
 
   });
   /* Sets the Maximum Zoom out Value */
@@ -222,8 +223,8 @@ $.ajax({
   }
 });
 
-$(document).ajaxStop(function() {
-  markerClusterer = new markerClusterer.MarkerClusterer({ 
+$(document).one("ajaxStop",function() {
+  markerCluster = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
     algorithmOptions:{radius:175, minPoints: 3},
