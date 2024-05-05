@@ -9,14 +9,14 @@ Authors: W. Lamuth, N. Gammel
 Date: 04/25/24
 */
 
-import { markers, map } from './script.js';
+import { markers, map, markerCluster } from './script.js';
 
 
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
     //this removes Virginia points, as id == null and removes clustering on all Virginia
     if(map==null){
-        markerClusterer.removeMarkers(Tmarkers);
+        markerCluster.removeMarkers(Tmarkers);
         console.log('markeres removed');
     }
   
@@ -25,7 +25,7 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     }
   
     if(map!=null){
-      markerClusterer.addMarkers(Tmarkers);
+      markerCluster.addMarkers(Tmarkers);
       console.log('markeres added');
     }
   }

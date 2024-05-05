@@ -19,7 +19,7 @@ export function search(markers, map) {
       const markerTitle = marker.title.toLowerCase();
   
       //currently zooms and centers on marker. opens infowindow to highlight
-      if (markerTitle.includes(searchInput)) {
+      if (markerTitle.includes(searchInput) && !matchfound) {
         console.log("Match found!");
         map.panTo(marker.position);
         map.setZoom(20);
