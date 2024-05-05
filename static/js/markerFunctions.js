@@ -34,7 +34,7 @@ export function setMarkerIcon(designatedUse){
         return "static/images/irrigation.png";
     }
     if (designatedUse === "Crop Irrigation") {
-        return "static/images/crop.png";
+        return "static/images/wheat.png";
     }
     if (designatedUse === "Drinking") {
         return "static/images/water-bottle.png";
@@ -45,12 +45,19 @@ export function setMarkerIcon(designatedUse){
 }
 
 //Simplified Function to add listeners to every marker
-export function addListeners(marker, infowindow, map) {
+export function addListeners(marker, infowindow, map, infowindow2, glyphElement) {
   //Event listener for hovering
-  marker.content.addEventListener('mouseenter', ({ domEvent }) => {
+  marker.content.addEventListener('mouseenter', () => {
     if (!window.popupLayerOpen || marker !== window.currentMarker) {
       infowindow.open(map, marker);
     }
+
+    //changes MD marker color upon hover
+    if(marker.descriptions.tag != 'Virginia'){
+      glyphElement.background = '#6fa8dc';
+      console.log("change color");
+    }
+  
   });
   
   //Event listener for closing hovering
@@ -58,15 +65,27 @@ export function addListeners(marker, infowindow, map) {
     if (!window.popupLayerOpen || marker !== window.currentMarker) {
       infowindow.close();
     }
+
+    //changes MD marker color upon hover
+    if(marker.descriptions.tag != 'Virginia'){
+      glyphElement.background = 'orange';
+    }
   });
       
   //adds interactive function to marker on click
   marker.addListener("click", () => {
-    popUpLayer1(marker, map);
-    infowindow.close();
-    window.popupLayerOpen = true;
+    //closes 2nd infowindow if already open
+    if(window.popupLayerOpen && marker === window.currentMarker){
+      infowindow2.close();
+      window.popupLayerOpen = false;
+      console.log("small infwindow close");
+    }
+    else{
+      popUpLayer1(marker, map, infowindow2);
+      infowindow.close();
+    }
   });
-
+  
   //if infowindow wont close on 'mouseleave' clicking the map will close
   google.maps.event.addListener(map, 'click', function() {
     if (infowindow) {

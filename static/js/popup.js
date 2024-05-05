@@ -14,53 +14,39 @@ import config from './config.js';
 let customPopup;
 
 //first layer popup
-export function popUpLayer1(marker, map){
+export function popUpLayer1(marker, map, infowindow2){
     //Close the currently open info window, if any
-    if (window.smallInfowindow) {
-      window.smallInfowindow.close();
+
+    window.popupLayerOpen = true;
+
+    if (window.infowindow2) {
+      window.infowindow2.close();
+      console.log("close window");
     }
     
-    const popupTitle = marker.title;
-  
-    //creates first layer infowindow
-    const smallInfowindow = new google.maps.InfoWindow({
-      content: `
-        <div class="info-window">
-          <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
-  
-          <p>${marker.descriptions.description1}</p>
-          <p>${marker.descriptions.description2}</p>
-  
-          <button id="view-more-button" onclick="viewMore('${marker.graph}')">View More</button>
-  
-        </div>
-      `,
-      
-      maxWidth: 300,
-      
-    });
-    
+    const popupTitle = marker.title;    
 
     //closes window if clicking outside
     google.maps.event.addListener(map, 'click', function () {
-      smallInfowindow.close();
+      infowindow2.close();
       window.popupLayerOpen = false;
     });
     
-    smallInfowindow.open(map, marker);
+    infowindow2.open(map, marker);
+
     window.currentMarker = marker;
-    window.smallInfowindow = smallInfowindow;
+    window.infowindow2 = infowindow2;
     window.popupTitle = popupTitle;
   
-  
-    smallInfowindow.addListener('closeclick', () => {
+    infowindow2.addListener('closeclick', () => {
       window.popupLayerOpen = false;
+      console.log("small infowindow close");
     });
   
 }
 
 //Function to open the full popup
-export function openPopup(marker, currentGraph) {
+export function openPopup(marker) {
     preformPost();
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
@@ -109,9 +95,9 @@ export function closePopup() {
 }
 
 //Function to handle the view more button
-export function viewMore(currentGraph) {
-    window.smallInfowindow.close();
-    openPopup(window.currentMarker, currentGraph);
+export function viewMore() {
+    window.infowindow2.close();
+    openPopup(window.currentMarker);
 }
 
 //Makes functions globally available
