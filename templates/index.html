@@ -28,15 +28,15 @@
       <div class="legend">
 
         <div class="drop-down-header">
-          <h3>Water Withdrawal</h3>
             <i class="drop-down-arrow" onclick="toggleDropDown()"></i>
+            <h3>Water Withdrawal</h3>
+            <label class="container" id="Select All" style="font-weight: 500;">
+              <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
+              <span class="checkmark" style="margin-right: -1.5em;"></span> 
+            </label>
         </div>
 
         <div class="drop-down">
-          <label class="container" id="Select All" style="font-weight: 500;">Select All
-            <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
-            <span class="checkmark"></span>
-          </label>
           
           <label class="container" id="Mining">
             <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
@@ -112,8 +112,8 @@
           <hr class="rounded">
 
         <div class="drop-down-header">
+          <i class="drop-down-arrow-VA" onclick="toggleDropDownVA()"></i>
           <h3>States</h3>
-            <i class="drop-down-arrow-VA" onclick="toggleDropDownVA()"></i>
         </div>
 
         <div class="drop-down-VA">
