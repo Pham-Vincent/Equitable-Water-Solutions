@@ -46,7 +46,7 @@ export function popUpLayer1(marker, map, infowindow2){
 }
 
 //Function to open the full popup
-export function openPopup(marker, currentGraph) {
+export function openPopup(marker) {
     preformPost(marker);
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `

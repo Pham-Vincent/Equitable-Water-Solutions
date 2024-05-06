@@ -8,7 +8,7 @@ Authors: W. Lamuth, V. Pham, N. Gammel
 
 Date: 04/21/24
 */
-import { popUpLayer1, openPopup, closePopup, viewMore } from './popup.js';
+import { popUpLayer1} from './popup.js';
 
 //sets marker image depending on designated use
 export function setMarkerIcon(designatedUse){
@@ -54,7 +54,7 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
 
     //changes MD marker color upon hover
     if(marker.descriptions.tag != 'Virginia'){
-      glyphElement.background = '#6fa8dc';
+      glyphElement.background = '#c658e5';
       console.log("change color");
     }
   

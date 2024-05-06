@@ -170,7 +170,7 @@
     display: inline-block;
     margin-right: 5px;
     margin-bottom: 3px;
-    padding: 4px;
+    padding: 3.5px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
     transition: transform 0.3s ease;
@@ -178,8 +178,8 @@
   }
    /*rotates arrow 180*/
    .rotate-drop-down-180 {
-    transform: rotate(135deg); 
-    -webkit-transform: rotate(135deg);
+    transform: rotate(-135deg); 
+    -webkit-transform: rotate(-135deg);
   }
 
   .drop-down.hidden{
@@ -200,7 +200,7 @@
     display: inline-block;
     margin-right: 5px;
     margin-bottom: 3px;
-    padding: 4px;
+    padding: 3.5px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
     transition: transform 0.3s ease;
@@ -208,6 +208,6 @@
   }
    /*rotates arrow 180*/
    .rotate-drop-down-180-VA {
-    transform: rotate(135deg); 
-    -webkit-transform: rotate(135deg);
+    transform: rotate(-135deg); 
+    -webkit-transform: rotate(-135deg);
   }

@@ -171,7 +171,7 @@ $.ajax({
       //custom marker
       const glyphElement = new PinElement({
         background: 'orange',
-        borderColor: '#000000',
+        borderColor: 'black',
         glyph: glyphImg,
       });
       
@@ -216,6 +216,7 @@ $.ajax({
             <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
             <p>${marker.descriptions.description1}</p>
             <p>${marker.descriptions.description2}</p>
+            <p>${marker.descriptions.tag}</p>
             <button id="view-more-button" onclick="viewMore()">View More</button>
           </div>
         `,  
