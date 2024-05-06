@@ -31,7 +31,13 @@ plt.switch_backend('agg')
 #Whenever a create_graph signal is sent will run this function
 @app.route('/create_graph',methods=['GET', 'POST'])
 def create_graph():
-
+  config = {
+  #Removes Plotly Logo On Graph
+  'displaylogo': False,
+  'editable':True,
+  'modeBarButtonsToAdd':[],
+  'modeBarButtonsToRemove':['zoom2d', 'select2d', 'lasso2d', 'resetScale2d']
+  }
   #Getting the JSON values 
   WithdrawValues = list(request.form.values())
   #Turns JSON Values Strings -> Floats
@@ -51,11 +57,8 @@ def create_graph():
     orientation="v",
     width=700,
     height=550,
-   
-    markers = True    
-   
-    
-    
+    markers = True,
+      
 )
   WithdrawPlotted.update_layout(title="Water Withdrawal Per Year", title_x=0.5,title_font_family="Times New Roman")
   #Visual Changes 
@@ -68,21 +71,25 @@ def create_graph():
         rangeselector=dict(
             buttons=list([
                 dict(count=1,
-                     label="1m",
-                     step="month",
-                     stepmode="backward"),
-                dict(count=6,
-                     label="6m",
-                     step="month",
-                     stepmode="backward"),
-                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=2,
+                     label="2y",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=3,
+                     label="3y",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=4,
+                     label="4y",
+                     step="year",
+                     stepmode="todate"),
+                 dict(count=1,
                      label="YTD",
                      step="year",
                      stepmode="todate"),
-                dict(count=1,
-                     label="1y",
-                     step="year",
-                     stepmode="backward"),
                 dict(step="all")
             ])
         ),
@@ -91,14 +98,14 @@ def create_graph():
         ),
         type="date"
     )
-)
+  )
 
 
 
   #Generating and Saving Image to display 
-  graph_html = pio.to_html(WithdrawPlotted, full_html=False)
+  graph_html = pio.to_html(WithdrawPlotted, full_html=False,config=config)
   graph_json='<div id="graph_html">' + graph_html + '<div>'
-  return jsonify({'graph_json': graph_json})
+  return jsonify({'graph_json': graph_json,})
 
 
 
