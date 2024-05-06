@@ -28,6 +28,9 @@ app = Flask(__name__)
 #Allows to generate Graph Image 
 plt.switch_backend('agg')
 
+#Interacts with ModeBar
+config = {'displaylogo': False,}
+
 #Whenever a create_graph signal is sent will run this function
 @app.route('/create_graph',methods=['GET', 'POST'])
 def create_graph():
@@ -57,7 +60,11 @@ def create_graph():
     
     
 )
-  WithdrawPlotted.update_layout(title="Water Withdrawal Per Year", title_x=0.5,title_font_family="Times New Roman")
+  WithdrawPlotted.update_layout(
+    title="Water Withdrawal Per Year", 
+    title_x=0.5,
+    title_font_family="Times New Roman",
+  )
   #Visual Changes 
   WithdrawPlotted.update_traces(marker_size=10,marker_color='red',line_color='black')
   WithdrawPlotted.update_xaxes(title_font_family="Times New Roman")
@@ -68,21 +75,25 @@ def create_graph():
         rangeselector=dict(
             buttons=list([
                 dict(count=1,
-                     label="1m",
-                     step="month",
-                     stepmode="backward"),
-                dict(count=6,
-                     label="6m",
-                     step="month",
-                     stepmode="backward"),
-                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=2,
+                     label="2y",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=3,
+                     label="3y",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=4,
+                     label="4y",
+                     step="year",
+                     stepmode="todate"),
+                 dict(count=1,
                      label="YTD",
                      step="year",
                      stepmode="todate"),
-                dict(count=1,
-                     label="1y",
-                     step="year",
-                     stepmode="backward"),
                 dict(step="all")
             ])
         ),
@@ -95,8 +106,9 @@ def create_graph():
 
 
 
+
   #Generating and Saving Image to display 
-  graph_html = pio.to_html(WithdrawPlotted, full_html=False)
+  graph_html = pio.to_html(WithdrawPlotted, full_html=False,config=config)
   graph_json='<div id="graph_html">' + graph_html + '<div>'
   return jsonify({'graph_json': graph_json})
 
