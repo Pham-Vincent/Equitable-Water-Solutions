@@ -17,11 +17,12 @@ a.modebar-btn {
   height: 120px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 150px;
   animation: spin 2s linear infinite;
-  border-top: 16px solid blue;
-  border-right: 16px solid green;
-  border-bottom: 16px solid red;
-  border-left: 16px solid yellow
+  border-top: 16px solid #46567e;
+  border-right: 16px solid #606d8f;
+  border-bottom: 16px solid #818ba6;
+  border-left: 16px solid #afb6c9
 }
 
 @keyframes spin {

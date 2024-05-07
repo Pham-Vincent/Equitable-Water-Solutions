@@ -27,8 +27,8 @@
     margin-bottom: 0;
     margin-left: 9px;
     margin-right: 9px;
-
     width: 200px;
+    border: 1px solid rgb(70, 86, 126);
 }
 
 /*styling for legend box*/
@@ -135,11 +135,6 @@
     box-shadow: -2px 2px 2px rgba(0, 0, 0, .4);
     cursor: pointer;
     background-color: #f6f6f6;
-  }
-  
-  .rounded{
-    border-top: 5px solid gray;
-    border-radius: 5px;
   }
   
   /*Slides the legend off-screen*/

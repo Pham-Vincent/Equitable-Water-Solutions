@@ -8,7 +8,7 @@ Authors: W. Lamuth, V. Pham, N. Gammel
 
 Date: 04/21/24
 */
-import { popUpLayer1} from './popup.js';
+import { popUpLayer1 } from './popup.js';
 
 //sets marker image depending on designated use
 export function setMarkerIcon(designatedUse){
@@ -54,8 +54,7 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
 
     //changes MD marker color upon hover
     if(marker.descriptions.tag != 'Virginia'){
-      glyphElement.background = '#c658e5';
-      console.log("change color");
+      glyphElement.background = '#6fa8dc';
     }
   
   });
@@ -78,7 +77,6 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
     if(window.popupLayerOpen && marker === window.currentMarker){
       infowindow2.close();
       window.popupLayerOpen = false;
-      console.log("small infwindow close");
     }
     else{
       popUpLayer1(marker, map, infowindow2);
@@ -92,4 +90,10 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
         infowindow.close();
     }
   });
+
+  map.data.addListener('click', function(event) {
+    infowindow2.close();
+    window.popupLayerOpen = false;
+  });
+
 }

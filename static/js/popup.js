@@ -21,7 +21,6 @@ export function popUpLayer1(marker, map, infowindow2){
 
     if (window.infowindow2) {
       window.infowindow2.close();
-      console.log("close window");
     }
     
     const popupTitle = marker.title;    
@@ -31,16 +30,15 @@ export function popUpLayer1(marker, map, infowindow2){
       infowindow2.close();
       window.popupLayerOpen = false;
     });
-    
-    infowindow2.open(map, marker);
 
+    infowindow2.open(map, marker); 
+    
     window.currentMarker = marker;
     window.infowindow2 = infowindow2;
     window.popupTitle = popupTitle;
   
     infowindow2.addListener('closeclick', () => {
       window.popupLayerOpen = false;
-      console.log("small infowindow close");
     });
   
 }
