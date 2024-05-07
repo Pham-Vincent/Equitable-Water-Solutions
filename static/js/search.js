@@ -22,12 +22,12 @@ export function search(markers, map) {
       
       //Changes marker to lowercase to compare with Searchinput 
       const markerTitle = marker.title.toLowerCase();
-  
       //currently zooms and centers on marker. opens infowindow to highlight
       if (markerTitle.includes(searchInput) && !matchfound) {
         map.panTo(marker.position);
         map.setZoom(20);
-        popUpLayer1(marker, map);
+        const infowindow = marker.infowindow; //Find the infowindow associated with the marker
+        popUpLayer1(marker, map, infowindow);
         window.popupLayerOpen = true;
         matchfound = true
     }

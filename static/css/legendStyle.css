@@ -24,10 +24,11 @@
 }
 .legend-container hr {
     padding:0%;
-    margin-bottom: 0%;
+    margin-bottom: 0;
     margin-left: 9px;
     margin-right: 9px;
     width: 200px;
+    border: 1px solid rgb(70, 86, 126);
 }
 
 /*styling for legend box*/
@@ -50,18 +51,18 @@
     margin-bottom: 0%;
     margin-left: -1px;
     margin-right: -10px;
+    margin-top: 0;
 }
 
 .icon{
-    float: right;
+    padding-right: 5px;
 }
-
   
   /*Styling for the legend options */
   .container {
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 0;
     margin-bottom:10%;
     cursor: pointer;
     font-size: 16px;
@@ -80,7 +81,7 @@
   .checkmark {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     height: 20px;
     width: 20px;
     background-color: darkgray;
@@ -136,11 +137,6 @@
     background-color: #f6f6f6;
   }
   
-  .rounded{
-    border-top: 5px solid gray;
-    border-radius: 5px;
-  }
-  
   /*Slides the legend off-screen*/
   .legend-container.hidden {
     transform: translateX(105%); 
@@ -161,4 +157,52 @@
   .rotate180 {
     transform: rotate(135deg); 
     -webkit-transform: rotate(135deg);
+  }
+
+  .drop-down-arrow{
+    border: solid black;
+    border-width: 0 0 3px 3px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    padding: 3.5px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+   /*rotates arrow 180*/
+   .rotate-drop-down-180 {
+    transform: rotate(-135deg); 
+    -webkit-transform: rotate(-135deg);
+  }
+
+  .drop-down.hidden{
+    display:none;
+  }
+
+  .drop-down-VA.hidden{
+    display:none;
+  }
+
+  .drop-down-header > *{
+    display: inline-block;
+  }
+
+  .drop-down-arrow-VA{
+    border: solid black;
+    border-width: 0 0 3px 3px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    padding: 3.5px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+   /*rotates arrow 180*/
+   .rotate-drop-down-180-VA {
+    transform: rotate(-135deg); 
+    -webkit-transform: rotate(-135deg);
   }

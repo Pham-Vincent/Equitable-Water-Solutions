@@ -79,30 +79,11 @@ $.ajax({
         point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
         legendType = 'Virginia';
 
-        //custom colored marker
-        const pinBackground = new PinElement({
-          background: '#0443fb',
-          borderColor: '#000000',
-          glyphColor: 'white',
-        });
-        
-        //uses triangle.png as marker
-        const glyphImg = document.createElement("img");
-        glyphImg.src = "static/images/triangle.png"
-
-        //marker with image icon
-        const glyphElement = new PinElement({
-          background: 'orange',
-          borderColor: '#000000',
-          glyph: glyphImg,
-        });
-
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
-            //content: glyphElement.element, // revert marker to default
         });
 
         // Attach custom properties to the marker object
@@ -134,9 +115,24 @@ $.ajax({
             disableAutoPan: true,
         });
 
+        //creates first layer infowindow
+        const infowindow2 = new google.maps.InfoWindow({
+          content: `
+            <div class="info-window">
+              <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
+              <p>${marker.descriptions.description1}</p>
+              <p>${marker.descriptions.description2}</p>
+              <button id="view-more-button" onclick="viewMore()">View More</button>
+            </div>
+          `,  
+          maxWidth: 300,
+        });
+        //Associate the infowindow with the marker
+        marker.infowindow = infowindow2;
+
         //import from 'markerFunction.js' and contains all marker event listeners
-        addListeners(marker, infowindow, map);    
-        
+        addListeners(marker, infowindow, map, infowindow2);    
+
       });
     },
     error: function(xhr, status, error) {
@@ -173,7 +169,7 @@ $.ajax({
       //custom marker
       const glyphElement = new PinElement({
         background: 'orange',
-        borderColor: '#000000',
+        borderColor: 'black',
         glyph: glyphImg,
       });
       
@@ -190,7 +186,7 @@ $.ajax({
         description1: locality,
         description2: fresh,
         description3: tidal,
-        tag: desc1
+        tag: desc1,
       };
 
       console.log(marker.descriptions.tag);
@@ -210,9 +206,25 @@ $.ajax({
           maxWidth: 300,
           disableAutoPan: true,
       });
+
+      //creates first layer infowindow
+      const infowindow2 = new google.maps.InfoWindow({
+        content: `
+          <div class="info-window">
+            <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
+            <p>${marker.descriptions.description1}</p>
+            <p>${marker.descriptions.description2}</p>
+            <p>${marker.descriptions.tag}</p>
+            <button id="view-more-button" onclick="viewMore()">View More</button>
+          </div>
+        `,  
+        maxWidth: 300,
+      });
+      //Associate the infowindow with the marker
+      marker.infowindow = infowindow2;
       
       //import from 'markerFunction.js' and contains all marker event listeners
-      addListeners(marker, infowindow, map);
+      addListeners(marker, infowindow, map, infowindow2, glyphElement);
           
     });
   },
@@ -233,20 +245,20 @@ $(document).one("ajaxStop",function() {
 //closes popup upon clicking overlay
 document.getElementById('overlay').addEventListener('click', closePopup);
 
-//handles enter key for search()
-function handleKeyPress(event) {
-  //Gets Input field of Search bar
-  var inputField =  document.getElementById("search-input")
-  //Handles Search
-  autocomplete(inputField,markers,map)
-}
-
 //handles calling legend functions();
 function callFunction(id, source){
   legendFunc(id);
   selectAll(id, source);
 }
 window.callFunction = callFunction;
+
+//handles enter key for search()
+function handleKeyPress(event) {
+  //Gets Input field of Search bar
+  var inputField =  document.getElementById("search-input")
+  //Handles Search
+  autocomplete(inputField,markers,map);
+}
 
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);

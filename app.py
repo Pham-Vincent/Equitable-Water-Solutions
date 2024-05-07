@@ -34,7 +34,13 @@ config = {'displaylogo': False,}
 #Whenever a create_graph signal is sent will run this function
 @app.route('/create_graph',methods=['GET', 'POST'])
 def create_graph():
-
+  config = {
+  #Removes Plotly Logo On Graph
+  'displaylogo': False,
+  'editable':True,
+  'modeBarButtonsToAdd':[],
+  'modeBarButtonsToRemove':['zoom2d', 'select2d', 'lasso2d', 'resetScale2d']
+  }
   #Getting the JSON values 
   WithdrawValues = list(request.form.values())
   #Turns JSON Values Strings -> Floats
@@ -54,11 +60,8 @@ def create_graph():
     orientation="v",
     width=700,
     height=550,
-   
-    markers = True    
-   
-    
-    
+    markers = True,
+      
 )
   WithdrawPlotted.update_layout(
     title="Water Withdrawal Per Year", 
@@ -102,7 +105,7 @@ def create_graph():
         ),
         type="date"
     )
-)
+  )
 
 
 
@@ -110,7 +113,7 @@ def create_graph():
   #Generating and Saving Image to display 
   graph_html = pio.to_html(WithdrawPlotted, full_html=False,config=config)
   graph_json='<div id="graph_html">' + graph_html + '<div>'
-  return jsonify({'graph_json': graph_json})
+  return jsonify({'graph_json': graph_json,})
 
 
 

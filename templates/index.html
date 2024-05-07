@@ -24,82 +24,107 @@
     <!-- legend -->
     <div class="legend-container">
       <h3>Legend</h3>
-      <hr class="rounded">
+      <hr>
       <div class="legend">
-        <h3>Water Withdrawal</h3>
-        <label class="container" id="Select All">Select All
-          <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
-          <span class="checkmark"></span>
-        </label>
+
+        <!-- legend drop-down -->
+        <div class="drop-down-header">
+            <i class="drop-down-arrow" onclick="toggleDropDown()"></i>
+            <h3>Water Withdrawal</h3>
+            <label class="container" id="Select All" style="font-weight: 500;">
+              <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
+              <span class="checkmark" style="margin-right: -1.5em;"></span> 
+            </label>
+        </div>
+
+        <div class="drop-down">
+          <label class="container" id="Mining">
+            <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
+            Mining
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Mining')">
+            <span class="checkmark"></span>
+          </label>
+          
+          <label class="container" id="Fire and Hyrdrostatic">
+            <img src="static/images/flame.png" alt="Fire & Hydrostatic Icon" class="icon">
+            Fire & Hydrostatic
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Fire and Hyrdrostatic')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Crop Irrigation">
+            <img src="static/images/wheat.png" alt="Crop Irrigation Icon" class="icon">
+            Crop Irrigation
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Crop Irrigation')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Other Irrigation">
+            <img src="static/images/irrigation.png" alt="Other Irrigation Icon" class="icon">
+            Other Irrigation
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Other Irrigation')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Power Related">
+            <img src="static/images/power.png" alt="Power Related Icon" class="icon">
+            Power Related
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Power Related')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Institutional Use">
+            <img src="static/images/institution.png" alt="Institutional Use Icon" class="icon">
+            Institutional Use
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Institutional Use')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Industrial Use">
+            <img src="static/images/factory.png" alt="Industrial Use Icon" class="icon">
+            Industrial Use
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Industrial Use')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Commercial Use">
+            <img src="static/images/dollar.png" alt="Commercial Use Icon" class="icon">
+            Commercial Use
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Commercial Use')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Drinking">
+            <img src="static/images/water-bottle.png" alt="Drinking Icon" class="icon">
+            Drinking
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Drinking')">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container" id="Aquaculture">
+            <img src="static/images/waterdroplet.png" alt="Aqua Culture Icon" class="icon">
+            Aqua Culture
+            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Aquaculture')">
+            <span class="checkmark"></span>
+          </label>
         
-        <label class="container" id="Mining">Mining
-          <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Mining')">
-          <span class="checkmark"></span>
-        </label>
-        
-        <label class="container" id="Fire and Hyrdrostatic">Fire & Hydrostatic
-          <img src="static/images/flame.png" alt="Fire & Hydrostatic Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Fire and Hyrdrostatic')">
-          <span class="checkmark"></span>
-        </label>
+        </div>
 
-        <label class="container" id="Crop Irrigation">Crop Irrigation
-          <img src="static/images/crop.png" alt="Crop Irrigation Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Crop Irrigation')">
-          <span class="checkmark"></span>
-        </label>
+          <hr>
 
-        <label class="container" id="Other Irrigation">Other Irrigation
-          <img src="static/images/irrigation.png" alt="Other Irrigation Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Other Irrigation')">
-          <span class="checkmark"></span>
-        </label>
+        <div class="drop-down-header">
+          <i class="drop-down-arrow-VA" onclick="toggleDropDownVA()"></i>
+          <h3>States</h3>
+        </div>
 
-        <label class="container" id="Power Related">Power Related
-          <img src="static/images/power.png" alt="Power Related Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Power Related')">
-          <span class="checkmark"></span>
-        </label>
+        <div class="drop-down-VA">
+          <label class="container" id="Virginia">Virginia
+            <input type="checkbox" checked="checked" onchange="legendFunc('Virginia')">
+            <span class="checkmark"></span>
+          </label>
+        </div>
 
-        <label class="container" id="Institutional Use">Institutional Use
-          <img src="static/images/institution.png" alt="Institutional Use Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Institutional Use')">
-          <span class="checkmark"></span>
-        </label>
-
-        <label class="container" id="Industrial Use">Industrial Use
-          <img src="static/images/factory.png" alt="Industrial Use Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Industrial Use')">
-          <span class="checkmark"></span>
-        </label>
-
-        <label class="container" id="Commercial Use">Commercial Use
-          <img src="static/images/dollar.png" alt="Commercial Use Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Commercial Use')">
-          <span class="checkmark"></span>
-        </label>
-
-        <label class="container" id="Drinking">Drinking
-          <img src="static/images/water-bottle.png" alt="Drinking Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Drinking')">
-          <span class="checkmark"></span>
-        </label>
-
-        <label class="container" id="Aquaculture">Aqua Culture
-          <img src="static/images/waterdroplet.png" alt="Aqua Culture Icon" class="icon">
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Aquaculture')">
-          <span class="checkmark"></span>
-        </label>
-
-        <hr class="rounded">
-
-        <h3>States</h3>
-
-        <label class="container" id="Virginia">Virginia
-          <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Virginia')">
-          <span class="checkmark"></span>
-        </label>
+        <hr>
         
       </div>
       <button class="legend-button" onclick="toggleSidebar()">
@@ -113,10 +138,22 @@
             const arrow = document.querySelector('.arrow');
             arrow.classList.toggle('rotate180');
         }
+        function toggleDropDown(){
+          const dropdown = document.querySelector('.drop-down');
+          dropdown.classList.toggle('hidden');
+          const arrow = document.querySelector('.drop-down-arrow');
+          arrow.classList.toggle('rotate-drop-down-180');
+        }
+        function toggleDropDownVA(){
+          const dropdown = document.querySelector('.drop-down-VA');
+          dropdown.classList.toggle('hidden');
+          const arrow = document.querySelector('.drop-down-arrow-VA');
+          arrow.classList.toggle('rotate-drop-down-180-VA');
+        }
       </script>
       <!-- legend end -->
 
-      <div id="map"></div>
+    <div id="map"></div>
       
 
     <!-- popup -->

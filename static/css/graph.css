@@ -1,0 +1,34 @@
+
+
+
+a.modebar-btn {
+  /* increases size of buttons of the modebar   */
+  font-size: 20px !important;
+  padding:0px 0px !important;
+  right: 65px; 
+  top:30px;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 150px;
+  animation: spin 2s linear infinite;
+  border-top: 16px solid #46567e;
+  border-right: 16px solid #606d8f;
+  border-bottom: 16px solid #818ba6;
+  border-left: 16px solid #afb6c9
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+
+}
+
+

@@ -14,54 +14,38 @@ import config from './config.js';
 let customPopup;
 
 //first layer popup
-export function popUpLayer1(marker, map){
+export function popUpLayer1(marker, map, infowindow2){
     //Close the currently open info window, if any
-    if (window.smallInfowindow) {
-      window.smallInfowindow.close();
+
+    window.popupLayerOpen = true;
+
+    if (window.infowindow2) {
+      window.infowindow2.close();
     }
     
-    const popupTitle = marker.title;
-  
-    //creates first layer infowindow
-    const smallInfowindow = new google.maps.InfoWindow({
-      content: `
-        <div class="info-window">
-          <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
-  
-          <p>${marker.descriptions.description1}</p>
-          <p>${marker.descriptions.description2}</p>
-  
-          <button id="view-more-button" onclick="viewMore('${marker.graph}')">View More</button>
-  
-        </div>
-      `,
-      
-      maxWidth: 300,
-      
-    });
-    
+    const popupTitle = marker.title;    
 
     //closes window if clicking outside
     google.maps.event.addListener(map, 'click', function () {
-      smallInfowindow.close();
+      infowindow2.close();
       window.popupLayerOpen = false;
     });
+
+    infowindow2.open(map, marker); 
     
-    smallInfowindow.open(map, marker);
     window.currentMarker = marker;
-    window.smallInfowindow = smallInfowindow;
+    window.infowindow2 = infowindow2;
     window.popupTitle = popupTitle;
   
-  
-    smallInfowindow.addListener('closeclick', () => {
+    infowindow2.addListener('closeclick', () => {
       window.popupLayerOpen = false;
     });
   
 }
 
 //Function to open the full popup
-export function openPopup(marker, currentGraph) {
-    preformPost(marker);
+export function openPopup(marker) {
+  
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
       <div class="popup-window">
@@ -81,6 +65,7 @@ export function openPopup(marker, currentGraph) {
         <div id="close-button" onclick="closePopup()"><img src="static/images/close-button.png" alt="Close"></div>
       </div>
     `;
+    preformPost(marker);
     customPopup.style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
     
@@ -88,19 +73,24 @@ export function openPopup(marker, currentGraph) {
   
     //Function to handle button click event for generating the graph
     function preformPost(marker){
+
       //Only will create Graphs for Virginia
-      if(marker.descriptions.tag == 'Virginia')
+    
+    if(marker.descriptions.tag == 'Virginia')
       {
+        $('#graph_html').addClass("loader")
       $.ajax({ 
         type:"POST",
         url:config.hostname + "/create_graph",
         data: marker.points,
        success: function(response){
+        /*Stops the Loading Screen*/
+        $('#graph_html').removeClass("loader")
         $('#graph_html').html(response.graph_json)
-
-        } 
+       } 
       });
     }
+    
     };
 }
 
@@ -113,9 +103,9 @@ export function closePopup() {
 }
 
 //Function to handle the view more button
-export function viewMore(currentGraph) {
-    window.smallInfowindow.close();
-    openPopup(window.currentMarker, currentGraph);
+export function viewMore() {
+    window.infowindow2.close();
+    openPopup(window.currentMarker);
 }
 
 //Makes functions globally available
