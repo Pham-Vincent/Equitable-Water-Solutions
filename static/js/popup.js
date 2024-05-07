@@ -47,7 +47,7 @@ export function popUpLayer1(marker, map, infowindow2){
 
 //Function to open the full popup
 export function openPopup(marker) {
-    preformPost(marker);
+  
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
       <div class="popup-window">
@@ -62,11 +62,12 @@ export function openPopup(marker) {
           <p>${marker.descriptions.description2}</p>
         </div>
         
-        <div id="graph_html" class="loader"></div>
+        <div id="graph_html"></div>
   
         <div id="close-button" onclick="closePopup()"><img src="static/images/close-button.png" alt="Close"></div>
       </div>
     `;
+    preformPost(marker);
     customPopup.style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
     
@@ -79,6 +80,7 @@ export function openPopup(marker) {
     
     if(marker.descriptions.tag == 'Virginia')
       {
+        $('#graph_html').addClass("loader")
       $.ajax({ 
         type:"POST",
         url:config.hostname + "/create_graph",
@@ -87,10 +89,10 @@ export function openPopup(marker) {
         /*Stops the Loading Screen*/
         $('#graph_html').removeClass("loader")
         $('#graph_html').html(response.graph_json)
-
-        } 
+       } 
       });
     }
+    
     };
 }
 
