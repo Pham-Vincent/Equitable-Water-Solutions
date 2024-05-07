@@ -62,7 +62,7 @@ export function openPopup(marker) {
           <p>${marker.descriptions.description2}</p>
         </div>
         
-        <div id="graph_html"></div>
+        <div id="graph_html" class="loader"></div>
   
         <div id="close-button" onclick="closePopup()"><img src="static/images/close-button.png" alt="Close"></div>
       </div>
@@ -74,14 +74,18 @@ export function openPopup(marker) {
   
     //Function to handle button click event for generating the graph
     function preformPost(marker){
+
       //Only will create Graphs for Virginia
-      if(marker.descriptions.tag == 'Virginia')
+    
+    if(marker.descriptions.tag == 'Virginia')
       {
       $.ajax({ 
         type:"POST",
         url:config.hostname + "/create_graph",
         data: marker.points,
        success: function(response){
+        /*Stops the Loading Screen*/
+        $('#graph_html').removeClass("loader")
         $('#graph_html').html(response.graph_json)
 
         } 
