@@ -162,7 +162,8 @@ $.ajax({
       longitude = parseFloat(point.FixedLongitudes),
       locality = point.County,
       fresh = point.FreshwaterOrSaltwater,
-      tidal = point.TidalorNontidal;
+      tidal = point.TidalorNontidal,
+      identifier = point.stationNames;
 
       //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
@@ -188,6 +189,7 @@ $.ajax({
         description2: fresh,
         description3: tidal,
         tag: desc1,
+        id: identifier
       };
 
       console.log(marker.descriptions.tag);
