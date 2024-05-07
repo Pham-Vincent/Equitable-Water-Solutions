@@ -133,7 +133,6 @@ $.ajax({
         //import from 'markerFunction.js' and contains all marker event listeners
         addListeners(marker, infowindow, map, infowindow2);    
 
-        
       });
     },
     error: function(xhr, status, error) {
