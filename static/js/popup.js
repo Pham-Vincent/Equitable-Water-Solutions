@@ -73,7 +73,6 @@ export function openPopup(marker) {
   
     //Function to handle button click event for generating the graph
     function preformPost(marker){
-
       //Only will create Graphs for Virginia
     
     if(marker.descriptions.tag == 'Virginia')
@@ -81,7 +80,7 @@ export function openPopup(marker) {
         $('#graph_html').addClass("loader")
       $.ajax({ 
         type:"POST",
-        url:config.hostname + "/create_graph",
+        url:config.hostname + "/create_MD_graph",
         data: marker.points,
        success: function(response){
         /*Stops the Loading Screen*/
@@ -90,6 +89,21 @@ export function openPopup(marker) {
        } 
       });
     }
+    /*Calvert Hills Hard Code*/ 
+    else if(marker.title =='CA1971S001(04)')
+      { 
+        $('#graph_html').addClass("loader")
+      $.ajax({ 
+        type:"POST",
+        url:config.hostname + "/HardCode",
+        data: marker.points,
+       success: function(response){
+        /*Stops the Loading Screen*/
+        $('#graph_html').removeClass("loader")
+        $('#graph_html').html(response.graph_json)
+       } 
+      });
+      }
     
     };
 }
