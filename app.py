@@ -22,6 +22,9 @@ import plotly.express as px
 import  plotly.io as pio
 import plotly
 from datetime import datetime
+from plotly import graph_objs as go
+
+
 
 #Flask Instance
 app = Flask(__name__)
@@ -37,20 +40,29 @@ def Hardcode_Graph():
   format_time = "%m/%d/%Y %H:%M"
   Hardcode_df['time']=Hardcode_df['time'].apply(pd.to_datetime,format='%m/%d/%Y %H:%M')
 
-  WithdrawPlotted = px.line(
-    data_frame=Hardcode_df,
-    y='Calvert Cliffs Nuclear Power Plant',
-    x='time',
-    orientation="v",
-    width=700,  
-    height=550,
-    render_mode='webg1',
-  ) 
+  WithdrawPlotted = go.Figure(
+    data=go.Scatter(
+        x=Hardcode_df['time'],
+        y=Hardcode_df['Calvert Cliffs Nuclear Power Plant'],
+        mode='lines',
+        name='',
+        hovertemplate='Time %{x}<br>Salinity: %{y}',  # Custom hover text template
+    ),
+    layout=go.Layout(
+        width=700,
+        height=550,
+        title="Calvert Cliffs Nuclear Power Plant Salinity Levels",
+        xaxis=dict(title="Time"),
+        yaxis=dict(title="Salinity Levels"),
+        showlegend=False
+    )
+)
+
 
   WithdrawPlotted.update_layout(
   yaxis_title="Salinity Levels",
   xaxis_title="Dates Samples Collected",
-  title="Calvert Cliffs Salinity Levels", 
+  title="<b>Calvert Cliffs Salinity Levels<b>", 
   title_x=0.5,
   yaxis_title_font=dict(
     size=18,
@@ -60,7 +72,8 @@ def Hardcode_Graph():
     xaxis_title_font=dict(
     size=18,
     family="Roboto"
-    )
+    ),
+   
   )
   
   WithdrawPlotted.update_layout(
