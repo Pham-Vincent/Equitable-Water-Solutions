@@ -9,7 +9,7 @@ Authors: W. Lamuth, N. Gammel
 Date: 04/25/24
 */
 
-import { markers, map, markerCluster } from './script.js';
+import { markers, map, markerCluster, shown } from './script.js';
 
 
 //sets all markers in given array to visible or invisible(used for legend)
@@ -21,7 +21,12 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     }
   
     for (let i = 0; i < Tmarkers.length; i++) {
-      Tmarkers[i].setMap(map);
+        if(Tmarkers[i].descriptions.visible == shown[1]){
+            Tmarkers[i].descriptions.visible = shown[0]
+        } else {
+            Tmarkers[i].descriptions.visible = shown[1]
+        }
+        Tmarkers[i].setMap(map);
     }
   
     if(map!=null){

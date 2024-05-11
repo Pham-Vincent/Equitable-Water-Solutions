@@ -21,6 +21,7 @@ import { legendFunc, selectAll } from './legend.js';
 export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
+export let shown = [false,true]
 
 function Load_Map(){
 
@@ -91,7 +92,8 @@ $.ajax({
         marker.descriptions = {
           description1: desc1,
           description2: locality,
-          tag: legendType
+          tag: legendType,
+          visible: shown[1]
         };
 
         marker.points = {
@@ -189,7 +191,8 @@ $.ajax({
         description2: fresh,
         description3: tidal,
         tag: desc1,
-        id: identifier
+        id: identifier,
+        visible: shown[1]
       };
 
       console.log(marker.descriptions.tag);

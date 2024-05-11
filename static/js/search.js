@@ -10,6 +10,8 @@ will call search(). If a match is found, it zooms and centers the map on the mat
 
 Date: 05/05/24
 */
+import { shown } from './script.js';
+
 
 export function search(markers, map) {
     //Looks inside the input box and gets value inside 
@@ -59,7 +61,7 @@ export function autocomplete(inp, arr,map) {
       /*for each item in the array...*/
       for (i = 0; i < arr.length; i++) {
         /*check if the item starts with the same letters as the text field value:*/
-        if (arr[i].title.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        if (arr[i].title.substr(0, val.length).toUpperCase() == val.toUpperCase() && arr[i].descriptions.visible == shown[1]) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
