@@ -29,9 +29,13 @@ export function search(markers, map) {
         const infowindow = marker.infowindow; //Find the infowindow associated with the marker
         popUpLayer1(marker, map, infowindow);
         window.popupLayerOpen = true;
+        //When Finds a Map it won't search anymore
         matchfound = true
-    }
-  });
+        return;
+      }
+      });
+      
+ 
   } 
 
 

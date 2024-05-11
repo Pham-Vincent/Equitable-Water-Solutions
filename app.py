@@ -22,6 +22,9 @@ import plotly.express as px
 import  plotly.io as pio
 import plotly
 from datetime import datetime
+from plotly import graph_objs as go
+
+
 
 #Flask Instance
 app = Flask(__name__)
@@ -31,14 +34,91 @@ plt.switch_backend('agg')
 #Interacts with ModeBar
 config = {'displaylogo': False,}
 
+@app.route('/HardCode',methods=['GET','POST'])
+def Hardcode_Graph():
+  Hardcode_df = pd.read_csv('static/csv/Calvert Cliffs Nuclear Power Plant.csv')
+  format_time = "%m/%d/%Y %H:%M"
+  Hardcode_df['time']=Hardcode_df['time'].apply(pd.to_datetime,format='%m/%d/%Y %H:%M')
+
+  WithdrawPlotted = go.Figure(
+    data=go.Scatter(
+        x=Hardcode_df['time'],
+        y=Hardcode_df['Calvert Cliffs Nuclear Power Plant'],
+        mode='lines',
+        name='',
+        hovertemplate='Time %{x}<br>Salinity: %{y}',  # Custom hover text template
+    ),
+    layout=go.Layout(
+        width=700,
+        height=550,
+        title="Calvert Cliffs Nuclear Power Plant Salinity Levels",
+        xaxis=dict(title="Time"),
+        yaxis=dict(title="Salinity Levels"),
+        showlegend=False
+    )
+)
+
+
+  WithdrawPlotted.update_layout(
+  yaxis_title="Salinity Levels",
+  xaxis_title="Dates Samples Collected",
+  title="<b>Calvert Cliffs Salinity Levels<b>", 
+  title_x=0.5,
+  yaxis_title_font=dict(
+    size=18,
+    family="Roboto"
+      
+    ),
+    xaxis_title_font=dict(
+    size=18,
+    family="Roboto"
+    ),
+   
+  )
+  
+  WithdrawPlotted.update_layout(
+     xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label="1m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=3,
+                     label="3m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=6,
+                     label="6m",
+                     step="month",
+                     stepmode="todate"),
+                dict(count=9,
+                     label="9m",
+                     step="month",
+                     stepmode="backward"),
+                dict(step="all")
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+)
+
+
+  graph_html = pio.to_html(WithdrawPlotted, full_html=False,config=config)
+  graph_json='<div id="graph_html">' + graph_html + '<div>'
+  return jsonify({'graph_json': graph_json,}) 
+
 #Whenever a create_graph signal is sent will run this function
-@app.route('/create_graph',methods=['GET', 'POST'])
+@app.route('/create_MD_graph',methods=['GET', 'POST'])
 def create_graph():
   config = {
   #Removes Plotly Logo On Graph
   'displaylogo': False,
   'editable':True,
-  'modeBarButtonsToAdd':[],
+  'modeBarButtonsToAdd':['resetcameradefault','resetViews'],
   'modeBarButtonsToRemove':['zoom2d', 'select2d', 'lasso2d', 'resetScale2d']
   }
   #Getting the JSON values 
@@ -51,7 +131,7 @@ def create_graph():
 
   WithdrawValues_data = [[datetime.strptime(year, '%Y'), WithdrawValues[i]] for i, year in enumerate(year_strings)]
   WithdrawValues_df = pd.DataFrame(WithdrawValues_data,columns=['Years','WaterWithdraw'])
- 
+  
   #Creates a Scatter Plot 
   WithdrawPlotted = px.line(
     data_frame=WithdrawValues_df,

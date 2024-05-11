@@ -47,6 +47,7 @@ async function initMap() {
   //Loads GeoJSON Data from JSON file
   map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
 
+  //Changes The Styling Within Map Boundaries
   map.data.setStyle({
     fillColor: 'purple',
     fillOpacity : .4,
