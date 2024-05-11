@@ -246,7 +246,6 @@ $(document).one("ajaxStop",function() {
     algorithmOptions:{radius:175, minPoints: 3},
   });
 });
-
 }
 
 //closes popup upon clicking overlay

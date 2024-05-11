@@ -51,11 +51,9 @@ export function legendFunc(id) {
     //if checked -> show markers
     if (checkbox.checked) {
         setMapOnAll(map, tempMarkers, id);
-        console.log("Checkbox is checked");
     } 
     //if unchecked -> hide markers
     else {
-        console.log("Checkbox is unchecked");
         setMapOnAll(null, tempMarkers, id);
     }
 }
