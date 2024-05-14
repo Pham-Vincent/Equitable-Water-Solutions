@@ -29,8 +29,7 @@ export function search(markers, map) {
         map.panTo(marker.position);
         map.setZoom(20);
         const infowindow = marker.infowindow; //Find the infowindow associated with the marker
-        popUpLayer1(marker, map, infowindow);
-        window.popupLayerOpen = true;
+        openInfoWindow2(marker, map, infowindow); 
         //When Finds a Map it won't search anymore
         matchfound = true
         return;

@@ -11,7 +11,6 @@ Date: 04/25/24
 
 import { markers, map, markerCluster, shown } from './script.js';
 
-
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
     //this removes Virginia points, as id == null and removes clustering on all Virginia

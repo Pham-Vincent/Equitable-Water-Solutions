@@ -8,9 +8,9 @@ Authors: W. Lamuth, V. Pham, N. Gammel
 
 Date: 04/21/24
 */
-import { popUpLayer1 } from './popup.js';
+import { openInfoWindow2 } from './popup.js';
 
-//sets marker image depending on designated use
+//sets marker glyph depending on designated use
 export function setMarkerIcon(designatedUse){
     if (designatedUse === "Mining") {
         return "static/images/pickaxe.png";
@@ -46,9 +46,9 @@ export function setMarkerIcon(designatedUse){
 
 //Simplified Function to add listeners to every marker
 export function addListeners(marker, infowindow, map, infowindow2, glyphElement) {
-  //Event listener for hovering
+  //Event listener for opening infowindow on hoverover
   marker.content.addEventListener('mouseenter', () => {
-    if (!window.popupLayerOpen || marker !== window.currentMarker) {
+    if (!window.isInfoWindow2Open || marker !== window.currentMarker) {
       infowindow.open(map, marker);
     }
 
@@ -59,9 +59,9 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
   
   });
   
-  //Event listener for closing hovering
+  //Event listener for closing infowindow on hoverout
   marker.content.addEventListener('mouseleave', () => {
-    if (!window.popupLayerOpen || marker !== window.currentMarker) {
+    if (!window.isInfoWindow2Open || marker !== window.currentMarker) {
       infowindow.close();
     }
 
@@ -71,29 +71,29 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
     }
   });
       
-  //adds interactive function to marker on click
+  //opens/closes infowindow2 with click
   marker.addListener("click", () => {
-    //closes 2nd infowindow if already open
-    if(window.popupLayerOpen && marker === window.currentMarker){
+    if(window.isInfoWindow2Open && marker === window.currentMarker){
       infowindow2.close();
-      window.popupLayerOpen = false;
+      window.isInfoWindow2Open = false;
     }
     else{
-      popUpLayer1(marker, map, infowindow2);
+      openInfoWindow2(marker, map, infowindow2);
       infowindow.close();
     }
   });
   
-  //if infowindow wont close on 'mouseleave' clicking the map will close
+  //if infowindow wont close on 'mouseleave', clicking the map will close infowindow
   google.maps.event.addListener(map, 'click', function() {
     if (infowindow) {
         infowindow.close();
     }
   });
 
+  //clicking on the chesapeake overlay closes infowindow
   map.data.addListener('click', function(event) {
     infowindow2.close();
-    window.popupLayerOpen = false;
+    window.isInfoWindow2Open = false;
   });
 
 }

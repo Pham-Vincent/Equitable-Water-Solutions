@@ -14,38 +14,37 @@ import config from './config.js';
 let customPopup;
 
 //first layer popup
-export function popUpLayer1(marker, map, infowindow2){
+export function openInfoWindow2(marker, map, infowindow2){
+    
+    window.isInfoWindow2Open = true;
+
     //Close the currently open info window, if any
-
-    window.popupLayerOpen = true;
-
     if (window.infowindow2) {
       window.infowindow2.close();
-    }
-    
-    const popupTitle = marker.title;    
+    }  
 
     //closes window if clicking outside
     google.maps.event.addListener(map, 'click', function () {
       infowindow2.close();
-      window.popupLayerOpen = false;
+      window.isInfoWindow2Open = false;
     });
 
     infowindow2.open(map, marker); 
     
     window.currentMarker = marker;
     window.infowindow2 = infowindow2;
-    window.popupTitle = popupTitle;
   
+    //when clicking 'X' to close infowindow, sets isInfoWindow2Open to false
     infowindow2.addListener('closeclick', () => {
-      window.popupLayerOpen = false;
+      window.isInfoWindow2Open = false;
     });
   
 }
 
-//Function to open the full popup
+//Function to open the full information display window
 export function openPopup(marker) {
   
+    //finds html id 'popup' and defines inner content
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
       <div class="popup-window">
@@ -67,9 +66,7 @@ export function openPopup(marker) {
     `;
     preformPost(marker);
     customPopup.style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-    
-    
+    document.getElementById('overlay').style.display = 'block'; 
   
     //Function to handle button click event for generating the graph
     function preformPost(marker){
@@ -108,12 +105,11 @@ export function openPopup(marker) {
     };
 }
 
-
 export function closePopup() {
     customPopup = document.getElementById('popup');
     customPopup.style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
-    window.popupLayerOpen=false;
+    window.isInfoWindow2Open=false;
 }
 
 //Function to handle the view more button
@@ -126,7 +122,7 @@ export function viewMore() {
 window.openPopup = openPopup;
 window.closePopup = closePopup;
 window.viewMore = viewMore;
-window.popUpLayer1 = popUpLayer1;
+window.openInfoWindow2 = openInfoWindow2;
 
 
 

@@ -1,3 +1,4 @@
+/* styling for the outermost div container */
 .legend-container{
     position: absolute;
     padding-left: 5px;
@@ -13,6 +14,8 @@
     height:450px;
     border-radius: 20px;
 }
+
+/* style header <h3>  */
 .legend-container h3 {
     padding:0%;
     margin-bottom: 0%;
@@ -22,6 +25,8 @@
     text-align: left;
     margin-left: 8px;
 }
+
+/* style line breaks <hr>  */
 .legend-container hr {
     padding:0%;
     margin-bottom: 0;
@@ -38,6 +43,7 @@
     padding: 10px;
     padding-top: 0%;
   }
+
 .legend h3{
     margin-bottom: 15px;
     margin-top: 10px;
@@ -159,7 +165,8 @@
     -webkit-transform: rotate(135deg);
   }
 
-  .drop-down-arrow{
+  /* drop-down arrow styling for MD (Water Withdrawal) */ 
+  .drop-down-arrow-MD{
     border: solid black;
     border-width: 0 0 3px 3px;
     display: inline-block;
@@ -171,24 +178,28 @@
     transition: transform 0.3s ease;
     cursor: pointer;
   }
-   /*rotates arrow 180*/
-   .rotate-drop-down-180 {
+   /*rotates arrow 90 degrees*/
+   .rotate-drop-down-180-MD {
     transform: rotate(-135deg); 
     -webkit-transform: rotate(-135deg);
   }
 
-  .drop-down.hidden{
+  /* toggles display visibility for MD data when clicking dropdown arrow */
+  .drop-down-MD.hidden{
     display:none;
   }
 
+  /* toggles display visibility for VA data when clicking dropdown arrow */
   .drop-down-VA.hidden{
     display:none;
   }
 
   .drop-down-header > *{
-    display: inline-block;
+    width:100%;
+    margin-top: 15px;
   }
 
+  /* drop-down arrow styling for VA */ 
   .drop-down-arrow-VA{
     border: solid black;
     border-width: 0 0 3px 3px;
@@ -201,7 +212,7 @@
     transition: transform 0.3s ease;
     cursor: pointer;
   }
-   /*rotates arrow 180*/
+   /*rotates arrow 90 degrees */
    .rotate-drop-down-180-VA {
     transform: rotate(-135deg); 
     -webkit-transform: rotate(-135deg);

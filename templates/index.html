@@ -31,17 +31,18 @@
       <hr>
       <div class="legend">
 
-        <!-- legend drop-down -->
+        <!-- legend MD drop-down -->
         <div class="drop-down-header">
-            <i class="drop-down-arrow" onclick="toggleDropDown()"></i>
-            <h3>Water Withdrawal</h3>
-            <label class="container" id="Select All" style="font-weight: 500;">
+            <label class="container" id="Select All" style="font-weight: 600;">
+              <i class="drop-down-arrow-MD" onclick="toggleDropDownMD(event)"></i>
+              Water Withdrawal
               <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
-              <span class="checkmark" style="margin-right: -1.5em;"></span> 
+              <span class="checkmark"></span> 
             </label>
         </div>
 
-        <div class="drop-down">
+        <!--MD start-->
+        <div class="drop-down-MD">
           <label class="container" id="Mining">
             <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
             Mining
@@ -113,21 +114,25 @@
           </label>
         
         </div>
-
-          <hr>
-
+        <!--MD end-->   
+        <hr>
+      
+        <!--VA drop-down header-->
         <div class="drop-down-header">
-          <i class="drop-down-arrow-VA" onclick="toggleDropDownVA()"></i>
-          <h3>States</h3>
+          <label class="container" id="Select All" style="font-weight: 600;">
+            <i class="drop-down-arrow-VA" onclick="toggleDropDownVA()"></i>
+            States
+          </label>
         </div>
 
+        <!--VA start-->
         <div class="drop-down-VA">
           <label class="container" id="Virginia">Virginia
             <input type="checkbox" checked="checked" onchange="legendFunc('Virginia')">
             <span class="checkmark"></span>
           </label>
         </div>
-
+        <!--VA end-->
         <hr>
         
       </div>
@@ -142,11 +147,12 @@
             const arrow = document.querySelector('.arrow');
             arrow.classList.toggle('rotate180');
         }
-        function toggleDropDown(){
-          const dropdown = document.querySelector('.drop-down');
+        function toggleDropDownMD(event){
+          event.preventDefault();
+          const dropdown = document.querySelector('.drop-down-MD');
           dropdown.classList.toggle('hidden');
-          const arrow = document.querySelector('.drop-down-arrow');
-          arrow.classList.toggle('rotate-drop-down-180');
+          const arrow = document.querySelector('.drop-down-arrow-MD');
+          arrow.classList.toggle('rotate-drop-down-180-MD');
         }
         function toggleDropDownVA(){
           const dropdown = document.querySelector('.drop-down-VA');
@@ -159,7 +165,6 @@
 
     <div id="map"></div>
       
-
     <!-- popup -->
       <div id="popup"></div>
       <div id="overlay" class="overlay"></div>
