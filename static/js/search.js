@@ -8,7 +8,7 @@ It exports autocomplete,to scriptjs. The autocomplete() function is responsible 
 This container will display markers that match with what is currently being searched. This Autocomplete search feature
 will call search(). If a match is found, it zooms and centers the map on the matching marker's position and opens an info window to highlight the marker. 
 
-Date: 05/05/24
+Date: 05/12/24
 */
 import { shown } from './script.js';
 

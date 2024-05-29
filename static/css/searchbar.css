@@ -6,7 +6,7 @@
   align-items: center;
   padding: 10px;
   border-radius: 20px;
-  background: #f6f6f6;
+  background: #ffffff;
   margin-left: 15%;
   margin-top: .5%;
   position: absolute;
@@ -14,14 +14,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
   display: inline-block;
-
-
 }
+
 /*Relates To The Entire Autocomplete Search Box*/ 
 .autocomplete-items {
   position: absolute;
