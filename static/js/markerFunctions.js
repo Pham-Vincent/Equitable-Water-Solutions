@@ -94,6 +94,6 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
   map.data.addListener('click', function(event) {
     infowindow2.close();
     window.isInfoWindow2Open = false;
-  });
+  });  
 
 }

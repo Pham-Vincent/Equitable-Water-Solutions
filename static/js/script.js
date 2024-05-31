@@ -66,7 +66,7 @@ AJAX connects to VA json file and extracts data
 Uses data to populate map with markers at specific Longitude/Latitude
 */
 $.ajax({
-    url: 'static/json/Va_Permit.json',
+    url: 'static/json/VA_tidal_final_v1.json',
     type:"GET",
     dataType: 'json',
     success: function(data) {
@@ -185,6 +185,7 @@ $.ajax({
           map,
           title: mapCode,
           content: glyphElement.element,
+  
       });
 
       // Attach custom properties to the marker object
@@ -228,7 +229,7 @@ $.ajax({
           </div>
         `,  
         maxWidth: 300,
-        
+        disableAutoPan: true,
       });
 
       //Associate the infowindow with the marker

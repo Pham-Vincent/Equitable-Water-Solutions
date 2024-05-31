@@ -4,3 +4,4 @@ config.js
 !Chesapeake_Bay_Shoreline_Low_Resolution.json
 *.csv
 *.xlsx
+venv
