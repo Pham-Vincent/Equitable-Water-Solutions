@@ -13,9 +13,12 @@ Date:4/25/2024
 
 #Import necessary libraries
 from flask import Flask,jsonify,render_template,request
+import mysql.connector
 import matplotlib.pyplot as plt
 import numpy as np
 import io
+from dotenv import load_dotenv
+import os
 import base64 
 import pandas as pd
 import plotly.express as px
@@ -36,14 +39,42 @@ config = {'displaylogo': False,}
 
 @app.route('/HardCode',methods=['GET','POST'])
 def Hardcode_Graph():
-  Hardcode_df = pd.read_csv('static/csv/Calvert Cliffs Nuclear Power Plant.csv')
-  format_time = "%m/%d/%Y %H:%M"
-  Hardcode_df['time']=Hardcode_df['time'].apply(pd.to_datetime,format='%m/%d/%Y %H:%M')
+  #Path To Env File
+  dotenv_path='static/env/.env'
+  #Opens Env File
+  load_dotenv(dotenv_path=dotenv_path)
+  #Connects to Database To Get Data
+  mydb = mysql.connector.connect(
+    host=os.getenv('DB_HOST'),
+    user= os.getenv('DB_USER'),
+    password= os.getenv('DB_PASS'),
+    database= os.getenv('DB_NAME')
 
-  WithdrawPlotted = go.Figure(
+  )
+  #Gets Marker Title Of current Info Window From Ajax 
+  marker_title = request.values
+  #Gets Marker Title Name 
+  marker_title = list(marker_title.keys())[0]
+
+  mycursor = mydb.cursor()
+
+  #Query For SQL
+  Query = "SELECT time,Salinity FROM Maryland_Tidal_History WHERE PermitNumber = \"" + str(marker_title)+ "\""
+
+  #Executes The Query
+  mycursor.execute(Query)
+
+  #Get The Results of The Query
+  myresult = mycursor.fetchall()
+  
+
+  Salinity_data = [[Time,Salinity] for Time,Salinity in (myresult)]
+  Salinity_df= pd.DataFrame(Salinity_data,columns=['Time','Salinity'])
+  
+  SalinityPlotted = go.Figure(
     data=go.Scatter(
-        x=Hardcode_df['time'],
-        y=Hardcode_df['Calvert Cliffs Nuclear Power Plant'],
+        x=Salinity_df['Time'],
+        y=Salinity_df['Salinity'],
         mode='lines',
         name='',
         hovertemplate='Time %{x}<br>Salinity: %{y}',  # Custom hover text template
@@ -59,10 +90,10 @@ def Hardcode_Graph():
 )
 
 
-  WithdrawPlotted.update_layout(
+  SalinityPlotted.update_layout(
   yaxis_title="Salinity Levels",
   xaxis_title="Dates Samples Collected",
-  title="<b>Calvert Cliffs Salinity Levels<b>", 
+  title=f"<b>{marker_title}</b>", 
   title_x=0.5,
   yaxis_title_font=dict(
     size=18,
@@ -76,7 +107,7 @@ def Hardcode_Graph():
    
   )
   
-  WithdrawPlotted.update_layout(
+  SalinityPlotted.update_layout(
      xaxis=dict(
         rangeselector=dict(
             buttons=list([
@@ -107,10 +138,13 @@ def Hardcode_Graph():
 )
 
 
-  graph_html = pio.to_html(WithdrawPlotted, full_html=False,config=config)
+  graph_html = pio.to_html(SalinityPlotted, full_html=False,config=config)
   graph_json='<div id="graph_html">' + graph_html + '<div>'
-  return jsonify({'graph_json': graph_json,}) 
+  return jsonify({'graph_json': graph_json,})
+  
 
+
+  return
 #Whenever a create_graph signal is sent will run this function
 @app.route('/create_MD_graph',methods=['GET', 'POST'])
 def create_graph():
@@ -123,6 +157,7 @@ def create_graph():
   }
   #Getting the JSON values 
   WithdrawValues = list(request.form.values())
+  
   #Turns JSON Values Strings -> Floats
   WithdrawValues =[float(Floats) for Floats in WithdrawValues]
 

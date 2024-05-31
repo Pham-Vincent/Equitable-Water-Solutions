@@ -79,7 +79,9 @@
     color: rgb(70, 86, 126);
     margin: 20px;
 }
-
+.gm-style-iw button:focus {
+    outline: 0;
+}
 .header-paragraph p{
     position: relative;
     text-align: left;

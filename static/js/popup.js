@@ -90,10 +90,11 @@ export function openPopup(marker) {
     else if(marker.title =='CA1971S001(04)')
       { 
         $('#graph_html').addClass("loader")
+        console.log(marker.title)
       $.ajax({ 
         type:"POST",
         url:config.hostname + "/HardCode",
-        data: marker.points,
+        data: marker.title, 
        success: function(response){
         /*Stops the Loading Screen*/
         $('#graph_html').removeClass("loader")
