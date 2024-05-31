@@ -77,7 +77,7 @@ export function openPopup(marker) {
         $('#graph_html').addClass("loader")
       $.ajax({ 
         type:"POST",
-        url:config.hostname + "/create_MD_graph",
+        url:config.hostname + "/create_VA_graph",
         data: marker.points,
        success: function(response){
         /*Stops the Loading Screen*/
@@ -86,19 +86,21 @@ export function openPopup(marker) {
        } 
       });
     }
-    /*Calvert Hills Hard Code*/ 
-    else if(marker.title =='CA1971S001(04)')
-      { 
+    /*Maryland Tidal Data */
+    else
+    { 
         $('#graph_html').addClass("loader")
-        console.log(marker.title)
-      $.ajax({ 
+        $.ajax({ 
         type:"POST",
-        url:config.hostname + "/HardCode",
+        url:config.hostname + "/create_MD_graph",
         data: marker.title, 
        success: function(response){
         /*Stops the Loading Screen*/
         $('#graph_html').removeClass("loader")
         $('#graph_html').html(response.graph_json)
+       },
+      error:function(error){
+      $('#graph_html').removeClass("loader")
        } 
       });
       }

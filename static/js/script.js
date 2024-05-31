@@ -167,6 +167,7 @@ $.ajax({
       fresh = point.FreshwaterOrSaltwater,
       tidal = point.TidalorNontidal,
       identifier = point.stationNames;
+      
 
       //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
@@ -193,6 +194,7 @@ $.ajax({
         description3: tidal,
         tag: desc1,
         id: identifier,
+      
         visible: shown[1]
       };
 

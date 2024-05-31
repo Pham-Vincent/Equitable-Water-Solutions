@@ -37,7 +37,7 @@ plt.switch_backend('agg')
 #Interacts with ModeBar
 config = {'displaylogo': False,}
 
-@app.route('/HardCode',methods=['GET','POST'])
+@app.route('/create_MD_graph',methods=['GET','POST'])
 def Hardcode_Graph():
   #Path To Env File
   dotenv_path='static/env/.env'
@@ -146,7 +146,7 @@ def Hardcode_Graph():
 
   return
 #Whenever a create_graph signal is sent will run this function
-@app.route('/create_MD_graph',methods=['GET', 'POST'])
+@app.route('/create_VA_graph',methods=['GET', 'POST'])
 def create_graph():
   config = {
   #Removes Plotly Logo On Graph
