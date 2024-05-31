@@ -16,15 +16,15 @@
 }
 
 /* finds class="info-window" ands sets styling*/
-.info-window{
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #ccc;
+.info-window {
+    margin-left: 6px;
+    margin-bottom: 6px;
+    padding: 8px;
     border-radius: 1px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     word-wrap: break-word;
+    border: 1px solid #ccc;
 }
-  
+
   /* sets title color to black*/
 .info-window strong{
     color: #333;
@@ -52,13 +52,21 @@
     cursor: pointer;
 }
 
+
 #view-more-button{
-    background-color: lightgrey; 
-    padding: 5px 10px;
-    color: black;
-    border-radius: 25px;
+    padding: 5px 15px; 
+    border-radius: 20px;
     border: none;
     cursor: pointer;
+    align-items: center;
+    background-color: lightgray;
+    color: black;
+}
+
+#view-more-button:hover{
+    background-color: rgb(70, 86, 126);
+    color: white;
+    transition: 0.5s;
 }
 
 .popup-title {
@@ -89,9 +97,7 @@
     color: black;
     margin-top: 0;
 }
-
-
-    
+ 
 .text{
     font-size: 16px;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -101,3 +107,22 @@
     border: none;
     background: transparent;
 }
+
+
+/* remove info-window X button
+button.gm-ui-hover-effect {
+    visibility: hidden;
+}
+
+
+/* Changes info-window background color
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+.gm-style .gm-style-iw-c,
+.gm-style .gm-style-iw-t::after { 
+  background: rgb(70, 86, 126);
+}
+
+.gm-style .gm-style-iw-tc::after {   background: rgb(70, 86, 126); }
+
+*/

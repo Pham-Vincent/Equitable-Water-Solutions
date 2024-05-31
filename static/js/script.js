@@ -8,13 +8,13 @@ mouseout, and click events on each marker. Additionally, it handles search funct
 
 Output: JavaScript file
 
-Date: 05/05/24
+Date: 05/12/24
 
 */
 //Gets Google Maps APi Key
 import config from './config.js';
 import { closePopup} from './popup.js';
-import {autocomplete } from './search.js';
+import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners} from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
 
@@ -43,6 +43,7 @@ async function initMap() {
     //45c77a2db5a260c8 -> Background Signs/Feature Styling Enabled
     mapId: "366d3e13ce470bd7", 
     scrollwheel:true, //bypasses command+scroll to zoom
+    streetViewControl: false, //removes streetview pegman
   });
 
   //Loads GeoJSON Data from JSON file
@@ -206,7 +207,7 @@ $.ajax({
       const infowindow = new InfoWindow({
         content: `
           <div class = "info-window">
-          <strong>${marker.title}</strong>
+          <strong style="color: rgb(70, 86, 126); align: center;">${marker.title}</strong>
           </div>
           `,
           maxWidth: 300,
@@ -217,15 +218,17 @@ $.ajax({
       const infowindow2 = new google.maps.InfoWindow({
         content: `
           <div class="info-window">
-            <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
-            <p>${marker.descriptions.description1}</p>
-            <p>${marker.descriptions.description2}</p>
-            <p>${marker.descriptions.tag}</p>
-            <button id="view-more-button" onclick="viewMore()">View More</button>
+            <p><strong style="color: rgb(70, 86, 126);"">Hydrocode:</strong>${marker.title}</p>
+            <p><strong style="color: rgb(70, 86, 126);">County:</strong>  ${marker.descriptions.description1}</p>
+            <p><strong style="color: rgb(70, 86, 126);">Water Type:</strong>  ${marker.descriptions.description2}</p>
+            <p><strong style="color: rgb(70, 86, 126);">Use Type:</strong>  ${marker.descriptions.tag}</p>
+            <button id="view-more-button" onclick="viewMore()"">View More</button>
           </div>
         `,  
         maxWidth: 300,
+        
       });
+
       //Associate the infowindow with the marker
       marker.infowindow = infowindow2;
       

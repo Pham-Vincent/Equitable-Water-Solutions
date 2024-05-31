@@ -8,7 +8,7 @@ It defines functions for displaying various layers of information associated wit
 including a basic popup, a detailed popup with additional content and a graph, and a view more button to toggle between popups. 
 The functions allow users to interact with markers on the map by displaying relevant information and additional details when clicked.
 
-Date: 05/05/24
+Date: 05/12/24
 */
 import config from './config.js';
 let customPopup;
