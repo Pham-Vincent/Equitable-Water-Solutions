@@ -76,11 +76,13 @@ $.ajax({
       data.forEach(function(point) {
         let mapCode = point.Hydrocode,
         desc1 = point.Source_Type,
+        useType = point.Use_Type,
         latitude = parseFloat(point.Latitude),
         longitude = parseFloat(point.Longitude),
         locality = point.Locality,
         point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
         legendType = 'Virginia';
+        
 
         // Uses latitude and longitude to map points on the map
         var marker = new AdvancedMarkerElement({
@@ -93,6 +95,7 @@ $.ajax({
         marker.descriptions = {
           description1: desc1,
           description2: locality,
+          description3: useType,
           tag: legendType,
           visible: shown[1]
         };
@@ -107,12 +110,12 @@ $.ajax({
         
         //marker pushed into markers array, used in search()
         markers.push(marker); 
-        console.log(marker.descriptions.tag);
+        console.log(marker.descriptions.description3);
         //creates infowindow used in hover listeners
         const infowindow = new InfoWindow({
           content: `
             <div class = "info-window">
-            <strong>${marker.title}</strong>
+            <strong style="color: rgb(70, 86, 126);">${marker.title}</strong>
             </div>
             `,
             maxWidth: 300,
@@ -123,9 +126,9 @@ $.ajax({
         const infowindow2 = new google.maps.InfoWindow({
           content: `
             <div class="info-window">
-              <strong style="color:rgb(70, 86, 126);">${marker.title}</strong>
-              <p>${marker.descriptions.description1}</p>
-              <p>${marker.descriptions.description2}</p>
+              <p><strong style="color:rgb(70, 86, 126);">Hydrocode: </strong> ${marker.title}</p>
+              <p><strong style="color: rgb(70, 86, 126);">Intake Type: </strong> ${marker.descriptions.description1}</p>
+              <p><strong style="color: rgb(70, 86, 126);">County: </strong> ${marker.descriptions.description2}</p>
               <button id="view-more-button" onclick="viewMore()">View More</button>
             </div>
           `,  
