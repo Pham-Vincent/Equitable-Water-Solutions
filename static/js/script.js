@@ -44,6 +44,7 @@ async function initMap() {
     mapId: "366d3e13ce470bd7", 
     scrollwheel:true, //bypasses command+scroll to zoom
     streetViewControl: false, //removes streetview pegman
+    fullscreenControl: false,
   });
 
   //Loads GeoJSON Data from JSON file
