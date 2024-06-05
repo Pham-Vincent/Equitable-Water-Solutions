@@ -275,7 +275,7 @@ function createClusterContent(count) {
 
   //Add the icon image
   const img = document.createElement('img');
-  img.src = 'static/images/image.png'; //src determines the icon image
+  img.src = 'static/images/clustericon.png'; //src determines the icon image
   img.style.width = '60px';
   img.style.height = '60px';
   div.appendChild(img);
