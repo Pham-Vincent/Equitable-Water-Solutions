@@ -85,7 +85,7 @@ $.ajax({
         
 
         // Uses latitude and longitude to map points on the map
-        var marker = new AdvancedMarkerElement({
+        var marker = new google.maps.marker.AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
@@ -126,9 +126,9 @@ $.ajax({
         const infowindow2 = new google.maps.InfoWindow({
           content: `
             <div class="info-window">
-              <p><strong style="color:rgb(70, 86, 126);">Hydrocode: </strong> ${marker.title}</p>
-              <p><strong style="color: rgb(70, 86, 126);">Intake Type: </strong> ${marker.descriptions.description1}</p>
-              <p><strong style="color: rgb(70, 86, 126);">County: </strong> ${marker.descriptions.description2}</p>
+              <p><strong style="color:rgb(70, 86, 126);">Hydrocode: </strong>  ${marker.title}</p>
+              <p><strong style="color: rgb(70, 86, 126);">Intake Type: </strong>  ${marker.descriptions.description1}</p>
+              <p><strong style="color: rgb(70, 86, 126);">County: </strong>  ${marker.descriptions.description2}</p>
               <button id="view-more-button" onclick="viewMore()">View More</button>
             </div>
           `,  
@@ -183,7 +183,7 @@ $.ajax({
       });
       
       // Uses latitude and longitude to map points on the map
-      var marker = new AdvancedMarkerElement({
+      var marker = new google.maps.marker.AdvancedMarkerElement({
           position: { lat: latitude, lng: longitude },
           map,
           title: mapCode,
@@ -224,7 +224,7 @@ $.ajax({
       const infowindow2 = new google.maps.InfoWindow({
         content: `
           <div class="info-window">
-            <p><strong style="color: rgb(70, 86, 126);"">Hydrocode:</strong>${marker.title}</p>
+            <p><strong style="color: rgb(70, 86, 126);"">Hydrocode:</strong>  ${marker.title}</p>
             <p><strong style="color: rgb(70, 86, 126);">County:</strong>  ${marker.descriptions.description1}</p>
             <p><strong style="color: rgb(70, 86, 126);">Water Type:</strong>  ${marker.descriptions.description2}</p>
             <p><strong style="color: rgb(70, 86, 126);">Use Type:</strong>  ${marker.descriptions.tag}</p>
@@ -248,11 +248,55 @@ $.ajax({
   }
 });
 
+//defines a custom icon for the marker cluster
+const renderer = {
+  render: ({ count, position }) => {
+    
+    const latLng = new google.maps.LatLng(position.lat(), position.lng());
+    
+    //Return an instance of AdvancedMarkerElement with custom content
+    return new google.maps.marker.AdvancedMarkerElement({
+      position: latLng,
+      content: createClusterContent(count), //Use a helper function to create the content
+      zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+    });
+  }
+};
+
+//Helper function to create the content for the cluster marker
+function createClusterContent(count) {
+  const div = document.createElement('div');
+  div.style.position = 'relative';
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.display = 'flex';
+  div.style.alignItems = 'center';
+  div.style.justifyContent = 'center';
+
+  //Add the icon image
+  const img = document.createElement('img');
+  img.src = 'static/images/image.png'; //src determines the icon image
+  img.style.width = '60px';
+  img.style.height = '60px';
+  div.appendChild(img);
+
+  //Add the marker count
+  const label = document.createElement('span');
+  label.innerText = String(count);
+  label.style.color = 'white';
+  label.style.fontSize = '14px';
+  label.style.position = 'absolute';
+  div.appendChild(label);
+
+  return div;
+}
+
 $(document).one("ajaxStop",function() {
   markerCluster = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
     algorithmOptions:{radius:175, minPoints: 3},
+    renderer: renderer,
   });
 });
 }

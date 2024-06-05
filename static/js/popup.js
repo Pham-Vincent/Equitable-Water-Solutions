@@ -52,11 +52,11 @@ export function openPopup(marker) {
 
         <div class="header-paragraph">
           <h3 class="popup-description">Water Source Type:</h3>
-          <p>${marker.descriptions.description1}</p>
+          <p>${marker.descriptions.description2}</p>
         </div>
         <div class="header-paragraph">
           <h3 class="popup-description">Area:</h3>
-          <p>${marker.descriptions.description2}</p>
+          <p>${marker.descriptions.description1}</p>
         </div>
         
         <div id="graph_html"></div>
