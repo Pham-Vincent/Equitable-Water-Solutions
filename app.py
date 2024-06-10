@@ -12,7 +12,7 @@ Date:4/25/2024
 
 
 #Import necessary libraries
-from flask import Flask,jsonify,render_template,request
+from flask import Flask,jsonify,render_template,request, redirect, url_for
 import mysql.connector
 import matplotlib.pyplot as plt
 import numpy as np
@@ -26,8 +26,7 @@ import  plotly.io as pio
 import plotly
 from datetime import datetime
 from plotly import graph_objs as go
-
-
+from flask_bcrypt import generate_password_hash
 
 #Flask Instance
 app = Flask(__name__)
@@ -239,7 +238,77 @@ def index():
   
   return render_template('index.html')
 
+#Path To Env File
+dotenv_path='static/env/.env'
+#Opens Env File
+load_dotenv(dotenv_path=dotenv_path)
+#Connect to DB
+db_config = {
+    'host': os.getenv('DB_HOST'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASS'),
+    'database': os.getenv('DB_NAME')
+}
 
+#test database connection
+conn = mysql.connector.connect(**db_config)
+
+def connect_to_database():
+    return mysql.connector.connect(**db_config)
+
+#register page route
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        if not username or not password or not email:
+            error = 'Please fill out all fields'
+            return render_template('register.html', error=error)
+        elif check_existing_user(username):
+            error = 'Username already exists'
+            return render_template('register.html', error=error)
+        elif check_existing_email(email):
+            error = 'Email already exists'
+            return render_template('register.html', error=error)
+        else:
+            # Hash the password before storing it
+            hashed_password = generate_password_hash(password).decode('utf-8')
+            add_user(username, hashed_password, email)
+            return redirect(url_for('index'))  # Redirect to home page after successful registration
+    return render_template('register.html')
+
+# Function to check if username already exists
+def check_existing_user(username):
+    conn = connect_to_database()
+    cursor = conn.cursor()
+    query = "SELECT * FROM Accounts WHERE username = %s"
+    cursor.execute(query, (username,))
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return user is not None
+
+def check_existing_email(email):
+   conn = connect_to_database()
+   cursor = conn.cursor()
+   query = "SELECT * FROM Accounts WHERE email = %s"
+   cursor.execute(query, (email,))
+   user = cursor.fetchone()
+   cursor.close()
+   conn.close()
+   return user is not None
+
+# Function to add a new user to the database
+def add_user(username, password, email):
+    conn = connect_to_database()
+    cursor = conn.cursor()
+    query = "INSERT INTO Accounts (username, password, email) VALUES (%s, %s, %s)"
+    cursor.execute(query, (username, password, email))
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 if __name__ == '__main__':
