@@ -70,7 +70,7 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
     }
     //reverts marker color on hoverout
     if(marker.descriptions.state != 'Virginia')
-      glyphElement.background = 'orange';
+      glyphElement.background = '#fe9f3b';
     if(marker.descriptions.state != 'Maryland')
       glyphElement.background = '#e06666';
   });

@@ -173,6 +173,7 @@
     display: inline-block;
     margin-right: 5%;
     margin-bottom: 3px;
+    margin-left: 1.5%;
     padding: 3.5px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
@@ -202,6 +203,7 @@
     display: inline-block;
     margin-right: 5%;
     margin-bottom: 3px;
+    margin-left: 1.5%;
     padding: 3.5px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);

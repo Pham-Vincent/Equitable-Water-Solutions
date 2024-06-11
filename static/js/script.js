@@ -189,7 +189,7 @@ $.ajax({
 
       //custom marker
       const glyphElement = new PinElement({
-        background: 'orange',
+        background: '#fe9f3b',
         borderColor: 'white',
         glyph: glyphImg,
       });

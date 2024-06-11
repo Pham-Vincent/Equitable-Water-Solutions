@@ -34,7 +34,7 @@
         <!--VA drop-down header-->
         <div class="drop-down-header">
           <label class="container" id="Select All UseTypes" style="font-weight: 600;">
-            <i class="drop-down-arrow-VA" onclick="toggleDropDownVA()"></i>
+            <i class="drop-down-arrow-VA" onclick="toggleDropDownVA(event)"></i>
             States
             <input type="checkbox" checked="checked" onchange="selectAll('Select All UseTypes', this)">
             <span class="checkmark"></span> 
@@ -43,12 +43,16 @@
 
         <!--VA start-->
         <div class="drop-down-VA">
-          <label class="container" id="Virginia">Virginia
+          <label class="container" id="Virginia">
+            <img src="static/images/VAcircle.png" alt="VA icon" class="icon">
+            Virginia
             <input type="checkbox" checked="checked" name="state" onchange="selectState('Virginia')">
             <span class="checkmark"></span>
           </label>
 
-          <label class="container" id="Maryland">Maryland
+          <label class="container" id="Maryland">
+            <img src="static/images/MDcircle.png" alt="MD icon" class="icon">
+            Maryland
             <input type="checkbox" checked="checked" name="state" onchange="selectState('Maryland')">
             <span class="checkmark"></span>
           </label>
@@ -169,7 +173,8 @@
           const arrow = document.querySelector('.drop-down-arrow-MD');
           arrow.classList.toggle('rotate-drop-down-180-MD');
         }
-        function toggleDropDownVA(){
+        function toggleDropDownVA(event){
+          event.preventDefault();
           const dropdown = document.querySelector('.drop-down-VA');
           dropdown.classList.toggle('hidden');
           const arrow = document.querySelector('.drop-down-arrow-VA');
