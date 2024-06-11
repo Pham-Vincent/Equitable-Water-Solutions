@@ -5,14 +5,15 @@ import pandas as pd
 from sklearn import svm
 from sklearn.preprocessing import StandardScaler
 import plotly.graph_objects as go
+import numpy as np
 
 def Outlier_Detection():
-    #Path To Get Enviroment Variables
+    # Path To Get Environment Variables
     dotenv_path = 'static/env/.env'
-    #Getting Enviroment Variables
+    # Getting Environment Variables
     load_dotenv(dotenv_path=dotenv_path)
     
-    #Connecting to Database
+    # Connecting to Database
     mydb = mysql.connector.connect(
         host=os.getenv('DB_HOST'),
         user=os.getenv('DB_USER'),
@@ -20,35 +21,41 @@ def Outlier_Detection():
         database=os.getenv('DB_NAME')
     )
     mycursor = mydb.cursor()
-    #Query To Get Desired Values from Database
+    # Query To Get Desired Values from Database
     query = "SELECT time, Salinity FROM Maryland_Tidal_History WHERE PermitNumber = 'CA1971S001(04)'"
     
-    #Executing Query
+    # Executing Query
     mycursor.execute(query)
 
-    #Getting Results From Query
+    # Getting Results From Query
     myresult = mycursor.fetchall()
 
-    # Inserting The Data Into DataBase
+    # Inserting The Data Into DataFrame
     Salinity_data = [[Time, Salinity] for Time, Salinity in myresult]
     Salinity_df = pd.DataFrame(Salinity_data, columns=['Time', 'Salinity'])
     Salinity_df['Time'] = pd.to_datetime(Salinity_df['Time']).apply(lambda x: x.timestamp())
     
-    X = Salinity_df[['Time']]
+    X = Salinity_df[['Time', 'Salinity']]
     
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
-    #Outlier Detection Process
-    clf = svm.OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
-    y_predict = clf.fit_predict(X_scaled)
+    # Outlier Detection Process
+    clf = svm.OneClassSVM(nu=0.2, kernel="rbf", gamma=.1).fit(X_scaled)
+    y_predict = clf.predict(X_scaled)
     
-    #Making 1 be Outlier and 0 be Normal
+    # Making 1 be Outlier and 0 be Normal
     svm_predict = pd.Series(y_predict, index=Salinity_df.index).replace([-1, 1], [1, 0])
     
-
     mycursor.close()
     mydb.close()
+    
+    # Mark the outliers and normal points
+    outliers = X[svm_predict == 1].values
+    normal_data = X[svm_predict == 0].values
+
+    
+
     svm_anomalies=pd.DataFrame(columns=["Salinity","Time"])
     #Creating a DF where only the Salinity has Points to Graph Later
     for i,pred in enumerate(svm_predict):
