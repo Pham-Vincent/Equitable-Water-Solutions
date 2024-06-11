@@ -70,7 +70,7 @@ export function selectAll(id, source){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
 
-    //finds all checkboxes with name attritbute = box
+    //Depending on id different checkboxes are found
     if(id === "Select All UseTypes"){
         checkboxes = document.getElementsByName("state");
     }

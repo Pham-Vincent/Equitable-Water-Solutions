@@ -89,7 +89,7 @@ $.ajax({
 
         //custom marker
         const glyphElement = new PinElement({
-          background: 'orange',
+          background: '#e06666',
           borderColor: 'white',
           glyph: glyphImg,
         });

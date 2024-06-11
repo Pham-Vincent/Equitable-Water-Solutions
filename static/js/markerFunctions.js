@@ -56,8 +56,11 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
       infowindow.open(map, marker);
     }
     //changes marker color on hoverover
-    glyphElement.background = '#ffd966';
-  
+    if(marker.descriptions.state != 'Virginia')
+      glyphElement.background = '#ffd966';
+    if(marker.descriptions.state != 'Maryland')
+      glyphElement.background = '#ea9999';
+    
   });
   
   //Event listener for closing infowindow on hoverout
@@ -66,7 +69,10 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
       infowindow.close();
     }
     //reverts marker color on hoverout
-    glyphElement.background = 'orange';
+    if(marker.descriptions.state != 'Virginia')
+      glyphElement.background = 'orange';
+    if(marker.descriptions.state != 'Maryland')
+      glyphElement.background = '#e06666';
   });
       
   //opens/closes infowindow2 with click
