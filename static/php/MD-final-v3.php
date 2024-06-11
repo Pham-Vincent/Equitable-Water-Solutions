@@ -1,14 +1,14 @@
 <?php 
 /*
-Title: VA-final.php
-Author: William lamuth
+Title: MD-markers.php
+Author: William Lamuth
 
 Functionality: This php program uses environment variables to sign into an AWS database. Inside of the 'env' file are 
 variables and the equivalent values we need to access our database tables. Using this login, the program uses an SQL 
 query to collect all the needed information for each marker on our mapping webpage from the AWS database. It then stores
 all of the information inside of a .json file that can be accessed and used via AJAX inside of our Javascript.
 
-Output: Virginia v3 JSON file
+Output: Maryland v3 JSON file
 
 */
 
@@ -42,11 +42,9 @@ and allows us to access all of the associated variables for database login
   mysqli_set_charset($conn, 'utf8');
   
   //$sql = "SELECT ic_site_id, site_description1, state_name, county_name, lat_dd, long_dd FROM SurfaceWater_Withdrawals"; // Adjust table and column names as per your database schema
-  
-  //Selects all information we need from VA_Permits
-  //Latitude > 1.1 as some of the points we were given appeared at (0,0) in the middle of the ocean, omitted these points
-  $sql = "SELECT Hydrocode, Source_Type, Latitude, Longitude, Locality, Year_2016, Year_2017, Year_2018, Year_2019, Year_2020, Use_Type FROM VIRGINIA_TIDAL_FINAL_VERSION_1 WHERE Latitude > 1.1";
 
+  //Selects all needed Information from Maryland_Tidal table in Database
+  $sql = "SELECT NewUseType, Longitude, Latitude, PermitNumber, County, streamName FROM MD_FINAL_V3";
   $result = $conn->query($sql);
 
   $data = array();
@@ -68,7 +66,7 @@ if ($result->num_rows > 0) {
   //Directory its going to be stored as
   $directory = __DIR__ . '/../json/';
   //create json file with stored data
-  $file = 'VA_tidal_final_v1.json'; 
+  $file = 'MD_final_v3.json'; 
   //create File Path where the data is going to be stored
   $filepath = $directory . $file;
   file_put_contents($filepath, $json);

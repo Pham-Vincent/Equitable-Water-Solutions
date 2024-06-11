@@ -15,33 +15,37 @@ export function setMarkerIcon(designatedUse){
     if (designatedUse === "Mining") {
         return "static/images/pickaxe.png";
     }
-    if (designatedUse === "Fire and Hyrdrostatic") {
+    if (designatedUse === "Fossil Power") {
         return "static/images/flame.png";
     }
-    if (designatedUse === "Power Related") {
+    if (designatedUse === "Municipal") {
         return "static/images/power.png";
     }
-    if (designatedUse === "Institutional Use") {
+    if (designatedUse === "Manufacturing") {
         return "static/images/institution.png";
     }
-    if (designatedUse === "Industrial Use") {
+    if (designatedUse === "Industrial") {
         return "static/images/factory.png";
     }
-    if (designatedUse === "Commercial Use") {
+    if (designatedUse === "Commercial") {
         return "static/images/dollar.png";
     }
-    if (designatedUse === "Other Irrigation") {
+    if (designatedUse === "Irrigation") {
         return "static/images/irrigation.png";
     }
-    if (designatedUse === "Crop Irrigation") {
+    if (designatedUse === "Agriculture") {
         return "static/images/wheat.png";
     }
-    if (designatedUse === "Drinking") {
+    if (designatedUse === "Other") {
         return "static/images/water-bottle.png";
     }
     if(designatedUse === "Aquaculture"){
         return "static/images/waterdroplet.png";
     }
+    if(designatedUse === "Nuclear Power"){
+      return "static/images/nuclearicon.png";
+  }
+    
 }
 
 //Simplified Function to add listeners to every marker
@@ -51,11 +55,8 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
     if (!window.isInfoWindow2Open || marker !== window.currentMarker) {
       infowindow.open(map, marker);
     }
-
-    //changes MD marker color upon hover
-    if(marker.descriptions.tag != 'Virginia'){
-      glyphElement.background = '#6fa8dc';
-    }
+    //changes marker color on hoverover
+    glyphElement.background = '#ffd966';
   
   });
   
@@ -64,11 +65,8 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
     if (!window.isInfoWindow2Open || marker !== window.currentMarker) {
       infowindow.close();
     }
-
-    //changes MD marker color upon hover
-    if(marker.descriptions.tag != 'Virginia'){
-      glyphElement.background = 'orange';
-    }
+    //reverts marker color on hoverout
+    glyphElement.background = 'orange';
   });
       
   //opens/closes infowindow2 with click

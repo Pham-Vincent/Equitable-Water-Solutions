@@ -45,7 +45,7 @@ and allows us to access all of the associated variables for database login
   
   //Selects all information we need from VA_Permits
   //Latitude > 1.1 as some of the points we were given appeared at (0,0) in the middle of the ocean, omitted these points
-  $sql = "SELECT Hydrocode, Source_Type, Latitude, Longitude, Locality, Year_2016, Year_2017, Year_2018, Year_2019, Year_2020, Use_Type FROM VIRGINIA_TIDAL_FINAL_VERSION_1 WHERE Latitude > 1.1";
+  $sql = "SELECT Hydrocode, Source_Type, Latitude, Longitude, Locality, Year_2016, Year_2017, Year_2018, Year_2019, Year_2020, Use_Type FROM VA_FINAL_V3 WHERE Latitude > 1.1";
 
   $result = $conn->query($sql);
 
@@ -68,7 +68,7 @@ if ($result->num_rows > 0) {
   //Directory its going to be stored as
   $directory = __DIR__ . '/../json/';
   //create json file with stored data
-  $file = 'VA_tidal_final_v1.json'; 
+  $file = 'VA_final_v3.json'; 
   //create File Path where the data is going to be stored
   $filepath = $directory . $file;
   file_put_contents($filepath, $json);
