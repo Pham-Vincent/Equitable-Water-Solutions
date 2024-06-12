@@ -36,7 +36,7 @@
           <label class="container" id="Select All UseTypes" style="font-weight: 600;">
             <i class="drop-down-arrow-VA" onclick="toggleDropDownVA(event)"></i>
             States
-            <input type="checkbox" checked="checked" onchange="selectAll('Select All UseTypes', this)">
+            <input type="checkbox" checked="checked" name="box" onchange="selectAll('Select All UseTypes', this)">
             <span class="checkmark"></span> 
           </label>
         </div>
@@ -46,14 +46,14 @@
           <label class="container" id="Virginia">
             <img src="static/images/VAcircle.png" alt="VA icon" class="icon">
             Virginia
-            <input type="checkbox" checked="checked" name="state" onchange="selectState('Virginia')">
+            <input type="checkbox" checked="checked" name="box" onchange="selectState('Virginia')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Maryland">
             <img src="static/images/MDcircle.png" alt="MD icon" class="icon">
             Maryland
-            <input type="checkbox" checked="checked" name="state" onchange="selectState('Maryland')">
+            <input type="checkbox" checked="checked" name="box" onchange="selectState('Maryland')">
             <span class="checkmark"></span>
           </label>
           
@@ -66,7 +66,7 @@
             <label class="container" id="Select All" style="font-weight: 600;">
               <i class="drop-down-arrow-MD" onclick="toggleDropDownMD(event)"></i>
               Use Types
-              <input type="checkbox" checked="checked" onchange="selectAll('Select All', this)">
+              <input type="checkbox" checked="checked" name="box" onchange="selectAll('Select All', this)">
               <span class="checkmark"></span> 
             </label>
         </div>

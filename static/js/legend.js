@@ -71,13 +71,8 @@ export function selectAll(id, source){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
 
-    //Depending on id different checkboxes are found
-    if(id === "Select All UseTypes"){
-        checkboxes = document.getElementsByName("state");
-    }
-    else{
-        checkboxes = document.getElementsByName("box");
-    }
+    //finds checkboxes with name "box"
+    const checkboxes = document.getElementsByName("box");
     
     //checks/unchecks all boxes depending on 'Select All' box status 
     for(var i=0;i<checkboxes.length;i++) 
