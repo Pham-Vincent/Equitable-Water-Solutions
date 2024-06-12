@@ -8,13 +8,16 @@ from sklearn import svm
 from sklearn.preprocessing import StandardScaler
 import plotly.graph_objects as go
 import numpy as np
+from scipy.stats import percentileofscore
 
 #Each dataPoint will Get a 1 week span From Current Date looking
 def CreateWindow(DataFrame):
-  df = pd.DataFrame(columns=['Mean','STD','Window'])
+  df = pd.DataFrame(columns=['Mean','STD','Variance','Sum',"PercentileScore","PercentileScoreWithinList",'Window'])
   # 1 week is 168 Points
-  WindowSize = 168
+  WindowSize = 24 * 7
   
+  #Used to calculate Percentile Values 
+  AllSalinityValues = DataFrame['Salinity'].astype(float).values.tolist()
 
   for i in range(len(DataFrame)):
       # Span of days before Current Point (3.5 days)
@@ -30,37 +33,38 @@ def CreateWindow(DataFrame):
       df.loc[i,'Window'] = [WindowList]
       df.loc[i,'Mean']= np.mean(WindowList)
       df.loc[i,'STD']= np.std(WindowList)
-      # DataFrame.at[i, 'Window'] = WindowList
+      df.loc[i,'Variance']= np.var(WindowList)
+      df.loc[i,'Sum']= np.sum(WindowList)
+
+      SalinityValue=DataFrame.at[i, 'Salinity']
+      df.loc[i,"PercentileScoreWithinList"]= percentileofscore(WindowList,SalinityValue)
+      df.loc[i,"PercentileScore"]= percentileofscore(AllSalinityValues,SalinityValue)
   DataFrame = pd.concat([DataFrame, df], axis=1)
   print(DataFrame)
 
   return(DataFrame)
 
-
-
-def Variance(DataFrame):
-  print('Hi')
-
 def AvgNeighbors(DataFrame):
 
     #Calculates For closest 24 Neighbors 
-    k = 24
-
+    k = 24 * 7
+    df = pd.DataFrame(columns=["AvgNeighbor"])
     # Fit KNN model
     knn = NearestNeighbors(n_neighbors=k)
-    knn.fit(X)
+    knn.fit(DataFrame)
 
     # Find indices and distances of k nearest neighbors
-    distances, indices = knn.kneighbors(X, n_neighbors=k+1)
+    distances, indices = knn.kneighbors(DataFrame, n_neighbors=k+1)
 
     # Calculate average distance
     for i,pred in enumerate(distances):
       #Calculates the Avg Distance Between Neighbors
       avg_distance = np.mean(distances[i])
 
+      #Saving Avg Neighbor Distance in a DataFrame
+      df.loc[i, 'AvgNeighbor'] = avg_distance
 
-      #Inserting Data into Anamoly DF 
-      Salinity_df.loc[i, 'AvgNeighbor'] = avg_distance
+    return(df)
 
 
 def main():
@@ -95,14 +99,20 @@ def main():
 
   #Gets Features and Window 
   X = CreateWindow(Salinity_df)
-  X.drop(['Window','Time'],axis =1, inplace = True)
+  
 
+
+  X.drop(['Window','Time'],axis =1, inplace = True)
+  KNNDF = AvgNeighbors(X)
+  X = pd.concat([X, KNNDF], axis=1)
+
+  print(KNNDF)
   
 
   scaler = StandardScaler()
   X_scaled = scaler.fit_transform(X)
   # Outlier Detection Process
-  clf = svm.OneClassSVM(nu=0.05, kernel="rbf", gamma=.1).fit(X_scaled)
+  clf = svm.OneClassSVM(nu=0.1, kernel="rbf", gamma=.1).fit(X_scaled)
   y_predict = clf.predict(X_scaled)
 
   # Making 1 be Outlier and 0 be Normal
