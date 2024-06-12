@@ -259,24 +259,25 @@ db_config = {
     'database': os.getenv('DB_NAME')
 }
 
-#test database connection
-conn = mysql.connector.connect(**db_config)
-
 def connect_to_database():
     return mysql.connector.connect(**db_config)
 
 #register page route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    #Checks that fields are filled
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
+        #Creates database connection and executes query
+        #Stores single sequence result in account
         conn = connect_to_database()
         cursor = conn.cursor(dictionary=True)
         query = "SELECT * FROM Accounts where username = %s"
         cursor.execute(query, (username,))
         account = cursor.fetchone()
+        #Validates if the account exists and follows correct naming conventions
         if account:
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -286,10 +287,12 @@ def register():
         elif not username or not password or not email:
             msg = 'Please fill out the form!'
         else:
+            #CREATES NEW ACCOUNT
             # Hash the password
             hash = password + app.secret_key
             hash = hashlib.sha1(hash.encode())
             password = hash.hexdigest()
+            # Insert into Database
             query = "INSERT INTO Accounts (username, password, email) VALUES (%s, %s, %s)"
             cursor.execute(query, (username, password, email))
             conn.commit()
@@ -297,7 +300,7 @@ def register():
             conn.close()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
-        # Form is empty... (no POST data)
+        # Form is empty
         msg = 'Please fill out the form!'
     msg=''
     return render_template('register.html', msg=msg)
@@ -307,21 +310,24 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        #Hashes input password
         hash = password + app.secret_key
         hash = hashlib.sha1(hash.encode())
         password = hash.hexdigest()
+        #Creates database connection
+        #Executes query to see if there is account with matching username and hashed password
         conn = connect_to_database()
         cursor = conn.cursor(dictionary=True)
         query = "SELECT * FROM Accounts where username = %s AND password = %s"
         cursor.execute(query, (username, password,))
         account = cursor.fetchone()
-        # If account exists in accounts table in out database
+        # If account exists in database
         if account:
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
-            # Redirect to home page
+            # Redirect to map page
             return redirect(url_for('index'))
         else:
             # Account doesnt exist or username/password incorrect
