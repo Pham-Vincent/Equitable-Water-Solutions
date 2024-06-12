@@ -31,8 +31,9 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     }
   
     if(map!=null){
-      markerCluster.addMarkers(Tmarkers);
-      console.log('markeres added');
+        markerCluster.removeMarkers(Tmarkers);
+        markerCluster.addMarkers(Tmarkers);
+        console.log('markeres added');
     }
   }
   
