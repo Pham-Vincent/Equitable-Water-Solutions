@@ -43,7 +43,7 @@
     padding: 10px;
     padding-top: 0%;
     overflow-x: hidden;
-  }
+}
 
 .legend h3{
     margin-bottom: 15px;
@@ -65,160 +65,158 @@
     padding-right: 5px;
 }
   
-  /*Styling for the legend options */
-  .container {
-    display: block;
-    position: relative;
-    padding-left: 0;
-    margin-bottom:10%;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /*Hide the default checkbox*/
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /*Create a custom checkbox*/
-  .checkmark {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 20px;
-    width: 20px;
-    background-color: darkgray;
-  }
-  
-  /*On mouse-over, add a grey background color*/
-  .container:hover input ~ .checkmark {
-    background-color: #ccc;
-  }
-  
-  /*When the checkbox is checked, add a blue background*/
-  .container input:checked ~ .checkmark {
-    background-color: #2196F3;
-  }
-  
-  /*Create the checkmark (hidden when not checked)*/
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /*Show the checkmark when checked*/
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /*Style the checkmark*/
-  .container .checkmark:after {
-    left: 7px;
-    top: 3px;
-    width: 3px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
-  
-  /* styles the legend button */
-  .legend-button{
-    position: absolute;
-    top: 37%;
-    left: -40px; 
-    height: 20%; 
-    width: 40px; 
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    border: none;
-    box-shadow: -2px 2px 2px rgba(0, 0, 0, .4);
-    cursor: pointer;
-    background-color: #ffffff;
-  }
-  
-  /*Slides the legend off-screen*/
-  .legend-container.hidden {
-    transform: translateX(105%); 
-  }
-  
-  /*arrow styling for legend button*/
-  .arrow {
-    border: solid black;
-    border-width: 0 5px 5px 0;
-    display: inline-block;
-    padding: 5px;
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    transition: transform 0.3s ease;
-  }
-  
-  /*rotates legend button arrow 180*/
-  .rotate180 {
-    transform: rotate(135deg); 
-    -webkit-transform: rotate(135deg);
-  }
+/*Styling for the legend options */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 0;
+  margin-bottom:10%;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-  /* drop-down arrow styling for MD (Water Withdrawal) */ 
-  .drop-down-arrow-MD{
-    border: solid black;
-    border-width: 0 0 3px 3px;
-    display: inline-block;
-    margin-right: 5%;
-    margin-bottom: 3px;
-    margin-left: 1.5%;
-    padding: 3.5px;
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-   /*rotates drop-down arrow 90 degrees*/
-   .rotate-drop-down-180-MD {
-    transform: rotate(-135deg); 
-    -webkit-transform: rotate(-135deg);
-  }
+/*Hide the default checkbox*/
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
 
-  /* toggles display visibility for MD data when clicking dropdown arrow */
-  .drop-down-MD.hidden{
-    display:none;
-  }
+/*Create a custom checkbox*/
+.checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  background-color: darkgray;
+}
 
-  .drop-down-header > *{
-    width:100%;
-    margin-top: 15px;
-  }
+/*On mouse-over, add a grey background color*/
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
 
-  /* drop-down arrow styling for VA */ 
-  .drop-down-arrow-VA{
-    border: solid black;
-    border-width: 0 0 3px 3px;
-    display: inline-block;
-    margin-right: 5%;
-    margin-bottom: 3px;
-    margin-left: 1.5%;
-    padding: 3.5px;
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-   /*rotates drop-down arrow 90 degrees */
-   .rotate-drop-down-180-VA {
-    transform: rotate(-135deg); 
-    -webkit-transform: rotate(-135deg);
-  }
+/*When the checkbox is checked, add a blue background*/
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
 
-  /* toggles display visibility for VA data when clicking dropdown arrow */
-  .drop-down-VA.hidden{
-    display:none;
-  }
+/*Create the checkmark (hidden when not checked)*/
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
 
- 
+/*Show the checkmark when checked*/
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/*Style the checkmark*/
+.container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 3px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* styles the legend button */
+.legend-button{
+  position: absolute;
+  top: 37%;
+  left: -40px; 
+  height: 20%; 
+  width: 40px; 
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border: none;
+  box-shadow: -2px 2px 2px rgba(0, 0, 0, .4);
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+/*Slides the legend off-screen*/
+.legend-container.hidden {
+  transform: translateX(105%); 
+}
+
+/*arrow styling for legend button*/
+.arrow {
+  display: inline-block;
+  transition: transform 0.5s ease;
+  width: 0; 
+  height: 0; 
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent; 
+  border-left:12px solid #1f1f1f;
+  margin-left: 10%;
+}
+
+
+/*rotates legend button arrow 180*/
+.rotate180 {
+  transform: rotate(180deg); 
+  -webkit-transform: rotate(180deg);
+}
+
+.drop-down-arrow-MD{
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid gray;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 3%;
+  margin-bottom: 1%;
+}
+  /*rotates drop-down arrow 90 degrees*/
+  .rotate-drop-down-180-MD {
+  transform: rotate(-90deg); 
+  -webkit-transform: rotate(-90deg);
+}
+
+/* toggles display visibility for MD data when clicking dropdown arrow */
+.drop-down-MD.hidden{
+  display:none;
+}
+
+.drop-down-header > *{
+  width:100%;
+  margin-top: 15px;
+}
+
+.drop-down-arrow-VA{
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid gray;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 3%;
+  margin-bottom: 1%;
+}
+
+  /*rotates drop-down arrow 90 degrees */
+  .rotate-drop-down-180-VA {
+  transform: rotate(-90deg); 
+  -webkit-transform: rotate(-90deg);
+}
+
+/* toggles display visibility for VA data when clicking dropdown arrow */
+.drop-down-VA.hidden{
+  display:none;
+}
+

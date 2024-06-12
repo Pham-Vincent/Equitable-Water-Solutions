@@ -19,10 +19,10 @@ export function setMarkerIcon(designatedUse){
         return "static/images/flame.png";
     }
     if (designatedUse === "Municipal") {
-        return "static/images/power.png";
+        return "static/images/institution.png";
     }
     if (designatedUse === "Manufacturing") {
-        return "static/images/institution.png";
+        return "static/images/nuclearicon.png";
     }
     if (designatedUse === "Industrial") {
         return "static/images/factory.png";
@@ -43,7 +43,7 @@ export function setMarkerIcon(designatedUse){
         return "static/images/waterdroplet.png";
     }
     if(designatedUse === "Nuclear Power"){
-      return "static/images/nuclearicon.png";
+      return "static/images/power.png";
   }
     
 }
