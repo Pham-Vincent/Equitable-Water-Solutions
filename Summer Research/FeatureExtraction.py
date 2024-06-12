@@ -11,18 +11,22 @@ import numpy as np
 from scipy.stats import percentileofscore
 
 #Each dataPoint will Get a 1 week span From Current Date looking
-def CreateWeeklyWindow(DataFrame):
-  df = pd.DataFrame(columns=['WeeklyMean','WeeklySTD','WeeklyVariance','WeeklySum','WeeklyWindow',"WeeklyPercentileScoreWithinList","WeeklyPercentileScore"])
-  # 1 week is 168 Points
-  WindowSize = 24 * 7
-  
+def CreateWindow(DataFrame,TimeSpan):
+
+  #Window Span Will be 1 day Multiplied by  How Many days 
+  WindowSize = 24 * int(TimeSpan)
+
+  columns =[str(TimeSpan) + "Mean",str(TimeSpan) + "STD",str(TimeSpan) + "Variance",str(TimeSpan)+ "Sum"]
+
+  df = pd.DataFrame({col: [] for col in columns})
+
   #Used to calculate Percentile Values 
   AllSalinityValues = DataFrame['Salinity'].astype(float).values.tolist()
-
   for i in range(len(DataFrame)):
-      # Span of days before Current Point (3.5 days)
+      # Span of days before Current Point (3.5 days) Wont Go Negative
       BeforeDate = max(0, i - (WindowSize // 2))
-      # Span of Days After Current Point (3.5 days)
+
+      # Span of Days After Current Point (3.5 days) Wont go Over Max Days
       AfterDate = min(len(DataFrame), i + (WindowSize // 2))
 
       # Will get All Values From Index BeforeDate to AfterDate
@@ -30,90 +34,25 @@ def CreateWeeklyWindow(DataFrame):
 
 
       WindowList = Window['Salinity'].astype(float).values.tolist()
-      df.loc[i,'WeeklyWindow'] = [WindowList]
-      df.loc[i,'WeeklyMean']= np.mean(WindowList)
-      df.loc[i,'WeeklySTD']= np.std(WindowList)
-      df.loc[i,'WeeklyVariance']= np.var(WindowList)
-      df.loc[i,'WeeklySum']= np.sum(WindowList)
+     
+     
+      df.loc[i,columns[0]] = np.mean(WindowList)
+      df.loc[i,columns[1]] = np.std(WindowList)
+      df.loc[i,columns[2]] = np.var(WindowList)
+      df.loc[i,columns[3]] = np.sum(WindowList)
+   
 
-      SalinityValue=DataFrame.at[i, 'Salinity']
-      df.loc[i,"WeeklyPercentileScoreWithinList"]= percentileofscore(WindowList,SalinityValue)
-      df.loc[i,"WeeklyPercentileScore"]= percentileofscore(AllSalinityValues,SalinityValue)
-
-
-  DataFrame = pd.concat([DataFrame, df], axis=1)
-  print(DataFrame)
-
-  return(DataFrame)
-#Each dataPoint will Get a 1 week span From Current Date looking
-def Create3dWindow(DataFrame):
-  df = pd.DataFrame(columns=['3dMean','3dSTD','3dVariance','3dSum','3dWindow'])
-  # 1 week is 168 Points
-  WindowSize = 24 *3
-  
-  #Used to calculate Percentile Values 
-  AllSalinityValues = DataFrame['Salinity'].astype(float).values.tolist()
-
-  for i in range(len(DataFrame)):
-      # Span of days before Current Point (3.5 days)
-      BeforeDate = max(0, i - (WindowSize // 2))
-      # Span of Days After Current Point (3.5 days)
-      AfterDate = min(len(DataFrame), i + (WindowSize // 2))
-
-      # Will get All Values From Index BeforeDate to AfterDate
-      Window = DataFrame[BeforeDate:AfterDate]
-
-
-      WindowList = Window['Salinity'].astype(float).values.tolist()
-      df.loc[i,'3dWindow'] = [WindowList]
-      df.loc[i,'3dMean']= np.mean(WindowList)
-      df.loc[i,'3dSTD']= np.std(WindowList)
-      df.loc[i,'3dVariance']= np.var(WindowList)
-      df.loc[i,'3dSum']= np.sum(WindowList)
-
-      SalinityValue=DataFrame.at[i, 'Salinity']
-     # df.loc[i,"DailyPercentileScoreWithinList"]= percentileofscore(WindowList,SalinityValue)
-     # df.loc[i,"DailyPercentileScore"]= percentileofscore(AllSalinityValues,SalinityValue)
+      #SalinityValue=DataFrame.at[i, 'Salinity']
+     # df.loc[i,"WeeklyPercentileScoreWithinList"]= percentileofscore(WindowList,SalinityValue)
+      #df.loc[i,"WeeklyPercentileScore"]= percentileofscore(AllSalinityValues,SalinityValue)
 
 
   DataFrame = pd.concat([DataFrame, df], axis=1)
-  print(DataFrame)
+  DataFrame.drop(['Time'],axis =1, inplace = True)
+
 
   return(DataFrame)
-def CreateDailyWindow(DataFrame):
-  df = pd.DataFrame(columns=['DailyMean','DailySTD','DailyVariance','DailySum','DailyWindow'])
-  # 1 week is 168 Points
-  WindowSize = 24 *30
-  
-  #Used to calculate Percentile Values 
-  AllSalinityValues = DataFrame['Salinity'].astype(float).values.tolist()
 
-  for i in range(len(DataFrame)):
-      # Span of days before Current Point (3.5 days)
-      BeforeDate = max(0, i - (WindowSize // 2))
-      # Span of Days After Current Point (3.5 days)
-      AfterDate = min(len(DataFrame), i + (WindowSize // 2))
-
-      # Will get All Values From Index BeforeDate to AfterDate
-      Window = DataFrame[BeforeDate:AfterDate]
-
-
-      WindowList = Window['Salinity'].astype(float).values.tolist()
-      df.loc[i,'DailyWindow'] = [WindowList]
-      df.loc[i,'DailyMean']= np.mean(WindowList)
-      df.loc[i,'DailySTD']= np.std(WindowList)
-      df.loc[i,'DailyVariance']= np.var(WindowList)
-      df.loc[i,'DailySum']= np.sum(WindowList)
-
-      SalinityValue=DataFrame.at[i, 'Salinity']
-     # df.loc[i,"DailyPercentileScoreWithinList"]= percentileofscore(WindowList,SalinityValue)
-     # df.loc[i,"DailyPercentileScore"]= percentileofscore(AllSalinityValues,SalinityValue)
-
-
-  DataFrame = pd.concat([DataFrame, df], axis=1)
-  print(DataFrame)
-
-  return(DataFrame)
 def AvgNeighbors(DataFrame):
 
     #Calculates For closest 24 Neighbors 
@@ -168,18 +107,13 @@ def main():
   X = Salinity_df[['Time', 'Salinity']]
 
   #Gets Features and Window 
-  X = CreateWeeklyWindow(Salinity_df)
-  
-  XDaily = CreateDailyWindow(Salinity_df)
-  X3d = Create3dWindow(Salinity_df)
-  X.drop(['WeeklyWindow','Time'],axis =1, inplace = True)
-  XDaily.drop(['DailyWindow','Time'],axis =1, inplace = True)
-  X3d.drop(['3dWindow','Time'],axis =1, inplace = True)
-  X = pd.concat([X, XDaily], axis=1)
-  KNNDF = AvgNeighbors(X)
-  X = pd.concat([X, KNNDF], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,7)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,5)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,3)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,6)], axis=1)
 
-  print(KNNDF)
   
 
   scaler = StandardScaler()
