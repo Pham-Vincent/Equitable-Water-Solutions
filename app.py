@@ -242,7 +242,9 @@ def create_graph():
 #This will Render Our "HomePage" aka our Map 
 @app.route('/',methods=['GET', 'POST'])
 def index():
-  
+  if 'loggedin' in session:
+      print(session['username'])
+      return render_template('index.html', username = session['username'])
   return render_template('index.html')
   
 
@@ -334,6 +336,18 @@ def login():
             msg = 'Incorrect username/password!'
     msg=''
     return render_template('login.html', msg=msg)
+
+@app.route('/profile')
+def profile():
+    if 'loggedin' in session:
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        return render_template('profile.html', account=account)
+    return redirect(url_for('login'))
+
 
 @app.route('/logout')
 def logout():
