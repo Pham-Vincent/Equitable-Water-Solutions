@@ -47,11 +47,7 @@ def CreateWindow(DataFrame,TimeSpan):
       #df.loc[i,"WeeklyPercentileScore"]= percentileofscore(AllSalinityValues,SalinityValue)
 
 
-  DataFrame = pd.concat([DataFrame, df], axis=1)
-  DataFrame.drop(['Time'],axis =1, inplace = True)
-
-
-  return(DataFrame)
+  return(df)
 
 def AvgNeighbors(DataFrame):
 
@@ -108,9 +104,10 @@ def main():
 
   #Gets Features and Window 
   X = pd.concat([X, CreateWindow(Salinity_df,7)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,6)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,6)], axis=1)
 
+  print(X)
   
 
   scaler = StandardScaler()
