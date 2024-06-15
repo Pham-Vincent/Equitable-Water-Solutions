@@ -6,13 +6,17 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
-	<body class="loggedin">
+	<body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
 		<nav class="navtop">
 			<div>
 				<h1>Website Title</h1>
-                <a href="{{ url_for('index') }}"><i class="fas fa-home"></i>Home</a>
+                <a href="{{ url_for('map') }}"><i class="fas fa-home"></i>Map</a>
 				<a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Profile</a>
+				{% if 'loggedin' in session %}
 				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				{% else %}
+				<a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i>Login</a>
+				{% endif %}
 			</div>
 		</nav>
 		<div class="content">

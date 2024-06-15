@@ -247,7 +247,12 @@ def index():
       return render_template('index.html', username = session['username'])
   return render_template('index.html')
   
-
+@app.route('/map', methods=['GET', 'POST'])
+def map():
+    if 'loggedin' in session:
+      print(session['username'])
+      return render_template('map.html', username = session['username'])
+    return render_template('map.html')
 
 #Path To Env File
 dotenv_path='static/env/.env'
@@ -298,9 +303,17 @@ def register():
             query = "INSERT INTO Accounts (username, password, email) VALUES (%s, %s, %s)"
             cursor.execute(query, (username, password, email))
             conn.commit()
+            query = "SELECT * FROM Accounts where username = %s AND password = %s"
+            cursor.execute(query, (username, password,))
+            account = cursor.fetchone()
+            # Create session data, we can access this data in other routes
+            session['loggedin'] = True
+            session['id'] = account['id']
+            session['username'] = account['username']
             cursor.close()
             conn.close()
-            msg = 'You have successfully registered!'
+            # Redirect to map page
+            return redirect(url_for('index'))
     elif request.method == 'POST':
         # Form is empty
         msg = 'Please fill out the form!'
@@ -329,9 +342,13 @@ def login():
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
+            cursor.close()
+            conn.close()
             # Redirect to map page
             return redirect(url_for('index'))
         else:
+            cursor.close()
+            conn.close()
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
     msg=''
@@ -356,7 +373,7 @@ def logout():
    session.pop('id', None)
    session.pop('username', None)
    # Redirect to login page
-   return redirect(url_for('login'))
+   return redirect(url_for('index'))
 
 if __name__ == '__main__':
   app.run(debug=True)
