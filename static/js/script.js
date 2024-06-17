@@ -52,7 +52,7 @@ async function initMap() {
 
   //Changes The Styling Within Map Boundaries
   map.data.setStyle({
-    fillColor: '#990000',
+    fillColor: '#5a5fcf',
     fillOpacity : .4,
     strokeWeight: 0,
 

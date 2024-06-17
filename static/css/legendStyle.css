@@ -171,9 +171,9 @@
 .drop-down-arrow-MD{
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid gray;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid gray;
   transition: transform 0.2s ease;
   cursor: pointer;
   display: inline-block;
@@ -199,14 +199,22 @@
 .drop-down-arrow-VA{
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid gray;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid gray;
   transition: transform 0.2s ease;
   cursor: pointer;
   display: inline-block;
   margin-right: 3%;
   margin-bottom: 1%;
+}
+
+.drop-down-arrow-VA:hover{
+  border-top: 7px solid black;
+}
+
+.drop-down-arrow-MD:hover{
+  border-top: 7px solid black;
 }
 
   /*rotates drop-down arrow 90 degrees */
@@ -219,4 +227,6 @@
 .drop-down-VA.hidden{
   display:none;
 }
+
+
 

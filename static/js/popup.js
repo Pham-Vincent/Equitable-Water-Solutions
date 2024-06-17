@@ -47,22 +47,20 @@ export function openPopup(marker) {
     //finds html id 'popup' and defines inner content
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
-      <div class="popup-window">
-        <h1 class="popup-title">Hydrocode: ${marker.title}</h1>
-
-        <div class="header-paragraph">
-          <h3 class="popup-description">Water Source Type:</h3>
-          <p>${marker.descriptions.description2}</p>
-        </div>
-        <div class="header-paragraph">
-          <h3 class="popup-description">Area:</h3>
-          <p>${marker.descriptions.description1}</p>
-        </div>
-        
-        <div id="graph_html"></div>
-  
+        <h1 class="popup-title">Hydrocode:  ${marker.title}</h1>
         <div id="close-button" onclick="closePopup()"><img src="static/images/close-button.png" alt="Close"></div>
-      </div>
+        <div class="popup-content">
+          <div class="header-paragraph">
+            <h3 class="popup-description">Water Source Type:</h3>
+            <p>${marker.descriptions.description2}</p>
+          </div>
+          <div class="header-paragraph">
+            <h3 class="popup-description">Area:</h3>
+            <p>${marker.descriptions.description1}</p>
+          </div>
+        
+          <div id="graph_html"></div>
+        </div>   
     `;
     preformPost(marker);
     customPopup.style.display = 'block';
