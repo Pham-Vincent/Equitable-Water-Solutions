@@ -1,1 +1,0 @@
-df = pd.DataFrame({col: [] for col in columns})

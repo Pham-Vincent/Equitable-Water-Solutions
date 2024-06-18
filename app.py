@@ -70,24 +70,32 @@ def Hardcode_Graph():
 
   Salinity_data = [[Time,Salinity] for Time,Salinity in (myresult)]
   Salinity_df= pd.DataFrame(Salinity_data,columns=['Time','Salinity'])
-  
+  color_scale = px.colors.diverging.Portland
+
   SalinityPlotted = go.Figure(
     data=go.Scatter(
         x=Salinity_df['Time'],
         y=Salinity_df['Salinity'],
-        mode='lines',
-        name='',
-        hovertemplate='Time %{x}<br>Salinity: %{y}',  # Custom hover text template
+        mode='lines+markers',  # Include markers for better visibility of colors
+        marker=dict(
+            color=Salinity_df['Salinity'],  # Map category data to color
+            colorscale=color_scale,
+            colorbar=dict(title='Salinity'),
+            size=4
+        ),
+        hovertemplate='Time: %{x}<br>Salinity: %{y}',
+        name=""
     ),
-    layout=go.Layout(
-        width=700,
-        height=550,
-        title="Calvert Cliffs Nuclear Power Plant Salinity Levels",
-        xaxis=dict(title="Time"),
-        yaxis=dict(title="Salinity Levels"),
-        showlegend=False
-    )
+layout=go.Layout(
+    width=700,
+    height=550,
+    title="Calvert Cliffs Nuclear Power Plant Salinity Levels",
+    xaxis=dict(title="Time"),
+    yaxis=dict(title="Salinity Levels"),
+    showlegend=False
 )
+)
+
 
 
   SalinityPlotted.update_layout(
@@ -104,6 +112,7 @@ def Hardcode_Graph():
     size=18,
     family="Roboto"
     ),
+    
    
   )
   
