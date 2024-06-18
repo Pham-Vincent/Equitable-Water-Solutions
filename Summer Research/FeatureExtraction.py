@@ -103,9 +103,13 @@ def main():
   X = Salinity_df[['Time', 'Salinity']]
 
   #Gets Features and Window 
-  X = pd.concat([X, CreateWindow(Salinity_df,7)], axis=1)
-  #X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
-  #X = pd.concat([X, CreateWindow(Salinity_df,6)], axis=1)
+  
+  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,1)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,3)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,5)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,12)], axis=1)
 
   print(X)
   
