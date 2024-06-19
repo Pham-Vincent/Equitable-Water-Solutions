@@ -101,3 +101,32 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
   });  
 
 }
+
+//Helper function to create the content for the cluster marker
+export function createClusterContent(count) {
+  const div = document.createElement('div');
+  div.style.position = 'relative';
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.display = 'flex';
+  div.style.alignItems = 'center';
+  div.style.justifyContent = 'center';
+
+  //Add the icon image
+  const img = document.createElement('img');
+  img.src = 'static/images/clustericondarkblue.png'; //src determines the icon image
+  img.style.width = '60px';
+  img.style.height = '60px';
+  div.appendChild(img);
+
+  //Add the marker count
+  const label = document.createElement('span');
+  label.innerText = String(count);
+  label.style.color = 'white';
+  label.style.fontSize = '14px';
+  label.style.position = 'absolute';
+  div.appendChild(label);
+
+  return div;
+}
+

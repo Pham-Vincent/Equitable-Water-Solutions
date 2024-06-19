@@ -31,18 +31,18 @@
       <hr>
       <div class="legend">
 
-        <!--VA drop-down header-->
+        <!--legend States header-->
         <div class="drop-down-header">
           <label class="container" id="Select All UseTypes" style="font-weight: 600;">
-            <i class="drop-down-arrow-VA" onclick="toggleDropDownVA(event)"></i>
+            <i class="drop-down-arrow-States" onclick="toggleDropDownState(event)"></i>
             States
             <input type="checkbox" checked="checked" name="box" onchange="selectAll('Select All UseTypes', this)">
             <span class="checkmark"></span> 
           </label>
         </div>
 
-        <!--VA start-->
-        <div class="drop-down-VA">
+        <!--legend States start-->
+        <div class="drop-down-States">
           <label class="container" id="Virginia">
             <img src="static/images/VAcircle.png" alt="VA icon" class="icon">
             Virginia
@@ -58,21 +58,21 @@
           </label>
           
         </div>
-        <!--VA end-->
+        <!--legend States end-->
         <hr>
 
-        <!-- legend MD drop-down -->
+        <!--Use Types header-->
         <div class="drop-down-header">
             <label class="container" id="Select All" style="font-weight: 600;">
-              <i class="drop-down-arrow-MD" onclick="toggleDropDownMD(event)"></i>
+              <i class="drop-down-arrow-UseType" onclick="toggleDropDownUseType(event)"></i>
               Use Types
               <input type="checkbox" checked="checked" name="box" onchange="selectAll('Select All', this)">
               <span class="checkmark"></span> 
             </label>
         </div>
 
-        <!--MD start-->
-        <div class="drop-down-MD">
+        <!--Use Types start-->
+        <div class="drop-down-UseTypes">
           <label class="container" id="Mining">
             <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
             Mining
@@ -151,7 +151,7 @@
           </label>
         
         </div>
-        <!--MD end-->   
+        <!--Use Types end-->   
         <hr>
         
       </div>
@@ -166,19 +166,19 @@
             const arrow = document.querySelector('.arrow');
             arrow.classList.toggle('rotate180');
         }
-        function toggleDropDownMD(event){
+        function toggleDropDownUseType(event){
           event.preventDefault();
-          const dropdown = document.querySelector('.drop-down-MD');
+          const dropdown = document.querySelector('.drop-down-UseTypes');
           dropdown.classList.toggle('hidden');
-          const arrow = document.querySelector('.drop-down-arrow-MD');
-          arrow.classList.toggle('rotate-drop-down-180-MD');
+          const arrow = document.querySelector('.drop-down-arrow-UseType');
+          arrow.classList.toggle('rotate-arrow-UseType');
         }
-        function toggleDropDownVA(event){
+        function toggleDropDownState(event){
           event.preventDefault();
-          const dropdown = document.querySelector('.drop-down-VA');
+          const dropdown = document.querySelector('.drop-down-States');
           dropdown.classList.toggle('hidden');
-          const arrow = document.querySelector('.drop-down-arrow-VA');
-          arrow.classList.toggle('rotate-drop-down-180-VA');
+          const arrow = document.querySelector('.drop-down-arrow-States');
+          arrow.classList.toggle('rotate-arrow-States');
         }
       </script>
       <!-- legend end -->

@@ -47,7 +47,7 @@ export function openPopup(marker) {
     //finds html id 'popup' and defines inner content
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `
-        <h1 class="popup-title">Hydrocode:  ${marker.title}</h1>
+        <h1 class="popup-title">Hydrocode:  <span style="color: #ffe657;">${marker.title}</span></h1>
         <div id="close-button" onclick="closePopup()"><img src="static/images/close-button.png" alt="Close"></div>
         <div class="popup-content">
           <div class="header-paragraph">

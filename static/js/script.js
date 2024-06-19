@@ -15,7 +15,7 @@ Date: 05/12/24
 import config from './config.js';
 import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
-import { setMarkerIcon, addListeners} from './markerFunctions.js';
+import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
 import { legendFunc, selectAll, selectState } from './legend.js';
 
 export let map;
@@ -35,8 +35,8 @@ async function initMap() {
   const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
-    center: { lat: 38.5, lng: -76.5 },
-    zoom: 8,
+    center: { lat: 38.2, lng: -76.2 },
+    zoom: 8.2,
   
     //Mappitng Styles:
     //366d3e13ce470bd7 -> No Background Signs/Feature Styling Disabled
@@ -44,7 +44,8 @@ async function initMap() {
     mapId: "366d3e13ce470bd7", 
     scrollwheel:true, //bypasses command+scroll to zoom
     streetViewControl: false, //removes streetview pegman
-    fullscreenControl: false,
+    fullscreenControl: false, 
+    mapTypeControl: false,
   });
 
   //Loads GeoJSON Data from JSON file
@@ -52,7 +53,7 @@ async function initMap() {
 
   //Changes The Styling Within Map Boundaries
   map.data.setStyle({
-    fillColor: '#5a5fcf',
+    fillColor: '#5a5fcf', //blue
     fillOpacity : .4,
     strokeWeight: 0,
 
@@ -104,8 +105,8 @@ $.ajax({
 
         // Attach custom properties to the marker object
         marker.descriptions = {
-          description1: desc1,
-          description2: locality,
+          description2: desc1,
+          description1: locality,
           tag: useType,
           state: legendType,
           visible: shown[1]
@@ -121,7 +122,6 @@ $.ajax({
         
         //marker pushed into markers array, used in search()
         markers.push(marker); 
-        console.log(marker.descriptions.tag);
         
         //sets marker glyph based on use type
         glyphImg.src = setMarkerIcon(marker.descriptions.tag);
@@ -143,6 +143,7 @@ $.ajax({
               <p><strong style="color:rgb(70, 86, 126);">Hydrocode: </strong>  ${marker.title}</p>
               <p><strong style="color: rgb(70, 86, 126);">Intake Type: </strong>  ${marker.descriptions.description1}</p>
               <p><strong style="color: rgb(70, 86, 126);">County: </strong>  ${marker.descriptions.description2}</p>
+              <p><strong style="color: rgb(70, 86, 126);">Use Type: </strong>  ${marker.descriptions.tag}</p>
               <button id="view-more-button" onclick="viewMore()">View More</button>
             </div>
           `,  
@@ -212,7 +213,6 @@ $.ajax({
         visible: shown[1]
       };
 
-      console.log(marker.descriptions.tag);
       //sets unique marker icon depending on designated use type
       glyphImg.src = setMarkerIcon(marker.descriptions.tag);
           
@@ -236,7 +236,7 @@ $.ajax({
           <div class="info-window">
             <p><strong style="color: rgb(70, 86, 126);"">Hydrocode:</strong>  ${marker.title}</p>
             <p><strong style="color: rgb(70, 86, 126);">County:</strong>  ${marker.descriptions.description1}</p>
-            <p><strong style="color: rgb(70, 86, 126);">Water Type:</strong>  ${marker.descriptions.description2}</p>
+            <p><strong style="color: rgb(70, 86, 126);">Water Source:</strong>  ${marker.descriptions.description2}</p>
             <p><strong style="color: rgb(70, 86, 126);">Use Type:</strong>  ${marker.descriptions.tag}</p>
             <button id="view-more-button" onclick="viewMore()"">View More</button>
           </div>
@@ -267,39 +267,11 @@ const renderer = {
     //Return an instance of AdvancedMarkerElement with custom content
     return new google.maps.marker.AdvancedMarkerElement({
       position: latLng,
-      content: createClusterContent(count), //Use a helper function to create the content
+      content: createClusterContent(count), //Use helper function from markerFunctions.js to create the cluster marker content
       zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
     });
   }
 };
-
-//Helper function to create the content for the cluster marker
-function createClusterContent(count) {
-  const div = document.createElement('div');
-  div.style.position = 'relative';
-  div.style.width = '50px';
-  div.style.height = '50px';
-  div.style.display = 'flex';
-  div.style.alignItems = 'center';
-  div.style.justifyContent = 'center';
-
-  //Add the icon image
-  const img = document.createElement('img');
-  img.src = 'static/images/clustericondarkblue.png'; //src determines the icon image
-  img.style.width = '60px';
-  img.style.height = '60px';
-  div.appendChild(img);
-
-  //Add the marker count
-  const label = document.createElement('span');
-  label.innerText = String(count);
-  label.style.color = 'white';
-  label.style.fontSize = '14px';
-  label.style.position = 'absolute';
-  div.appendChild(label);
-
-  return div;
-}
 
 $(document).one("ajaxStop",function() {
   markerCluster = new markerClusterer.MarkerClusterer({ 
@@ -329,7 +301,6 @@ function handleKeyPress(event) {
   //Handles Search
   autocomplete(inputField,markers,map);
 }
-
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
 //Calls function to load the map 
