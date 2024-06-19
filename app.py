@@ -13,50 +13,33 @@ Date:4/25/2024
 
 #Import necessary libraries
 from flask import Flask,jsonify,render_template,request
-import mysql.connector
-import matplotlib.pyplot as plt
+from Database import *
+from Graph import *
+from FeatureExtraction import *
+
 import numpy as np
 import io
-from dotenv import load_dotenv
 import os
 import base64 
 import pandas as pd
-import plotly.express as px
-import  plotly.io as pio
-import plotly
-from datetime import datetime
-from plotly import graph_objs as go
-
-
+import mysql.connector
 
 #Flask Instance
 app = Flask(__name__)
-#Allows to generate Graph Image 
-plt.switch_backend('agg')
 
-#Interacts with ModeBar
-config = {'displaylogo': False,}
+
 
 @app.route('/create_MD_graph',methods=['GET','POST'])
-def Hardcode_Graph():
-  #Path To Env File
-  dotenv_path='static/env/.env'
-  #Opens Env File
-  load_dotenv(dotenv_path=dotenv_path)
-  #Connects to Database To Get Data
-  mydb = mysql.connector.connect(
-    host=os.getenv('DB_HOST'),
-    user= os.getenv('DB_USER'),
-    password= os.getenv('DB_PASS'),
-    database= os.getenv('DB_NAME')
-
-  )
+def create_MD_graph():
   #Gets Marker Title Of current Info Window From Ajax 
   marker_title = request.values
   #Gets Marker Title Name 
   marker_title = list(marker_title.keys())[0]
 
-  mycursor = mydb.cursor()
+  #Establishes Connection With DB 
+  conn = DatabaseConn()
+
+  mycursor = conn.cursor()
 
   #Query For SQL
   Query = "SELECT time,Salinity FROM Maryland_Tidal_History WHERE PermitNumber = \"" + str(marker_title)+ "\""
@@ -66,94 +49,14 @@ def Hardcode_Graph():
 
   #Get The Results of The Query
   myresult = mycursor.fetchall()
-  
 
   Salinity_data = [[Time,Salinity] for Time,Salinity in (myresult)]
   Salinity_df= pd.DataFrame(Salinity_data,columns=['Time','Salinity'])
-  color_scale = px.colors.diverging.Portland
 
-  SalinityPlotted = go.Figure(
-    data=go.Scatter(
-        x=Salinity_df['Time'],
-        y=Salinity_df['Salinity'],
-        mode='lines+markers',  # Include markers for better visibility of colors
-        marker=dict(
-            color=Salinity_df['Salinity'],  # Map category data to color
-            colorscale=color_scale,
-            colorbar=dict(title='Salinity'),
-            size=4
-        ),
-        hovertemplate='Time: %{x}<br>Salinity: %{y}',
-        name=""
-    ),
-layout=go.Layout(
-    width=700,
-    height=550,
-    title="Calvert Cliffs Nuclear Power Plant Salinity Levels",
-    xaxis=dict(title="Time"),
-    yaxis=dict(title="Salinity Levels"),
-    showlegend=False
-)
-)
+  Salinity_df=AverageDailySalinity(Salinity_df) 
+  return(Maryland_Tidal_Graph(str(marker_title),Salinity_df))
 
-
-
-  SalinityPlotted.update_layout(
-  yaxis_title="Salinity Levels",
-  xaxis_title="Dates Samples Collected",
-  title=f"<b>{marker_title}</b>", 
-  title_x=0.5,
-  yaxis_title_font=dict(
-    size=18,
-    family="Roboto"
-      
-    ),
-    xaxis_title_font=dict(
-    size=18,
-    family="Roboto"
-    ),
-    
-   
-  )
   
-  SalinityPlotted.update_layout(
-     xaxis=dict(
-        rangeselector=dict(
-            buttons=list([
-                dict(count=1,
-                     label="1m",
-                     step="month",
-                     stepmode="backward"),
-                dict(count=3,
-                     label="3m",
-                     step="month",
-                     stepmode="backward"),
-                dict(count=6,
-                     label="6m",
-                     step="month",
-                     stepmode="todate"),
-                dict(count=9,
-                     label="9m",
-                     step="month",
-                     stepmode="backward"),
-                dict(step="all")
-            ])
-        ),
-        rangeslider=dict(
-            visible=True
-        ),
-        type="date"
-    )
-)
-
-
-  graph_html = pio.to_html(SalinityPlotted, full_html=False,config=config)
-  graph_json='<div id="graph_html">' + graph_html + '<div>'
-  return jsonify({'graph_json': graph_json,})
-  
-
-
-  return
 #Whenever a create_graph signal is sent will run this function
 @app.route('/create_VA_graph',methods=['GET', 'POST'])
 def create_graph():

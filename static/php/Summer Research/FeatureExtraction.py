@@ -5,10 +5,14 @@ import mysql.connector
 from dotenv import load_dotenv
 import pandas as pd
 from sklearn import svm
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import RobustScaler,MinMaxScaler
 import plotly.graph_objects as go
 import numpy as np
 from scipy.stats import percentileofscore
+
+
+
+
 
 #Each dataPoint will Get a 1 week span From Current Date looking
 def CreateWindow(DataFrame,TimeSpan):
@@ -48,6 +52,8 @@ def CreateWindow(DataFrame,TimeSpan):
 
 
   return(df)
+
+
 
 def AvgNeighbors(DataFrame):
 
@@ -104,20 +110,21 @@ def main():
 
   #Gets Features and Window 
   
-  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
+  
   X = pd.concat([X, CreateWindow(Salinity_df,1)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
   X = pd.concat([X, CreateWindow(Salinity_df,3)], axis=1)
-  #X = pd.concat([X, CreateWindow(Salinity_df,5)], axis=1)
-  #X = pd.concat([X, CreateWindow(Salinity_df,12)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
+  #X= pd.concat([X, CreateWindow(Salinity_df,5)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,6)], axis=1)
 
   print(X)
   
 
-  scaler = StandardScaler()
+  scaler = RobustScaler()
   X_scaled = scaler.fit_transform(X)
   # Outlier Detection Process
-  clf = svm.OneClassSVM(nu=0.1, kernel="rbf", gamma=.1).fit(X_scaled)
+  clf = svm.OneClassSVM(nu=.5, kernel="rbf", gamma=.1).fit(X_scaled)
   y_predict = clf.predict(X_scaled)
 
   # Making 1 be Outlier and 0 be Normal
