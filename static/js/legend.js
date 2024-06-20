@@ -31,7 +31,6 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     if(map!=null){
         markerCluster.removeMarkers(Tmarkers);
         markerCluster.addMarkers(Tmarkers);
-
     }
   }
   
@@ -69,7 +68,7 @@ export function selectAll(id, source){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
 
-    //finds checkboxes elements with name "box" in index.html
+    //finds checkboxes elements with name="box" in index.html
     const checkboxes = document.getElementsByName("box");
     
     //checks/unchecks all boxes depending on 'Select All' box status 
@@ -91,6 +90,7 @@ Usage: Removes/displays markers for each state depending on which statebox is ch
 export function selectState(id){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     
+    //Checks id to filter which markers to remove
     if(id === "Maryland"){
         tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Virginia');
     }
