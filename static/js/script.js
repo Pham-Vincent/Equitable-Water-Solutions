@@ -44,8 +44,8 @@ async function initMap() {
     mapId: "366d3e13ce470bd7", 
     scrollwheel:true, //bypasses command+scroll to zoom
     streetViewControl: false, //removes streetview pegman
-    fullscreenControl: false, 
-    mapTypeControl: false,
+    fullscreenControl: false, //removes fullscreen button
+    mapTypeControl: false, //removes map type buttons (terrian/satellite)
   });
 
   //Loads GeoJSON Data from JSON file
@@ -204,7 +204,7 @@ $.ajax({
   
       });
 
-      // Attach custom properties to the marker object
+      //Attach custom properties to the marker object
       marker.descriptions = {
         description1: locality,
         description2: stream,

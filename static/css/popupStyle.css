@@ -68,13 +68,14 @@
     background-color: lightgray;
     color: black;
 }
-
+/*changes view more colors on hover*/
 #view-more-button:hover{
     background-color: rgb(70, 86, 126);
     color: white;
     transition: 0.5s;
 }
 
+/*handles style and positioning of popup title*/
 .popup-title {
     position: relative;
     left: 0;
@@ -87,6 +88,7 @@
     font-weight: 500;
 }
 
+/* handles styles and position of popup contents */
 .header-paragraph{
     position: relative;
     text-align: left;

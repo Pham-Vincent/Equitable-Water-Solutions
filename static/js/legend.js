@@ -11,14 +11,12 @@ Date: 04/25/24
 
 import { markers, map, markerCluster, shown } from './script.js';
 let tempMarkers;
-let checkboxes;
 
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
     //this removes Virginia points, as id == null and removes clustering on all Virginia
     if(map==null){
         markerCluster.removeMarkers(Tmarkers);
-        console.log('markeres removed');
     }
   
     for (let i = 0; i < Tmarkers.length; i++) {
@@ -33,7 +31,7 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     if(map!=null){
         markerCluster.removeMarkers(Tmarkers);
         markerCluster.addMarkers(Tmarkers);
-        console.log('markeres added');
+
     }
   }
   
@@ -71,7 +69,7 @@ export function selectAll(id, source){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
 
-    //finds checkboxes with name "box"
+    //finds checkboxes elements with name "box" in index.html
     const checkboxes = document.getElementsByName("box");
     
     //checks/unchecks all boxes depending on 'Select All' box status 
@@ -85,6 +83,11 @@ export function selectAll(id, source){
         setMapOnAll(null, markers);
 }
 
+/*
+Name: selectStates
+
+Usage: Removes/displays markers for each state depending on which statebox is checked/unchecked
+*/
 export function selectState(id){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     
@@ -100,8 +103,6 @@ export function selectState(id){
     else{
         tempMarkers = [];
     }
-    
-    //const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Virginia');
 
     //if checked -> show markers, else -> hide markers
     if(selectAllBox.checked)
