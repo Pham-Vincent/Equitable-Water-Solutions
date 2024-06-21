@@ -70,7 +70,7 @@ export function openPopup(marker) {
     function preformPost(marker){
       //Only will create Graphs for Virginia
     
-    if(marker.descriptions.tag == 'Virginia')
+    if(marker.descriptions.state == 'Virginia')
       {
         $('#graph_html').addClass("loader")
       $.ajax({ 
