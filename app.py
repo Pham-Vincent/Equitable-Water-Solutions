@@ -243,14 +243,12 @@ def create_graph():
 @app.route('/',methods=['GET', 'POST'])
 def index():
   if 'loggedin' in session:
-      print(session['username'])
       return render_template('index.html', username = session['username'])
   return render_template('index.html')
   
 @app.route('/map', methods=['GET', 'POST'])
 def map():
     if 'loggedin' in session:
-      print(session['username'])
       return render_template('map.html', username = session['username'])
     return render_template('map.html')
 
