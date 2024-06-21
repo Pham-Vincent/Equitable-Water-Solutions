@@ -1,3 +1,16 @@
+""" 
+Title: Database.py
+Author: Vincent Pham
+
+Functionality: This file is designed to contain all functions related to Database. It includes a Function that is Used to connect to the Database.
+
+
+Output: Database Connection
+Date:6/21/2024
+"""
+
+
+
 from dotenv import load_dotenv
 import mysql.connector
 import os

@@ -1,20 +1,30 @@
+""" 
+Title: FeatureExtraction
+Author: Vincent Pham
+
+Functionality: This file facilitates the extraction of data from time series, enhancing its readability and usability.
+
+Output: Database Connection
+Date:6/21/2024
+"""
+
+
 import numpy as np
 import pandas as pd
 from datetime import datetime
 from scipy.interpolate import interp1d
 
 
-
+#This Function Is Used to Get Missing Data Hourly Between Points
 def interpolation(DataFrame):
 
-
   DataFrame['Salinity'] = DataFrame['Salinity'].interpolate(method='linear')
-  print(DataFrame)
+
   return DataFrame
 
 
 
-#The purpose of this function is to calculate the average salinity values for each day, using hourly data recorded throughout the day.
+#The purpose of this function is to calculate the average salinity values for each day, using hourly data recorded throughout the day Making the Graph More Readable.
 def AverageDailySalinity(DataFrame):
 
   Date = pd.DataFrame(columns=['Date_Reformatted'])
@@ -40,17 +50,13 @@ def AverageDailySalinity(DataFrame):
     
     #Gets all Salinity Values That are in a Certain Date 
     filtered_df = DataFrame[DataFrame['Time'].dt.date == CurrentDate.date()]
+
     #Converts Salinity DF to List With Float Variables
     Salinity_List = filtered_df['Salinity'].astype(float).values.tolist()
 
     CurrentDate = pd.to_datetime(CurrentDate, format='%Y-%m-%d')  
     
-    NewDates.loc[NewDates['Time'] == CurrentDate, 'Salinity'] = np.mean(Salinity_List)   
-    
-  print(NewDates)
-  #Date.columns=['Time','Salinity']
-  
-  
+    NewDates.loc[NewDates['Time'] == CurrentDate, 'Salinity'] = np.mean(Salinity_List)     
   
   return interpolation(NewDates)
 
