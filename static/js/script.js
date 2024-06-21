@@ -15,8 +15,8 @@ Date: 05/12/24
 import config from './config.js';
 import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
-import { setMarkerIcon, addListeners} from './markerFunctions.js';
-import { legendFunc, selectAll } from './legend.js';
+import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
+import { legendFunc, selectAll, selectState } from './legend.js';
 
 export let map;
 export let markers = []; //stores markers used in search()
@@ -35,8 +35,8 @@ async function initMap() {
   const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
-    center: { lat: 38.5, lng: -76.5 },
-    zoom: 8,
+    center: { lat: 38.2, lng: -76.2 },
+    zoom: 8.2,
   
     //Mappitng Styles:
     //366d3e13ce470bd7 -> No Background Signs/Feature Styling Disabled
@@ -44,6 +44,8 @@ async function initMap() {
     mapId: "366d3e13ce470bd7", 
     scrollwheel:true, //bypasses command+scroll to zoom
     streetViewControl: false, //removes streetview pegman
+    fullscreenControl: false, //removes fullscreen button
+    mapTypeControl: false, //removes map type buttons (terrian/satellite)
   });
 
   //Loads GeoJSON Data from JSON file
@@ -51,7 +53,7 @@ async function initMap() {
 
   //Changes The Styling Within Map Boundaries
   map.data.setStyle({
-    fillColor: 'purple',
+    fillColor: '#5a5fcf', //blue
     fillOpacity : .4,
     strokeWeight: 0,
 
@@ -66,7 +68,7 @@ AJAX connects to VA json file and extracts data
 Uses data to populate map with markers at specific Longitude/Latitude
 */
 $.ajax({
-    url: 'static/json/VA_tidal_final_v1.json',
+    url: 'static/json/VA_final_v3.json',
     type:"GET",
     dataType: 'json',
     success: function(data) {
@@ -83,20 +85,30 @@ $.ajax({
         point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
         legendType = 'Virginia';
         
+        //uses triangle.png as marker default
+        const glyphImg = document.createElement("img");
+
+        //custom marker
+        const glyphElement = new PinElement({
+          background: '#e06666',
+          borderColor: 'white',
+          glyph: glyphImg,
+        });
 
         // Uses latitude and longitude to map points on the map
-        var marker = new AdvancedMarkerElement({
+        var marker = new google.maps.marker.AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
             map,
             title: mapCode,
+            content: glyphElement.element,
         });
 
         // Attach custom properties to the marker object
         marker.descriptions = {
-          description1: desc1,
-          description2: locality,
-          description3: useType,
-          tag: legendType,
+          description2: desc1,
+          description1: locality,
+          tag: useType,
+          state: legendType,
           visible: shown[1]
         };
 
@@ -110,7 +122,9 @@ $.ajax({
         
         //marker pushed into markers array, used in search()
         markers.push(marker); 
-        console.log(marker.descriptions.description3);
+        
+        //sets marker glyph based on use type
+        glyphImg.src = setMarkerIcon(marker.descriptions.tag);
         //creates infowindow used in hover listeners
         const infowindow = new InfoWindow({
           content: `
@@ -126,9 +140,10 @@ $.ajax({
         const infowindow2 = new google.maps.InfoWindow({
           content: `
             <div class="info-window">
-              <p><strong style="color:rgb(70, 86, 126);">Hydrocode: </strong> ${marker.title}</p>
-              <p><strong style="color: rgb(70, 86, 126);">Intake Type: </strong> ${marker.descriptions.description1}</p>
-              <p><strong style="color: rgb(70, 86, 126);">County: </strong> ${marker.descriptions.description2}</p>
+              <p><strong style="color:rgb(70, 86, 126);">Hydrocode: </strong>  ${marker.title}</p>
+              <p><strong style="color: rgb(70, 86, 126);">Intake Type: </strong>  ${marker.descriptions.description1}</p>
+              <p><strong style="color: rgb(70, 86, 126);">County: </strong>  ${marker.descriptions.description2}</p>
+              <p><strong style="color: rgb(70, 86, 126);">Use Type: </strong>  ${marker.descriptions.tag}</p>
               <button id="view-more-button" onclick="viewMore()">View More</button>
             </div>
           `,  
@@ -138,7 +153,7 @@ $.ajax({
         marker.infowindow = infowindow2;
 
         //import from 'markerFunction.js' and contains all marker event listeners
-        addListeners(marker, infowindow, map, infowindow2);    
+        addListeners(marker, infowindow, map, infowindow2, glyphElement);    
 
       });
     },
@@ -153,37 +168,35 @@ AJAX connects to MD json file and extracts data
 Uses data to populate map with markers at specific Longitude/Latitude
 */
 $.ajax({
-  url: 'static/json/MD_Tidal.json',
+  url: 'static/json/MD_final_v3.json',
   type:"GET",
   dataType: 'json',
   success: function(data) {
       console.log("AJAX request completed successfully");
 
       // Use the data to map points on the map
-       // Use the data given in json file
+      // Use the data given in json file
     data.forEach(function(point) {
       let mapCode = point.PermitNumber,
-      desc1 = point.DesignatedUse,
-      latitude = parseFloat(point.FixedLatitudes),
-      longitude = parseFloat(point.FixedLongitudes),
+      desc1 = point.NewUseType,
+      latitude = parseFloat(point.Latitude),
+      longitude = parseFloat(point.Longitude),
       locality = point.County,
-      fresh = point.FreshwaterOrSaltwater,
-      tidal = point.TidalorNontidal,
-      identifier = point.stationNames;
-      
+      stream = point.streamName,
+      legendType = 'Maryland';
 
       //uses triangle.png as marker default
       const glyphImg = document.createElement("img");
 
       //custom marker
       const glyphElement = new PinElement({
-        background: 'orange',
-        borderColor: 'black',
+        background: '#fe9f3b',
+        borderColor: 'white',
         glyph: glyphImg,
       });
       
       // Uses latitude and longitude to map points on the map
-      var marker = new AdvancedMarkerElement({
+      var marker = new google.maps.marker.AdvancedMarkerElement({
           position: { lat: latitude, lng: longitude },
           map,
           title: mapCode,
@@ -191,18 +204,15 @@ $.ajax({
   
       });
 
-      // Attach custom properties to the marker object
+      //Attach custom properties to the marker object
       marker.descriptions = {
         description1: locality,
-        description2: fresh,
-        description3: tidal,
+        description2: stream,
         tag: desc1,
-        id: identifier,
-      
+        state: legendType,
         visible: shown[1]
       };
 
-      console.log(marker.descriptions.tag);
       //sets unique marker icon depending on designated use type
       glyphImg.src = setMarkerIcon(marker.descriptions.tag);
           
@@ -224,9 +234,9 @@ $.ajax({
       const infowindow2 = new google.maps.InfoWindow({
         content: `
           <div class="info-window">
-            <p><strong style="color: rgb(70, 86, 126);"">Hydrocode:</strong>${marker.title}</p>
+            <p><strong style="color: rgb(70, 86, 126);"">Hydrocode:</strong>  ${marker.title}</p>
             <p><strong style="color: rgb(70, 86, 126);">County:</strong>  ${marker.descriptions.description1}</p>
-            <p><strong style="color: rgb(70, 86, 126);">Water Type:</strong>  ${marker.descriptions.description2}</p>
+            <p><strong style="color: rgb(70, 86, 126);">Water Source:</strong>  ${marker.descriptions.description2}</p>
             <p><strong style="color: rgb(70, 86, 126);">Use Type:</strong>  ${marker.descriptions.tag}</p>
             <button id="view-more-button" onclick="viewMore()"">View More</button>
           </div>
@@ -248,11 +258,27 @@ $.ajax({
   }
 });
 
+//defines a custom icon for the marker cluster
+const renderer = {
+  render: ({ count, position }) => {
+    
+    const latLng = new google.maps.LatLng(position.lat(), position.lng());
+    
+    //Return an instance of AdvancedMarkerElement with custom content
+    return new google.maps.marker.AdvancedMarkerElement({
+      position: latLng,
+      content: createClusterContent(count), //Use helper function from markerFunctions.js to create the cluster marker content
+      zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+    });
+  }
+};
+
 $(document).one("ajaxStop",function() {
   markerCluster = new markerClusterer.MarkerClusterer({ 
     map,
     markers:markers,
     algorithmOptions:{radius:175, minPoints: 3},
+    renderer: renderer,
   });
 });
 }
@@ -264,6 +290,7 @@ document.getElementById('overlay').addEventListener('click', closePopup);
 function callFunction(id, source){
   legendFunc(id);
   selectAll(id, source);
+  selectState(id);
 }
 window.callFunction = callFunction;
 
@@ -274,7 +301,6 @@ function handleKeyPress(event) {
   //Handles Search
   autocomplete(inputField,markers,map);
 }
-
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
 //Calls function to load the map 
