@@ -37,13 +37,6 @@ app = Flask(__name__)
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
-#Allows to generate Graph Image 
-plt.switch_backend('agg')
-=======
-import mysql.connector
-
-#Flask Instance
-app = Flask(__name__)
 
 
 
@@ -94,7 +87,7 @@ def index():
 
   if 'loggedin' in session:
       return render_template('index.html', username = session['username'])
-
+  return render_template('index.html')
   
 @app.route('/map', methods=['GET', 'POST'])
 #Returns Map webpage
