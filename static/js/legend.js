@@ -10,13 +10,13 @@ Date: 04/25/24
 */
 
 import { markers, map, markerCluster, shown } from './script.js';
+let tempMarkers;
 
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
     //this removes Virginia points, as id == null and removes clustering on all Virginia
     if(map==null){
         markerCluster.removeMarkers(Tmarkers);
-        console.log('markeres removed');
     }
   
     for (let i = 0; i < Tmarkers.length; i++) {
@@ -29,8 +29,8 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     }
   
     if(map!=null){
-      markerCluster.addMarkers(Tmarkers);
-      console.log('markeres added');
+        markerCluster.removeMarkers(Tmarkers);
+        markerCluster.addMarkers(Tmarkers);
     }
   }
   
@@ -68,14 +68,41 @@ export function selectAll(id, source){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
 
-    //finds all checkboxes with name attritbute = box
+    //finds checkboxes elements with name="box" in index.html
     const checkboxes = document.getElementsByName("box");
-    //parses for MD markers only
-    const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag != 'Virginia');
-
+    
     //checks/unchecks all boxes depending on 'Select All' box status 
     for(var i=0;i<checkboxes.length;i++) 
         checkboxes[i].checked = source.checked;
+
+    //if checked -> show markers, else -> hide markers
+    if(selectAllBox.checked)
+        setMapOnAll(map, markers);
+    else
+        setMapOnAll(null, markers);
+}
+
+/*
+Name: selectStates
+
+Usage: Removes/displays markers for each state depending on which statebox is checked/unchecked
+*/
+export function selectState(id){
+    const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
+    
+    //Checks id to filter which markers to remove
+    if(id === "Maryland"){
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Virginia');
+    }
+    else if(id === "Virginia"){
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Maryland');
+    }
+    else if(id == "Select All"){
+        tempMarkers = markers;
+    }
+    else{
+        tempMarkers = [];
+    }
 
     //if checked -> show markers, else -> hide markers
     if(selectAllBox.checked)
@@ -88,3 +115,4 @@ export function selectAll(id, source){
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
 window.selectAll = selectAll;
+window.selectState = selectState;
