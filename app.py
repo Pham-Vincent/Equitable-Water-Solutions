@@ -35,6 +35,8 @@ load_dotenv(dotenv_path=dotenv_path)
 
 #Flask Instance
 app = Flask(__name__)
+
+#Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
 #Allows to generate Graph Image 
@@ -241,12 +243,14 @@ def create_graph():
 
 #This will Render Our "HomePage" aka our Map 
 @app.route('/',methods=['GET', 'POST'])
+#Returns homepage with session variables
 def index():
   if 'loggedin' in session:
       return render_template('index.html', username = session['username'])
   return render_template('index.html')
   
 @app.route('/map', methods=['GET', 'POST'])
+#Returns Map webpage
 def map():
     if 'loggedin' in session:
       return render_template('map.html', username = session['username'])
@@ -264,11 +268,13 @@ db_config = {
     'database': os.getenv('DB_NAME')
 }
 
+#Creates Database Connection
 def connect_to_database():
     return mysql.connector.connect(**db_config)
 
 #register page route
 @app.route('/register', methods=['GET', 'POST'])
+#Registers user and adds information to database
 def register():
     #Checks that fields are filled
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
@@ -319,6 +325,7 @@ def register():
     return render_template('register.html', msg=msg)
 
 @app.route('/login', methods=['GET', 'POST'])
+#Uses login submission to check database for matching information
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -353,6 +360,7 @@ def login():
     return render_template('login.html', msg=msg)
 
 @app.route('/profile')
+#Sets up profile page only when logged in
 def profile():
     if 'loggedin' in session:
         conn = connect_to_database()
@@ -365,6 +373,7 @@ def profile():
 
 
 @app.route('/logout')
+#deletes session variables
 def logout():
     # Remove session data, this will log the user out
    session.pop('loggedin', None)
