@@ -10,7 +10,6 @@ Date: 04/25/24
 */
 
 import { markers, map, markerCluster, shown } from './script.js';
-let tempMarkers;
 
 //Creates Hashmap data structure - default value is true as they are shown by default
 //useTypes is general term, likely to be changed
@@ -82,7 +81,7 @@ export function legendFunc(id) {
 
     //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    console.log(id);
+    
     let tempMarkers;
     if(id === "Maryland"||id === "Virginia"){
         tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state === id);
