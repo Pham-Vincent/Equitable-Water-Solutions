@@ -12,26 +12,62 @@ Date: 04/25/24
 import { markers, map, markerCluster, shown } from './script.js';
 let tempMarkers;
 
+//Creates Hashmap-like data structure
+//NAME SUBJECT TO CHANGE
+var useTypes = new Map;
+useTypes.set('Maryland',true);
+useTypes.set('Virginia',true);
+useTypes.set('Agriculture',true);
+useTypes.set('Aquaculture',true);
+useTypes.set('Commercial',true);
+useTypes.set('Fossil Power',true);
+useTypes.set('Industrial',true);
+useTypes.set('Irrigation',true);
+useTypes.set('Manufacturing',true);
+useTypes.set('Mining',true);
+useTypes.set('Municipal',true);
+useTypes.set('Nuclear Power',true);
+useTypes.set('Other',true);
+
+
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
+    //Switch from visible id to non-visible id
     //this removes Virginia points, as id == null and removes clustering on all Virginia
+    if(!useTypes.has(id)){
+        useTypes.set(id,true);
+    }
+
     if(map==null){
+        //Switch from visible id to non-visible id
+        useTypes.set(id,false);
         markerCluster.removeMarkers(Tmarkers);
+    }
+    else{
+        useTypes.set(id,true);
     }
   
     for (let i = 0; i < Tmarkers.length; i++) {
+        //Related to only SEARCHING for shown markers
         if(Tmarkers[i].descriptions.visible == shown[1]){
             Tmarkers[i].descriptions.visible = shown[0]
         } else {
             Tmarkers[i].descriptions.visible = shown[1]
         }
-        Tmarkers[i].setMap(map);
+        //Checks if State ID is Shown and Usetype ID is shown
+        //Account for map == null && state == false && tag == false
+        console.log(Tmarkers[i].descriptions.state);
+        console.log(useTypes.get(Tmarkers[i].descriptions.state));
+        console.log(useTypes.get(Tmarkers[i].descriptions.tag));
+        if(map != null && useTypes.get(Tmarkers[i].descriptions.state) == true && useTypes.get(Tmarkers[i].descriptions.tag) == true){
+            Tmarkers[i].setMap(map);
+            markerCluster.addMarker(Tmarkers[i]);
+        }
+        else{
+            Tmarkers[i].setMap(null);
+        }  
     }
-  
-    if(map!=null){
-        markerCluster.removeMarkers(Tmarkers);
-        markerCluster.addMarkers(Tmarkers);
-    }
+        
   }
   
 /*
@@ -44,9 +80,13 @@ export function legendFunc(id) {
     //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
-
-    const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
-
+    let tempMarkers;
+    if(id === "Maryland"||id === "Virginia"){
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state === id);
+    }
+    else{
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
+    }
     //if checked -> show markers
     if (checkbox.checked) {
         setMapOnAll(map, tempMarkers, id);
@@ -82,37 +122,7 @@ export function selectAll(id, source){
         setMapOnAll(null, markers);
 }
 
-/*
-Name: selectStates
-
-Usage: Removes/displays markers for each state depending on which statebox is checked/unchecked
-*/
-export function selectState(id){
-    const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    
-    //Checks id to filter which markers to remove
-    if(id === "Maryland"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Virginia');
-    }
-    else if(id === "Virginia"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Maryland');
-    }
-    else if(id == "Select All"){
-        tempMarkers = markers;
-    }
-    else{
-        tempMarkers = [];
-    }
-
-    //if checked -> show markers, else -> hide markers
-    if(selectAllBox.checked)
-        setMapOnAll(map, tempMarkers);
-    else
-        setMapOnAll(null, tempMarkers);
-}
-
 //makes functions globally accessible
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
 window.selectAll = selectAll;
-window.selectState = selectState;
