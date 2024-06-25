@@ -1,4 +1,5 @@
 from sklearn.neighbors import NearestNeighbors
+from FeatureExtraction import *
 import numpy as np
 import os
 import mysql.connector
@@ -9,6 +10,7 @@ from sklearn.preprocessing import StandardScaler
 import plotly.graph_objects as go
 import numpy as np
 from scipy.stats import percentileofscore
+
 
 #Each dataPoint will Get a 1 week span From Current Date looking
 def CreateWindow(DataFrame,TimeSpan):
@@ -98,6 +100,7 @@ def main():
   # Inserting The Data Into DataFrame
   Salinity_data = [[Time, Salinity] for Time, Salinity in myresult]
   Salinity_df = pd.DataFrame(Salinity_data, columns=['Time', 'Salinity'])
+  Salinity_df = AverageDailySalinity(Salinity_df)
   Salinity_df['Time'] = pd.to_datetime(Salinity_df['Time']).apply(lambda x: x.timestamp())
 
   X = Salinity_df[['Time', 'Salinity']]

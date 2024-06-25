@@ -17,7 +17,7 @@ from flask import Flask,jsonify,render_template,request, redirect, url_for, sess
 import mysql.connector
 from Database import *
 from Graph import *
-from FeatureExtraction import *
+c
 
 import numpy as np
 import io
