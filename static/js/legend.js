@@ -34,6 +34,9 @@ useTypes.set('Other',true);
 export function setMapOnAll(map, Tmarkers, id=null) {
     //Switch from visible id to non-visible id
     //this removes Virginia points, as id == null and removes clustering on all Virginia
+    if(id==null){
+        setAllMapValuesToFalse(map);
+    }
     if(!useTypes.has(id)){
         useTypes.set(id,true);
     }
@@ -121,7 +124,16 @@ export function selectAll(id, source){
     else
         setMapOnAll(null, markers);
 }
+/*
+Name: setAllMapValuesToFalse
 
+Usage:If selectAll function is called, this will be a simple way to adjust all attributes
+*/
+function setAllMapValuesToFalse(map) {
+    useTypes.forEach((value, key) => {
+        useTypes.set(key, map==null?false:true);
+    });
+}
 //makes functions globally accessible
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
