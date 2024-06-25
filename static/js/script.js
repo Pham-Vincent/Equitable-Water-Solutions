@@ -33,6 +33,12 @@ async function initMap() {
   await Load_Map()
   const { Map, InfoWindow} = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
+
+  //Limits the Bounds Within this area
+  var allowedBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(-60, -180),// Southwest corner (60 degrees south, entire western hemisphere)
+    new google.maps.LatLng(85, 180) // Northeast corner (North Pole, entire eastern hemisphere)
+  );
   //creates map instance, map centered on chesapeake bay
   map = new Map(document.getElementById("map"), {
     center: { lat: 38.2, lng: -76.2 },
@@ -46,7 +52,13 @@ async function initMap() {
     streetViewControl: false, //removes streetview pegman
     fullscreenControl: false, //removes fullscreen button
     mapTypeControl: false, //removes map type buttons (terrian/satellite)
+    restriction: {
+      latLngBounds: allowedBounds,// Gives the Maps Boundaries 
+      strictBounds: false // Set to true if you want to completely restrict panning
+    }
   });
+  
+  
 
   //Loads GeoJSON Data from JSON file
   map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
@@ -94,7 +106,7 @@ $.ajax({
           borderColor: 'white',
           glyph: glyphImg,
         });
-
+        
         // Uses latitude and longitude to map points on the map
         var marker = new google.maps.marker.AdvancedMarkerElement({
             position: { lat: latitude, lng: longitude },
@@ -301,6 +313,7 @@ function handleKeyPress(event) {
   //Handles Search
   autocomplete(inputField,markers,map);
 }
+
 //event listener for search enter press
 document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
 //Calls function to load the map 
