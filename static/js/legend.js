@@ -12,27 +12,66 @@ Date: 04/25/24
 import { markers, map, markerCluster, shown } from './script.js';
 let tempMarkers;
 
+//Creates Hashmap data structure - default value is true as they are shown by default
+//useTypes is general term, likely to be changed
+var useTypes = new Map;
+useTypes.set('Maryland',true);
+useTypes.set('Virginia',true);
+useTypes.set('Agriculture',true);
+useTypes.set('Aquaculture',true);
+useTypes.set('Commercial',true);
+useTypes.set('Fossil Power',true);
+useTypes.set('Industrial',true);
+useTypes.set('Irrigation',true);
+useTypes.set('Manufacturing',true);
+useTypes.set('Mining',true);
+useTypes.set('Municipal',true);
+useTypes.set('Nuclear Power',true);
+useTypes.set('Other',true);
+
+
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
-    //this removes Virginia points, as id == null and removes clustering on all Virginia
-    if(map==null){
-        markerCluster.removeMarkers(Tmarkers);
+    //Checks if selectAll was called (id = null)
+    if(id==null){
+        setAllMapValuesToFalse(map);
     }
+
+    //map is null when you toggle to remove markers
+    if(map==null){
+        //Switch from visible id to non-visible id
+        useTypes.set(id,false);
+        markerCluster.removeMarkers(Tmarkers);
+        //Hides hidden markers for search
+        Tmarkers.forEach(marker => marker.descriptions.visible = shown[0]);
+        return;
+    }
+    //Since map is not null in this case, we are adding markers to the map
+    //So we set the input id to true
+    useTypes.set(id,true);
+
+    //creates two new sub-arrays to store values for batch system
+    const markersToAdd = [];
   
     for (let i = 0; i < Tmarkers.length; i++) {
-        if(Tmarkers[i].descriptions.visible == shown[1]){
-            Tmarkers[i].descriptions.visible = shown[0]
-        } else {
+        const stateVisible = useTypes.get(Tmarkers[i].descriptions.state);
+        const tagVisible = useTypes.get(Tmarkers[i].descriptions.tag);
+
+        //If the state and tag are visible, then the markers within Tmarkers are shown on the map
+        if(stateVisible && tagVisible){
+            markersToAdd.push(Tmarkers[i]);
+            Tmarkers[i].setMap(map);
+            //Shows revealed markers for search
             Tmarkers[i].descriptions.visible = shown[1]
         }
-        Tmarkers[i].setMap(map);
     }
-  
-    if(map!=null){
-        markerCluster.removeMarkers(Tmarkers);
-        markerCluster.addMarkers(Tmarkers);
+
+    //Batch System Updates to add all markers in one push, improving performance
+    if(markersToAdd.length > 0){
+        markerCluster.addMarkers(markersToAdd);
     }
-  }
+        
+}
   
 /*
 Name: legendFunc
@@ -44,9 +83,13 @@ export function legendFunc(id) {
     //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
-
-    const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
-
+    let tempMarkers;
+    if(id === "Maryland"||id === "Virginia"){
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state === id);
+    }
+    else{
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
+    }
     //if checked -> show markers
     if (checkbox.checked) {
         setMapOnAll(map, tempMarkers, id);
@@ -81,38 +124,17 @@ export function selectAll(id, source){
     else
         setMapOnAll(null, markers);
 }
-
 /*
-Name: selectStates
+Name: setAllMapValuesToFalse
 
-Usage: Removes/displays markers for each state depending on which statebox is checked/unchecked
+Usage:If selectAll function is called, this will be a simple way to adjust all attributes
 */
-export function selectState(id){
-    const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    
-    //Checks id to filter which markers to remove
-    if(id === "Maryland"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Virginia');
-    }
-    else if(id === "Virginia"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Maryland');
-    }
-    else if(id == "Select All"){
-        tempMarkers = markers;
-    }
-    else{
-        tempMarkers = [];
-    }
-
-    //if checked -> show markers, else -> hide markers
-    if(selectAllBox.checked)
-        setMapOnAll(map, tempMarkers);
-    else
-        setMapOnAll(null, tempMarkers);
+function setAllMapValuesToFalse(map) {
+    useTypes.forEach((value, key) => {
+        useTypes.set(key, map==null?false:true);
+    });
 }
-
 //makes functions globally accessible
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
 window.selectAll = selectAll;
-window.selectState = selectState;
