@@ -12,8 +12,8 @@ Date: 04/25/24
 import { markers, map, markerCluster, shown } from './script.js';
 let tempMarkers;
 
-//Creates Hashmap-like data structure
-//NAME SUBJECT TO CHANGE
+//Creates Hashmap data structure - default value is true as they are shown by default
+//useTypes is general term, likely to be changed
 var useTypes = new Map;
 useTypes.set('Maryland',true);
 useTypes.set('Virginia',true);
@@ -32,46 +32,46 @@ useTypes.set('Other',true);
 
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
-    //Switch from visible id to non-visible id
-    //this removes Virginia points, as id == null and removes clustering on all Virginia
+    //Checks if selectAll was called (id = null)
     if(id==null){
         setAllMapValuesToFalse(map);
     }
-    if(!useTypes.has(id)){
-        useTypes.set(id,true);
-    }
 
+    //map is null when you toggle to remove markers
     if(map==null){
         //Switch from visible id to non-visible id
         useTypes.set(id,false);
         markerCluster.removeMarkers(Tmarkers);
+        //Hides hidden markers for search
+        Tmarkers.forEach(marker => marker.descriptions.visible = shown[0]);
+        return;
     }
-    else{
-        useTypes.set(id,true);
-    }
+    //Since map is not null in this case, we are adding markers to the map
+    //So we set the input id to true
+    useTypes.set(id,true);
+
+    //creates two new sub-arrays to store values for batch system
+    const markersToAdd = [];
   
     for (let i = 0; i < Tmarkers.length; i++) {
-        //Related to only SEARCHING for shown markers
-        if(Tmarkers[i].descriptions.visible == shown[1]){
-            Tmarkers[i].descriptions.visible = shown[0]
-        } else {
+        const stateVisible = useTypes.get(Tmarkers[i].descriptions.state);
+        const tagVisible = useTypes.get(Tmarkers[i].descriptions.tag);
+
+        //If the state and tag are visible, then the markers within Tmarkers are shown on the map
+        if(stateVisible && tagVisible){
+            markersToAdd.push(Tmarkers[i]);
+            Tmarkers[i].setMap(map);
+            //Shows revealed markers for search
             Tmarkers[i].descriptions.visible = shown[1]
         }
-        //Checks if State ID is Shown and Usetype ID is shown
-        //Account for map == null && state == false && tag == false
-        console.log(Tmarkers[i].descriptions.state);
-        console.log(useTypes.get(Tmarkers[i].descriptions.state));
-        console.log(useTypes.get(Tmarkers[i].descriptions.tag));
-        if(map != null && useTypes.get(Tmarkers[i].descriptions.state) == true && useTypes.get(Tmarkers[i].descriptions.tag) == true){
-            Tmarkers[i].setMap(map);
-            markerCluster.addMarker(Tmarkers[i]);
-        }
-        else{
-            Tmarkers[i].setMap(null);
-        }  
+    }
+
+    //Batch System Updates to add all markers in one push, improving performance
+    if(markersToAdd.length > 0){
+        markerCluster.addMarkers(markersToAdd);
     }
         
-  }
+}
   
 /*
 Name: legendFunc
