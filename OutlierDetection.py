@@ -6,7 +6,7 @@ import mysql.connector
 from dotenv import load_dotenv
 import pandas as pd
 from sklearn import svm
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 import plotly.graph_objects as go
 import numpy as np
 from scipy.stats import percentileofscore
@@ -42,6 +42,7 @@ def CreateWindow(DataFrame,TimeSpan):
       df.loc[i,columns[1]] = np.std(WindowList)
       df.loc[i,columns[2]] = np.var(WindowList)
       df.loc[i,columns[3]] = np.sum(WindowList)
+      
    
 
       #SalinityValue=DataFrame.at[i, 'Salinity']
@@ -107,20 +108,20 @@ def main():
 
   #Gets Features and Window 
   
-  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
   X = pd.concat([X, CreateWindow(Salinity_df,1)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
   X = pd.concat([X, CreateWindow(Salinity_df,3)], axis=1)
-  #X = pd.concat([X, CreateWindow(Salinity_df,5)], axis=1)
+ # X = pd.concat([X, CreateWindow(Salinity_df,7)], axis=1)
   #X = pd.concat([X, CreateWindow(Salinity_df,12)], axis=1)
 
   print(X)
   
 
-  scaler = StandardScaler()
+  scaler = MinMaxScaler()
   X_scaled = scaler.fit_transform(X)
   # Outlier Detection Process
-  clf = svm.OneClassSVM(nu=0.1, kernel="rbf", gamma=.1).fit(X_scaled)
+  clf = svm.OneClassSVM(nu=0.15, kernel="rbf", gamma=.1).fit(X_scaled)
   y_predict = clf.predict(X_scaled)
 
   # Making 1 be Outlier and 0 be Normal
