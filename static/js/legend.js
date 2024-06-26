@@ -10,29 +10,70 @@ Date: 04/25/24
 */
 
 import { markers, map, markerCluster, shown } from './script.js';
-let tempMarkers;
+let checkboxes;
 
+//Creates Hashmap data structure - default value is true as they are shown by default
+//useTypes is general term, likely to be changed
+var states = ['Maryland', 'Virginia'];
+var tags = ['Agriculture', 'Aquaculture','Commercial','Fossil Power', 'Industrial','Irrigation','Manufacturing','Mining','Municipal','Nuclear Power','Other'];
+
+var useTypes = new Map;
+useTypes.set('Maryland',true);
+useTypes.set('Virginia',true);
+useTypes.set('Agriculture',true);
+useTypes.set('Aquaculture',true);
+useTypes.set('Commercial',true);
+useTypes.set('Fossil Power',true);
+useTypes.set('Industrial',true);
+useTypes.set('Irrigation',true);
+useTypes.set('Manufacturing',true);
+useTypes.set('Mining',true);
+useTypes.set('Municipal',true);
+useTypes.set('Nuclear Power',true);
+useTypes.set('Other',true);
+
+/*
+Name: setMapOnAll
+
+Usage: Pass in map, a list of markers, and the id of attribute to adjust the markers being shown/hidden on the map.
+*/
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
-    //this removes Virginia points, as id == null and removes clustering on all Virginia
+    //map is null when you toggle to remove markers
     if(map==null){
+        //Switch from visible id to non-visible id
+        useTypes.set(id,false);
         markerCluster.removeMarkers(Tmarkers);
+        //Hides hidden markers for search
+        Tmarkers.forEach(marker => marker.descriptions.visible = shown[0]);
+        return;
     }
+    //Since map is not null in this case, we are adding markers to the map
+    //So we set the input id to true
+    useTypes.set(id,true);
+
+    //creates two new sub-arrays to store values for batch system
+    const markersToAdd = [];
   
     for (let i = 0; i < Tmarkers.length; i++) {
-        if(Tmarkers[i].descriptions.visible == shown[1]){
-            Tmarkers[i].descriptions.visible = shown[0]
-        } else {
+        const stateVisible = useTypes.get(Tmarkers[i].descriptions.state);
+        const tagVisible = useTypes.get(Tmarkers[i].descriptions.tag);
+
+        //If the state and tag are visible, then the markers within Tmarkers are shown on the map
+        if(stateVisible && tagVisible){
+            markersToAdd.push(Tmarkers[i]);
+            Tmarkers[i].setMap(map);
+            //Shows revealed markers for search
             Tmarkers[i].descriptions.visible = shown[1]
         }
-        Tmarkers[i].setMap(map);
     }
-  
-    if(map!=null){
-        markerCluster.removeMarkers(Tmarkers);
-        markerCluster.addMarkers(Tmarkers);
+
+    //Batch System Updates to add all markers in one push, improving performance
+    if(markersToAdd.length > 0){
+        markerCluster.addMarkers(markersToAdd);
     }
-  }
+        
+}
   
 /*
 Name: legendFunc
@@ -40,13 +81,16 @@ Usage: Pass in an id that matches with corresponding tag associated with each ma
         Using this we can use a single function to make a fully functioning legend.
 */
 export function legendFunc(id) {
-
     //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    console.log(id);
-
-    const tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
-
+    
+    let tempMarkers;
+    if(id === "Maryland"||id === "Virginia"){
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state === id);
+    }
+    else{
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
+    }
     //if checked -> show markers
     if (checkbox.checked) {
         setMapOnAll(map, tempMarkers, id);
@@ -66,53 +110,46 @@ If unchecked it unchecks all checkboxes and removes all markers
 export function selectAll(id, source){
 
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    console.log(id);
 
-    //finds checkboxes elements with name="box" in index.html
-    const checkboxes = document.getElementsByName("box");
+    //Chooses which boxes to select/unselect depending on id Use Types or States
+    if(id==='Select All States'){
+         checkboxes = document.getElementsByName("states");
+    }
+    else{
+         checkboxes = document.getElementsByName("type");
+    }
     
     //checks/unchecks all boxes depending on 'Select All' box status 
     for(var i=0;i<checkboxes.length;i++) 
         checkboxes[i].checked = source.checked;
 
     //if checked -> show markers, else -> hide markers
-    if(selectAllBox.checked)
+    if(selectAllBox.checked){
+        setAllMapValues(map,id);
         setMapOnAll(map, markers);
-    else
+    }
+    else {
+        setAllMapValues(null,id);
         setMapOnAll(null, markers);
+    }
 }
 
 /*
-Name: selectStates
+Name: setAllMapValuesToFalse
 
-Usage: Removes/displays markers for each state depending on which statebox is checked/unchecked
+Usage:If selectAll function is called, this will be a simple way to adjust all attributes
 */
-export function selectState(id){
-    const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    
-    //Checks id to filter which markers to remove
-    if(id === "Maryland"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Virginia');
+function setAllMapValues(map,id) {
+    //loops through states
+    if(id==='Select All States'){
+        states.forEach(state => useTypes.set(state, map==null?false:true));
     }
-    else if(id === "Virginia"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state != 'Maryland');
-    }
-    else if(id == "Select All"){
-        tempMarkers = markers;
-    }
+    //loops through all tags
     else{
-        tempMarkers = [];
+        tags.forEach(tag => useTypes.set(tag, map==null?false:true));
     }
-
-    //if checked -> show markers, else -> hide markers
-    if(selectAllBox.checked)
-        setMapOnAll(map, tempMarkers);
-    else
-        setMapOnAll(null, tempMarkers);
 }
-
 //makes functions globally accessible
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
 window.selectAll = selectAll;
-window.selectState = selectState;

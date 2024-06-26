@@ -33,10 +33,10 @@
 
         <!--legend States header-->
         <div class="drop-down-header">
-          <label class="container" id="Select All UseTypes" style="font-weight: 600;">
+          <label class="container" id="Select All States" style="font-weight: 600;">
             <i class="drop-down-arrow-States" onclick="toggleDropDownState(event)"></i>
             States
-            <input type="checkbox" checked="checked" name="box" onchange="selectAll('Select All UseTypes', this)">
+            <input type="checkbox" checked="checked" name="states" onchange="selectAll('Select All States', this)">
             <span class="checkmark"></span> 
           </label>
         </div>
@@ -46,14 +46,14 @@
           <label class="container" id="Virginia">
             <img src="static/images/VAcircle.png" alt="VA icon" class="icon">
             Virginia
-            <input type="checkbox" checked="checked" name="box" onchange="selectState('Virginia')">
+            <input type="checkbox" checked="checked" name="states" onchange="legendFunc('Virginia')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Maryland">
             <img src="static/images/MDcircle.png" alt="MD icon" class="icon">
             Maryland
-            <input type="checkbox" checked="checked" name="box" onchange="selectState('Maryland')">
+            <input type="checkbox" checked="checked" name="states" onchange="legendFunc('Maryland')">
             <span class="checkmark"></span>
           </label>
           
@@ -63,10 +63,10 @@
 
         <!--Use Types header-->
         <div class="drop-down-header">
-            <label class="container" id="Select All" style="font-weight: 600;">
+            <label class="container" id="Select All UseTypes" style="font-weight: 600;">
               <i class="drop-down-arrow-UseType" onclick="toggleDropDownUseType(event)"></i>
               Use Types
-              <input type="checkbox" checked="checked" name="box" onchange="selectAll('Select All', this)">
+              <input type="checkbox" checked="checked" name="type" onchange="selectAll('Select All UseTypes', this)">
               <span class="checkmark"></span> 
             </label>
         </div>
@@ -76,77 +76,77 @@
           <label class="container" id="Agriculture">
             <img src="static/images/wheat.png" alt="Agriculture Icon" class="icon">
             Agriculture
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Agriculture')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Agriculture')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Aquaculture">
             <img src="static/images/waterdroplet.png" alt="Aqua Culture Icon" class="icon">
             Aqua Culture
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Aquaculture')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Aquaculture')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Commercial">
             <img src="static/images/dollar.png" alt="Commercial Icon" class="icon">
             Commercial
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Commercial')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Commercial')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Fossil Power">
             <img src="static/images/flame.png" alt="Fossil Power icon" class="icon">
             Fossil Power
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Fossil Power')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Fossil Power')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Industrial">
             <img src="static/images/factory.png" alt="Industrial Icon" class="icon">
             Industrial
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Industrial')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Industrial')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Irrigation">
             <img src="static/images/irrigation.png" alt="Irrigation Icon" class="icon">
             Irrigation
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Irrigation')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Irrigation')">
             <span class="checkmark"></span>
           </label>
           
           <label class="container" id="Manufacturing">
             <img src="static/images/nuclearicon.png" alt="Manufacturing Icon" class="icon">
             Manufacturing
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Manufacturing')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Manufacturing')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Mining"> 
             <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
             Mining
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Mining')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Mining')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Municipal">
             <img src="static/images/institution.png" alt="Municipal Icon" class="icon">
             Municipal
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Municipal')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Municipal')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Nuclear Power">
             <img src="static/images/power.png" alt="Nuclear Power Icon" class="icon">
             Nuclear Power
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Nuclear Power')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Nuclear Power')">
             <span class="checkmark"></span>
           </label>
 
           <label class="container" id="Other">
             <img src="static/images/water-bottle.png" alt="Other Icon" class="icon">
             Other
-            <input type="checkbox" checked="checked" name="box" onchange="legendFunc('Other')">
+            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Other')">
             <span class="checkmark"></span>
           </label>
         
