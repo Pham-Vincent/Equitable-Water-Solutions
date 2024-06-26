@@ -14,6 +14,9 @@ let checkboxes;
 
 //Creates Hashmap data structure - default value is true as they are shown by default
 //useTypes is general term, likely to be changed
+var states = ['Maryland', 'Virginia'];
+var tags = ['Agriculture', 'Aquaculture','Commercial','Fossil Power', 'Industrial','Irrigation','Manufacturing','Mining','Municipal','Nuclear Power','Other'];
+
 var useTypes = new Map;
 useTypes.set('Maryland',true);
 useTypes.set('Virginia',true);
@@ -29,14 +32,13 @@ useTypes.set('Municipal',true);
 useTypes.set('Nuclear Power',true);
 useTypes.set('Other',true);
 
+/*
+Name: setMapOnAll
 
+Usage: Pass in map, a list of markers, and the id of attribute to adjust the markers being shown/hidden on the map.
+*/
 //sets all markers in given array to visible or invisible(used for legend)
 export function setMapOnAll(map, Tmarkers, id=null) {
-    //Checks if selectAll was called (id = null)
-    if(id==null){
-        setAllMapValuesToFalse(map);
-    }
-
     //map is null when you toggle to remove markers
     if(map==null){
         //Switch from visible id to non-visible id
@@ -108,7 +110,6 @@ If unchecked it unchecks all checkboxes and removes all markers
 export function selectAll(id, source){
 
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    console.log(id);
 
     //Chooses which boxes to select/unselect depending on id Use Types or States
     if(id==='Select All States'){
@@ -123,20 +124,30 @@ export function selectAll(id, source){
         checkboxes[i].checked = source.checked;
 
     //if checked -> show markers, else -> hide markers
-    if(selectAllBox.checked)
+    if(selectAllBox.checked){
+        setAllMapValues(map,id);
         setMapOnAll(map, markers);
-    else
+    }
+    else {
+        setAllMapValues(null,id);
         setMapOnAll(null, markers);
+    }
 }
+
 /*
 Name: setAllMapValuesToFalse
 
 Usage:If selectAll function is called, this will be a simple way to adjust all attributes
 */
-function setAllMapValuesToFalse(map) {
-    useTypes.forEach((value, key) => {
-        useTypes.set(key, map==null?false:true);
-    });
+function setAllMapValues(map,id) {
+    //loops through states
+    if(id==='Select All States'){
+        states.forEach(state => useTypes.set(state, map==null?false:true));
+    }
+    //loops through all tags
+    else{
+        tags.forEach(tag => useTypes.set(tag, map==null?false:true));
+    }
 }
 //makes functions globally accessible
 window.legendFunc = legendFunc;
