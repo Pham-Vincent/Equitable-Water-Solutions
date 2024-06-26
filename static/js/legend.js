@@ -10,6 +10,7 @@ Date: 04/25/24
 */
 
 import { markers, map, markerCluster, shown } from './script.js';
+let checkboxes;
 
 //Creates Hashmap data structure - default value is true as they are shown by default
 //useTypes is general term, likely to be changed
@@ -78,7 +79,6 @@ Usage: Pass in an id that matches with corresponding tag associated with each ma
         Using this we can use a single function to make a fully functioning legend.
 */
 export function legendFunc(id) {
-
     //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
     
@@ -110,8 +110,13 @@ export function selectAll(id, source){
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
     console.log(id);
 
-    //finds checkboxes elements with name="box" in index.html
-    const checkboxes = document.getElementsByName("box");
+    //Chooses which boxes to select/unselect depending on id Use Types or States
+    if(id==='Select All States'){
+         checkboxes = document.getElementsByName("states");
+    }
+    else{
+         checkboxes = document.getElementsByName("type");
+    }
     
     //checks/unchecks all boxes depending on 'Select All' box status 
     for(var i=0;i<checkboxes.length;i++) 
