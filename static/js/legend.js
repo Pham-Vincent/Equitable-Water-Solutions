@@ -70,6 +70,7 @@ export function setMapOnAll(map, Tmarkers, id=null) {
 
     //Batch System Updates to add all markers in one push, improving performance
     if(markersToAdd.length > 0){
+        markerCluster.removeMarkers(markersToAdd);
         markerCluster.addMarkers(markersToAdd);
     }
         
