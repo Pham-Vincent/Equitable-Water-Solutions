@@ -36,7 +36,7 @@
           <label class="container" id="Select All States" style="font-weight: 600;">
             <i class="drop-down-arrow-States" onclick="toggleDropDownState(event)"></i>
             States
-            <input type="checkbox" checked="checked" name="states" onchange="selectAll('Select All States', this)">
+            <input id="States-checkbox" type="checkbox" checked="checked" name="states" onchange="selectAll('Select All States', this)">
             <span class="checkmark"></span> 
           </label>
         </div>
@@ -66,7 +66,7 @@
             <label class="container" id="Select All UseTypes" style="font-weight: 600;">
               <i class="drop-down-arrow-UseType" onclick="toggleDropDownUseType(event)"></i>
               Use Types
-              <input type="checkbox" checked="checked" name="type" onchange="selectAll('Select All UseTypes', this)">
+              <input id="types-checkbox" type="checkbox" checked="checked" name="type" onchange="selectAll('Select All UseTypes', this)">
               <span class="checkmark"></span> 
             </label>
         </div>

@@ -10,7 +10,6 @@ Date: 04/25/24
 */
 
 import { markers, map, markerCluster, shown } from './script.js';
-let checkboxes;
 
 //Creates Hashmap data structure - default value is true as they are shown by default
 //useTypes is general term, likely to be changed
@@ -100,6 +99,8 @@ export function legendFunc(id) {
     else {
         setMapOnAll(null, tempMarkers, id);
     }
+
+    checkSelectAll(); //if all checkboxes check for States or Use Types, corresponding select all box is selected/deselected
 }
 
 /*
@@ -112,7 +113,8 @@ export function selectAll(id, source){
 
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
 
-    //Chooses which boxes to select/unselect depending on id Use Types or States
+    //Chooses which boxes to select/unselect depending on Use Types or States
+    let checkboxes;
     if(id==='Select All States'){
          checkboxes = document.getElementsByName("states");
     }
@@ -133,6 +135,7 @@ export function selectAll(id, source){
         setAllMapValues(null,id);
         setMapOnAll(null, markers);
     }
+
 }
 
 /*
@@ -149,6 +152,40 @@ function setAllMapValues(map,id) {
     else{
         tags.forEach(tag => useTypes.set(tag, map==null?false:true));
     }
+}
+
+/*
+Name: checkSelectAll
+
+Usage: selecting/deselecting all checkboxes of either Use Type or States will select/deselect the corresponding select all checkbox
+*/
+function checkSelectAll(){
+    //grabs select all checkboxes by HTML id
+    const statesBox = document.getElementById("States-checkbox");
+    const typeBox = document.getElementById("types-checkbox");
+    
+    //Set to filter in/out states & types
+    const excludeStates = new Set(['Maryland', 'Virginia']);
+    const excludeTypes = new Set(['Agriculture', 'Aquaculture','Commercial','Fossil Power', 'Industrial','Irrigation','Manufacturing','Mining','Municipal','Nuclear Power','Other']);
+  
+    let typesFalse = [...useTypes.entries()].filter(([key, value]) => excludeTypes.has(key)).every(([key, value]) => value === false); //if all types are false, returns true
+    let typesTrue = [...useTypes.entries()].filter(([key, value]) => excludeTypes.has(key)).every(([key, value]) => value === true); //if all types are true, returns true
+    let statesFalse = [...useTypes.entries()].filter(([key, value]) => excludeStates.has(key)).every(([key, value]) => value === false); //if all states are false, returns true
+    let statesTrue = [...useTypes.entries()].filter(([key, value]) => excludeStates.has(key)).every(([key, value]) => value === true); //if all states are true, returns true
+
+    if(statesFalse){
+        statesBox.checked = false;
+    }
+    if(statesTrue){
+        statesBox.checked = true;
+    }
+    if(typesTrue){
+        typeBox.checked = true;
+    }
+    if(typesFalse){
+        typeBox.checked = false;
+    }
+    
 }
 //makes functions globally accessible
 window.legendFunc = legendFunc;
