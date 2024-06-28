@@ -163,15 +163,11 @@ function checkSelectAll(){
     //grabs select all checkboxes by HTML id
     const statesBox = document.getElementById("States-checkbox");
     const typeBox = document.getElementById("types-checkbox");
-    
-    //Set to filter in/out states & types
-    const excludeStates = new Set(['Maryland', 'Virginia']);
-    const excludeTypes = new Set(['Agriculture', 'Aquaculture','Commercial','Fossil Power', 'Industrial','Irrigation','Manufacturing','Mining','Municipal','Nuclear Power','Other']);
   
-    let typesFalse = [...useTypes.entries()].filter(([key, value]) => excludeTypes.has(key)).every(([key, value]) => value === false); //if all types are false, returns true
-    let typesTrue = [...useTypes.entries()].filter(([key, value]) => excludeTypes.has(key)).every(([key, value]) => value === true); //if all types are true, returns true
-    let statesFalse = [...useTypes.entries()].filter(([key, value]) => excludeStates.has(key)).every(([key, value]) => value === false); //if all states are false, returns true
-    let statesTrue = [...useTypes.entries()].filter(([key, value]) => excludeStates.has(key)).every(([key, value]) => value === true); //if all states are true, returns true
+    let typesFalse = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === false); //if all types are false, returns true
+    let typesTrue = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === true); //if all types are true, returns true
+    let statesFalse = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === false); //if all states are false, returns true
+    let statesTrue = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === true); //if all states are true, returns true
 
     if(statesFalse){
         statesBox.checked = false;
