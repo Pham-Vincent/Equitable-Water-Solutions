@@ -12,11 +12,40 @@
     <!-- google icon css ( used in searchbar )-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function(){
+            $('a').each(function(){
+                if ($(this).prop('href') == window.location.href) {
+                    $(this).find('span').addClass('active');
+                }
+            });
+        });
+    </script>
   </head>
-  <body>             
+  <body>    
+    <!--Navigation bar-->
+    <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
+      <nav class="navtop">
+          <div>
+              <h1><a href="{{ url_for('index') }}">SaltCast</a></h1>
+              <a href="{{ url_for('map') }}"><span>Map</span></a>
+              <a href="{{ url_for('aboutus') }}"><span>About Us</span></a>
+              {% if 'loggedin' in session %}
+              <a href="{{ url_for('logout') }}"><span>Logout</span></a>
+              {% else %}
+              <a href="{{ url_for('login') }}"><span>Login</span></a>
+              {% endif %}
+          </div>
+      </nav>
+      <div class="content">
+          {% block content %}{% endblock %}
+      </div>
+  </body>
+    <!--end of Navigation bar-->         
     <!-- map container -->
     <div id="map-container">
-      
       <!-- search bar -->
       <div class="search">
         <span class="search-icon material-symbols-outlined">search</span>

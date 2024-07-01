@@ -22,18 +22,29 @@
         import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
         document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
     </script>
+    <!-- jquery function to create an "active" class in span for the currently active navbar page -->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function(){
+            $('a').each(function(){
+                if ($(this).prop('href') == window.location.href) {
+                    $(this).find('span').addClass('active');
+                }
+            });
+        });
+    </script>
     <!-- Material Components Import Ends Here -->
 </head>
 <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
     <nav class="navtop">
         <div>
-            <h1>SaltCast</h1>
-            <a href="{{ url_for('map') }}"><i class="fas fa-home"></i>Map</a>
-            <a href="{{ url_for('aboutus') }}"><i class="fas fa-user-circle"></i>About Us</a>
+            <img src="static/images/SaltCastLogo.png" alt="logo"><h1><a href="{{ url_for('index') }}"></a></h1>
+            <a href="{{ url_for('map') }}"><span>Map</span></a>
+            <a href="{{ url_for('aboutus') }}"><span>About Us</span></a>
             {% if 'loggedin' in session %}
-            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            <a href="{{ url_for('logout') }}"><span>Logout</span></a>
             {% else %}
-            <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i>Login</a>
+            <a href="{{ url_for('login') }}"><span>Login</span></a>
             {% endif %}
         </div>
     </nav>

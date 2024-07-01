@@ -102,23 +102,37 @@ body {
     font-weight: normal;
 }
 .navtop div a {
-    padding: 0 20px;
+    padding:20px;
     text-decoration: none;
     color: #c1c4c8;
     font-weight: bold;
 }
-.navtop div a i {
-    padding: 2px 8px 0 0;
+.navtop div a span {
+    padding: 5px 10px 5px 10px;
 }
-.navtop div a:hover {
+.navtop div a span:hover{
+    background-color: #3274d6;
+    border-radius: 15px;
+    width: auto;
+    height: auto;
     color: #eaebed;
 }
+
+.navtop .active{
+    background-color: #3274d6;
+    border-radius: 15px;
+    width: auto;
+    height: auto;
+    color: #eaebed;
+}
+
 body.loggedin {
     background-color: #f3f4f7;
 }
 .content {
     width: 1000px;
     margin: 0 auto;
+    color:white;
 }
 .content h2 {
     margin: 0;
