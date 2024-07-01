@@ -38,7 +38,7 @@
 <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
     <nav class="navtop">
         <div>
-            <img src="static/images/SaltCastLogo.png" alt="logo"><h1><a href="{{ url_for('index') }}"></a></h1>
+            <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastLogo.png" alt="logo" style="width:10em; height:4em;"></a></h1>
             <a href="{{ url_for('map') }}"><span>Map</span></a>
             <a href="{{ url_for('aboutus') }}"><span>About Us</span></a>
             {% if 'loggedin' in session %}
