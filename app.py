@@ -222,5 +222,8 @@ def logout():
    # Redirect to login page
    return redirect(url_for('index'))
 
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutUs.html')
 if __name__ == '__main__':
   app.run(debug=True)
