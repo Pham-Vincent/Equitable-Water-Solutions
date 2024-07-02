@@ -19,6 +19,8 @@ def CreateWindow(DataFrame,TimeSpan):
   WindowSize = 24 * int(TimeSpan)
 
   columns =[str(TimeSpan) + "Mean",str(TimeSpan) + "STD",str(TimeSpan) + "Variance",str(TimeSpan)+ "Sum"]
+  columns.append(str(TimeSpan) + "WeeklyPercentileScoreWithinList")
+  columns.append(str(TimeSpan) + "WeeklyPercentileScore")
 
   df = pd.DataFrame({col: [] for col in columns})
 
@@ -45,9 +47,9 @@ def CreateWindow(DataFrame,TimeSpan):
       
    
 
-      #SalinityValue=DataFrame.at[i, 'Salinity']
-     # df.loc[i,"WeeklyPercentileScoreWithinList"]= percentileofscore(WindowList,SalinityValue)
-      #df.loc[i,"WeeklyPercentileScore"]= percentileofscore(AllSalinityValues,SalinityValue)
+      SalinityValue=DataFrame.at[i, 'Salinity']
+      df.loc[i,columns[4]]= percentileofscore(WindowList,SalinityValue)
+      df.loc[i,columns[5]]= percentileofscore(AllSalinityValues,SalinityValue)
 
 
   return(df)
@@ -109,12 +111,12 @@ def main():
   #Gets Features and Window 
   
   X = pd.concat([X, CreateWindow(Salinity_df,1)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
   X = pd.concat([X, CreateWindow(Salinity_df,3)], axis=1)
- # X = pd.concat([X, CreateWindow(Salinity_df,7)], axis=1)
-  #X = pd.concat([X, CreateWindow(Salinity_df,12)], axis=1)
-
+  X = pd.concat([X, CreateWindow(Salinity_df,7)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,30)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,365)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,14)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,21)], axis=1)
   print(X)
   
 
