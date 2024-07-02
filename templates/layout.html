@@ -36,27 +36,17 @@
     <!-- Material Components Import Ends Here -->
 </head>
 <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
-    <nav class="nav">
-        <div class="wrap">
-            <div class="logo">
-                <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastLogo.png" alt="logo" style="width:10em; height:4em;"></a></h1>
-            </div>
-            <div class="links">
-                <a href="{{ url_for('map') }}" class="link"><span>Map</span></a>
-                <a href="{{ url_for('aboutus') }}" class="link"><span>About Us</span></a>
-                {% if 'loggedin' in session %}
-                <a href="{{ url_for('logout') }}" class="link"><span>Logout</span></a>
-                {% else %}
-                <a href="{{ url_for('login') }}" class="link"><span>Login</span></a>
-                {% endif %}
-            </div>
-            <div class="user">
-                <div class="user-wrap">
-                    <div class="avatar" style="background-image: url('static/images/SaltCastLogoSmall.png');">
-                        <a href="{{ url_for('profile') }}" class="link"></a>
-                    </div>
-                </div>
-            </div>
+    <nav class="navtop">
+        <div>
+            <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastLogoWhite.png" alt="logo" style="width:12em; height:5em;"></a></h1>
+            <a href="{{ url_for('map') }}"><span>Map</span></a>
+            <a href="{{ url_for('aboutus') }}"><span>About Us</span></a>
+            {% if 'loggedin' in session %}
+            <a href="{{ url_for('logout') }}"><span>Logout</span></a>
+            {% else %}
+            <a href="{{ url_for('login') }}"><span>Login</span></a>
+            {% endif %}
+            <a href="{{ url_for('profile') }}"><img src="static/images/profile.png" alt="logo" style="width:2.5em; height:2.5em;"></a>
         </div>
     </nav>
     <div class="content">

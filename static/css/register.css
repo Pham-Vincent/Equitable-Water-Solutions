@@ -1,3 +1,5 @@
+@import 'navbar.css';
+@import 'background.css';
 * {
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
@@ -6,7 +8,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 body {
-    background-color: #435165;
+    background-color: #3b63c2;
     margin: 0;
 }
 .login, .register {
@@ -78,240 +80,16 @@ body {
     transition: background-color 0.2s;
 }
 
-/*START OF NEW NAVBAR*/
-
-/*NEW EXPERIMENTAL NAVBAR*/
-nav,.solid,.transparent:hover {
-    background: #2b2d42;
-    color: #bcbedc
-}
-
-.nav {
-    display: flex;
-    height: 75px;
-    justify-content: center;
-    left: 0;
-    position: fixed;
-    top: 0;
-    transition: background .8s ease,color .2s;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    width: 100%;
-    z-index: 999
-}
-
-.nav:hover .chevron {
-    opacity: 1
-}
-
-.nav .active{
-    /*
-    background-color: #4d668d;
-    border-radius: 15px;
-    */
-    width: auto;
-    height: auto;
-    color: #eaebed;
-}
-
-/*aligns all title in the center*/
-.wrap {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    margin-left: 50px;
-    margin-right: 50px;
-    max-width: 1050px;
-    width: 100%
-}
-
-/*CSS for logo in top right corner*/
-.logo img {
-    height: 50px;
-    width: 50px
-}
-
-.logo,.user {
-    align-items: center;
-    display: inline-flex;
-    height: 55px;
-    justify-content: center;
-    width: 65px
-}
-
-/*Related to the image in top right, PROFILE PICTURE*/
-.user {
-    cursor: pointer;
-    position: relative
-}
-
-.user .avatar {
-    background-size: cover;
-    border-radius: 3px;
-    height: 38px;
-    width: 38px;
-    transition: .8s
-}
-
-.user .avatar:focus {
-    outline: 0
-}
-
-/*I do not know what this does*/
-.user .chevron {
-    color: #777a9e;
-    font-size: 1.2rem;
-    left: 45px;
-    opacity: .5;
-    position: absolute;
-    top: 14px;
-    transition: opacity .3s ease
-}
-
-/*Used for all links*/
-.links {
-    align-items: center;
-    display: inline-flex;
-    font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    justify-content: center;
-    text-transform: capitalize;
-    width: 100%
-}
-
-.link {
-    letter-spacing: .01em;
-    padding: 18px 16px
-}
-
-.link:hover {
-    color: #d3d5f3
-}
-
-/*Formats tag: a*/
-a {
-    color: inherit;
-    text-decoration: none;
-    transition: .15s;
-    outline: 0
-}
-
-a:hover {
-    color: rgb(var(--color-blue))
-}
-
-a:visited {
-    color: inherit
-}
-
-a:visited:hover {
-    color: rgb(var(--color-blue))
-}
-
-.noscript a {
-    color: rgb(var(--color-blue))
-}
-
-/*Formats tag: h1*/
-h1 {
-    font-size: 1.9rem;
-    font-weight: 400
-}
-
-h1{
-    color: rgb(var(--color-text));
-    margin: 0;
-    padding: 0
-}
-
-/*aligns images center*/
-img {
-    vertical-align: text-top
-}
-
-/*END OF NEW NAVBAR*/
-
-.navtop {
-    background-color: #2f3947;
-    height: 60px;
-    width: 100%;
-    border: 0;
-}
-.navtop div {
-    display: flex;
-    margin: 0 auto;
-    width: 1000px;
-    height: 100%;
-}
-.navtop div h1, .navtop div a {
-    display: inline-flex;
-    align-items: center;
-}
-.navtop div h1 {
-    flex: 1;
-    font-size: 24px;
-    padding: 0;
-   margin: 0;
-    color: #eaebed;
-    font-weight: normal;
-}
-.navtop div a {
-    padding:20px;
-    text-decoration: none;
-    color: #c1c4c8;
-    font-weight: bold;
-}
-.navtop div a span {
-    padding: 5px 10px 5px 10px;
-}
-.navtop div a span:hover{
-    background-color: #3274d6;
-    border-radius: 15px;
-    width: auto;
-    height: auto;
-    color: #eaebed;
-}
-
-.navtop .active{
-    background-color: #3274d6;
-    border-radius: 15px;
-    width: auto;
-    height: auto;
-    color: #eaebed;
-}
 
 body.loggedin {
     background-color: #f3f4f7;
 }
-.content {
-    width: 1000px;
-    margin: 0 auto;
-    color:white;
+
+.landing-page{
+   text-align: center;
+   margin-top: 25%;
+   font-size: 80px;
+   color:white;
 }
-.content h2 {
-    margin: 0;
-    padding: 25px 0;
-    font-size: 22px;
-    border-bottom: 1px solid #e0e0e3;
-    color: #4a536e;
-}
-.content > p, .content > div {
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-    margin: 25px 0;
-    padding: 25px;
-  background-color: #fff;
-}
-.content > p table td, .content > div table td {
-  padding: 5px;
-}
-.content > p table td:first-child, .content > div table td:first-child {
-  font-weight: bold;
-  color: #4a536e;
-  padding-right: 15px;
-}
-.content > div p {
-  padding: 5px;
-  margin: 0 0 10px 0;
-}
+
+
