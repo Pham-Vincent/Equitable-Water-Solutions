@@ -24,12 +24,15 @@
         });
     </script>
   </head>
-  <body>    
+  <body>            
+    <!-- map container -->
+    <div id="map-container">
+
     <!--Navigation bar-->
     <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
       <nav class="navtop">
           <div>
-              <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastLogo.png" alt="logo" style="width:10em; height:4em;"></a></h1>
+              <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastLogoWhite.png" alt="logo" style="width:12em; height:5em;"></a></h1>
               <a href="{{ url_for('map') }}"><span>Map</span></a>
               <a href="{{ url_for('aboutus') }}"><span>About Us</span></a>
               {% if 'loggedin' in session %}
@@ -37,15 +40,12 @@
               {% else %}
               <a href="{{ url_for('login') }}"><span>Login</span></a>
               {% endif %}
+              <a href="{{ url_for('profile') }}"><img src="static/images/profile.png" alt="logo" style="width:2.5em; height:2.5em;"></a>
           </div>
       </nav>
-      <div class="content">
-          {% block content %}{% endblock %}
-      </div>
-  </body>
-    <!--end of Navigation bar-->         
-    <!-- map container -->
-    <div id="map-container">
+    </body>
+    <!--end of Navigation bar--> 
+    
       <!-- search bar -->
       <div class="search">
         <span class="search-icon material-symbols-outlined">search</span>
