@@ -6,3 +6,8 @@ config.js
 *.xlsx
 venv
 *.pyc
+dist
+node_modules
+src
+.babelrc
+webpack.config.js

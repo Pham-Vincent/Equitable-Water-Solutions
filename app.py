@@ -224,6 +224,8 @@ def logout():
 
 @app.route('/aboutus')
 def aboutus():
+    if 'loggedin' in session:
+      return render_template('index.html', username = session['username'])
     return render_template('aboutUs.html')
 if __name__ == '__main__':
   app.run(debug=True)

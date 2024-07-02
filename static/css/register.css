@@ -77,6 +77,162 @@ body {
     background-color: #2868c7;
     transition: background-color 0.2s;
 }
+
+/*START OF NEW NAVBAR*/
+
+/*NEW EXPERIMENTAL NAVBAR*/
+nav,.solid,.transparent:hover {
+    background: #2b2d42;
+    color: #bcbedc
+}
+
+.nav {
+    display: flex;
+    height: 75px;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transition: background .8s ease,color .2s;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+    z-index: 999
+}
+
+.nav:hover .chevron {
+    opacity: 1
+}
+
+.nav .active{
+    /*
+    background-color: #4d668d;
+    border-radius: 15px;
+    */
+    width: auto;
+    height: auto;
+    color: #eaebed;
+}
+
+/*aligns all title in the center*/
+.wrap {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
+    max-width: 1050px;
+    width: 100%
+}
+
+/*CSS for logo in top right corner*/
+.logo img {
+    height: 50px;
+    width: 50px
+}
+
+.logo,.user {
+    align-items: center;
+    display: inline-flex;
+    height: 55px;
+    justify-content: center;
+    width: 65px
+}
+
+/*Related to the image in top right, PROFILE PICTURE*/
+.user {
+    cursor: pointer;
+    position: relative
+}
+
+.user .avatar {
+    background-size: cover;
+    border-radius: 3px;
+    height: 38px;
+    width: 38px;
+    transition: .8s
+}
+
+.user .avatar:focus {
+    outline: 0
+}
+
+/*I do not know what this does*/
+.user .chevron {
+    color: #777a9e;
+    font-size: 1.2rem;
+    left: 45px;
+    opacity: .5;
+    position: absolute;
+    top: 14px;
+    transition: opacity .3s ease
+}
+
+/*Used for all links*/
+.links {
+    align-items: center;
+    display: inline-flex;
+    font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    justify-content: center;
+    text-transform: capitalize;
+    width: 100%
+}
+
+.link {
+    letter-spacing: .01em;
+    padding: 18px 16px
+}
+
+.link:hover {
+    color: #d3d5f3
+}
+
+/*Formats tag: a*/
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: .15s;
+    outline: 0
+}
+
+a:hover {
+    color: rgb(var(--color-blue))
+}
+
+a:visited {
+    color: inherit
+}
+
+a:visited:hover {
+    color: rgb(var(--color-blue))
+}
+
+.noscript a {
+    color: rgb(var(--color-blue))
+}
+
+/*Formats tag: h1*/
+h1 {
+    font-size: 1.9rem;
+    font-weight: 400
+}
+
+h1{
+    color: rgb(var(--color-text));
+    margin: 0;
+    padding: 0
+}
+
+/*aligns images center*/
+img {
+    vertical-align: text-top
+}
+
+/*END OF NEW NAVBAR*/
+
 .navtop {
     background-color: #2f3947;
     height: 60px;
@@ -158,8 +314,4 @@ body.loggedin {
 .content > div p {
   padding: 5px;
   margin: 0 0 10px 0;
-}
-.logo{
-    height: 30px;
-    width: 50px;
 }
