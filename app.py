@@ -18,7 +18,7 @@ import mysql.connector
 from Database import *
 from Graph import *
 from FeatureExtraction import *
-
+from dotenv import load_dotenv
 import numpy as np
 import io
 import os
@@ -33,16 +33,15 @@ load_dotenv(dotenv_path=dotenv_path)
 
 #Flask Instance
 app = Flask(__name__)
-
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
-
-
-
-
+#Purpose is to Return the Map API Key without revealing it to public
+@app.route('/ApiKey')
+def APIKEY():
+    return(os.getenv('MAP_KEY'))
+    
 @app.route('/create_MD_graph',methods=['GET','POST'])
-
 def create_MD_graph():
   #Gets Marker Title Of current Info Window From Ajax 
   marker_title = request.values
@@ -84,7 +83,6 @@ def create_graph():
 @app.route('/',methods=['GET', 'POST'])
 #Returns homepage with session variables
 def index():
-
   if 'loggedin' in session:
       return render_template('index.html', username = session['username'])
   return render_template('index.html')
