@@ -1,1 +1,44 @@
+<!--Team Page - Displays all team members-->
 {% extends 'layout.html' %}
+
+{% block title %}Team Page{% endblock %}
+
+{% block content %}
+<div class="area">
+      <ul class="circles">
+          <!--Javascript to loop through persons.json and create person boxes-->
+          <div class="row" id="cards-container">
+          </div>
+  
+          <script>
+              document.addEventListener('DOMContentLoaded', function(){
+                  const container = document.getElementById('cards-container');
+                  fetch('static/json/persons.json')
+                  .then(response => response.json())
+                  .then(persons => {
+                      container.innerHTML = returnCards(persons);
+                  });
+              });
+  
+              function returnCards(persons) {
+                  return "<div class=\"column\">" + persons.map(person => `
+                      <div class="card">
+                          <img src="${person.image}" alt="${person.name}" style="width:100%">
+                          <div class="container">
+                              <h2>${person.name}</h2>
+                              <p class="title">${person.title}</p>
+                              <p>${person.description}</p>
+                              <p><button class="button">Contact</button></p>
+                          </div>
+                      </div>`).join('') + "</div>";
+              }
+          </script>
+  
+          <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      </ul>
+  </div>
+  
+
+
+
+{% endblock %}
