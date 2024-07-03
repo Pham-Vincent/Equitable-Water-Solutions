@@ -1,7 +1,6 @@
 @import 'navbar.css';
 @import 'background.css';
 @import 'landingpage.css';
-@import 'teamPage.css';
 * {
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
