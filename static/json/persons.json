@@ -1,0 +1,65 @@
+[
+    {
+      "name": "Jane Doe",
+      "title": "CEO & Founder",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example1@example.com",
+      "image": "https://i.imgur.com/8ho1flg.png"
+    },
+    {
+      "name": "Mike Ross",
+      "title": "Art Director",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    },
+    {
+      "name": "John Doe",
+      "title": "Designer",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    },
+    {
+      "name": "Mike Ross",
+      "title": "Art Director",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    },
+    {
+      "name": "John Doe",
+      "title": "Designer",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    },
+    {
+      "name": "Mike Ross",
+      "title": "Art Director",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    },
+    {
+      "name": "John Doe",
+      "title": "Designer",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    },
+    {
+      "name": "Mike Ross",
+      "title": "Art Director",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    },
+    {
+      "name": "John Doe",
+      "title": "Designer",
+      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoWhite.png"
+    }
+  ]

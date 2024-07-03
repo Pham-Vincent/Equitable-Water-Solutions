@@ -7,7 +7,7 @@
 <div class="area">
       <ul class="circles">
           <!--Javascript to loop through persons.json and create person boxes-->
-          <div class="row" id="cards-container">
+          <div class="container" id="cards-container">
           </div>
   
           <script>
@@ -21,22 +21,39 @@
               });
   
               function returnCards(persons) {
-                  return "<div class=\"column\">" + persons.map(person => `
-                      <div class="card">
-                          <img src="${person.image}" alt="${person.name}" style="width:100%">
-                          <div class="container">
-                              <h2>${person.name}</h2>
-                              <p class="title">${person.title}</p>
-                              <p>${person.description}</p>
-                              <p><button class="button">Contact</button></p>
-                          </div>
-                      </div>`).join('') + "</div>";
+                  const columns = 4;
+                  let html = "";
+  
+                  for (let i = 0; i < persons.length; i += columns) {
+                      html += '<div class="row">';
+                      for (let j = i; j < i + columns && j < persons.length; j++) {
+                          const person = persons[j];
+                          html += `
+                              <div class="column">
+                                  <div class="card">
+                                      <div class="image-container">
+                                      <img src="${person.image}" referrerpolicy="no-referrer" alt="${person.name}" style="width:100%">
+                                      </div>
+                                      <div class="mini-container">
+                                          <h2>${person.name}</h2>
+                                          <p class="title">${person.title}</p>
+                                          <p>${person.description}</p>
+                                          <p><button class="button">Contact</button></p>
+                                      </div>
+                                  </div>
+                              </div>`;
+                      }
+                      html += '</div>';
+                  }
+  
+                  return html;
               }
           </script>
   
           <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
       </ul>
   </div>
+  
   
 
 
