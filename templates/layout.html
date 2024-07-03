@@ -38,15 +38,17 @@
 <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
     <nav class="navtop">
         <div>
-            <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastLogoWhite.png" alt="logo" style="width:12em; height:5em;"></a></h1>
-            <a href="{{ url_for('map') }}"><span>Map</span></a>
-            <a href="{{ url_for('aboutus') }}"><span>About Us</span></a>
-            {% if 'loggedin' in session %}
-            <a href="{{ url_for('logout') }}"><span>Logout</span></a>
-            {% else %}
-            <a href="{{ url_for('login') }}"><span>Login</span></a>
-            {% endif %}
-            <a href="{{ url_for('profile') }}"><img src="static/images/profile.png" alt="logo" style="width:2.5em; height:2.5em;"></a>
+            <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastLogoWhite.png" alt="logo" style="width:9em; height:2.5em;"></a></h1>
+            <div class="nav-options">
+                <a href="{{ url_for('map') }}"><span>Map</span></a>
+                <a href="{{ url_for('aboutus') }}"><span>About Us</span></a>
+                {% if 'loggedin' in session %}
+                <a href="{{ url_for('logout') }}"><span>Logout</span></a>
+                {% else %}
+                <a href="{{ url_for('login') }}"><span>Login</span></a>
+                {% endif %}
+            </div>
+            <a href="{{ url_for('profile') }}"><img src="static/images/profile.png" alt="profile" style="width:2.5em; height:2.5em;"></a>
         </div>
     </nav>
     <div class="content">

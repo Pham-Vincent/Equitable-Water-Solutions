@@ -13,7 +13,7 @@
     width: auto;
     height: 100%;
 }
-.navtop div h1, .navtop div a {
+.navtop div h1, .navtop div a{
     display: inline-flex;
     align-items: center;
 }
@@ -25,17 +25,15 @@
     margin: 0;
     color: #ffffff;
     font-weight: normal;
-
 }
 .navtop div a {
     padding:20px;
     text-decoration: none;
     color: #ffffff;
     font-weight: bold;
-    margin-right: 5px;
 }
-.navtop div a span {
-    padding: 8px 15px 8px 15px;
+.navtop div span {
+    padding: 8px 15px;
     font-size: 20px;
 }
 .navtop div a span:hover{
@@ -53,4 +51,17 @@
     height: auto;
     color:  white;
 }
+
+.nav-options{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #5d87e7;
+    border-radius: 30px;
+}
+
+
+
+
 

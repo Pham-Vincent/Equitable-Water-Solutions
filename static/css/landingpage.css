@@ -1,0 +1,44 @@
+/*
+CSS for index.html to syle the landing/coming soon page
+*/
+
+.page-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 20px;
+}
+.landing-page{
+    align-items: center;
+    text-align: center;
+    font-size: 80px;
+    color:white;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+ .page-content img{
+    border-radius: 50%;
+    width: 300px;
+    height: 300px; 
+    margin-bottom: 0;
+ }
+
+ .page-content p{
+    color: white;
+    font-size: medium;
+    font-weight: 800;
+ }
+ 
+ body {
+     background-color: #4168c1;
+     margin: 0;
+ }
+
+
+
+
+
+ 
