@@ -25,7 +25,7 @@ import os
 import base64 
 import pandas as pd
 import hashlib, re
-
+from flask_cors import CORS
 #Path To Env File
 dotenv_path='static/env/.env'
 #Opens Env File
@@ -33,6 +33,10 @@ load_dotenv(dotenv_path=dotenv_path)
 
 #Flask Instance
 app = Flask(__name__)
+
+#Allows app.route to Work For the Domain 
+CORS(app)
+
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
