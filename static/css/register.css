@@ -6,6 +6,7 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
 }
 .login, .register {
     width: 400px;
@@ -80,6 +81,13 @@ body{
 body.loggedin {
     background-color: #f3f4f7;
 }
+
+.content {
+    width: 100%;
+    margin: 0 auto;
+    color:white;
+}
+
 
 
 

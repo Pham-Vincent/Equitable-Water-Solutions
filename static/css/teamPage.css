@@ -4,7 +4,8 @@
     display: flex;
     justify-content: center;
     width: 80%;
-    transform: translate(-4.5%, -1%); /*temp fix to formatting issue*/
+    transform: translate(-3%, -1%); /*temp fix to formatting issue*/
+
 }
 
 .column {
@@ -37,7 +38,6 @@
   /* Some left and right padding inside the container */
   .container-aboutUs {
     margin-top: 60px;
-    padding: 0 16px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -4,9 +4,6 @@
 CSS for the landing page animated background
 */
 
-body{
-    overflow: hidden;
-}
 .area{
     background: #2f4d8f00;  
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
