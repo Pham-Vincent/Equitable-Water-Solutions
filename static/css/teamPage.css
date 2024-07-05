@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     width: 80%;
+    transform: translate(-6%, -1%); /*temp fix to formatting issue*/
 }
 
 .column {
@@ -54,7 +55,7 @@
   }
 
   .mini-container {
-    padding: 0 16px;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,4 +88,8 @@
   
   .button:hover {
     background-color: #555;
+  }
+
+  .mini-container h2, .mini-container p{
+    margin-bottom: 0;
   }

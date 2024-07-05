@@ -2,40 +2,81 @@
 CSS for index.html to syle the landing/coming soon page
 */
 
+/* defines a flex to split to page into 2 halfs (div/img) */
 .page-content{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
     border-radius: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10em;
 }
-.landing-page{
+
+.page-content > div{
+    width: 100%;
+    margin-left: 50px;
+}
+.page-content h1{
     align-items: center;
     text-align: center;
-    font-size: 80px;
+    font-size: 60px;
     color:white;
-    margin-bottom: 20px;
-    margin-top: -10px;
+    margin-top: 0;
+    margin-bottom: 50px;
+    margin-left: 100px;
+    text-align:left;
 }
 
  .page-content img{
     border-radius: 50%;
-    width: 300px;
-    height: 300px; 
+    width: 500px;
+    height: 500px; 
     margin-bottom: 0;
+    margin-right: 100px;
+    background-color: #5d86e777;
  }
 
  .page-content p{
     color: white;
-    font-size: medium;
+    font-size: larger;
     font-weight: 800;
+    margin-left: 100px;
+    text-align:justify;
  }
  
  body {
-     background-color: #4168c1;
+     background-color: #2d58bb; /*backgronud color*/
      margin: 0;
  }
+
+ a:link{
+    color: white;
+ }
+
+ a:visited{
+    color: white;
+ }
+
+ a:hover{
+    color: black;
+ }
+
+ #logo-text{
+    width: 14.7em; 
+    height:4.2em;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 0;
+    margin-right: 5px;
+    vertical-align:middle;
+    margin-left: 90px;
+ }
+
+
+
 
 
 

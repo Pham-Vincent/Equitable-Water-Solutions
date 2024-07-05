@@ -4,13 +4,9 @@
 /*
 CSS for the landing page animated background
 */
-*{
-    margin: 0px;
-    padding: 0px;
-}
 
 body{
-    font-family: 'Exo', sans-serif;
+    overflow: hidden;
 }
 
 .area{
@@ -35,7 +31,7 @@ body{
     list-style: none;
     width: 20px;
     height: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.368);
     animation: animate 25s linear infinite;
     bottom: -150px;   
 }
