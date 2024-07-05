@@ -7,56 +7,51 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/teamPage.css') }}">
 <div class="area">
       <ul class="circles">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
           <!--Javascript to loop through persons.json and create person boxes-->
-          <div class="container" id="cards-container">
-          </div>
-  
-          <script>
-              document.addEventListener('DOMContentLoaded', function(){
-                  const container = document.getElementById('cards-container');
-                  fetch('static/json/persons.json')
-                  .then(response => response.json())
-                  .then(persons => {
-                      container.innerHTML = returnCards(persons);
-                  });
-              });
-  
-              function returnCards(persons) {
-                  const columns = 4;
-                  let html = "";
-  
-                  for (let i = 0; i < persons.length; i += columns) {
-                      html += '<div class="row">';
-                      for (let j = i; j < i + columns && j < persons.length; j++) {
-                          const person = persons[j];
-                          html += `
-                              <div class="column">
-                                  <div class="card">
-                                      <div class="image-container">
-                                      <img src="${person.image}" referrerpolicy="no-referrer" alt="${person.name}" style="width:100%">
-                                      </div>
-                                      <div class="mini-container">
-                                          <h2>${person.name}</h2>
-                                          <p class="title">${person.title}</p>
-                                          <p>${person.description}</p>
-                                          <p><button class="button">Contact</button></p>
-                                      </div>
-                                  </div>
-                              </div>`;
-                      }
-                      html += '</div>';
-                  }
-  
-                  return html;
-              }
-          </script>
-  
-          <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
       </ul>
+    <div class="container-aboutUs" id="cards-container">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const container = document.getElementById('cards-container');
+            fetch('static/json/persons.json')
+            .then(response => response.json())
+            .then(persons => {
+                container.innerHTML = returnCards(persons);
+            });
+        });
+
+        function returnCards(persons) {
+            const columns = 4;
+            let html = "";
+
+            for (let i = 0; i < persons.length; i += columns) {
+                html += '<div class="row">';
+                for (let j = i; j < i + columns && j < persons.length; j++) {
+                    const person = persons[j];
+                    html += `
+                        <div class="column">
+                            <div class="card">
+                                <div class="image-container">
+                                <img src="${person.image}" referrerpolicy="no-referrer" alt="${person.name}" style="width:100%">
+                                </div>
+                                <div class="mini-container">
+                                    <h2>${person.name}</h2>
+                                    <p class="title">${person.title}</p>
+                                    <p>${person.description}</p>
+                                    <p><button class="button">Contact</button></p>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                html += '</div>';
+            }
+
+            return html;
+        }
+    </script>
   </div>
-  
-  
-
-
 
 {% endblock %}

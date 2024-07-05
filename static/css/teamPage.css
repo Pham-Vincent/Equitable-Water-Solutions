@@ -1,9 +1,10 @@
+
 /* Three columns side by side */
 .row {
     display: flex;
     justify-content: center;
     width: 80%;
-    transform: translate(-6%, -1%); /*temp fix to formatting issue*/
+    transform: translate(-4.5%, -1%); /*temp fix to formatting issue*/
 }
 
 .column {
@@ -25,7 +26,7 @@
   /* Add some shadows to create a card effect */
   .card {
     border-radius: 20px;
-    background-color: #5274C4;
+    background-color: #4974d9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     text-align: center;
@@ -34,15 +35,15 @@
   }
   
   /* Some left and right padding inside the container */
-  .container {
-    margin-top: 76px;
+  .container-aboutUs {
+    margin-top: 60px;
     padding: 0 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow:auto;
   }
 
   .image-container {
@@ -92,4 +93,5 @@
 
   .mini-container h2, .mini-container p{
     margin-bottom: 0;
+    color: rgb(255, 255, 255);
   }
