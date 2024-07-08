@@ -4,22 +4,10 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<div class="area" >
-      <ul class="circles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landingpage.css') }}">
 
       <div class="page-content">
-
         <div>
           <img src="static/images/SaltCastLogoWhite.png" alt="logo" id="logo-text"> 
           <h1>
@@ -32,7 +20,5 @@
         <img src="static/images/SaltCastLogoNew.png">
         
       </div>
-</div >
-
 
 {% endblock %}

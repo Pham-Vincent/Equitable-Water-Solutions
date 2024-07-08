@@ -7,9 +7,10 @@ CSS for the navbar
     height: 60px;
     width: 100%;
     border: 0;
-    position:absolute;
-    z-index: 1;
+    position:fixed;
+    z-index: 2;
     top:0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .navtop div {
     display: flex;
@@ -48,6 +49,7 @@ CSS for the navbar
     color: white;
 }
 
+/* highlight the current page on the nav bar */
 .navtop .active{
     background-color: #2d58bb;
     border-radius: 20px;

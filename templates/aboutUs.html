@@ -4,12 +4,10 @@
 {% block title %}Team Page{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/teamPage.css') }}">
-<div class="area">
-      <ul class="circles">
-        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-          <!--Javascript to loop through persons.json and create person boxes-->
-      </ul>
+
+      <!--Javascript to loop through persons.json and create person boxes-->
     <div class="container-aboutUs" id="cards-container"></div>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
@@ -50,6 +48,6 @@
             return html;
         }
     </script>
-</div>
+
 
 {% endblock %}
