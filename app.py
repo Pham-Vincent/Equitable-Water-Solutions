@@ -210,6 +210,8 @@ def profile():
         query = "SELECT * FROM Accounts where id = %s"
         cursor.execute(query, (session['id'],))
         account = cursor.fetchone()
+        cursor.close()
+        conn.close()
         return render_template('profile.html', account=account)
     return redirect(url_for('login'))
 
@@ -227,7 +229,14 @@ def logout():
 @app.route('/aboutus')
 def aboutus():
     if 'loggedin' in session:
-      return render_template('index.html', username = session['username'])
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return render_template('aboutUs.html', account=account)
     return render_template('aboutUs.html')
 if __name__ == '__main__':
   app.run(debug=True)

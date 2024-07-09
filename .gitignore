@@ -12,3 +12,4 @@ node_modules
 src
 .babelrc
 webpack.config.js
+test-app
