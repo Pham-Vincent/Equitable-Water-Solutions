@@ -1,14 +1,15 @@
 body{
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     width: 100%;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #2d58bb; /*page backgronud color*/
+    
     margin: 0;
+    background-image: linear-gradient(to right, #142A54 , #50BAB6);
 }
 
 .login, .register {
@@ -88,9 +89,7 @@ body.loggedin {
 .content {
     width: auto;
     height: auto;
-    color:white;
     margin-top: 60px;
-    
 }
 
 

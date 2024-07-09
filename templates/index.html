@@ -4,21 +4,26 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/landingpage.css') }}">
 
+  <div class="area" >
+    <ul class="circles">
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
       <div class="page-content">
         <div>
           <img src="static/images/SaltCastLogoWhite.png" alt="logo" id="logo-text"> 
           <h1>
-            is in progress
+            loading...
           </h1>
           <p style="margin-bottom: 30px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa.</p>
-          <p>learn more <a href="{{ url_for('aboutus') }}" style="font-size: larger;">About Us</a></p>
+          <p style="font-style: italic;font-weight: 800;">Meet the team on our <a href="{{ url_for('aboutus') }}" style="font-size: larger;">Contact Us</a> page.</p>
         </div>
 
-        <img src="static/images/SaltCastLogoNew.png">
+        <img src="static/images/SaltCastLogoGreen.svg">
         
       </div>
+</div>
+  
 
 {% endblock %}

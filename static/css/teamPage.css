@@ -15,25 +15,22 @@
     z-index: 1;
   }
   
-  
   @media screen and (max-width: 650px) {
     .column {
       width: 100%;
       display: block;
     }
   }
-  
 
   .card {
     border-radius: 20px;
-    background-color: #4974d9;
+    background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
     margin: 20px;
     width: 100%;
     z-index: 1;
   }
-  
 
   .container-aboutUs {
     display: flex;
@@ -92,7 +89,7 @@
 
   .mini-container h2, .mini-container p{
     margin-bottom: 0;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
   }
 
 

@@ -13,12 +13,11 @@ CSS for index.html to syle the landing/coming soon page
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10em;
+    gap: 15em;
 }
 
 .page-content > div{
     width: 100%;
-    margin-left: 50px;
 }
 .page-content h1{
     align-items: center;
@@ -33,17 +32,16 @@ CSS for index.html to syle the landing/coming soon page
 
  .page-content img{
     border-radius: 50%;
-    width: 500px;
-    height: 500px; 
+    width: 50%;
+    height: 50%; 
     margin-bottom: 0;
     margin-right: 100px;
-    background-color: #5d86e777;
+    background-color: rgba(255, 255, 255, 0.126);
  }
 
  .page-content p{
     color: white;
-    font-size: larger;
-    font-weight: 800;
+    font:normal normal normal 18px/24px Roboto;
     margin-left: 100px;
     text-align:justify;
  }
@@ -69,6 +67,10 @@ CSS for index.html to syle the landing/coming soon page
     vertical-align:middle;
     margin-left: 90px;
  }
+
+
+
+
 
 
 

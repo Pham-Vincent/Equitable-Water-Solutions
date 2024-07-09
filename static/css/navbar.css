@@ -3,14 +3,14 @@ CSS for the navbar
 */
 
 .navtop {
-    background-color: #4974d9;
+    background-color: #ffffff;
     height: 60px;
     width: 100%;
     border: 0;
     position:fixed;
     z-index: 2;
     top:0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .navtop div {
     display: flex;
@@ -34,28 +34,30 @@ CSS for the navbar
 .navtop div a {
     padding:20px;
     text-decoration: none;
-    color: #ffffff;
-    font-weight: bold;
+    color: #1A1A1A;
 }
-.navtop div span {
-    padding: 8px 15px;
+.navtop .nav-options span {
+    padding: 3px 6px;
     font-size: 20px;
+    font: normal normal normal 18px Roboto;
+    margin-left: 20px;
 }
-.navtop div a span:hover{
-    background-color: #2d58bb;
-    border-radius: 20px;
+.navtop .nav-options a span:hover{
+    background-color: #DBEFD4;
+    border-radius: 5px;
     width: auto;
     height: auto;
-    color: white;
+    color: #1A1A1A;
 }
 
 /* highlight the current page on the nav bar */
-.navtop .active{
-    background-color: #2d58bb;
-    border-radius: 20px;
+.navtop .nav-options .active{
+    background-color: #DBEFD4;
+    border-radius: 5px;
     width: auto;
     height: auto;
-    color:  white;
+    color:  #1A1A1A;
+    font: normal normal bold 18px/24px Roboto;
 }
 
 .nav-options{
@@ -63,18 +65,30 @@ CSS for the navbar
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #5d87e7;
+    background-color: #5d86e700;
     border-radius: 30px;
 }
 
 #profile-icon{
     width:2.5em; height:2.5em;
+    background-color: #142A54;
+    border-radius: 20px;
 }
 
 #profile-icon:hover{
-    background-color: #2d58bb;
+    background-color: #289D7A;
     border-radius: 20px;
 }
+
+.login-logout span{
+    padding: 8px 40px;
+    background-color: #289D7A;
+    border-radius: 20px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: white;
+}
+
 
 
 
