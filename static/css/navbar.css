@@ -32,7 +32,7 @@ CSS for the navbar
     font-weight: normal;
 }
 .navtop div a {
-    padding:20px;
+    padding:10px;
     text-decoration: none;
     color: #1A1A1A;
 }
@@ -40,7 +40,6 @@ CSS for the navbar
     padding: 3px 6px;
     font-size: 20px;
     font: normal normal normal 18px Roboto;
-    margin-left: 20px;
 }
 .navtop .nav-options a span:hover{
     background-color: #DBEFD4;
@@ -80,6 +79,9 @@ CSS for the navbar
     border-radius: 20px;
 }
 
+.login-logout{
+    margin: 0 20px 0 0;
+}
 .login-logout span{
     padding: 8px 40px;
     background-color: #289D7A;
