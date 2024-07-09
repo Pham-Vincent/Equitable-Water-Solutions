@@ -12,11 +12,12 @@ Date: 05/12/24
 
 */
 //Gets Google Maps APi Key
+import { MarkerClusterer }from '@googlemaps/markerclusterer';
+import $ from 'jquery';
 import config from './config.js';
-import { closePopup} from './popup.js';
-import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
-import { legendFunc, selectAll } from './legend.js';
+import config from './config.js';
+
 
 export let map;
 export let markers = []; //stores markers used in search()
@@ -27,14 +28,37 @@ console.log("This is for development purposes only. For development by the Salis
 
 function Load_Map(){
 
-  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r,"places","marker"].join(","));for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:"):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-  ({key:config.apiKey, v: "weekly"});
-}
+  (g => {
+    var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+    b = b[c] || (b[c] = {});
+    var d = b.maps || (b.maps = {}),
+        r = new Set,
+        e = new URLSearchParams,
+        u = () => h || (h = new Promise((resolve, reject) => {
+          a = m.createElement("script");
+          e.set("libraries", [...r, "places", "marker"].join(","));
+          for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+          e.set("callback", c + ".maps." + q);
+          a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+          d[q] = resolve;
+          a.onerror = () => {
+            h = null; // Reset h on error
+            reject(Error(p + " could not load."));
+          };
+          a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+          m.head.append(a);
+        }));
+    d[l] ? console.warn(p + " only loads once. Ignoring:") : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n));
+  })({
+    key: config.apiKey,
+    v: "weekly"
+  });
+  }
 
 async function initMap() {
   await Load_Map()
   const { Map, InfoWindow} = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
+  const { PinElement} = await google.maps.importLibrary("marker");
 
   //Limits the Bounds Within this area
   var allowedBounds = new google.maps.LatLngBounds(
@@ -288,7 +312,7 @@ const renderer = {
 };
 
 $(document).one("ajaxStop",function() {
-  markerCluster = new markerClusterer.MarkerClusterer({ 
+  markerCluster = new MarkerClusterer({ 
     map,
     markers:markers,
     algorithmOptions:{radius:175, minPoints: 3},
@@ -297,8 +321,6 @@ $(document).one("ajaxStop",function() {
 });
 }
 
-//closes popup upon clicking overlay
-document.getElementById('overlay').addEventListener('click', closePopup);
 
 //handles calling legend functions();
 function callFunction(id, source){
@@ -308,15 +330,14 @@ function callFunction(id, source){
 window.callFunction = callFunction;
 
 //handles enter key for search()
-function handleKeyPress(event) {
+export function handleKeyPress(event) {
   //Gets Input field of Search bar
   var inputField =  document.getElementById("search-input")
   //Handles Search
   autocomplete(inputField,markers,map);
 }
 
-//event listener for search enter press
-document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
+
 //Calls function to load the map 
 Load_Map();
 //Calls function to details to the map (Markers,Legend,etc)

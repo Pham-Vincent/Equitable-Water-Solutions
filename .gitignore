@@ -6,3 +6,6 @@ config.js
 *.xlsx
 venv
 *.pyc
+!package.json
+!package-lock.json
+node_modules

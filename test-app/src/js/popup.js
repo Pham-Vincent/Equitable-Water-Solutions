@@ -10,6 +10,7 @@ The functions allow users to interact with markers on the map by displaying rele
 
 Date: 05/12/24
 */
+import $ from 'jquery';
 import config from './config.js';
 let customPopup;
 
@@ -103,7 +104,7 @@ export function openPopup(marker) {
       });
       }
     
-    };
+    }
 }
 
 export function closePopup() {

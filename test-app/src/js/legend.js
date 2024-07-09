@@ -74,7 +74,7 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     }
         
 }
-  
+
 /*
 Name: legendFunc
 Usage: Pass in an id that matches with corresponding tag associated with each marker.
@@ -100,7 +100,6 @@ export function legendFunc(id) {
         setMapOnAll(null, tempMarkers, id);
     }
 
-    checkSelectAll(); //if all checkboxes check for States or Use Types, corresponding select all box is selected/deselected
 }
 
 /*
@@ -152,36 +151,6 @@ function setAllMapValues(map,id) {
     else{
         tags.forEach(tag => useTypes.set(tag, map==null?false:true));
     }
-}
-
-/*
-Name: checkSelectAll
-
-Usage: selecting/deselecting all checkboxes of either Use Type or States will select/deselect the corresponding select all checkbox
-*/
-function checkSelectAll(){
-    //grabs select all checkboxes by HTML id
-    const statesBox = document.getElementById("States-checkbox");
-    const typeBox = document.getElementById("types-checkbox");
-  
-    let typesFalse = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === false); //if all types are false, returns true
-    let typesTrue = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === true); //if all types are true, returns true
-    let statesFalse = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === false); //if all states are false, returns true
-    let statesTrue = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === true); //if all states are true, returns true
-
-    if(statesFalse){
-        statesBox.checked = false;
-    }
-    if(statesTrue){
-        statesBox.checked = true;
-    }
-    if(typesTrue){
-        typeBox.checked = true;
-    }
-    if(typesFalse){
-        typeBox.checked = false;
-    }
-    
 }
 //makes functions globally accessible
 window.legendFunc = legendFunc;

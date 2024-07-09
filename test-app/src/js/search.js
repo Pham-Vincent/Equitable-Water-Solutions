@@ -11,6 +11,7 @@ will call search(). If a match is found, it zooms and centers the map on the mat
 Date: 05/12/24
 */
 import { shown } from './script.js';
+import {openInfoWindow2} from './popup.js';
 
 
 export function search(markers, map) {
@@ -87,7 +88,6 @@ export function autocomplete(inp, arr,map) {
   /*execute a function presses a key on the keyboard:*/
   inp.addEventListener("keydown", function(e) {
     var x = document.getElementById(this.id + "autocomplete-list");
-    const autocompletelist = document.querySelector(".autocomplete-items");
 
     if (x) x = x.getElementsByTagName("div");
     if (e.keyCode == 40) {
