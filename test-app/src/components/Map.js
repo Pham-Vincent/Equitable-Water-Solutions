@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import config from './../js/config.js';
 
+
 const MapComponent = () => {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
-  const [setCurrentMarker] = useState(null);
   const [customPopup, setCustomPopup] = useState(null);
 
   const Load_Map = () => {
@@ -34,17 +34,53 @@ const MapComponent = () => {
   };
 
   const initMap = async () => {
+    await Load_Map();
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
 
+    const allowedBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(-60, -180),// Southwest corner (60 degrees south, entire western hemisphere)
+        new google.maps.LatLng(85, 180) // Northeast corner (North Pole, entire eastern hemisphere)
+      );
+
     const mapInstance = new Map(mapRef.current, {
-      center: { lat: 38.5, lng: -76.5 },
-      zoom: 8,
+        center: { lat: 38.2, lng: -76.2 },
+        zoom: 8.2,
+      
+        //Mappitng Styles:
+        //366d3e13ce470bd7 -> No Background Signs/Feature Styling Disabled
+        //45c77a2db5a260c8 -> Background Signs/Feature Styling Enabled
+        mapId: "366d3e13ce470bd7", 
+        scrollwheel:true, //bypasses command+scroll to zoom
+        streetViewControl: false, //removes streetview pegman
+        fullscreenControl: false, //removes fullscreen button
+        mapTypeControl: false, //removes map type buttons (terrian/satellite)
+        restriction: {
+          latLngBounds: allowedBounds,// Gives the Maps Boundaries 
+          strictBounds: false // Set to true if you want to completely restrict panning
+        }
     });
+
+    //Loads GeoJSON Data from JSON file
+    mapInstance.data.loadGeoJson('json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
+
+    //Changes The Styling Within Map Boundaries
+    mapInstance.data.setStyle({
+        fillColor: '#5a5fcf', //blue
+        fillOpacity : .4,
+        strokeWeight: 0,
+    });
+    /* Sets the Maximum Zoom out Value */
+  mapInstance.setOptions({ minZoom: 3});
 
     console.log("Fetch request started");
 
     try {
-      const response = await fetch('Va_Permit.json');
+      const response = await fetch('json/Va_Permit.json', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -117,12 +153,9 @@ const MapComponent = () => {
       content: `
         <div class="info-window">
           <strong>${marker.getTitle()}</strong>
-
           <p>${marker.descriptions.description1}</p>
           <p>${marker.descriptions.description2}</p>
-
           <button id="view-more-button" onclick="viewMore('${marker.graph}')">View More</button>
-
         </div>
       `,
       maxWidth: 300,
@@ -134,7 +167,6 @@ const MapComponent = () => {
     });
 
     smallInfowindow.open(map, marker);
-    setCurrentMarker(marker);
     window.smallInfowindow = smallInfowindow;
     window.popupTitle = popupTitle;
 

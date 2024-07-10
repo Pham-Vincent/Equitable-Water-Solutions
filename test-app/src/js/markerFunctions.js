@@ -13,37 +13,37 @@ import { openInfoWindow2 } from './popup.js';
 //sets marker glyph depending on designated use
 export function setMarkerIcon(designatedUse){
     if (designatedUse === "Mining") {
-        return "static/images/pickaxe.png";
+        return "/images/pickaxe.png";
     }
     if (designatedUse === "Fossil Power") {
-        return "static/images/flame.png";
+        return "/images/flame.png";
     }
     if (designatedUse === "Municipal") {
-        return "static/images/institution.png";
+        return "/images/institution.png";
     }
     if (designatedUse === "Manufacturing") {
-        return "static/images/nuclearicon.png";
+        return "/images/nuclearicon.png";
     }
     if (designatedUse === "Industrial") {
-        return "static/images/factory.png";
+        return "/images/factory.png";
     }
     if (designatedUse === "Commercial") {
-        return "static/images/dollar.png";
+        return "/images/dollar.png";
     }
     if (designatedUse === "Irrigation") {
-        return "static/images/irrigation.png";
+        return "/images/irrigation.png";
     }
     if (designatedUse === "Agriculture") {
-        return "static/images/wheat.png";
+        return "/images/wheat.png";
     }
     if (designatedUse === "Other") {
-        return "static/images/water-bottle.png";
+        return "/images/water-bottle.png";
     }
     if(designatedUse === "Aquaculture"){
-        return "static/images/waterdroplet.png";
+        return "/images/waterdroplet.png";
     }
     if(designatedUse === "Nuclear Power"){
-      return "static/images/power.png";
+      return "/images/power.png";
   }
     
 }
