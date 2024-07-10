@@ -36,6 +36,7 @@ const MapComponent = () => {
   const initMap = async () => {
     await Load_Map();
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+    let markersList = [];
 
     const allowedBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(-60, -180),// Southwest corner (60 degrees south, entire western hemisphere)
@@ -101,8 +102,17 @@ const MapComponent = () => {
           descriptions: {
             description1: desc1,
             description2: locality
+          },
+          points: {
+            point1: parseFloat(point.Year_2016),
+            point2: parseFloat(point.Year_2017),
+            point3: parseFloat(point.Year_2018),
+            point4: parseFloat(point.Year_2019),
+            point5: parseFloat(point.Year_2020)
           }
         });
+
+        markersList.push(marker);
 
         const infowindow = new InfoWindow({
           content: `
@@ -114,7 +124,7 @@ const MapComponent = () => {
         });
 
         marker.addListener('mouseover', () => {
-          if (!window.popupLayerOpen && marker.getTitle() !== window.popupTitle) {
+          if (!window.popupLayerOpen) {
             infowindow.open(mapInstance, marker);
           }
         });
@@ -175,6 +185,12 @@ const MapComponent = () => {
     });
   };
 
+  //Function to handle the view more button
+  function viewMore(currentGraph) {
+  window.smallInfowindow.close();
+  openPopup(window.currentMarker, currentGraph);
+}
+
   const openPopup = (marker, currentGraph) => {
     const popup = document.getElementById('popup');
     popup.innerHTML = `
@@ -225,6 +241,7 @@ const MapComponent = () => {
   }, []);
 
   useEffect(() => {
+    document.getElementById('overlay').addEventListener('click', viewMore);
     document.getElementById('overlay').addEventListener('click', closePopup);
     document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
   }, []);
