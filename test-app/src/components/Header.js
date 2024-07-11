@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
+import './../css/navbar.css';
 import './../css/register.css';
+import { NavLink} from 'react-router-dom';
 
 
 const Header = () => {
@@ -30,18 +32,25 @@ const Header = () => {
         <header className={loggedIn?'loggedin':'loggedout'}>
             <nav className="navtop">
                 <div>
-                    <h1>SaltCast</h1>
-                    <Link to="/Map"><i className="fas fa-home"></i>Map</Link>
-                    <Link to="/Profile"><i className="fas fa-user-circle"></i>Profile</Link>
-                    {loggedIn? (
-                        <>
-                            <Link to="/logout"><i className="fas fa-sign-out-alt"></i>Logout</Link>
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/Login"><i className="fas fa-sign-in-alt"></i>Login</Link>
-                        </>
-                    )}
+                    <h1><Link to="/"><img src="images/SaltCastGreenText.svg" alt="logo" style={{ width:'6.2em', height:'1.8em' }}/></Link></h1>
+
+                    <div className="nav-options">
+                        <NavLink exact to="/"><span>Home</span></NavLink>
+                        <Link><span>Dashboard</span></Link>
+                        <NavLink to="/Map" activeClassName="active"><span>Salinity Map Tool</span></NavLink>
+                        <NavLink to="/Aboutus" activeClassName="active"><span>Contact Us</span></NavLink>
+                    </div>
+
+                    <div className="login-logout">
+                        {loggedIn ? (
+                        <Link to="{{ url_for('logout') }}"><span>Logout</span></Link>
+                        ) : (
+                        <NavLink to="{{ url_for('login') }}" activeClassName="active" ><span>Login</span></NavLink>
+                        )}
+                        <NavLink to="{{ url_for('profile') }}" activeClassName="active" id="profile-link"><img src="images/profile.png" alt="profile" id="profile-icon"/></NavLink>
+                        <img src="images/WCAG-icon.png" alt="WCAG" id="WCAG-icon"/>
+                    </div>
+
                 </div>
             </nav>
             <div className="content">

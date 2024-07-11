@@ -1,0 +1,136 @@
+/*
+Code by: William Lamuth
+
+CSS for the teamPage
+*/
+.row {
+    display: flex;
+    justify-content:space-evenly;
+    width: 100%;
+    z-index: 1;
+}
+
+.column {
+    width: 33.33%;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+  
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+
+    .row{
+      display: contents;
+    }
+    
+  }
+
+  .card {
+    border-radius: 20px;
+    background-color: #ffffff;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    margin: 20px 0 20px 0;
+  }
+
+  .container-aboutUs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height:100%;
+    z-index: 1;
+    background-color: #ffffff;
+  }
+
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mini-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+  }
+  
+  .container-aboutUs::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+  }
+  
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .button:hover {
+    background-color: #555;
+  }
+
+  .mini-container h2, .mini-container p{
+    margin-bottom: 0;
+    color: rgb(0, 0, 0);
+  }
+
+
+  .contact-top-content{
+    width: 100%;
+    height: 300px;
+    z-index:2;
+  }
+
+  .top-content-text{
+    color:white;
+    padding:50px 0 50px 100px;
+  }
+
+  #line-1{
+    font: normal normal bold 50px/55px Roboto;
+    margin-bottom:0;
+  }
+
+  #line-2{
+    font: italic normal bold 20px/28px Roboto;
+  }
+
+  #line-3{
+    font: normal normal normal 16px/24px Roboto;
+  }
+
+
+  #team-header{
+    height: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    padding:50px 0 0 100px;
+    font: normal normal bold 18px Roboto;
+  }
+
+
+ 
