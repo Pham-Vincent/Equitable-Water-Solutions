@@ -1,64 +1,141 @@
 [
     {
-      "name": "Jane Doe",
-      "title": "CEO & Founder",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Dr. Ming Li",
+      "title": "Principal Investigator",
+      "description": "Professor at Horn Point Laboratory at University of Maryland",
       "email": "example1@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "Mike Ross",
-      "title": "Art Director",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Dr. Raymond Najjar",
+      "title": "Principal Investigator",
+      "description": "Professor of Oceanography at The Pennsylvania State University",
       "email": "example2@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "John Doe",
-      "title": "Designer",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Dr. Allison Lassiter",
+      "title": "Principal Investigator",
+      "description": "Assistant Professor in City and Regional Planning at the University of Pennsylvania Weitzman School of Design",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Dr. Alfonso Mejia",
+      "title": "Principal Investigator",
+      "description": "Professor of Oceanography at The Pennsylvania State University",
       "email": "example3@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "Mike Ross",
-      "title": "Art Director",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Dr. Sujay Kaushal",
+      "title": "Principal Investigator",
+      "description": "Professor of Geology at the University of Maryland",
       "email": "example2@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "John Doe",
-      "title": "Designer",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Antonia Hadjimichael",
+      "title": "Senior Investigator",
+      "description": "Assistant Professor at Penn State University",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Xiaohong (Sophie) Wang",
+      "title": "Senior Investigator",
+      "description": "TBD",
       "email": "example3@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "Mike Ross",
-      "title": "Art Director",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Robert Chant",
+      "title": "Senior Investigator",
+      "description": "Professor at Rutgers University",
       "email": "example2@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "John Doe",
-      "title": "Designer",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Dr. Shuangquan (Peter) Wang",
+      "title": "Senior Investigator",
+      "description": "Assistant Professor at Salisbury University",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Samantha Puckett",
+      "title": "Senior Investigator",
+      "description": "Clean Water Program Director at the Izaak Walton League of America, a national nonprofit focused on conservation",
       "email": "example3@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "Mike Ross",
-      "title": "Art Director",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Conor Keitzer",
+      "title": "Project Manager",
+      "description": "Science Integrator at University of Maryland Center for Environmental Science",
       "email": "example2@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     },
     {
-      "name": "John Doe",
-      "title": "Designer",
-      "description": "Some text that describes me lorem ipsum ipsum lorem.",
+      "name": "Ziyu Chen",
+      "title": "Project Member",
+      "description": "Postdoctoral Researcher at University of Maryland Center for Environmental Science",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Kanika Kumar",
+      "title": "Product & UX Design Strategist",
+      "description": "Graduate Student of Integrated Product Design at the University of Pennsylvania",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Ava Spangler",
+      "title": "Project Member",
+      "description": "Graduate Student at Penn State University",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Ann Foo",
+      "title": "Graphic Designer",
+      "description": "Science Communicator at University of Maryland Center for Environmental Science",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Vincent Pham",
+      "title": "Developer",
+      "description": "Undergraduate Student at Salisbury University",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Nicholas Gammel",
+      "title": "Developer",
+      "description": "Undergraduate Student at Salisbury University",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "William Lamuth",
+      "title": "Developer",
+      "description": "Undergraduate Student at Salisbury University",
+      "email": "example3@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Abby Hileman",
+      "title": "Project Member",
+      "description": "Salt Watch Coordinator at the Izaak Walton League of America, a national nonprofit focused on conservation",
+      "email": "example2@example.com",
+      "image": "static/images/SaltCastLogoGreen.svg"
+    },
+    {
+      "name": "Spencer Presley",
+      "title": "Project Member",
+      "description": "TBD",
       "email": "example3@example.com",
       "image": "static/images/SaltCastLogoGreen.svg"
     }
