@@ -39,17 +39,17 @@
                 <a href="{{ url_for('index') }}"><span>Home</span></a>
                 <a><span>Dashboard</span></a> <!--temporary placeholder-->
                 <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a>
-                <a><span>Corrosion Exposure</span></a> <!--temporary placeholder-->
                 <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
             </div>
 
             <div class="login-logout">
-                {% if 'loggedin' in session %}
-                <a href="{{ url_for('logout') }}"><span>Logout</span></a>
-                {% else %}
-                <a href="{{ url_for('login') }}"><span>Login</span></a>
-                {% endif %}
-                <a href="{{ url_for('profile') }}"><img src="static/images/profile.png" alt="profile" id="profile-icon"></a></div>
+              {% if 'loggedin' in session %}
+              <a href="{{ url_for('logout') }}"><span>Logout</span></a>
+              {% else %}
+              <a href="{{ url_for('login') }}"><span>Login</span></a>
+              {% endif %}
+              <a href="{{ url_for('profile') }}" id="profile-link"><img src="static/images/profile.png" alt="profile" id="profile-icon"></a>
+              <img src="static/images/WCAG-icon.png" alt="WCAG" id="WCAG-icon">
             </div>
     </nav>
     </div>

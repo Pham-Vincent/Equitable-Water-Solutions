@@ -14,7 +14,6 @@ CSS for the navbar
 }
 .navtop div {
     display: flex;
-    margin: 0 auto;
     width: auto;
     height: 100%;
 }
@@ -30,9 +29,9 @@ CSS for the navbar
     margin: 0;
     color: #ffffff;
     font-weight: normal;
+    margin-left: 100px;
 }
 .navtop div a {
-    padding:10px;
     text-decoration: none;
     color: #1A1A1A;
 }
@@ -40,6 +39,7 @@ CSS for the navbar
     padding: 3px 6px;
     font-size: 20px;
     font: normal normal normal 18px Roboto;
+    margin: 0 15px 0 15px;
 }
 .navtop .nav-options a span:hover{
     background-color: #DBEFD4;
@@ -60,16 +60,12 @@ CSS for the navbar
 }
 
 .nav-options{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: #5d86e700;
     border-radius: 30px;
 }
 
 #profile-icon{
-    width:2.5em; height:2.5em;
+    width:2.3em; height:2.3em;
     background-color: #142A54;
     border-radius: 20px;
 }
@@ -79,17 +75,31 @@ CSS for the navbar
     border-radius: 20px;
 }
 
-.login-logout{
-    margin: 0 20px 0 0;
+.login-logout {
+    display: flex;
+    align-items: center; /* Vertically center the items */
 }
+
 .login-logout span{
     padding: 8px 40px;
     background-color: #289D7A;
     border-radius: 20px;
-    margin-top: 1%;
-    margin-bottom: 1%;
     color: white;
+    margin: 0 20px 0 20px;
 }
+
+#WCAG-icon{
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#profile-link{
+    margin-right: 50px;
+}
+
+
 
 
 
