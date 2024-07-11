@@ -4,133 +4,133 @@
       "title": "Principal Investigator",
       "description": "Professor at Horn Point Laboratory at University of Maryland",
       "email": "example1@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Ming-Li_NSFCA@2x.png"
     },
     {
       "name": "Dr. Raymond Najjar",
       "title": "Principal Investigator",
       "description": "Professor of Oceanography at The Pennsylvania State University",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/ray-najjar@2x.png"
     },
     {
       "name": "Dr. Allison Lassiter",
       "title": "Principal Investigator",
       "description": "Assistant Professor in City and Regional Planning at the University of Pennsylvania Weitzman School of Design",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Allison Lassiter@2x.png"
     },
     {
       "name": "Dr. Alfonso Mejia",
       "title": "Principal Investigator",
       "description": "Professor of Oceanography at The Pennsylvania State University",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/alfonso-mejia@2x.png"
     },
     {
       "name": "Dr. Sujay Kaushal",
       "title": "Principal Investigator",
       "description": "Professor of Geology at the University of Maryland",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/SujayKaushal@2x.png"
     },
     {
       "name": "Antonia Hadjimichael",
       "title": "Senior Investigator",
       "description": "Assistant Professor at Penn State University",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/antonia-hadjimichael@2x.png"
     },
     {
       "name": "Xiaohong (Sophie) Wang",
       "title": "Senior Investigator",
       "description": "TBD",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Xiaohong (Sophie) Wang@2x.png"
     },
     {
       "name": "Robert Chant",
       "title": "Senior Investigator",
       "description": "Professor at Rutgers University",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/robert-chant@2x.png"
     },
     {
       "name": "Dr. Shuangquan (Peter) Wang",
       "title": "Senior Investigator",
       "description": "Assistant Professor at Salisbury University",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Shuangquan (Peter) Wang_Salisbury University@2x.png"
     },
     {
       "name": "Samantha Puckett",
       "title": "Senior Investigator",
       "description": "Clean Water Program Director at the Izaak Walton League of America, a national nonprofit focused on conservation",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/samantha-briggs@2x.png"
     },
     {
       "name": "Conor Keitzer",
       "title": "Project Manager",
       "description": "Science Integrator at University of Maryland Center for Environmental Science",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Conor-Keitzer.png"
     },
     {
       "name": "Ziyu Chen",
       "title": "Project Member",
       "description": "Postdoctoral Researcher at University of Maryland Center for Environmental Science",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/CHEN-ZIYU@2x.png"
     },
     {
       "name": "Kanika Kumar",
       "title": "Product & UX Design Strategist",
       "description": "Graduate Student of Integrated Product Design at the University of Pennsylvania",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Kanika@2x.png"
     },
     {
       "name": "Ava Spangler",
       "title": "Project Member",
       "description": "Graduate Student at Penn State University",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/ava-spangler@2x.png"
     },
     {
       "name": "Ann Foo",
       "title": "Graphic Designer",
       "description": "Science Communicator at University of Maryland Center for Environmental Science",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Ann-Foo@2x.png"
     },
     {
       "name": "Vincent Pham",
       "title": "Developer",
       "description": "Undergraduate Student at Salisbury University",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/vincent-pham@2x.png"
     },
     {
       "name": "Nicholas Gammel",
       "title": "Developer",
       "description": "Undergraduate Student at Salisbury University",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/Nicholas_gammel@2x.png"
     },
     {
       "name": "William Lamuth",
       "title": "Developer",
       "description": "Undergraduate Student at Salisbury University",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/william-lamuth@2x.png"
     },
     {
       "name": "Abby Hileman",
       "title": "Project Member",
       "description": "Salt Watch Coordinator at the Izaak Walton League of America, a national nonprofit focused on conservation",
       "email": "example2@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/AbbyHileman3@2x.png"
     },
     {
       "name": "Spencer Presley",
