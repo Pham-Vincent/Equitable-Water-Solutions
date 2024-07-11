@@ -18,6 +18,7 @@ import mysql.connector
 from Database import *
 from Graph import *
 from FeatureExtraction import *
+from flask_cors import CORS
 
 import numpy as np
 import io
@@ -27,17 +28,19 @@ import pandas as pd
 import hashlib, re
 
 #Path To Env File
-dotenv_path='static/env/.env'
+dotenv_path='.flaskenv'
 #Opens Env File
 load_dotenv(dotenv_path=dotenv_path)
 
 #Flask Instance
 app = Flask(__name__)
+CORS(app)
 
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
 
+'''
 
 
 
@@ -78,23 +81,31 @@ def create_graph():
   return Virginia_Tidal_Graph(WithdrawValues)
 
 
-
+'''
 
 #This will Render Our "HomePage" aka our Map 
-@app.route('/',methods=['GET', 'POST'])
+@app.route('/profile')
 #Returns homepage with session variables
-def index():
+def profile():
+    response_body = {
+        "name": "Nagato",
+        "about" :"Hello! I'm a full stack developer that loves python and javascript"
+    }
 
-  if 'loggedin' in session:
-      return render_template('index.html', username = session['username'])
-  return render_template('index.html')
+    return jsonify(response_body)
   
-@app.route('/map', methods=['GET', 'POST'])
+
+'''
+
+
+@app.route('/Map', methods=['GET', 'POST'])
 #Returns Map webpage
 def map():
     if 'loggedin' in session:
       return render_template('map.html', username = session['username'])
     return render_template('map.html')
+
+
 
 #Path To Env File
 dotenv_path='static/env/.env'
@@ -222,5 +233,9 @@ def logout():
    # Redirect to login page
    return redirect(url_for('index'))
 
+'''
+
 if __name__ == '__main__':
   app.run(debug=True)
+
+  
