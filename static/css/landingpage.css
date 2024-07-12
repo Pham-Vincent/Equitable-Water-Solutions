@@ -56,7 +56,7 @@ CSS for index.html to syle the landing/coming soon page
 
  .page-content p{
     color: white;
-    font:normal normal normal 18px/24px Roboto;
+    font:normal normal normal 20px/24px Roboto;
     margin-left: 100px;
     text-align:justify;
  }

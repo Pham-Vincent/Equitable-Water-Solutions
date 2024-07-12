@@ -1,7 +1,7 @@
 
 .row {
     display: flex;
-    justify-content:space-evenly;
+    justify-content:center;
     width: 100%;
     z-index: 1;
 }
@@ -29,8 +29,8 @@
     background-color: #ffffff;
     text-align: center;
     width: 100%;
+    margin: 20px auto 20px auto;
     z-index: 1;
-    margin: 20px 0 20px 0;
   }
 
   .container-aboutUs {
@@ -52,6 +52,7 @@
     display: flex; 
     align-items: center;
     justify-content: center;
+    margin-bottom: -70px;
   }
 
   .mini-container {
@@ -61,6 +62,9 @@
     width: 60%;
     height: 100%;
     margin: 0 auto;
+    border-radius: 20px;
+    border-style:solid;
+    padding: 50px 10px 40px 10px;
   }
   
   .container-aboutUs::after, .row::after {
