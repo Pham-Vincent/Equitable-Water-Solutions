@@ -1,0 +1,72 @@
+<!--Team Page - Displays all team members-->
+{% extends 'layout.html' %}
+
+{% block title %}Team Page{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teamPage.css') }}">
+
+    <div class="contact-split-container">
+
+        <div class="contact-top-content">
+            <div class="top-content-text">
+                <h1 id="line-1">Contact Us</h1>
+                <p id="line-2">We would love to hear from you!</p>
+                <p id="line-3">Please email us at emailaddress@gmail.com with any questions or concerns.</p>
+            </div>
+        </div>
+
+        <div id="team-header">
+            <h1>Meet The Team</h1>
+        </div>
+
+        <!--Javascript to loop through persons.json and create person boxes-->
+        <div class="container-aboutUs" id="cards-container">
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                const container = document.getElementById('cards-container');
+                fetch('static/json/persons.json')
+                .then(response => response.json())
+                .then(persons => {
+                    container.innerHTML = returnCards(persons);
+                });
+            });
+
+            function returnCards(persons) {
+                const columns = 3;
+                let html = "";
+
+                for (let i = 0; i < persons.length; i += columns) {
+                    html += '<div class="row">';
+                    for (let j = i; j < i + columns && j < persons.length; j++) {
+                        const person = persons[j];
+                        html += `
+                            <div class="column">
+                                <div class="card">
+                                    <div class="image-container">
+                                    <img src="${person.image}" referrerpolicy="no-referrer" alt="${person.name}" style="width:50%; height:50%;">
+                                    </div>
+                                    <div class="mini-container">
+                                        <h2>${person.name}</h2>
+                                        <p class="title">${person.title}</p>
+                                        <p>${person.description}</p>
+                                        <p><button class="button">Contact</button></p>
+                                    </div>
+                                </div>
+                            </div>`;
+                    }
+                    html += '</div>';
+                }
+
+                return html;
+            }
+        </script>
+        </div>
+
+    </div>
+    
+
+
+{% endblock %}

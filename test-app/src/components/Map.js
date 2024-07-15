@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import config from './../js/config.js';
 
-
 const MapComponent = () => {
   const mapRef = useRef(null);
+  const popupRef = useRef(null);
+  const overlayRef = useRef(null);
   const [map, setMap] = useState(null);
-  const [markers, setMarkers] = useState([]);
-  const [customPopup, setCustomPopup] = useState(null);
 
   const Load_Map = () => {
     (g => {
@@ -36,47 +35,38 @@ const MapComponent = () => {
   const initMap = async () => {
     await Load_Map();
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
-    let markersList = [];
 
     const allowedBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(-60, -180),// Southwest corner (60 degrees south, entire western hemisphere)
-        new google.maps.LatLng(85, 180) // Northeast corner (North Pole, entire eastern hemisphere)
-      );
+      new google.maps.LatLng(-60, -180),
+      new google.maps.LatLng(85, 180)
+    );
 
     const mapInstance = new Map(mapRef.current, {
-        center: { lat: 38.2, lng: -76.2 },
-        zoom: 8.2,
-      
-        //Mappitng Styles:
-        //366d3e13ce470bd7 -> No Background Signs/Feature Styling Disabled
-        //45c77a2db5a260c8 -> Background Signs/Feature Styling Enabled
-        mapId: "366d3e13ce470bd7", 
-        scrollwheel:true, //bypasses command+scroll to zoom
-        streetViewControl: false, //removes streetview pegman
-        fullscreenControl: false, //removes fullscreen button
-        mapTypeControl: false, //removes map type buttons (terrian/satellite)
-        restriction: {
-          latLngBounds: allowedBounds,// Gives the Maps Boundaries 
-          strictBounds: false // Set to true if you want to completely restrict panning
-        }
+      center: { lat: 38.2, lng: -76.2 },
+      zoom: 8.2,
+      mapId: "366d3e13ce470bd7",
+      scrollwheel: true,
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeControl: false,
+      restriction: {
+        latLngBounds: allowedBounds,
+        strictBounds: false
+      }
     });
 
-    //Loads GeoJSON Data from JSON file
     mapInstance.data.loadGeoJson('json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
 
-    //Changes The Styling Within Map Boundaries
     mapInstance.data.setStyle({
-        fillColor: '#5a5fcf', //blue
-        fillOpacity : .4,
-        strokeWeight: 0,
+      fillColor: '#5a5fcf',
+      fillOpacity: .4,
+      strokeWeight: 0,
     });
-    /* Sets the Maximum Zoom out Value */
-  mapInstance.setOptions({ minZoom: 3});
 
-    console.log("Fetch request started");
+    mapInstance.setOptions({ minZoom: 3 });
 
     try {
-      const response = await fetch('json/Va_Permit.json', {
+      const response = await fetch('json/VA_final_v3.json', {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
@@ -86,67 +76,45 @@ const MapComponent = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log("Fetch request completed successfully");
 
-      const loadedMarkers = data.map(point => {
+      data.forEach(point => {
         const mapCode = point.Hydrocode;
         const desc1 = point.Source_Type;
-        const latitude = parseFloat(point.Latitude);
-        const longitude = parseFloat(point.Longitude);
         const locality = point.Locality;
 
-        const marker = new google.maps.Marker({
-          position: { lat: latitude, lng: longitude },
+        const newMarker = new google.maps.Marker({
+          position: { lat: parseFloat(point.Latitude), lng: parseFloat(point.Longitude) },
           map: mapInstance,
           title: mapCode,
-          descriptions: {
-            description1: desc1,
-            description2: locality
-          },
-          points: {
-            point1: parseFloat(point.Year_2016),
-            point2: parseFloat(point.Year_2017),
-            point3: parseFloat(point.Year_2018),
-            point4: parseFloat(point.Year_2019),
-            point5: parseFloat(point.Year_2020)
-          }
         });
-
-        markersList.push(marker);
 
         const infowindow = new InfoWindow({
           content: `
             <div class="info-window">
-              <strong>${marker.title}</strong>
+              <strong>${newMarker.title}</strong>
+              <p>${desc1}</p>
+              <p>${locality}</p>
             </div>
           `,
           maxWidth: 300,
         });
 
-        marker.addListener('mouseover', () => {
-          if (!window.popupLayerOpen) {
-            infowindow.open(mapInstance, marker);
-          }
+        newMarker.addListener('mouseover', () => {
+          infowindow.open(mapInstance, newMarker);
         });
 
-        marker.addListener('mouseout', () => {
-          if (!window.popupLayerOpen) {
-            infowindow.close();
-          }
-        });
-
-        marker.addListener("click", () => {
-          popUpLayer1(marker);
+        newMarker.addListener('mouseout', () => {
           infowindow.close();
-          window.popupLayerOpen = true;
         });
 
-        return marker;
+        newMarker.addListener("click", () => {
+          popUpLayer1(newMarker);
+          infowindow.close();
+        });
       });
 
-      setMarkers(loadedMarkers);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching or processing data:', error);
     }
 
     setMap(mapInstance);
@@ -157,82 +125,29 @@ const MapComponent = () => {
       window.smallInfowindow.close();
     }
 
-    const popupTitle = marker.getTitle();
-
-    const smallInfowindow = new google.maps.InfoWindow({
+    const infowindow = new google.maps.InfoWindow({
       content: `
         <div class="info-window">
           <strong>${marker.getTitle()}</strong>
-          <p>${marker.descriptions.description1}</p>
-          <p>${marker.descriptions.description2}</p>
-          <button id="view-more-button" onclick="viewMore('${marker.graph}')">View More</button>
+          <p>${marker.getTitle()}</p>
         </div>
       `,
       maxWidth: 300,
     });
 
-    google.maps.event.addListener(map, 'click', function () {
-      smallInfowindow.close();
-      window.popupLayerOpen = false;
-    });
-
-    smallInfowindow.open(map, marker);
-    window.smallInfowindow = smallInfowindow;
-    window.popupTitle = popupTitle;
-
-    smallInfowindow.addListener('closeclick', () => {
-      window.popupLayerOpen = false;
-    });
-  };
-
-  //Function to handle the view more button
-  function viewMore(currentGraph) {
-  window.smallInfowindow.close();
-  openPopup(window.currentMarker, currentGraph);
-}
-
-  const openPopup = (marker, currentGraph) => {
-    const popup = document.getElementById('popup');
-    popup.innerHTML = `
-      <h1>${marker.getTitle()}</h1>
-      <div class="info-window">
-        <p>${marker.descriptions.description1}</p>
-        <p>${marker.descriptions.description2}</p>
-        <div id="close-button" onclick="closePopup()">X</div>
-      </div>
-    `;
-    popup.style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-    setCustomPopup(popup);
+    infowindow.open(map, marker);
+    window.smallInfowindow = infowindow;
   };
 
   const closePopup = () => {
-    customPopup.style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.keyCode === 13) {
-      const searchInput = document.getElementById("search-input").value.trim();
-      if (searchInput !== "") {
-        search();
-      }
+    const popup = popupRef.current;
+    if (popup) {
+      popup.style.display = 'none';
     }
-  };
-
-  const search = () => {
-    const searchInput = document.getElementById("search-input").value.toLowerCase();
-
-    markers.forEach(marker => {
-      const markerTitle = marker.getTitle().toLowerCase();
-
-      if (markerTitle.includes(searchInput)) {
-        console.log("Match found!");
-        openPopup(marker, marker.graph);
-      } else {
-        console.log("Not found");
-      }
-    });
+    const overlay = overlayRef.current;
+    if (overlay) {
+      overlay.style.display = 'none';
+    }
   };
 
   useEffect(() => {
@@ -241,17 +156,23 @@ const MapComponent = () => {
   }, []);
 
   useEffect(() => {
-    document.getElementById('overlay').addEventListener('click', viewMore);
-    document.getElementById('overlay').addEventListener('click', closePopup);
-    document.getElementById("search-input").addEventListener("keypress", handleKeyPress);
+    const overlay = overlayRef.current;
+    if (overlay) {
+      overlay.addEventListener('click', closePopup);
+    }
+
+    return () => {
+      if (overlay) {
+        overlay.removeEventListener('click', closePopup);
+      }
+    };
   }, []);
 
   return (
     <div>
       <div id="map" ref={mapRef} style={{ width: '100%', height: '100vh' }}></div>
-      <div id="popup" style={{ display: 'none' }}></div>
-      <div id="overlay" style={{ display: 'none' }}></div>
-      <input type="text" id="search-input" placeholder="Search..." />
+      <div id="popup" ref={popupRef} style={{ display: 'none' }}></div>
+      <div id="overlay" ref={overlayRef} style={{ display: 'none' }}></div>
     </div>
   );
 };

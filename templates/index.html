@@ -1,0 +1,59 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landingpage.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}">
+
+<div class="split-content">
+  <div class="area" >
+    <ul class="circles">
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+  </div>
+      <div class="page-content">
+        <div>
+          <h1>
+            <span style="font-style:italic">SaltCast </span> loading...
+          </h1>
+          <p style="margin-bottom: 30px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa.</p>
+          <p style="font-style: italic;font-weight: 800;">Meet the team on our <a href="{{ url_for('aboutus') }}" style="font-size: larger;">Contact Us</a> page.</p>
+        </div>
+
+        <img src="static/images/SaltCastLogoGreen.svg">
+        
+      </div>
+
+  <div class="bottom-content">
+    <div style="margin: 80px 100px 30px 100px;">
+      <h1>Our Journey So Far...</h1>
+      <p>Come check out some of our academic articles that helped shape the SaltCast journey.</p>
+    </div>
+    <div class="article-boxes">
+        <div class="box-1">
+          <img src="static/images/article-icon.svg">
+          <p>Article A: Name of Article and Details</p>
+          <p id="article-description">A short description about the article, and how it fuelled the journey. A little bit more about the article and its content.</p>
+          <button>Read Now</button>
+        </div>
+        <div class="box-2">
+          <img src="static/images/article-icon.svg">
+          <p>Article B: Name of Article and Details</p>
+          <p id="article-description">A short description about the article, and how it fuelled the journey. A little bit more about the article and its content.</p>
+          <button>Read Now</button>
+        </div>
+        <div class="box-3">
+          <img src="static/images/article-icon.svg">
+          <p>Article C: Name of Article and Details</p>
+          <p id="article-description">A short description about the article, and how it fuelled the journey. A little bit more about the article and its content.</p>
+          <button>Read Now</button>
+        </div>
+    </div>
+  </div>
+</div>
+  
+  
+
+{% endblock %}

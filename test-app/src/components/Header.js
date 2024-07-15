@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import './../css/navbar.css';
 import './../css/register.css';
-import { NavLink} from 'react-router-dom';
 
 
 const Header = () => {
