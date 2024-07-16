@@ -35,6 +35,7 @@ const MapComponent = () => {
   const initMap = async () => {
     await Load_Map();
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
 
     const allowedBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(-60, -180),
@@ -82,7 +83,7 @@ const MapComponent = () => {
         const desc1 = point.Source_Type;
         const locality = point.Locality;
 
-        const newMarker = new google.maps.Marker({
+        const newMarker = new AdvancedMarkerElement({
           position: { lat: parseFloat(point.Latitude), lng: parseFloat(point.Longitude) },
           map: mapInstance,
           title: mapCode,
