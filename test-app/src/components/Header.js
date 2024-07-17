@@ -37,7 +37,7 @@ const Header = () => {
                         <NavLink exact to="/"><span>Home</span></NavLink>
                         <Link><span>Dashboard</span></Link>
                         <NavLink to="/Map" activeClassName="active"><span>Salinity Map Tool</span></NavLink>
-                        <NavLink to="/Aboutus" activeClassName="active"><span>Contact Us</span></NavLink>
+                        <NavLink to="/About" activeClassName="active"><span>Contact Us</span></NavLink>
                     </div>
 
                     <div className="login-logout">

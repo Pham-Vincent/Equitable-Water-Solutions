@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import config from './../js/config.js';
+import './../css/style.css'
 
 const MapComponent = () => {
   const mapRef = useRef(null);
@@ -35,7 +36,7 @@ const MapComponent = () => {
   const initMap = async () => {
     await Load_Map();
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
+    const { Marker } = await google.maps.importLibrary("marker")
 
     const allowedBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(-60, -180),
@@ -79,14 +80,13 @@ const MapComponent = () => {
       const data = await response.json();
 
       data.forEach(point => {
-        const mapCode = point.Hydrocode;
         const desc1 = point.Source_Type;
         const locality = point.Locality;
 
-        const newMarker = new AdvancedMarkerElement({
+        const newMarker = new Marker({
           position: { lat: parseFloat(point.Latitude), lng: parseFloat(point.Longitude) },
           map: mapInstance,
-          title: mapCode,
+          title: point.Hydrocode,
         });
 
         const infowindow = new InfoWindow({
@@ -100,18 +100,21 @@ const MapComponent = () => {
           maxWidth: 300,
         });
 
-        newMarker.addListener('mouseover', () => {
-          infowindow.open(mapInstance, newMarker);
-        });
-
-        newMarker.addListener('mouseout', () => {
-          infowindow.close();
-        });
-
         newMarker.addListener("click", () => {
           popUpLayer1(newMarker);
           infowindow.close();
         });
+
+        newMarker.addListener("mouseover", () => {
+          console.log("mouseover event triggered");
+          infowindow.open(mapInstance, newMarker);
+        });
+
+        newMarker.addListener("mouseout", () => {
+          console.log("mouseout event triggered");
+          infowindow.close();
+        });
+
       });
 
     } catch (error) {
@@ -129,8 +132,8 @@ const MapComponent = () => {
     const infowindow = new google.maps.InfoWindow({
       content: `
         <div class="info-window">
-          <strong>${marker.getTitle()}</strong>
-          <p>${marker.getTitle()}</p>
+          <strong>${marker.title}</strong>
+          <p>${marker.title}</p>
         </div>
       `,
       maxWidth: 300,
