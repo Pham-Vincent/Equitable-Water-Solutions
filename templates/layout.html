@@ -24,7 +24,7 @@
         document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
     </script>
     <!-- jquery function to create an "active" class in span for the currently active navbar page -->
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
         $(function(){
             $('a').each(function(){
@@ -43,19 +43,8 @@
 
             <div class="nav-options">
                 <a href="{{ url_for('index') }}"><span>Home</span></a>
-                <a><span>Dashboard</span></a> <!--temporary placeholder-->
-                <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a>
+                <!-- remove map link <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a> -->
                 <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
-            </div>
-
-            <div class="login-logout">
-                {% if 'loggedin' in session %}
-                <a href="{{ url_for('logout') }}"><span>Logout</span></a>
-                {% else %}
-                <a href="{{ url_for('login') }}"><span>Login</span></a>
-                {% endif %}
-                <a href="{{ url_for('profile') }}" id="profile-link"><img src="static/images/profile.png" alt="profile" id="profile-icon"></a>
-                <img src="static/images/WCAG-icon.png" alt="WCAG" id="WCAG-icon">
             </div>
 
         </div>

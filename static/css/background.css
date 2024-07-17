@@ -11,7 +11,6 @@ CSS for the landing page animated background
     height: 50%;
     flex:1;
     z-index: -1;
-
 }
 
 .circles{
@@ -30,7 +29,7 @@ CSS for the landing page animated background
     width: 20px;
     height: 20px;
     background: rgba(255, 255, 255, 0.526);
-    animation: animate 25s linear infinite;
+    animation: animate 20s linear infinite;
     bottom: -150px;   
 }
 

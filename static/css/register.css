@@ -7,7 +7,6 @@ body{
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    
     margin: 0;
     background-image: linear-gradient(to right, #142A54 , #50BAB6);
 }
@@ -40,8 +39,8 @@ body{
     color: #9da3ac;
 }
 .login .links a.active, .register .links a.active {
-    border-bottom: 3px solid #3274d6;
-    color: #3274d6;
+    border-bottom: 3px solid #ffffff;
+    color: #ffffff;
 }
 .login form, .register form {
     display: flex;

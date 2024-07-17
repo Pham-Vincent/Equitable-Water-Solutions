@@ -4,6 +4,7 @@
     justify-content:center;
     width: 100%;
     z-index: 1;
+    margin: auto 1000px auto 1000px;
 }
 
 .column {
@@ -33,6 +34,11 @@
     z-index: 1;
   }
 
+  .contact-split-container{
+    width: auto;
+    height: auto;
+  }
+
   .container-aboutUs {
     display: flex;
     flex-direction: column;
@@ -52,14 +58,14 @@
     display: flex; 
     align-items: center;
     justify-content: center;
-    margin-bottom: -70px;
+    margin-bottom: -15%;
   }
 
   .mini-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
+    width: 70%;
     height: 100%;
     margin: 0 auto;
     border-radius: 20px;
@@ -97,7 +103,6 @@
     margin-bottom: 0;
     color: rgb(0, 0, 0);
   }
-
 
   .contact-top-content{
     width: 100%;

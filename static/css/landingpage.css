@@ -16,7 +16,7 @@ CSS for index.html to syle the landing/coming soon page
     height:50%;
     flex:1;
     background-color: #ffffff;
-    flex-basis: 400px;
+    flex-basis: 500px;
 }
 
 .page-content{
@@ -25,22 +25,19 @@ CSS for index.html to syle the landing/coming soon page
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20em;
-    margin:50px;
-    margin-left: 0;
+    gap: 17em;
+    margin: 50px 0 50px 0;
 }
 
 .page-content > div{
     width: 100%;
+    padding: 0 0 30px 100px;
 }
 .page-content h1{
     align-items: center;
     text-align: center;
     font-size: 60px;
     color:white;
-    margin-top: 0;
-    margin-bottom: 30px;
-    margin-left: 100px;
     text-align:left;
     font: normal normal bold 50px/55px Roboto;
 }
@@ -57,8 +54,7 @@ CSS for index.html to syle the landing/coming soon page
  .page-content p{
     color: white;
     font:normal normal normal 20px/24px Roboto;
-    margin-left: 100px;
-    text-align:justify;
+    text-align:left;
  }
 
  a:link{
@@ -73,16 +69,6 @@ CSS for index.html to syle the landing/coming soon page
     color: black;
  }
 
- #logo-text{
-    width: 14.7em; 
-    height:4.2em;
-    background-color: rgba(255, 255, 255, 0);
-    border-radius: 0;
-    margin-right: 5px;
-    vertical-align:middle;
-    margin-left: 90px;
- }
-
  .article-boxes{
     display: flex;
     flex-direction: row;
@@ -91,7 +77,7 @@ CSS for index.html to syle the landing/coming soon page
     margin: 20px 100px 100px 100px;
     justify-content: space-between;
     align-items: center;
-    gap:50px;
+    gap:4%;
  }
 
  .box-1, .box-2, .box-3{
@@ -101,11 +87,15 @@ CSS for index.html to syle the landing/coming soon page
     box-shadow: 0px 0px 20px #1A1A1A38;
     border-radius: 20px;
     padding: 10px;
-    margin: 10px 0 10px 0;
  }
+ 
+ .box-1 div, .box-2 div, .box-3 div{
+    display: inline-block;
+ }
+
 .article-boxes img{
     float: left;
-    padding: 20px;
+    padding: 10px;
  }
 
  .article-boxes p{
@@ -113,7 +103,7 @@ CSS for index.html to syle the landing/coming soon page
  }
 
  #article-description{
-    margin: 30px 0 20px 10px;
+    margin: 10px 0px 0px 10px;
     font: normal normal normal 18px/28px Roboto;
  }
 
@@ -127,6 +117,12 @@ CSS for index.html to syle the landing/coming soon page
     margin: 30px 0 20px 10px;
     cursor: pointer;
     font: normal normal bold 18px/28px Roboto;
+ }
+
+ .article-boxes button img{
+    float: right;
+    display: inline;
+    padding: 3px 5px 0 5px;
  }
 
  @media screen and (max-width: 650px) {

@@ -57,7 +57,7 @@
     },
     {
       "name": "Dr. Shuangquan (Peter) Wang",
-      "title": "Senior Investigator",
+      "title": "Investigator",
       "description": "Assistant Professor at Salisbury University",
       "email": "example2@example.com",
       "image": "static/images/Team-Images/Shuangquan (Peter) Wang_Salisbury University@2x.png"
@@ -135,8 +135,8 @@
     {
       "name": "Spencer Presley",
       "title": "Project Member",
-      "description": "TBD",
+      "description": "Undergraduate Student at Salisbury University",
       "email": "example3@example.com",
-      "image": "static/images/SaltCastLogoGreen.svg"
+      "image": "static/images/Team-Images/SpencerPresley2x.png"
     }
   ]
