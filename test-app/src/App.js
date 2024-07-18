@@ -1,8 +1,8 @@
 import {React} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import About from './components/About';
-import Map from './components/Map';
+import Home from './pages/Home';
+import About from './pages/About';
+import Map from './pages/Map';
 import Header from './components/Header';
 
 const App = () => {

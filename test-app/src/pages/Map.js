@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import config from './../js/config.js';
+import config from '../js/config.js';
 import './../css/style.css'
 
 const MapComponent = () => {
