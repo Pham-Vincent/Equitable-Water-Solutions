@@ -11,6 +11,7 @@ def AverageDailySalinity(DataFrame):
   #Reformats The Time So We can filter by months
   DataFrame['Time'] = DataFrame['Time'].dt.strftime('%m')
   DataFrame = DataFrame.drop(columns=['PermitNumber'])
+  DataFrame=DataFrame.drop(8771)
   grouped_df = DataFrame.groupby('Time').mean().reset_index()
   return(grouped_df)
 
@@ -23,10 +24,11 @@ df=AverageDailySalinity(df)
 
 fig = go.Figure()
 
-  
+depths = [30, 25, 20, 15, 10, 5, 0] 
+ColorForGraph=['#030582','#0f1180','#1d1f80','#474b96','#5b60b0','#7377bd','#9597c2']
 # Add bar traces for each depth
-for i in range(34,-1,-1):
-  fig.add_trace(go.Bar(x=df['Time'], y=df['Depth:'+str(i)], name='Depth:'+str(i)))
+for depth,color in zip(depths,ColorForGraph):
+  fig.add_trace(go.Scatter(x=df['Time'], y=df['Depth:'+str(depth)], name='Depth:'+str(depth),fill='tozeroy',mode='lines',fillcolor='rgba(0, 100, 80, 0.2)'))
 
 # Update layout
 fig.update_layout(
@@ -35,10 +37,9 @@ fig.update_layout(
     yaxis_title='Salinity',
     barmode='overlay',  # Group bars for each depth at each time
     legend_title='Depth',
-    template='plotly',
-    
-
 )
+fig.update_traces(hovertemplate='Salinity Level:%{y}')
+
 
 # Show the plot
 fig.show()
