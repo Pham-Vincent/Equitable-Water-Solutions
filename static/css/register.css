@@ -39,8 +39,8 @@ body{
     color: #9da3ac;
 }
 .login .links a.active, .register .links a.active {
-    border-bottom: 3px solid #ffffff;
-    color: #ffffff;
+    border-bottom: 3px solid #3274d6;
+    color: #3274d6;
 }
 .login form, .register form {
     display: flex;
@@ -82,7 +82,7 @@ body{
 
 
 body.loggedin {
-    background-color: #2d58bb;
+    background-color: #ffffff;
 }
 
 .content {

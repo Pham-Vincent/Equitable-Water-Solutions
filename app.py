@@ -238,5 +238,22 @@ def aboutus():
         conn.close()
         return render_template('aboutUs.html', account=account)
     return render_template('aboutUs.html')
+
+
+@app.route('/researchpapers')
+def research():
+    if 'loggedin' in session:
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return render_template('research.html', account=account)
+    return render_template('research.html')
 if __name__ == '__main__':
   app.run(debug=True)
+
+
+  

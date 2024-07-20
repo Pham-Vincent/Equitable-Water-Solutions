@@ -1,0 +1,122 @@
+.research-content{
+    width: 100%;
+    height: 100%;
+    padding: 50px 100px;
+    z-index: 1;
+    background-color: rgb(255, 255, 255);
+}
+
+.research-content > h1{
+    position: relative;
+    font: normal normal bold 50px/55px Roboto;
+    margin: 10px 0;
+}
+
+.research-content > p{
+    font: italic normal normal 20px/28px Roboto;
+    margin: 10px 0;
+}
+
+.articles{
+    width: calc(100% - 200px);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    
+}
+
+.article-row{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#title{
+    font: italic normal bold 20px/28px Roboto;
+    color: #0B2B57;
+}
+
+#authors{
+    font: normal normal normal 14px/24px Roboto;
+    color: #1A1A1A;
+    opacity: 0.6;
+}
+
+#description{
+    font: normal normal normal 16px/24px Roboto;
+    color: #1A1A1A;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background: #e5e9ed;
+    margin: 20px 0;
+    width: 100%;
+}
+
+#link-icon{
+    height:20%;
+    width:20%;
+    float: right;
+    display: inline;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.article-image{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+
+
+.article-image > img{
+    width: 350px;
+    height: 250px; 
+    margin-left: -8%;
+}
+
+
+.article-image > #read-more{
+    padding: 7px 20px;
+    background-color: #289d7ae2;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    bottom: 10%;
+    right: 0; 
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    position: absolute;
+    text-decoration: none;
+    font: normal normal bold 16px/26px Roboto;
+} 
+.article-image > #read-more:hover{
+    background-color: #289d7a;
+    padding: 7px 22px;
+    transition: 0.2s;
+}
+
+@media screen and (max-width: 650px) {
+    .article-row{
+        flex-direction: column;
+    }
+   
+    
+  }
+
+
+
+
+
+
+
