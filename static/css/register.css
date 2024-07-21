@@ -8,6 +8,7 @@ body{
     overflow-y: auto;
     overflow-x: hidden;
     margin: 0;
+    padding:0;
     background-image: linear-gradient(to right, #142A54 , #50BAB6);
 }
 
