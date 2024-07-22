@@ -11,7 +11,6 @@
     box-sizing: border-box;
     z-index: 1;
   }
-  
   @media screen and (max-width: 650px) {
     .column {
       width: 100%;
@@ -102,13 +101,22 @@
     background-color: #555;
   }
 
-  .mini-container > h2{
-    font: italic normal medium 20px/28px Roboto;
+  .mini-container h2, .mini-container p{
+    margin-bottom: -5px;
+    color: rgb(0, 0, 0);
   }
 
-  .mini-container h2, .mini-container p{
-    margin-bottom: 0;
-    color: rgb(0, 0, 0);
+  .mini-container > h2{
+    font: italic normal normal 20px/28px Roboto;
+    font-weight: 500;
+  }
+
+  .mini-container > .title{
+    font: normal normal bold 16px/24px Roboto;
+  }
+
+  .mini-container > p{
+    font: normal normal normal 16px/20px Roboto;
   }
 
   .contact-top-content{
@@ -120,7 +128,7 @@
 
   .top-content-text{
     color:rgb(0, 0, 0);
-    padding:50px 0 0 100px;
+    padding:0 0 0 100px;
   }
 
   #line-1{
@@ -138,11 +146,13 @@
 
 
   #team-header{
-    height: 50px;
+    height: 70px;
     width: 100%;
     background-color: #ffffff;
     padding:50px 0 0 100px;
-    font: normal normal bold 18px Roboto;
+  }
+  #team-header h1{
+    font: normal normal bold 50px/55px Roboto;
   }
 
 .submit-form{
@@ -200,11 +210,51 @@
   transition: .3s;
 }
 
-
-
 .submit-container {
   align-self: flex-end;
 }
+
+#ContactUs-button{
+  width: 140px;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid #0A2B57;
+}
+
+#ContactUs-button a{
+  text-decoration: none;
+}
+
+#MeetTeam-button{
+  width: 140px;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid #0A2B57;
+}
+
+#MeetTeam-button:hover, #ContactUs-button:hover{
+  background-color: #cacaca;
+  transition: .3s;
+}
+
+#MeetTeam-button a{
+  text-decoration: none;
+}
+
+.slide-buttons{
+  padding: 50px 0 0 100px;
+}
+
+
+a:link{
+  color: rgb(0, 0, 0);
+}
+
+a:visited{
+  color: rgb(0, 0, 0);
+}
+
+
 
 
 
