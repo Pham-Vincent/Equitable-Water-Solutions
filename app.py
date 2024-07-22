@@ -228,7 +228,9 @@ def logout():
    # Redirect to login page
    return redirect(url_for('index'))
 
+#Routing for the about us page
 @app.route('/aboutus', methods=['GET', 'POST'])
+#Function leads to about us page, sets up function call for the contact us section
 def aboutus():
     if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'email' in request.form:
         firstname = request.form['fname']
@@ -252,23 +254,30 @@ def aboutus():
         return render_template('aboutUs.html', account=account)
     return render_template('aboutUs.html')
 
+#Function to send email to company email with information given from the contact us section of the about us page
 def contactus(fname, lname, email, message):
+    #Email Sent from sender
     sender = "waterequitable@gmail.com"
 
+    #Email Received by receiver - NO RECEIVER ATM
     #Change Receivers
     receivers = ["waterequitable@gmail.com",]
     #Change Receivers
 
     msg = MIMEText(message)
+    #Sets up subject line of email
     msg['Subject'] = email + ' , ' + fname + ' , ' + lname
+    #Sets up sender
     msg['From'] = sender
+    #Sets up Receiver
     msg['To'] = ', '.join(receivers)
+    #Connects to Sender email via smtp library and sends email to receiver
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
-        smtp_server.login(sender, "rndxidrgmfzqkewq")
+        #
+        smtp_server.login(sender, os.getenv('EMAIL_KEY'))
         smtp_server.sendmail(sender, receivers, msg.as_string())
-    print("Message sent!")
 
-
+#Routing for research paper page
 @app.route('/researchpapers')
 def research():
     if 'loggedin' in session:
