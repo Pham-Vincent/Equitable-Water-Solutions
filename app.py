@@ -60,17 +60,14 @@ def create_MD_graph():
   mycursor = conn.cursor()
 
   #Query For SQL
-  Query = "SELECT time,Salinity FROM Maryland_Tidal_History WHERE PermitNumber = \"" + str(marker_title)+ "\""
-
+  Query = "SELECT Time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = \"" + str(marker_title) + "\""
   #Executes The Query
   mycursor.execute(Query)
 
   #Get The Results of The Query
   myresult = mycursor.fetchall()
-
   Salinity_data = [[Time,Salinity] for Time,Salinity in (myresult)]
   Salinity_df= pd.DataFrame(Salinity_data,columns=['Time','Salinity'])
-
   Salinity_df=AverageDailySalinity(Salinity_df) 
   return(Maryland_Tidal_Graph(str(marker_title),Salinity_df))
 
