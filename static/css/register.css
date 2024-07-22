@@ -12,6 +12,10 @@ body{
     background-image: linear-gradient(to right, #142A54 , #50BAB6);
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 .login, .register {
     width: 400px;
     background-color: #ffffff;
