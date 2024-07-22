@@ -1,0 +1,261 @@
+
+.row {
+    display: flex;
+    justify-content:center;
+    width: auto;
+    z-index: 1;
+}
+
+.column {
+    width: 33.33%;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+
+    .row{
+      display: contents;
+    }
+
+    .form{
+      flex-direction: column;
+    }
+    
+  }
+
+  .card {
+    border-radius: 20px;
+    background-color: #ffffff;
+    text-align: center;
+    width: 100%;
+    margin: 20px auto 20px auto;
+    z-index: 1;
+  }
+
+  .contact-split-container{
+    width: auto;
+    height: auto;
+  }
+
+  .container-aboutUs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height:100%;
+    z-index: 1;
+    background-color: #ffffff;
+  }
+
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -15%;
+  }
+
+  .mini-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 20px;
+    border-style:solid;
+    padding: 50px 10px 40px 10px;
+  }
+  
+  .container-aboutUs::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+  }
+  
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .button:hover {
+    background-color: #555;
+  }
+
+  .mini-container h2, .mini-container p{
+    margin-bottom: -5px;
+    color: rgb(0, 0, 0);
+  }
+
+  .mini-container > h2{
+    font: italic normal normal 20px/28px Roboto;
+    font-weight: 500;
+  }
+
+  .mini-container > .title{
+    font: normal normal bold 16px/24px Roboto;
+  }
+
+  .mini-container > p{
+    font: normal normal normal 16px/20px Roboto;
+  }
+
+  .contact-top-content{
+    width: 100%;
+    height: 550px;
+    z-index:2;
+    background-color: #E5E9ED;
+  }
+
+  .top-content-text{
+    color:rgb(0, 0, 0);
+    padding:0 0 0 100px;
+  }
+
+  #line-1{
+    font: normal normal bold 50px/55px Roboto;
+    margin-bottom:0;
+  }
+
+  #line-2{
+    font: italic normal bold 20px/28px Roboto;
+  }
+
+  #line-3{
+    font: normal normal normal 16px/24px Roboto;
+  }
+
+
+  #team-header{
+    height: 70px;
+    width: 100%;
+    background-color: #ffffff;
+    padding:50px 0 0 100px;
+  }
+  #team-header h1{
+    font: normal normal bold 50px/55px Roboto;
+  }
+
+.submit-form{
+  width:auto;
+  margin:0 100px 0 100px;
+}
+
+.form{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font: normal normal normal 16px/24px Roboto;
+}
+
+.user-info input{
+  width: 400px;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.user-message{
+  display: flex;
+  flex-direction: column;
+}
+
+.user-message #message{
+  width: 700px;
+  height: 180px;
+  border: none;
+  border-radius: 10px;
+  resize: none;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.user-message #submit-button{
+  background-color: #289d7a;
+  border-radius: 23px;
+  border: none;
+  color: white;
+  width: 101px;
+  height: 45px;
+  font: normal normal bold 16px/26px Roboto;
+  cursor: pointer;
+}
+
+.user-message #submit-button:hover{
+  background-color: #2cac86;
+  width: 110px;
+  height: 45px;
+  transition: .3s;
+}
+
+.submit-container {
+  align-self: flex-end;
+}
+
+#ContactUs-button{
+  width: 140px;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid #0A2B57;
+}
+
+#ContactUs-button a{
+  text-decoration: none;
+}
+
+#MeetTeam-button{
+  width: 140px;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid #0A2B57;
+}
+
+#MeetTeam-button:hover, #ContactUs-button:hover{
+  background-color: #cacaca;
+  transition: .3s;
+}
+
+#MeetTeam-button a{
+  text-decoration: none;
+}
+
+.slide-buttons{
+  padding: 50px 0 0 100px;
+}
+
+
+a:link{
+  color: rgb(0, 0, 0);
+}
+
+a:visited{
+  color: rgb(0, 0, 0);
+}
+
+
+
+
+
+ 

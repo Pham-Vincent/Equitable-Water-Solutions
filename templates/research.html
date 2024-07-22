@@ -1,0 +1,51 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/researchpage.css') }}">
+<div class="research-content">
+    <h1>Research Papers</h1>
+    <p>Check out some of our academic articles that helped shape the SaltCast journey.</p>
+
+    <div class="articles" id="articles-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const container = document.getElementById('articles-container');
+            fetch('static/json/ResearchPapers.json')
+            .then(response => response.json())
+            .then(papers => {
+                container.innerHTML = returnArticles(papers);
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+        });
+
+        function returnArticles(papers) {
+            let html = "";
+
+            for (let i = 0; i < papers.length; i++) {
+                html += `
+                    <div class="article-row">
+                        <div class="article-image">
+                            <img src="${papers[i].image}" referrerpolicy="no-referrer" alt="${papers[i].title}">
+                            <a href="${papers[i].link}" id="read-more" target="_blank" rel="noopener noreferrer">Read Now<img src="static/images/link-icon.svg" id="link-icon"></a>
+                        </div>
+                        <div class="article-description">
+                            <p id="title">${papers[i].title}</p>
+                            <p id="authors">${papers[i].authors}</p>
+                            <p id="description">${papers[i].description}</p>
+                        </div>
+                    </div>
+                    <hr>` ;
+            }
+
+            return html;
+        }
+    </script>
+</div>
+
+  
+
+{% endblock %}

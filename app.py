@@ -25,7 +25,9 @@ import os
 import base64 
 import pandas as pd
 import hashlib, re
+import smtplib
 from flask_cors import CORS
+from email.mime.text import MIMEText
 #Path To Env File
 dotenv_path='static/env/.env'
 #Opens Env File
@@ -210,6 +212,8 @@ def profile():
         query = "SELECT * FROM Accounts where id = %s"
         cursor.execute(query, (session['id'],))
         account = cursor.fetchone()
+        cursor.close()
+        conn.close()
         return render_template('profile.html', account=account)
     return redirect(url_for('login'))
 
@@ -224,5 +228,70 @@ def logout():
    # Redirect to login page
    return redirect(url_for('index'))
 
+#Routing for the about us page
+@app.route('/aboutus', methods=['GET', 'POST'])
+#Function leads to about us page, sets up function call for the contact us section
+def aboutus():
+    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'email' in request.form:
+        firstname = request.form['fname']
+        lastname = request.form['lname']
+        #Add Email Input Check
+        email = request.form['email']
+        if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+           return render_template('aboutUs.html')
+        
+        message = request.form['message']
+        contactus(firstname, lastname, email, message)
+        #return success message - For Now Reloads page
+    if 'loggedin' in session:
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return render_template('aboutUs.html', account=account)
+    return render_template('aboutUs.html')
+
+#Function to send email to company email with information given from the contact us section of the about us page
+def contactus(fname, lname, email, message):
+    #Email Sent from sender
+    sender = "waterequitable@gmail.com"
+
+    #Email Received by receiver - NO RECEIVER ATM
+    #Change Receivers
+    receivers = ["waterequitable@gmail.com",]
+    #Change Receivers
+
+    msg = MIMEText(message)
+    #Sets up subject line of email
+    msg['Subject'] = email + ' , ' + fname + ' , ' + lname
+    #Sets up sender
+    msg['From'] = sender
+    #Sets up Receiver
+    msg['To'] = ', '.join(receivers)
+    #Connects to Sender email via smtp library and sends email to receiver
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        #
+        smtp_server.login(sender, os.getenv('EMAIL_KEY'))
+        smtp_server.sendmail(sender, receivers, msg.as_string())
+
+#Routing for research paper page
+@app.route('/researchpapers')
+def research():
+    if 'loggedin' in session:
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return render_template('research.html', account=account)
+    return render_template('research.html')
 if __name__ == '__main__':
   app.run(debug=True)
+
+
+  

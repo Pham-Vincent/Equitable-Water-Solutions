@@ -1,8 +1,16 @@
 .env
 config.js
 *.json
+!persons.json
 !Chesapeake_Bay_Shoreline_Low_Resolution.json
 *.csv
 *.xlsx
 venv
 *.pyc
+dist
+node_modules
+src
+.babelrc
+webpack.config.js
+test-app
+!ResearchPapers.json
