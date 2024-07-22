@@ -16,20 +16,20 @@
             </div>
             <div class="submit-form">
                 <!-- <form action="">  set action = to backend -->
-                <form>
-                    <div class="form">
+                <form action="{{ url_for('aboutus') }}" method="post">
+                    <div class="form" >
                         <div class="user-info">
                             <label for="fname">First name</label><br>
-                            <input type="text" id="fname" name="fname" ><br>
+                            <input type="text" id="fname" name="fname" required><br>
                             <label for="lname">Last name</label><br>
-                            <input type="text" id="lname" name="lname"><br>
+                            <input type="text" id="lname" name="lname" required><br>
                             <label for="email">Email</label><br>
-                            <input type="text" id="email" name="email"><br>
+                            <input type="text" id="email" name="email" required><br>
                         </div>
                         <div class="user-message">
                             <div>
                                 <label>Message</label><br>
-                                <textarea type="text" id="message" name="message"></textarea><br>
+                                <textarea type="text" id="message" name="message" required></textarea><br>
                             </div>
 
                             <div class="submit-container">
