@@ -184,7 +184,7 @@
   margin-bottom: 1%;
 }
   
-/*rotates UseType drop-down arrow */
+/*rotates UseType drop-down arrow 90 degrees*/
 .rotate-arrow-UseType {
   transform: rotate(-90deg); 
   -webkit-transform: rotate(-90deg);

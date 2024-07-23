@@ -13,3 +13,4 @@ src
 .babelrc
 webpack.config.js
 test-app
+!ResearchPapers.json

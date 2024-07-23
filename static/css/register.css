@@ -7,9 +7,13 @@ body{
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    
     margin: 0;
+    padding:0;
     background-image: linear-gradient(to right, #142A54 , #50BAB6);
+}
+
+html{
+    scroll-behavior: smooth;
 }
 
 .login, .register {
@@ -83,7 +87,7 @@ body{
 
 
 body.loggedin {
-    background-color: #2d58bb;
+    background-color: #ffffff;
 }
 
 .content {

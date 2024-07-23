@@ -9,20 +9,57 @@
 
     <div class="contact-split-container">
 
-        <div class="contact-top-content">
+        <div class="contact-top-content" id="Contact-Us">
+            <div class="slide-buttons">
+                <span>
+                    <button id="ContactUs-button" style="background-color: #B7E2BA;font: normal normal bold 14px/24px Roboto;">Contact Us</button>
+                    <button id="MeetTeam-button"><a href="#team-header">Meet the team</a></button>
+                </span>
+            </div>
             <div class="top-content-text">
                 <h1 id="line-1">Contact Us</h1>
                 <p id="line-2">We would love to hear from you!</p>
-                <p id="line-3">Please email us at emailaddress@gmail.com with any questions or concerns.</p>
+            </div>
+            <div class="submit-form">
+                <!-- <form action="">  set action = to backend -->
+                <form action="{{ url_for('aboutus') }}" method="post">
+                    <div class="form" >
+                        <div class="user-info">
+                            <label for="fname">First name</label><br>
+                            <input type="text" id="fname" name="fname" required><br>
+                            <label for="lname">Last name</label><br>
+                            <input type="text" id="lname" name="lname" required><br>
+                            <label for="email">Email</label><br>
+                            <input type="text" id="email" name="email" required><br>
+                        </div>
+                        <div class="user-message">
+                            <div>
+                                <label>Message</label><br>
+                                <textarea type="text" id="message" name="message" required></textarea><br>
+                            </div>
+
+                            <div class="submit-container">
+                                <input type="submit" value="Submit" id="submit-button">
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
         <div id="team-header">
+            <div class="slide-buttons" style="padding: 0 0 10px 0;">
+                <span>
+                    <button id="ContactUs-button"><a href="#Contact-Us">Contact Us</a></button>
+                    <button id="MeetTeam-button" style="background-color: #B7E2BA;font: normal normal bold 14px/24px Roboto;">Meet the team</button>
+                </span>
+            </div>
             <h1>Meet The Team</h1>
         </div>
 
         <!--Javascript to loop through persons.json and create person boxes-->
-        <div class="container-aboutUs" id="cards-container">
+        <div style="padding: 50px; background-color: rgb(255, 255, 255);">
+            <div class="container-aboutUs" id="cards-container"></div>
         </div>
         <script>
             document.addEventListener('DOMContentLoaded', function(){
@@ -52,7 +89,6 @@
                                         <h2>${person.name}</h2>
                                         <p class="title">${person.title}</p>
                                         <p>${person.description}</p>
-                                        <p><button class="button">Contact</button></p>
                                     </div>
                                 </div>
                             </div>`;

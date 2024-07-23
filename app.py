@@ -25,7 +25,9 @@ import os
 import base64 
 import pandas as pd
 import hashlib, re
+import smtplib
 from flask_cors import CORS
+from email.mime.text import MIMEText
 #Path To Env File
 dotenv_path='static/env/.env'
 #Opens Env File
@@ -58,17 +60,14 @@ def create_MD_graph():
   mycursor = conn.cursor()
 
   #Query For SQL
-  Query = "SELECT time,Salinity FROM Maryland_Tidal_History WHERE PermitNumber = \"" + str(marker_title)+ "\""
-
+  Query = "SELECT Time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = \"" + str(marker_title) + "\""
   #Executes The Query
   mycursor.execute(Query)
 
   #Get The Results of The Query
   myresult = mycursor.fetchall()
-
   Salinity_data = [[Time,Salinity] for Time,Salinity in (myresult)]
   Salinity_df= pd.DataFrame(Salinity_data,columns=['Time','Salinity'])
-
   Salinity_df=AverageDailySalinity(Salinity_df) 
   return(Maryland_Tidal_Graph(str(marker_title),Salinity_df))
 
@@ -226,8 +225,19 @@ def logout():
    # Redirect to login page
    return redirect(url_for('index'))
 
-@app.route('/aboutus')
+@app.route('/aboutus', methods=['GET', 'POST'])
 def aboutus():
+    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'email' in request.form:
+        firstname = request.form['fname']
+        lastname = request.form['lname']
+        #Add Email Input Check
+        email = request.form['email']
+        if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+           return render_template('aboutUs.html')
+        
+        message = request.form['message']
+        contactus(firstname, lastname, email, message)
+        #return success message - For Now Reloads page
     if 'loggedin' in session:
         conn = connect_to_database()
         cursor = conn.cursor(dictionary=True)
@@ -238,5 +248,38 @@ def aboutus():
         conn.close()
         return render_template('aboutUs.html', account=account)
     return render_template('aboutUs.html')
+
+def contactus(fname, lname, email, message):
+    sender = "waterequitable@gmail.com"
+
+    #Change Receivers
+    receivers = ["waterequitable@gmail.com",]
+    #Change Receivers
+
+    msg = MIMEText(message)
+    msg['Subject'] = email + ' , ' + fname + ' , ' + lname
+    msg['From'] = sender
+    msg['To'] = ', '.join(receivers)
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        smtp_server.login(sender, "rndxidrgmfzqkewq")
+        smtp_server.sendmail(sender, receivers, msg.as_string())
+    print("Message sent!")
+
+
+@app.route('/researchpapers')
+def research():
+    if 'loggedin' in session:
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return render_template('research.html', account=account)
+    return render_template('research.html')
 if __name__ == '__main__':
   app.run(debug=True)
+
+
+  
