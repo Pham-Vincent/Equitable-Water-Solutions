@@ -60,6 +60,7 @@ export function openPopup(marker) {
           </div>
         
           <div id="graph_html"></div>
+          <div id="DepthHeatMap_html"></div>
         </div>   
     `;
     preformPost(marker);
@@ -72,7 +73,7 @@ export function openPopup(marker) {
     
     if(marker.descriptions.state == 'Virginia')
       {
-        $('#graph_html').addClass("loader")
+        $('#graph_html').addClass("loader")        
       $.ajax({ 
         type:"POST",
         url:config.hostname + "/create_VA_graph",
@@ -88,6 +89,7 @@ export function openPopup(marker) {
     else
     { 
         $('#graph_html').addClass("loader")
+        $('#DepthHeatMap_html').addClass("loader")
         $.ajax({ 
         type:"POST",
         url:config.hostname + "/create_MD_graph",
@@ -99,6 +101,19 @@ export function openPopup(marker) {
        },
       error:function(error){
       $('#graph_html').removeClass("loader")
+       } 
+      });
+        $.ajax({ 
+        type:"POST",
+        url:config.hostname + "/create_MultiDepth_graph",
+        data: marker.title, 
+       success: function(response){
+        /*Stops the Loading Screen*/
+        $('#DepthHeatMap_html').removeClass("loader")
+        $('#DepthHeatMap_html').html(response.Depth_json)
+       },
+      error:function(error){
+      $('#DepthHeatMap_html').removeClass("loader")
        } 
       });
       }
