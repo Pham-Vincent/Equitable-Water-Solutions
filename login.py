@@ -1,3 +1,12 @@
+""" 
+Title:About.py
+Author: Nicholas Gammel
+
+Functionality: This file is designed to control functionality of Login/Register.
+
+Output: Session Variables for login
+Date:7/23/2024
+"""
 from flask import Flask,render_template,request, redirect, url_for, session
 from Database import *
 from Graph import *
@@ -6,7 +15,7 @@ from FeatureExtraction import *
 import hashlib, re
 
 
-
+#Controls register page functionality including validating using input and storing data inside of database
 def registerFunction():
     #Checks that fields are filled
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
@@ -90,6 +99,8 @@ def loginFunction():
     msg=''
     return render_template('login.html', msg=msg)
 
+
+#Used to check session variables on each page to validate user is logged in
 def checkLogin(html):
     if 'loggedin' in session:
         conn = DatabaseConn()

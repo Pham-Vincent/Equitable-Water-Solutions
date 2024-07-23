@@ -98,8 +98,9 @@ def map():
 def register():
     return registerFunction()
 
-
+#login page route
 @app.route('/login', methods=['GET', 'POST'])
+#Logs user in using information from database
 def login():
     return loginFunction()
 
