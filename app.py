@@ -41,7 +41,34 @@ app.secret_key = os.getenv('SECRET_KEY')
 @app.route('/ApiKey')
 def APIKEY():
     return(os.getenv('MAP_KEY'))
-    
+
+# Route to create a heatmap for salinity at multiple depths
+@app.route('/create_MultiDepth_graph',methods=['GET','POST'])
+def create_MultiDepth_graph():
+  #Gets Marker Title Of current Info Window From Ajax 
+  marker_title = request.values
+  #Gets Marker Title Name  
+  marker_title = list(marker_title.keys())[0]
+
+  #Establishes Connection With DB 
+  conn = DatabaseConn()
+
+  #Query For SQL
+  mycursor = conn.cursor()
+
+  Query = "SELECT Time, `Depth:0`,`Depth:5`,`Depth:10`,`Depth:15`,`Depth:20`,`Depth:25`,`Depth:30` FROM Maryland_Salinity_Depth WHERE PermitNumber = \"" + str(marker_title) + "\""
+  #Executes The Query
+  mycursor.execute(Query)
+  #Get The Results of The Query
+  myresult = mycursor.fetchall()
+  column_names = ['Time', 'Depth:0', 'Depth:5', 'Depth:10', 'Depth:15', 'Depth:20', 'Depth:25', 'Depth:30']
+  DepthDF = pd.DataFrame(myresult, columns=column_names)
+  DepthDF['Time'] = pd.to_datetime(DepthDF['Time'])
+  DepthDF=MonthlyAverages(DepthDF)
+  return(MultiDepthGraphing(str(marker_title),DepthDF))
+
+
+# Route to graph surface salinity of Maryland points
 @app.route('/create_MD_graph',methods=['GET','POST'])
 def create_MD_graph():
   #Gets Marker Title Of current Info Window From Ajax 
@@ -51,9 +78,7 @@ def create_MD_graph():
 
   #Establishes Connection With DB 
   conn = DatabaseConn()
-
   mycursor = conn.cursor()
-
   #Query For SQL
   Query = "SELECT Time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = \"" + str(marker_title) + "\""
   #Executes The Query
@@ -117,6 +142,7 @@ def logout():
    session.pop('username', None)
    # Redirect to login page
    return redirect(url_for('index'))
+
 
 #Routing for the about us page
 @app.route('/aboutus', methods=['GET', 'POST'])

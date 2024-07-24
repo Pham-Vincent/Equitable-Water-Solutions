@@ -43,13 +43,12 @@ def Maryland_Tidal_Graph(marker_title,Salinity_df):
             colorbar=dict(title='Salinity'),
             size=4
         ),
-        hovertemplate='Time: %{x}<br>Salinity: %{y}',
+        hovertemplate='Time: %{x}<br>Salinity: %{y} ppt',
         name=""
     ),
 layout=go.Layout(
-    width=700,
+    width=800,
     height=550,
-    title="Calvert Cliffs Nuclear Power Plant Salinity Levels",
     xaxis=dict(title="Time"),
     yaxis=dict(title="Salinity Levels"),
     showlegend=False
@@ -60,9 +59,9 @@ layout=go.Layout(
 
   SalinityPlotted.update_layout(
   yaxis_title="Salinity Levels",
-  xaxis_title="Dates Samples Collected",
-  title=f"<b>{marker_title}</b>", 
-  title_x=0.5,
+  xaxis_title="Timestamps",
+  title=f"<b>2022 Surface Salinity Information</b>", 
+  title_x=0.7,
   yaxis_title_font=dict(
     size=18,
     family="Roboto"
@@ -71,8 +70,7 @@ layout=go.Layout(
     xaxis_title_font=dict(
     size=18,
     family="Roboto"
-    ),
-    
+    ), 
    
   )
   
@@ -197,4 +195,68 @@ def Virginia_Tidal_Graph(WithdrawValues):
   graph_html = pio.to_html(WithdrawPlotted, full_html=False,config=config)
   graph_json='<div id="graph_html">' + graph_html + '<div>'
   return jsonify({'graph_json': graph_json,})
-  
+
+# This function creates a heatmap to display salinity values at different depths
+def MultiDepthGraphing(marker_title,Depth_df):
+  #Color Scale For HeatMap
+  custom_colorscale = [
+      [0.0, '#9597c2'],    # Lightest blue
+      [0.2, '#5b60b0'],   # Lighter blue
+      [0.4, '#474b96'],   # Light blue
+      [0.6, '#1d1f80'],   # Dark blue
+      [0.8, '#0f1180'],   # Blue
+      [1.0, '#030582']   # Dark blue
+  ]
+  config = {'displaylogo': False,}
+
+  #Selects only the Depths That Want to be plotted
+  Depth_df = Depth_df[['Time', 'Depth:0', 'Depth:5', 'Depth:10', 'Depth:15', 'Depth:20', 'Depth:25', 'Depth:30']]
+
+  #Transposes the DataFrame to be in graphable form
+  Depth_df = Depth_df.transpose()
+
+  #Reorders The DataFrame as it gets Automatically Sorted in alphabetical order when grouping by month
+  Depth_df = Depth_df[[4,3,7,0,8,6,5,1,11,10,9,2]]
+
+  #Months Go In their own DF
+  new_index = Depth_df.iloc[0]
+
+  #Removes Months from DF
+  Depth_df= Depth_df[1:]
+
+  #Changes Names from Depth:0 -> 0 
+  Depth_df.index=[0,5,10,15,20,25,30]
+  Depth_df.columns = new_index
+  #Graphing of the DataFrame
+  fig = px.imshow(Depth_df, color_continuous_scale=custom_colorscale, aspect="auto")
+  fig.update_layout(
+      title= '<b>2022 Depth Salinity Information</b>',
+      title_x=0.42,
+      width=900,
+      height=550,
+      yaxis_title='Depth',
+      xaxis_title='Timestamps',
+      coloraxis_colorbar=dict(
+          title='PPT<br>(Parts Per Thousand)',  # Title for the color bar
+          title_side='top'                   # Position the title at the top
+      ),
+      yaxis_title_font=dict(
+        size=16,
+        family="Roboto",
+          
+      ),
+      xaxis_title_font=dict(
+        size=16,
+        family="Roboto",
+      ),
+  )
+
+  fig.update_traces(
+      hovertemplate='<br>Month: %{x}<br>Depth: %{y}<br>Salinity: %{z}<extra></extra>',
+
+  )
+
+  graph_html = pio.to_html(fig, full_html=False,config=config)
+  Depth_json='<div id="DepthHeatMap_html">' + graph_html + '<div>'
+  return jsonify({'Depth_json': Depth_json,})
+      
