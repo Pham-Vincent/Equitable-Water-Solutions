@@ -90,31 +90,28 @@ export function openPopup(marker) {
     { 
         $('#graph_html').addClass("loader")
         $('#DepthHeatMap_html').addClass("loader")
-        $.ajax({ 
-        type:"POST",
-        url:config.hostname + "/create_MD_graph",
-        data: marker.title, 
-       success: function(response){
-        /*Stops the Loading Screen*/
-        $('#graph_html').removeClass("loader")
-        $('#graph_html').html(response.graph_json)
-       },
-      error:function(error){
-      $('#graph_html').removeClass("loader")
-       } 
-      });
-        $.ajax({ 
-        type:"POST",
-        url:config.hostname + "/create_MultiDepth_graph",
-        data: marker.title, 
-       success: function(response){
-        /*Stops the Loading Screen*/
-        $('#DepthHeatMap_html').removeClass("loader")
-        $('#DepthHeatMap_html').html(response.Depth_json)
-       },
-      error:function(error){
-      $('#DepthHeatMap_html').removeClass("loader")
-       } 
+        Promise.all([
+          $.ajax({
+              type: "POST",
+              url: config.hostname + "/create_MD_graph",
+              data: marker.title
+          }),
+          $.ajax({
+              type: "POST",
+              url: config.hostname + "/create_MultiDepth_graph",
+              data: marker.title
+          })
+      ]).then(([response1, response2]) => {
+          // Success handling for both requests
+          $('#graph_html').removeClass("loader");
+          $('#graph_html').html(response1.graph_json);
+      
+          $('#DepthHeatMap_html').removeClass("loader");
+          $('#DepthHeatMap_html').html(response2.Depth_json);
+      }).catch((error) => {
+          // Error handling for both requests
+          $('#graph_html').removeClass("loader");
+          $('#DepthHeatMap_html').removeClass("loader");
       });
       }
     

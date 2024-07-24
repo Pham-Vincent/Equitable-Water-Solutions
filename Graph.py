@@ -43,7 +43,7 @@ def Maryland_Tidal_Graph(marker_title,Salinity_df):
             colorbar=dict(title='Salinity'),
             size=4
         ),
-        hovertemplate='Time: %{x}<br>Salinity: %{y}',
+        hovertemplate='Time: %{x}<br>Salinity: %{y} ppt',
         name=""
     ),
 layout=go.Layout(
@@ -59,9 +59,9 @@ layout=go.Layout(
 
   SalinityPlotted.update_layout(
   yaxis_title="Salinity Levels",
-  xaxis_title="Dates Samples Collected",
-  title=f"<b>{marker_title}</b>", 
-  title_x=0.5,
+  xaxis_title="Timestamps",
+  title=f"<b>2022 Surface Salinity Information</b>", 
+  title_x=0.7,
   yaxis_title_font=dict(
     size=18,
     family="Roboto"
@@ -70,8 +70,7 @@ layout=go.Layout(
     xaxis_title_font=dict(
     size=18,
     family="Roboto"
-    ),
-    
+    ), 
    
   )
   
@@ -209,7 +208,7 @@ def MultiDepthGraphing(marker_title,Depth_df):
   ]
   config = {'displaylogo': False,}
 
-  #Selects only the Depths THat Want to be plotted
+  #Selects only the Depths That Want to be plotted
   Depth_df = Depth_df[['Time', 'Depth:0', 'Depth:5', 'Depth:10', 'Depth:15', 'Depth:20', 'Depth:25', 'Depth:30']]
 
   #Transposes the DataFrame to be in graphable form
@@ -230,15 +229,25 @@ def MultiDepthGraphing(marker_title,Depth_df):
   #Graphing of the DataFrame
   fig = px.imshow(Depth_df, color_continuous_scale=custom_colorscale, aspect="auto")
   fig.update_layout(
-      title= 'Depth Salinity Information',
-      title_x=0.5,
+      title= '<b>2022 Depth Salinity Information</b>',
+      title_x=0.42,
       width=900,
       height=550,
       yaxis_title='Depth',
+      xaxis_title='Timestamps',
       coloraxis_colorbar=dict(
           title='PPT<br>(Parts Per Thousand)',  # Title for the color bar
           title_side='top'                   # Position the title at the top
-      )
+      ),
+      yaxis_title_font=dict(
+        size=16,
+        family="Roboto",
+          
+      ),
+      xaxis_title_font=dict(
+        size=16,
+        family="Roboto",
+      ),
   )
 
   fig.update_traces(
