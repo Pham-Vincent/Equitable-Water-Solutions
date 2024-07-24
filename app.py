@@ -42,6 +42,7 @@ app.secret_key = os.getenv('SECRET_KEY')
 def APIKEY():
     return(os.getenv('MAP_KEY'))
 
+# Route to create a heatmap for salinity at multiple depths
 @app.route('/create_MultiDepth_graph',methods=['GET','POST'])
 def create_MultiDepth_graph():
   #Gets Marker Title Of current Info Window From Ajax 
@@ -67,7 +68,7 @@ def create_MultiDepth_graph():
   return(MultiDepthGraphing(str(marker_title),DepthDF))
 
 
-
+# Route to graph surface salinity of Maryland points
 @app.route('/create_MD_graph',methods=['GET','POST'])
 def create_MD_graph():
   #Gets Marker Title Of current Info Window From Ajax 
@@ -141,6 +142,7 @@ def logout():
    session.pop('username', None)
    # Redirect to login page
    return redirect(url_for('index'))
+
 
 #Routing for the about us page
 @app.route('/aboutus', methods=['GET', 'POST'])

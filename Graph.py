@@ -196,6 +196,7 @@ def Virginia_Tidal_Graph(WithdrawValues):
   graph_json='<div id="graph_html">' + graph_html + '<div>'
   return jsonify({'graph_json': graph_json,})
 
+# This function creates a heatmap to display salinity values at different depths
 def MultiDepthGraphing(marker_title,Depth_df):
   #Color Scale For HeatMap
   custom_colorscale = [

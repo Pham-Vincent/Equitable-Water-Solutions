@@ -60,6 +60,7 @@ def AverageDailySalinity(DataFrame):
   
   return interpolation(NewDates)
 
+# Get the monthly averages for salinity at each depth
 def MonthlyAverages(DataFrame):
 
   #Reformats The Time So We can filter by months
