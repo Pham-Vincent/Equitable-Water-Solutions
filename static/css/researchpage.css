@@ -1,7 +1,13 @@
-.research-content{
+.outer-research-container{
+    background-color: white;
     width: 100%;
+}
+
+.research-content{
+    width: 85%;
     height: 100%;
-    padding: 50px 100px;
+    margin: 0 auto;
+    padding-top: 5%;
     z-index: 1;
     background-color: rgb(255, 255, 255);
 }
@@ -10,15 +16,17 @@
     position: relative;
     font: normal normal bold 50px/55px Roboto;
     margin: 10px 0;
+    color: #0A2B57;
 }
 
 .research-content > p{
-    font: italic normal normal 20px/28px Roboto;
+    font: italic normal bold 20px/28px Roboto;
     margin: 10px 0;
+    color: #0A2B57
 }
 
 .articles{
-    width: calc(100% - 200px);
+    width: auto;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -109,6 +117,42 @@ hr {
     .article-row{
         flex-direction: column;
     }
+
+
+    .research-content > h1{
+        font: normal normal bold 35px/48px Roboto;
+    }
+
+    .research-content p{
+        font: italic normal bold 16px/24px Roboto;
+    }
+
+    #title{
+        font: italic normal bold 16px/24px Roboto;
+    }
+    
+    #authors{
+        font: normal normal normal 12px/22px Roboto;
+    }
+    
+    #description{
+        font: normal normal normal 14px/22px Roboto;
+    }
+
+    .article-image > img{
+        width: 350px;
+        height: 250px; 
+        margin: 0 auto;
+    }
+
+    .article-image > #read-more{
+        bottom: 10%;
+        right: -8%; 
+    } 
+
+
+
+
    
     
   }

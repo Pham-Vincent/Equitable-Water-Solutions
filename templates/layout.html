@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/@material/layout-grid@latest/dist/mdc.layout-grid.css">
     <link rel="stylesheet" href="https://unpkg.com/@material/card@latest/dist/mdc.card.css">
     <link rel="stylesheet" href="https://unpkg.com/@material/ripple@latest/dist/mdc.ripple.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="importmap">
         {
             "imports": {
@@ -34,22 +35,52 @@
             });
         });
     </script>
+
+    <script>
+        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "small-bar") {
+                x.className += "-responsive";
+            } else {
+                x.className = "small-bar";
+            }
+        }
+    </script>
     <!-- Material Components Import Ends Here -->
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
-    <nav class="navtop">
-        <div>
-            <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastGreenText.svg" alt="logo" style="width:6.2em; height:1.8em;"></a></h1>
+    
+    <div class="nav-container">
+        <nav class="navtop">
 
-            <div class="nav-options">
-                <a href="{{ url_for('index') }}"><span>Home</span></a>
-                <!-- remove map link <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a> -->
-                <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
-                <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
+            <div id="div1">
+                <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastGreenText.svg" alt="logo"></a></h1>
+    
+                <div class="nav-options">
+                    <a href="{{ url_for('index') }}"><span>Home</span></a>
+                    <!-- remove map link <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a> -->
+                    <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
+                    <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
+                    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+    
             </div>
+            
+        </nav>
 
+        <div class="small-bar" id="myTopnav">
+            <a href="{{ url_for('index') }}"><span>Home</span></a>
+            <!-- remove map link <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a> -->
+            <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
+            <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
         </div>
-    </nav>
+        
+    </div>
+    
     <div class="content">
         {% block content %}{% endblock %}
     </div>

@@ -16,28 +16,28 @@
     {
       "name": "Dr. Allison Lassiter",
       "title": "Principal Investigator",
-      "description": "Assistant Professor in City and Regional Planning at the University of Pennsylvania Weitzman School of Design",
+      "description": "Assistant Professor at University of Pennsylvania",
       "email": "example2@example.com",
       "image": "static/images/Team-Images/Allison Lassiter@2x.png"
     },
     {
       "name": "Dr. Alfonso Mejia",
       "title": "Principal Investigator",
-      "description": "Professor of Oceanography at The Pennsylvania State University",
+      "description": "Associate Professor at Pennsylvania State University",
       "email": "example3@example.com",
       "image": "static/images/Team-Images/alfonso-mejia@2x.png"
     },
     {
       "name": "Dr. Sujay Kaushal",
       "title": "Principal Investigator",
-      "description": "Professor of Geology at the University of Maryland",
+      "description": "Professor at University of Maryland",
       "email": "example2@example.com",
       "image": "static/images/Team-Images/SujayKaushal@2x.png"
     },
     {
       "name": "Antonia Hadjimichael",
       "title": "Senior Investigator",
-      "description": "Assistant Professor at Penn State University",
+      "description": "Assistant Professor at Pennsylvania State University",
       "email": "example2@example.com",
       "image": "static/images/Team-Images/antonia-hadjimichael@2x.png"
     },
@@ -65,7 +65,7 @@
     {
       "name": "Samantha Puckett",
       "title": "Senior Investigator",
-      "description": "Clean Water Program Director at the Izaak Walton League of America, a national nonprofit focused on conservation",
+      "description": "Clean Water Program Director at the Izaak Walton League of America",
       "email": "example3@example.com",
       "image": "static/images/Team-Images/samantha-briggs@2x.png"
     },
@@ -86,14 +86,14 @@
     {
       "name": "Kanika Kumar",
       "title": "Product & UX Design Strategist",
-      "description": "Graduate Student of Integrated Product Design at the University of Pennsylvania",
+      "description": "Graduate Student at University of Pennsylvania",
       "email": "example3@example.com",
       "image": "static/images/Team-Images/Kanika@2x.png"
     },
     {
       "name": "Ava Spangler",
       "title": "Project Member",
-      "description": "Graduate Student at Penn State University",
+      "description": "Graduate Student at Pennsylvania State University",
       "email": "example2@example.com",
       "image": "static/images/Team-Images/ava-spangler@2x.png"
     },
@@ -128,7 +128,7 @@
     {
       "name": "Abby Hileman",
       "title": "Project Member",
-      "description": "Salt Watch Coordinator at the Izaak Walton League of America, a national nonprofit focused on conservation",
+      "description": "Salt Watch Coordinator at the Izaak Walton League of America",
       "email": "example2@example.com",
       "image": "static/images/Team-Images/AbbyHileman3@2x.png"
     },
