@@ -5,19 +5,19 @@ CSS for index.html to syle the landing/coming soon page
 /* defines a flex to split to page into 2 halfs (div/img) */
 
 .page-content{
-    width: 100%;
+    width: 85%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10em;
-    margin: 150px 0 0 0;
+    margin: 10% auto;
     z-index: 1;
 }
 
 .page-content > div{
-    width: 100%;
-    padding: 0 0 30px 100px;
+    width: auto;
+    padding: 0 0 30px 0;
     z-index: 1;
 }
 .page-content h1{
@@ -31,31 +31,40 @@ CSS for index.html to syle the landing/coming soon page
 
  .page-content img{
     border-radius: 50%;
-    width: 80%;
-    height: 80%; 
+    width: 460px;
+    height: 460px;
     margin-bottom: 0;
-    margin-right: 100px;
     background-color: rgba(255, 255, 255, 0.126);
     z-index: 1;
  }
 
  .page-content p{
     color: white;
-    font:normal normal normal 20px/24px Roboto;
+    font:normal normal normal 16px/24px Roboto;
     text-align:left;
  }
 
- a:link{
+ .journey a:link{
     color: white;
  }
 
- a:visited{
+ .journey a:visited{
     color: white;
  }
 
- a:hover{
+ .journey a:hover{
     color: black;
     transition: 0.2s;
+ }
+
+ .journey h1{
+    font: normal normal bold 35px/43px Roboto;
+ }
+
+ .journey p{
+    font: italic normal normal 20px/28px Roboto;
+    font-style: italic;
+    font-weight: 500;
  }
 
 
@@ -65,13 +74,44 @@ CSS for index.html to syle the landing/coming soon page
         display:contents;
     }
 
-    .page-content div{
-        margin: 20px 0 0 -50px;
-    }
-
     .page-content img{
         margin: 0 auto;
      }
+
+     .page-content h1{
+        font: italic normal bold 35px/48px Roboto;
+        padding-top: 10%;
+     }
+
+     .page-content p{
+        font: normal normal normal 14px/22px Roboto;
+     }
+
+     .page-content > div{
+        width: 85%;
+        margin: 0 auto;
+     }
+
+     .page-content img{
+        height: 70%;
+        width: 70%;
+        display: block;
+        margin: 20px auto 20px auto;
+        z-index: 2;
+     }
+
+     .journey h1{
+        font: normal normal bold 22px/30px Roboto;
+        margin: auto 0 5px 0;
+     }
+    
+     .journey p{
+        font: italic normal normal 16px/24px Roboto;
+        font-weight: 500;
+        margin: 5px 0;
+     }
+
+     
  }
 
  

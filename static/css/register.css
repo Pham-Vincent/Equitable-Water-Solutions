@@ -3,12 +3,12 @@ body{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     overflow-y: auto;
     overflow-x: hidden;
     margin: 0;
-    padding:0;
+    padding: 0;
     background-image: linear-gradient(to right, #142A54 , #50BAB6);
 }
 
@@ -22,6 +22,7 @@ html{
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;
 }
+
 .login h1, .register h1 {
     text-align: center;
     color: #5b6574;
@@ -29,10 +30,12 @@ html{
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #dee0e4;
 }
+
 .login .links, .register .links {
     display: flex;
     padding: 0 15px;
 }
+
 .login .links a, .register .links a {
     color: #adb2ba;
     text-decoration: none;
@@ -40,19 +43,23 @@ html{
     padding: 0 10px 10px 10px;
     font-weight: bold;
 }
+
 .login .links a:hover, .register .links a:hover {
     color: #9da3ac;
 }
+
 .login .links a.active, .register .links a.active {
     border-bottom: 3px solid #3274d6;
     color: #3274d6;
 }
+
 .login form, .register form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 20px;
 }
+
 .login form label, .register form label {
     display: flex;
     justify-content: center;
@@ -62,6 +69,7 @@ html{
     background-color: #3274d6;
     color: #ffffff;
 }
+
 .login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
     width: 310px;
     height: 50px;
@@ -69,6 +77,7 @@ html{
     margin-bottom: 20px;
     padding: 0 15px;
 }
+
 .login form input[type="submit"], .register form input[type="submit"] {
     width: 100%;
     padding: 15px;
@@ -80,11 +89,11 @@ html{
     color: #ffffff;
     transition: background-color 0.2s;
 }
+
 .login form input[type="submit"]:hover, .register form input[type="submit"]:hover {
     background-color: #2868c7;
     transition: background-color 0.2s;
 }
-
 
 body.loggedin {
     background-color: #ffffff;

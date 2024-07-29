@@ -1,30 +1,22 @@
 
+.outer-container{
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  padding-top: 5%;
+}
+
 .row {
     display: flex;
-    justify-content:center;
-    width: auto;
+    flex-direction: row;
+    justify-content:space-between;
+    width: 100%;
     z-index: 1;
 }
 
 .column {
-    width: 33.33%;
+    width: 30%;
     box-sizing: border-box;
     z-index: 1;
-  }
-  @media screen and (max-width: 650px) {
-    .column {
-      width: 100%;
-      display: block;
-    }
-
-    .row{
-      display: contents;
-    }
-
-    .form{
-      flex-direction: column;
-    }
-    
   }
 
   .card {
@@ -46,8 +38,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 85%;
     height:100%;
+    margin: 0 auto;
     z-index: 1;
     background-color: #ffffff;
   }
@@ -60,43 +53,34 @@
     display: flex; 
     align-items: center;
     justify-content: center;
-    margin-bottom: -15%;
+    margin-bottom: -20%;
   }
 
   .mini-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70%;
-    height: 150px;
+    width: 100%;
+    height: 220px;
     margin: 0 auto;
     border-radius: 20px;
     border-style:solid;
-    padding: 50px 10px 40px 10px;
+    padding: 500px auto 20px auto;
   }
   
+  /* mess up formatting so i took out - Will :)
   .container-aboutUs::after, .row::after {
     content: "";
     clear: both;
     display: table;
   }
+  */
   
   .title {
     color: grey;
   }
   
-  .button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-  }
-  
+
   .button:hover {
     background-color: #555;
   }
@@ -107,8 +91,10 @@
   }
 
   .mini-container > h2{
+    margin-top: 20%;
     font: italic normal normal 20px/28px Roboto;
     font-weight: 500;
+    color: #0A2B57
   }
 
   .mini-container > .title{
@@ -119,37 +105,46 @@
     font: normal normal normal 16px/20px Roboto;
   }
 
-  .contact-top-content{
+  .top-content-container{
     width: 100%;
+    background-color: #E5E9ED;
+  }
+
+  .contact-top-content{
+    width: 85%;
     height: 550px;
+    margin: 0 auto;
     z-index:2;
     background-color: #E5E9ED;
   }
 
   .top-content-text{
     color:rgb(0, 0, 0);
-    padding:0 0 0 100px;
   }
 
   #line-1{
     font: normal normal bold 50px/55px Roboto;
     margin-bottom:0;
+    color: #0A2B57
   }
 
   #line-2{
     font: italic normal bold 20px/28px Roboto;
+    color: #0A2B57
   }
 
-  #line-3{
-    font: normal normal normal 16px/24px Roboto;
+  .team-header-container{
+    background-color: white;
+    width:100%;
   }
-
 
   #team-header{
     height: 70px;
-    width: 100%;
+    width: 85%;
+    margin: 0 auto;
     background-color: #ffffff;
-    padding:50px 0 0 100px;
+    padding:50px 0 0 0;
+    color: #0A2B57
   }
   #team-header h1{
     font: normal normal bold 50px/55px Roboto;
@@ -157,19 +152,22 @@
 
 .submit-form{
   width:auto;
-  margin:0 100px 0 100px;
 }
 
 .form{
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 7em;
   font: normal normal normal 16px/24px Roboto;
 }
 
+.user-info{
+  width: 60%;
+}
 .user-info input{
-  width: 400px;
+  width: 100%;
   height: 45px;
   border: none;
   border-radius: 10px;
@@ -178,12 +176,13 @@
 }
 
 .user-message{
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .user-message #message{
-  width: 700px;
+  width: 100%;
   height: 180px;
   border: none;
   border-radius: 10px;
@@ -242,7 +241,11 @@
 }
 
 .slide-buttons{
-  padding: 50px 0 0 100px;
+  padding: 50px 0 0 0;
+}
+
+#team-header > .slide-buttons{
+  padding : 0 0 10px 0;
 }
 
 
@@ -252,6 +255,80 @@ a:link{
 
 a:visited{
   color: rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+
+  .row{
+    display: contents;
+  }
+
+  .form{
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-top-content{
+    height: 750px;
+  }
+
+  .user-info{
+    width: 100%
+  }
+
+  .user-info input{
+    width: 100%;
+    height: 45px;
+  }
+
+  .user-message #message{
+    width: 100%;
+    height: 80px; 
+  }
+
+  .submit-container {
+    align-self: flex-start;
+  }
+
+  .mini-container{
+    display: block;
+    width: 100%;
+    padding: 0;
+    height: 200px;
+    word-wrap: break-word;
+  }
+
+  #team-header{
+    height: 130px;
+  }
+
+  .mini-container > h2{
+    margin-top: 16%;
+    font: italic normal normal 16px/24px Roboto;
+    font-weight: 500;
+  }
+
+  .mini-container > .title{
+    font: normal normal bold 14px/22px Roboto;
+  }
+
+  .mini-container > p{
+    font: normal normal normal 14px/22px Roboto;
+  }
+  
+  .image-container{
+    margin-bottom: -20%;
+  }
+
+  
+
+
+
+  
 }
 
 
