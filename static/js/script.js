@@ -92,8 +92,8 @@ $.ajax({
         let mapCode = point.Hydrocode,
         desc1 = point.Source_Type,
         useType = point.Use_Type,
-        latitude = parseFloat(point.Latitude),
-        longitude = parseFloat(point.Longitude),
+        latitude = parseFloat(point.Latitude) - randomOffset(),
+        longitude = parseFloat(point.Longitude) + randomOffset(),
         locality = point.Locality,
         point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
         legendType = 'Virginia';
@@ -192,8 +192,8 @@ $.ajax({
     data.forEach(function(point) {
       let mapCode = point.PermitNumber,
       desc1 = point.NewUseType,
-      latitude = parseFloat(point.Latitude),
-      longitude = parseFloat(point.Longitude),
+      latitude = parseFloat(point.Latitude) + randomOffset(),
+      longitude = parseFloat(point.Longitude) - randomOffset(),
       locality = point.County,
       stream = point.streamName,
       legendType = 'Maryland';
@@ -312,6 +312,17 @@ function handleKeyPress(event) {
   var inputField =  document.getElementById("search-input")
   //Handles Search
   autocomplete(inputField,markers,map);
+}
+
+function randomOffset() {
+  //6.9 miles per .1 degree latitude
+  //5.46 miles per .1 degree longitude 
+  //All coordinates between 0-4 miles offset
+  //Math.random() gets random value between 0 and 1
+  let num = Math.random();
+  while(num>.05)
+      num/=10;
+  return num;
 }
 
 //event listener for search enter press
