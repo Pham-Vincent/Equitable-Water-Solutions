@@ -92,7 +92,7 @@ def main():
   )
   mycursor = mydb.cursor()
   # Query To Get Desired Values from Database
-  query = "SELECT time, Salinity FROM Maryland_Tidal_History WHERE PermitNumber = 'CA1971S001(04)'"
+  query = "SELECT time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = 'CA1971S001(04)'"
 
   # Executing Query
   mycursor.execute(query)
@@ -103,7 +103,7 @@ def main():
   # Inserting The Data Into DataFrame
   Salinity_data = [[Time, Salinity] for Time, Salinity in myresult]
   Salinity_df = pd.DataFrame(Salinity_data, columns=['Time', 'Salinity'])
-  Salinity_df = AverageDailySalinity(Salinity_df)
+  #Salinity_df = AverageDailySalinity(Salinity_df)
   Salinity_df['Time'] = pd.to_datetime(Salinity_df['Time']).apply(lambda x: x.timestamp())
 
   X = Salinity_df[['Time', 'Salinity']]
@@ -168,19 +168,21 @@ def main():
       connectgaps=False
   ))
 
-  SalinityPlotted.add_trace(go.Scatter(
+  """  
+    SalinityPlotted.add_trace(go.Scatter(
       x=svm_anomalies['Datetime'],
       y=svm_anomalies['Salinity'],
       mode='lines',
       marker=dict(color='red', size=8),
       name='Anomaly',
       hovertemplate='Time %{x}<br>Salinity: %{y}'
-  ))
+  )) 
+  """
 
   SalinityPlotted.update_layout(
       width=700,
       height=550,
-      title="Calvert Cliffs Nuclear Power Plant Salinity Levels",
+      title="Raw Dataset",
       xaxis=dict(title="Time"),
       yaxis=dict(title="Salinity Levels"),
       showlegend=True
@@ -188,15 +190,14 @@ def main():
 
   SalinityPlotted.update_layout(
       yaxis_title="Salinity Levels",
-      xaxis_title="Dates Samples Collected",
-      title=f"<b>Calvert Cliffs Nuclear Power Plant Salinity Levels</b>",
+      xaxis_title="Timestamp",
       title_x=0.5,
       yaxis_title_font=dict(size=18, family="Roboto"),
       xaxis_title_font=dict(size=18, family="Roboto"),
   )
 
   #Time Series Data Creation
-  SalinityPlotted.update_layout(
+  """ SalinityPlotted.update_layout(
       xaxis=dict(
           rangeselector=dict(
               buttons=list([
@@ -210,7 +211,7 @@ def main():
           rangeslider=dict(visible=True),
           type="date"
       )
-  )
+  ) """
   SalinityPlotted.show()  
 
 
