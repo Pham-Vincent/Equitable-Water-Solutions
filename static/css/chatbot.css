@@ -4,7 +4,7 @@
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
  /* Global reset and font setting */
- * {
+ .chatbot * {
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
   box-sizing: border-box; /* Set box sizing to border box */
@@ -97,7 +97,7 @@ body.show-chatbot .chatbot {
   transform: translateY(-50%);
 }
 
-header h2 {
+.chatbot header h2 {
   font-size: 1.4rem;
 }
 

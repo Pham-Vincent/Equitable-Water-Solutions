@@ -1,5 +1,4 @@
-// Configuration
-const API_BASE_URL = 'http://18.118.37.115'; // AWS EC2 Public IP
+let API_BASE_URL;
 
 // DOM Elements
 const chatbotToggler = document.querySelector(".chatbot-toggler"); // Button to toggle the chatbot
@@ -202,4 +201,15 @@ closeBtn.addEventListener("click", () => {
 chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
 
 // Initialize the chat when the script loads
-document.addEventListener('DOMContentLoaded', initializeChat);
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/ApiKey')
+        .then(response => response.json())
+        .then(config => {
+            API_BASE_URL = config.bot_url;
+            initializeChat();
+        })
+        .catch(error => {
+            console.error('Error fetching AI base URL:', error);
+            showError("Failed to initialize chat. Please try again later. From chatbot.js, document.addEventListener('DOMContentLoaded', () => { ... });");
+        })
+});
