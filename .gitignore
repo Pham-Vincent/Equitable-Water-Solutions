@@ -14,3 +14,4 @@ src
 webpack.config.js
 test-app
 !ResearchPapers.json
+references
