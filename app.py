@@ -40,7 +40,9 @@ app.secret_key = os.getenv('SECRET_KEY')
 #Purpose is to Return the Map API Key without revealing it to public
 @app.route('/ApiKey')
 def APIKEY():
-    return(os.getenv('MAP_KEY'))
+    map_key = os.getenv('MAP_KEY')
+    botURL = os.getenv('CHATBOT_URL')
+    return jsonify({'mapKey': map_key, 'bot_url': botURL})
 
 # Route to create a heatmap for salinity at multiple depths
 @app.route('/create_MultiDepth_graph',methods=['GET','POST'])
@@ -158,8 +160,7 @@ def contactus():
 def research():
     checkLogin('research.html')
     return render_template('research.html')
-
-
+  
 if __name__ == '__main__':
   app.run(debug=True)
 
