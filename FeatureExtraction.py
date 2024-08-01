@@ -50,7 +50,7 @@ def AverageDailySalinity(DataFrame):
     
     #Gets all Salinity Values That are in a Certain Date 
     filtered_df = DataFrame[DataFrame['Time'].dt.date == CurrentDate.date()]
-
+    
     #Converts Salinity DF to List With Float Variables
     Salinity_List = filtered_df['Salinity'].astype(float).values.tolist()
 

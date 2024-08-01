@@ -20,7 +20,7 @@ def CreateWindow(DataFrame,TimeSpan):
 
   columns =[str(TimeSpan) + "Mean",str(TimeSpan) + "STD",str(TimeSpan) + "Variance",str(TimeSpan)+ "Sum"]
   columns.append(str(TimeSpan) + "WeeklyPercentileScoreWithinList")
-  columns.append(str(TimeSpan) + "WeeklyPercentileScore")
+  #columns.append(str(TimeSpan) + "WeeklyPercentileScore")
 
   df = pd.DataFrame({col: [] for col in columns})
 
@@ -49,7 +49,7 @@ def CreateWindow(DataFrame,TimeSpan):
 
       SalinityValue=DataFrame.at[i, 'Salinity']
       df.loc[i,columns[4]]= percentileofscore(WindowList,SalinityValue)
-      df.loc[i,columns[5]]= percentileofscore(AllSalinityValues,SalinityValue)
+      #df.loc[i,columns[5]]= percentileofscore(AllSalinityValues,SalinityValue)
 
 
   return(df)
@@ -92,7 +92,7 @@ def main():
   )
   mycursor = mydb.cursor()
   # Query To Get Desired Values from Database
-  query = "SELECT time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = 'CA1971S001(04)'"
+  query = "SELECT time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = 'CH2020S008(01)'"
 
   # Executing Query
   mycursor.execute(query)
@@ -103,29 +103,27 @@ def main():
   # Inserting The Data Into DataFrame
   Salinity_data = [[Time, Salinity] for Time, Salinity in myresult]
   Salinity_df = pd.DataFrame(Salinity_data, columns=['Time', 'Salinity'])
-  #Salinity_df = AverageDailySalinity(Salinity_df)
+  Salinity_df = AverageDailySalinity(Salinity_df)
   Salinity_df['Time'] = pd.to_datetime(Salinity_df['Time']).apply(lambda x: x.timestamp())
 
   X = Salinity_df[['Time', 'Salinity']]
 
   #Gets Features and Window 
   
-  X = pd.concat([X, CreateWindow(Salinity_df,1)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,3)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,7)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,30)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,2)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,4)], axis=1)
+  X = pd.concat([X, CreateWindow(Salinity_df,6)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,8)], axis=1)
   #X = pd.concat([X, CreateWindow(Salinity_df,365)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,14)], axis=1)
-  X = pd.concat([X, CreateWindow(Salinity_df,21)], axis=1)
-  print(X)
+  #X = pd.concat([X, CreateWindow(Salinity_df,10)], axis=1)
+  #X = pd.concat([X, CreateWindow(Salinity_df,21)], axis=1)
   
 
   scaler = MinMaxScaler()
   X_scaled = scaler.fit_transform(X)
   # Outlier Detection Process
-  clf = svm.OneClassSVM(nu=0.15, kernel="rbf", gamma=.1).fit(X_scaled)
+  clf = svm.OneClassSVM(nu=0.4, kernel="rbf", gamma=.1).fit(X_scaled)
   y_predict = clf.predict(X_scaled)
-
   # Making 1 be Outlier and 0 be Normal
   svm_predict = pd.Series(y_predict, index=Salinity_df.index).replace([-1, 1], [1, 0])
 
@@ -168,21 +166,21 @@ def main():
       connectgaps=False
   ))
 
-  """  
-    SalinityPlotted.add_trace(go.Scatter(
-      x=svm_anomalies['Datetime'],
-      y=svm_anomalies['Salinity'],
-      mode='lines',
-      marker=dict(color='red', size=8),
-      name='Anomaly',
-      hovertemplate='Time %{x}<br>Salinity: %{y}'
-  )) 
-  """
+  
+  SalinityPlotted.add_trace(go.Scatter(
+    x=svm_anomalies['Datetime'],
+    y=svm_anomalies['Salinity'],
+    mode='lines',
+    marker=dict(color='red', size=8),
+    name='Anomaly',
+    hovertemplate='Time %{x}<br>Salinity: %{y}'
+)) 
+  
 
   SalinityPlotted.update_layout(
       width=700,
       height=550,
-      title="Raw Dataset",
+      title="Preprocessed Dataset",
       xaxis=dict(title="Time"),
       yaxis=dict(title="Salinity Levels"),
       showlegend=True
