@@ -25,44 +25,11 @@
         });
     </script>
 
-    <!-- Start: Chatbot -->
-     <!-- Chatbot Styling -->
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
-
-      <!-- Chatbot JS -->
-       <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
-    <!-- End: Chatbot-->
+   
   </head>
   <body>            
     <!-- map container -->
     <div id="map-container">
-
-    <!--Navigation bar-->
-    <div class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
-      <nav class="navtop">
-        <div>
-            <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastGreenText.svg" alt="logo" style="width:6.2em; height:1.8em;"></a></h1>
-
-            <div class="nav-options">
-                <a href="{{ url_for('index') }}"><span>Home</span></a>
-                <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a>
-                <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
-            </div>
-
-            <div class="login-logout">
-              {% if 'loggedin' in session %}
-              <a href="{{ url_for('logout') }}"><span>Logout</span></a>
-              {% else %}
-              <a href="{{ url_for('login') }}"><span>Login</span></a>
-              {% endif %}
-              <a href="{{ url_for('profile') }}" id="profile-link"><img src="static/images/profile.png" alt="profile" id="profile-icon"></a>
-              <img src="static/images/WCAG-icon.png" alt="WCAG" id="WCAG-icon">
-            </div>
-    </nav>
-    </div>
-    <!--end of Navigation bar--> 
 
       <!-- search bar -->
       <div class="search">
