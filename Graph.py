@@ -200,13 +200,21 @@ def Virginia_Tidal_Graph(WithdrawValues):
 def MultiDepthGraphing(marker_title,Depth_df):
   #Color Scale For HeatMap
   custom_colorscale = [
-      [0.0, '#9597c2'],    # Lightest blue
-      [0.2, '#5b60b0'],   # Lighter blue
-      [0.4, '#474b96'],   # Light blue
-      [0.6, '#1d1f80'],   # Dark blue
-      [0.8, '#0f1180'],   # Blue
-      [1.0, '#030582']   # Dark blue
-  ]
+    [0.0, '#d0d3f0'],    # Very light blue
+    [0.1, '#a7aee2'],    # Light blue
+    [0.2, '#7e8bd4'],    # Slightly darker light blue
+    [0.3, '#5565c6'],    # Medium light blue
+    [0.4, '#3e4db8'],    # Medium blue
+    [0.5, '#3137ad'],    # Darker medium blue
+    [0.6, '#26309d'],    # Dark blue
+    [0.7, '#1e288d'],    # Darker blue
+    [0.8, '#171e7d'],    # Even darker blue
+    [0.9, '#10146d'],    # Very dark blue
+    [0.95, '#090959'],
+    [1.0,'#050547']    # Darkest blue
+]
+
+
   config = {'displaylogo': False,}
 
   #Selects only the Depths That Want to be plotted
