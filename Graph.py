@@ -219,22 +219,23 @@ def MultiDepthGraphing(marker_title,Depth_df):
 
   #Selects only the Depths That Want to be plotted
   Depth_df = Depth_df[['Time', 'Depth:0', 'Depth:5', 'Depth:10', 'Depth:15', 'Depth:20', 'Depth:25', 'Depth:30']]
-
+  
+  Depth_df.set_index('Time', inplace=True)
   #Transposes the DataFrame to be in graphable form
   Depth_df = Depth_df.transpose()
-
+  print(Depth_df)
   #Reorders The DataFrame as it gets Automatically Sorted in alphabetical order when grouping by month
-  Depth_df = Depth_df[[4,3,7,0,8,6,5,1,11,10,9,2]]
+  #Depth_df = Depth_df[[4,3,7,0,8,6,5,1,11,10,9,2]]
 
   #Months Go In their own DF
-  new_index = Depth_df.iloc[0]
+  #new_index = Depth_df.iloc[0]
 
   #Removes Months from DF
-  Depth_df= Depth_df[1:]
+  #Depth_df= Depth_df[1:]
 
   #Changes Names from Depth:0 -> 0 
-  Depth_df.index=[0,5,10,15,20,25,30]
-  Depth_df.columns = new_index
+  #Depth_df.index=[0,5,10,15,20,25,30]
+  # Depth_df.columns = new_index
   #Graphing of the DataFrame
   fig = px.imshow(Depth_df, color_continuous_scale=custom_colorscale, aspect="auto")
   fig.update_layout(
