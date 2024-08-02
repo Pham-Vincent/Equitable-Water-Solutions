@@ -64,7 +64,7 @@ def AverageDailySalinity(DataFrame):
 def MonthlyAverages(DataFrame):
 
   #Reformats The Time So We can filter by months
-  DataFrame['Time'] = DataFrame['Time'].dt.strftime('%b')
+  DataFrame['Time'] = DataFrame['Time'].dt.strftime('%Y-%m-%d')
   #Extra Data For 2023 only want 2022
   DataFrame=DataFrame.drop(8760)
   #Groups The Data my Month and Gets the Average

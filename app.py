@@ -66,7 +66,8 @@ def create_MultiDepth_graph():
   column_names = ['Time', 'Depth:0', 'Depth:5', 'Depth:10', 'Depth:15', 'Depth:20', 'Depth:25', 'Depth:30']
   DepthDF = pd.DataFrame(myresult, columns=column_names)
   DepthDF['Time'] = pd.to_datetime(DepthDF['Time'])
-  #DepthDF=MonthlyAverages(DepthDF)
+  DepthDF=MonthlyAverages(DepthDF)
+  print(DepthDF)
   return(MultiDepthGraphing(str(marker_title),DepthDF))
 
 
