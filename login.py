@@ -68,7 +68,7 @@ def registerFunction():
 #Uses login submission to check database for matching information
 def loginFunction():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
         #Hashes input password
         hash = password + os.getenv('SECRET_KEY')
@@ -78,8 +78,8 @@ def loginFunction():
         #Executes query to see if there is account with matching username and hashed password
         conn = DatabaseConn()
         cursor = conn.cursor(dictionary=True)
-        query = "SELECT * FROM Accounts where username = %s AND password = %s"
-        cursor.execute(query, (username, password,))
+        query = "SELECT * FROM Accounts where email = %s AND password = %s"
+        cursor.execute(query, (email, password,))
         account = cursor.fetchone()
         # If account exists in database
         if account:
@@ -95,7 +95,7 @@ def loginFunction():
             cursor.close()
             conn.close()
             # Account doesnt exist or username/password incorrect
-            msg = 'Incorrect username/password!'
+            msg = 'Incorrect email/password!'
     msg=''
     return render_template('login.html', msg=msg)
 

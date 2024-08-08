@@ -142,8 +142,10 @@ def logout():
    session.pop('loggedin', None)
    session.pop('id', None)
    session.pop('username', None)
-   # Redirect to login page
-   return redirect(url_for('index'))
+   # Get the referring page URL
+   referrer = request.referrer
+   # Redirect to same page - logged out
+   return redirect(referrer or url_for('index'))
 
 
 #Routing for the about us page
