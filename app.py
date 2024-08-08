@@ -134,6 +134,12 @@ def profile():
     checkLogin('profile.html')
     return redirect(url_for('login'))
 
+@app.route('/dashboard')
+#Sets up dashboard page only when logged in
+def dashboard():
+    checkLogin('dashboard.html')
+    return render_template('dashboard.html')
+
 
 @app.route('/logout')
 #deletes session variables

@@ -24,6 +24,24 @@
     letter-spacing: 0px;
     color: #1A1A1A;
     opacity: 1;
+    padding: 40px 0 0 40px;
+}
+
+/*styling for popup close button 'X' */
+.form-popup #close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: black;
+}
+
+.form-popup .delimeter {
+    background-color: #e5e9ed;
+    height:2px;
+    width: 90%;
+    left: 40px;
+    position: relative;
 }
 
 /* Add styles to the form container */
@@ -34,7 +52,8 @@
 /* Full-width input fields */
 .form-container input[type=text], .form-container input[type=password] {
     width: 100%;
-    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin: 5px 0 22px 0;
     border: none;
     background: #f1f1f1;
@@ -44,23 +63,6 @@
 .form-container input[type=text]:focus, .form-container input[type=password]:focus {
     background-color: #ddd;
     outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom:10px;
-    opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-    background-color: red;
 }
 
 /* Add some hover effects to buttons */

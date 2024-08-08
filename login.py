@@ -90,7 +90,8 @@ def loginFunction():
             cursor.close()
             conn.close()
             # Redirect to map page
-            return redirect(url_for('index'))
+            referrer = request.referrer
+            return redirect(referrer or url_for('index'))
         else:
             cursor.close()
             conn.close()
