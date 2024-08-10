@@ -1,3 +1,9 @@
+/*
+  Issue with Circles:
+  1.  Need two different circles -> One for Clicking, One for Hovering (Use a set?)
+  2.  Radius meaning is not intuitive
+*/
+
 //initializes the marker circle to null
 export let markerCircle = null;
 
