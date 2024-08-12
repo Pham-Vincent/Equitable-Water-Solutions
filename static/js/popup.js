@@ -11,12 +11,14 @@ The functions allow users to interact with markers on the map by displaying rele
 Date: 05/12/24
 */
 import config from './config.js';
+import { addCircle, removeCircle } from './marker-radius.js';
 let customPopup;
 
 //first layer popup
 export function openInfoWindow2(marker, map, infowindow2){
     
     window.isInfoWindow2Open = true;
+    addCircle(map, marker);
 
     //Close the currently open info window, if any
     if (window.infowindow2) {
@@ -27,6 +29,7 @@ export function openInfoWindow2(marker, map, infowindow2){
     google.maps.event.addListener(map, 'click', function () {
       infowindow2.close();
       window.isInfoWindow2Open = false;
+      removeCircle(map, marker);
     });
 
     infowindow2.open(map, marker); 
@@ -37,13 +40,14 @@ export function openInfoWindow2(marker, map, infowindow2){
     //when clicking 'X' to close infowindow, sets isInfoWindow2Open to false
     infowindow2.addListener('closeclick', () => {
       window.isInfoWindow2Open = false;
+      removeCircle(map, marker);
     });
   
 }
 
 //Function to open the full information display window
 export function openPopup(marker) {
-  
+  removeCircle(map, marker);
     //finds html id 'popup' and defines inner content
     customPopup = document.getElementById('popup');
     customPopup.innerHTML = `

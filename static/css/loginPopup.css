@@ -1,0 +1,164 @@
+/* The popup form - hidden by default */
+.form-popup {
+    width: 50%;
+    min-height: 60%;
+    display: none;
+    position: fixed;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px #1A1A1A3B;
+    border-radius: 5px;
+    opacity: 1;
+    background-color:white;
+    }
+
+.form-popup h2 {
+    color: var(--unnamed-color-1a1a1a);
+    text-align: left;
+    font: normal normal bold 16px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+    padding: 2% 0 0 5%;
+    display: block;
+}
+
+.form-container h2 {
+    color: var(--unnamed-color-1a1a1a);
+    text-align: left;
+    font: normal normal bold 16px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+    padding: 0 0 0 0;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.form-popup h3 {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-35)/var(--unnamed-line-spacing-43) var(--unnamed-font-family-radio-canada-big);
+    color: #0A2B57;
+    text-align: left;
+    font-weight: bold;
+    opacity: 1;
+    font-size: 35px;
+    padding: 0 0 0 0;
+    margin-block-start: 11px;
+    margin-block-end: 20px;
+    display: block;
+}
+
+/*styling for popup close button 'X' */
+.form-popup #close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: black;
+}
+
+.form-popup .delimeter {
+    background-color: #e5e9ed;
+    height:2px;
+    width: 90%;
+    left: 5%;
+    position: relative;
+}
+
+.form-popup .half-delimeter {
+    background-color: #e5e9ed;
+    height:2px;
+    width: 40%;
+    position: relative;
+}
+
+.form-popup h4 {
+    display: block;
+    text-align: center;
+    font: normal normal normal 16px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 20px;
+}
+
+.form-popup .or-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Add styles to the form container */
+.form-container {
+    position: relative;
+    left: 5%;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    width: 90%;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-left: 20px;
+    font: normal normal normal 16px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: rgba(229, 233, 237, 0.5) 0% 0% no-repeat padding-box;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+
+.form-container input[type=submit] {
+    background-color: #04AA6D; /* Green */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 25px 13px 25px;
+    font: normal normal bold 16px/26px Roboto;
+    letter-spacing: 0px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The overlay element */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 8; /* Below the popup form */
+}
+
+.form-popup .new-account-button {
+    background-color: #04AA6D; /* Green */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 25px 13px 25px;
+    font: normal normal bold 16px/26px Roboto;
+    letter-spacing: 0px;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+    justify-content: center;
+}

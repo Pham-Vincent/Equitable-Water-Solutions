@@ -2,6 +2,17 @@
 CSS for the navbar
 */
 
+.navtop {
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    position:fixed;
+    top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2; 
+}
+
+/*
 .nav-container{
     width: 100%;
     height: 60px;
@@ -18,6 +29,7 @@ CSS for the navbar
     border: 0;
     margin: 0 auto;
 }
+*/
 
 .navtop #div1, .nav-options {
     display: flex;
@@ -75,6 +87,43 @@ CSS for the navbar
 .nav-options{
     background-color: #5d86e700;
     border-radius: 30px;
+    margin-right: 30px;
+}
+
+.navtop .grey-back {
+    display: flex;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: #E5E9ED;
+    padding: 0 10px;
+    height: 80%;
+    margin: auto 0; /* Vertically center the container */
+}
+
+.navtop .login-container{
+    border-radius: 30px;
+    margin-right: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.navtop .button {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    border-radius: 30px;
+    padding: 0 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 65%;
+}
+
+.navtop .button span {
+    color: white;
+    text-align: center;
+    line-height: 1em;
+    font-size: 14px;
 }
 
 
