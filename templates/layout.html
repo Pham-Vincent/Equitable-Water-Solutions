@@ -4,26 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Dashboard{% endblock %}</title>
-    <!-- Imports Material Components -->
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginPopup.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Radio Canada">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/@material/layout-grid@latest/dist/mdc.layout-grid.css">
     <link rel="stylesheet" href="https://unpkg.com/@material/card@latest/dist/mdc.card.css">
     <link rel="stylesheet" href="https://unpkg.com/@material/ripple@latest/dist/mdc.ripple.css">
-    <script type="importmap">
-        {
-            "imports": {
-                "@material/web/": "https://esm.run/@material/web/"
-            }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
+
     <!-- jquery function to create an "active" class in span for the currently active navbar page -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
@@ -55,13 +46,70 @@
 
             <div class="nav-options">
                 <a href="{{ url_for('index') }}"><span>Home</span></a>
-                <!-- remove map link <a href="{{ url_for('map') }}"><span>Salinity Map Tool</span></a> -->
+                {% if 'loggedin' in session %}
+                <a href="{{ url_for('dashboard') }}"><span>Dashboard</span></a>
+                <a href="{{ url_for('map') }}"><span>Map Tool</span></a>
+                {% endif %}
                 <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
                 <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
+
             </div>
 
+            <div class="grey-back">
+                <div class="login-container">
+                    {% if 'loggedin' in session %}
+                    <a class="button" href="{{ url_for('logout') }}"><span>{{ session.get('username') }}</span></a>
+                    {% else %}
+                    <button class="button" onclick="openForm()"><span>Log In</span></button>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </nav>
+
+    <!-- Login Form Popup Start -->
+    <div class="overlay" id="overlay"></div>
+
+    <div class="form-popup" id="myForm">
+        <div id="close-button" onclick="closeForm()"><img src="static/images/close-login.png" alt="Close"></div>
+        <h2>Sign in or create an account</h2>
+        <div class="delimeter"></div>
+        <form action="{{ url_for('login') }}" method="post" class="form-container">
+          <h3>Sign in</h3>
+      
+          <input type="text" placeholder="Email" name="email" required>
+      
+          <input type="password" placeholder="Password" name="password" required>
+      
+          <input type="submit" value="Continue">
+
+          <div class="or-container">
+            <div class="half-delimeter"></div>
+            <h4>OR</h4>
+            <div class="half-delimeter"></div>
+          </div>
+
+            <h2>Don't have an account yet?</h2>
+
+            <a class="new-account-button" href="{{ url_for('register') }}"><span>Click here to create an account</span></a>
+        </form>
+    </div>
+    <script>
+    document.getElementById('overlay').addEventListener('click', closeForm);
+
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+        document.getElementById('overlay').style.display = "block";
+    }
+  
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+    }
+    </script>
+
+    <!-- Login Form Popup End -->
+
     <div class="content">
         {% block content %}{% endblock %}
     </div>

@@ -134,6 +134,12 @@ def profile():
     checkLogin('profile.html')
     return redirect(url_for('login'))
 
+@app.route('/dashboard')
+#Sets up dashboard page only when logged in
+def dashboard():
+    checkLogin('dashboard.html')
+    return render_template('dashboard.html')
+
 
 @app.route('/logout')
 #deletes session variables
@@ -142,8 +148,10 @@ def logout():
    session.pop('loggedin', None)
    session.pop('id', None)
    session.pop('username', None)
-   # Redirect to login page
-   return redirect(url_for('index'))
+   # Get the referring page URL
+   referrer = request.referrer
+   # Redirect to same page - logged out
+   return redirect(referrer or url_for('index'))
 
 
 #Routing for the about us page

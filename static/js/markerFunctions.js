@@ -9,6 +9,7 @@ Authors: W. Lamuth, V. Pham, N. Gammel
 Date: 04/21/24
 */
 import { openInfoWindow2 } from './popup.js';
+import { addCircle, markerCircle, removeCircle } from './marker-radius.js';
 
 //sets marker glyph depending on designated use
 export function setMarkerIcon(designatedUse){
@@ -54,19 +55,20 @@ export function addListeners(marker, infowindow, map, infowindow2, glyphElement)
   marker.content.addEventListener('mouseenter', () => {
     if (!window.isInfoWindow2Open || marker !== window.currentMarker) {
       infowindow.open(map, marker);
+      addCircle(map, marker);
     }
     //changes marker color on hoverover
     if(marker.descriptions.state != 'Virginia')
       glyphElement.background = '#ffd966';
     if(marker.descriptions.state != 'Maryland')
       glyphElement.background = '#ea9999';
-    
   });
   
   //Event listener for closing infowindow on hoverout
   marker.content.addEventListener('mouseleave', () => {
     if (!window.isInfoWindow2Open || marker !== window.currentMarker) {
       infowindow.close();
+      removeCircle(map, marker);
     }
     //reverts marker color on hoverout
     if(marker.descriptions.state != 'Virginia')
