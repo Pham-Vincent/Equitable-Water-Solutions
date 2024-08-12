@@ -46,8 +46,10 @@
 
             <div class="nav-options">
                 <a href="{{ url_for('index') }}"><span>Home</span></a>
+                {% if 'loggedin' in session %}
                 <a href="{{ url_for('dashboard') }}"><span>Dashboard</span></a>
                 <a href="{{ url_for('map') }}"><span>Map Tool</span></a>
+                {% endif %}
                 <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
                 <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
 
