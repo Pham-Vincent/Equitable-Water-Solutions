@@ -18,25 +18,33 @@ import hashlib, re
 #Controls register page functionality including validating using input and storing data inside of database
 def registerFunction():
     #Checks that fields are filled
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
-        username = request.form['username']
+    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'org' in request.form and 'password' in request.form and 'password-again' in request.form and 'email' in request.form and 'tags' in request.form:
+        fname = request.form['fname']
+        lname = request.form['lname']
+        organization = request.form['org']
         password = request.form['password']
+        password_check = request.form['password-again']
         email = request.form['email']
+        tags = request.form['tags']
         #Creates database connection and executes query
         #Stores single sequence result in account
         conn = DatabaseConn()
         cursor = conn.cursor(dictionary=True)
-        query = "SELECT * FROM Accounts where username = %s"
-        cursor.execute(query, (username,))
+        query = "SELECT * FROM Accounts where email = %s"
+        cursor.execute(query, (email,))
         account = cursor.fetchone()
         #Validates if the account exists and follows correct naming conventions
         if account:
             msg = 'Account already exists!'
+        elif password != password_check:
+            msg = 'Password does not match!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address!'
-        elif not re.match(r'[A-Za-z0-9]+', username):
-            msg = 'Username must contain only characters and numbers!'
-        elif not username or not password or not email:
+        elif not re.match(r'[A-Za-z]+', fname):
+            msg = 'First name must contain only characters!'
+        elif not re.match(r'[A-Za-z]+', lname):
+            msg = 'Last name must contain only characters!'
+        elif not fname or not lname or not organization or not password_check or not password or not email:
             msg = 'Please fill out the form!'
         else:
             #CREATES NEW ACCOUNT
@@ -45,16 +53,16 @@ def registerFunction():
             hash = hashlib.sha1(hash.encode())
             password = hash.hexdigest()
             # Insert into Database
-            query = "INSERT INTO Accounts (username, password, email) VALUES (%s, %s, %s)"
-            cursor.execute(query, (username, password, email))
+            query = "INSERT INTO Accounts (fname, lname, password, email, organization, tags) VALUES (%s, %s, %s, %s, %s, %s)"
+            cursor.execute(query, (fname, lname, password, email, organization, tags))
             conn.commit()
-            query = "SELECT * FROM Accounts where username = %s AND password = %s"
-            cursor.execute(query, (username, password,))
+            query = "SELECT * FROM Accounts where email = %s AND password = %s"
+            cursor.execute(query, (email, password,))
             account = cursor.fetchone()
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
-            session['username'] = account['username']
+            session['username'] = account['fname']
             cursor.close()
             conn.close()
             # Redirect to map page
@@ -86,7 +94,7 @@ def loginFunction():
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
-            session['username'] = account['username']
+            session['username'] = account['fname']
             cursor.close()
             conn.close()
             # Redirect to map page

@@ -211,10 +211,32 @@ CSS for the navbar
         display: none;
     }
 
-
-
-
 }
+
+
+body{
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: auto;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to right, #142A54 , #50BAB6);
+  }
+  
+  html{
+    scroll-behavior: smooth;
+  }
+  
+  .content {
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+  }
 
 
 

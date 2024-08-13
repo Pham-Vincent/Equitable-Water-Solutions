@@ -4,31 +4,45 @@
 		<meta charset="utf-8">
 		<title>Register</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
-		<div class="register">
-			<h1>Register</h1>
-			<div class="links">
-				<a href="{{ url_for('login') }}">Login</a>
-				<a href="{{ url_for('register') }}" class="active">Register</a>
+		<form action="{{ url_for('register') }}" method="post" autocomplete="off"></form>
+			<div class="register-form-container">
+				<div class="offset">
+					<!-- Header Start -->
+					<div class="flex-container">
+						<div class="main-title">Get Started with&nbsp;</div>
+						<div class="saltcast">SaltCast</div>
+						<div class="main-title">.</div>
+					</div>
+
+					<h3>Create an Account</h3>
+
+					<!-- Header End -->
+
+					<div class="flex-container">
+						<input type="text" name="fname" placeholder="First Name" required>
+						<input type="email" name="email" placeholder="Email Address" required>
+						<input type="password" name="password" placeholder="Password" required>
+					</div>
+					<div class="flex-container">
+						<input type="text" name="lname" placeholder="Last Name" required>
+						<input type="text" name="org" placeholder="Organization" required>
+						<input type="password" name="password-again" placeholder="Retype Password" required>
+						
+					</div>
+						<div class="msg">{{ msg }}</div>
+				</div>
 			</div>
-			<form action="{{ url_for('register') }}" method="post" autocomplete="off">
-				<label for="username">
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<label for="email">
-					<i class="fas fa-envelope"></i>
-				</label>
-				<input type="email" name="email" placeholder="Email" id="email" required>
-				<div class="msg">{{ msg }}</div>
-				<input type="submit" value="Register">
-			</form>
-		</div>
+
+			<div class="tags-container">
+				<div class="offset">
+					<h3>Select Account Type</h3>
+
+					<input type="text" name="tags" placeholder="Tags" required>
+					<input type="submit" value="Register">
+				</div>
+			</div>
+		</form>
 	</body>
 </html>
