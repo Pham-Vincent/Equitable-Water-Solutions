@@ -77,6 +77,7 @@ body, html {
     letter-spacing: 0px;
     color: #1A1A1A;
     opacity: 1;
+    user-select: none;
 }
 
 .toggle-slider {
@@ -93,27 +94,90 @@ body, html {
     width: 22px;
     border-radius: 50%;
     left: 10%;
-    top: 12%;
+    top: 13%;
     background-color: #b7e2ba;
     cursor: pointer;
 }
 
 .toggle-slider.active .slider-center {
     left: auto; /* Resets left */
-    left: 50%; /* Moves the slider to the right */
+    left: 54%; /* Moves the slider to the right */
 }
 .option-container {
-    width: 50%;
-    height: 300px; /* Try using pixels or adjust the height */
-    margin: 40px 40px 40px 0;
+    display: inline-block;
+    height: auto;
+    padding-bottom: 4%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    width: 50%; 
+    margin: 40px 40px 0 0;
     background-color: white;
     border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .tags-container input {
     display: block; /* Ensures inputs stack vertically */
     margin: 1% 0; /* Spacing between inputs */
+}
+
+.pricing-text {
+    text-align: left;
+    font: normal normal normal 22px/24px Radio Canada Big;
+    letter-spacing: 0px;
+    color: #289D7A;
+}
+
+.bold-description {
+    text-align: left;
+    font: normal normal bold 20px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+    display: block;
+    margin-top: 10px;
+}
+
+.option-container .delimeter {
+    background-color: #0a2b57;
+    height:1px;
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.button-location {
+    position: relative;
+    height: 40%;
+    width: 100%;
+}
+
+.button-location .select-button {
+    height: 45px;
+    width: 95px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 2px solid #289D7A;
+    border-radius: 23px;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: normal normal bold 16px/26px Roboto;
+    letter-spacing: 0px;
+    color: #289D7A;
+    opacity: 1;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.button-location .select-button.active {
+    width: 113px;
+    background: #0a2b57 0% 0% no-repeat padding-box;
+    border: 2px solid #0a2b57;
+    color: #b7e2ba;
 }
