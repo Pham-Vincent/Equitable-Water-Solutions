@@ -8,22 +8,26 @@ body, html {
 }
 
 .register-form-container {
+    display: inline-block;
     background-color: white;
-    height: 40%;
+    height: auto;
     width: 100%;
+    padding: 4%;
+    box-sizing: border-box;
 }
 
 .offset {
     position: relative;
-    top:70px;
-    left: 5%;
+    width: 95%;
 }
 
 .tags-container {
     background-color: #e9e5ed;
-    display: block;
-    height: 80%;
+    display: inline-block;
+    height: auto;
     width: 100%;
+    padding: 4%;
+    box-sizing: border-box;
 }
 
 .flex-container {
@@ -53,7 +57,7 @@ body, html {
 }
 
 .register-form-container input[type=text], .register-form-container input[type=password], .register-form-container input[type=email] {
-    width: 28%;
+    width: 30%;
     padding-top: 13px;
     padding-bottom: 13px;
     padding-left: 20px;
@@ -64,4 +68,52 @@ body, html {
     border: none;
     background: rgba(229, 233, 237, 0.5) 0% 0% no-repeat padding-box;
     border-radius: 5px;
+}
+
+.offset .standard-text {
+    text-align: left;
+    padding: 3px 0;
+    font: normal normal normal 16px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+}
+
+.toggle-slider {
+    height: 30px;
+    width: 60px;
+    border-radius: 15px;
+    background-color: #0a2b57;
+    cursor: pointer;
+}
+
+.toggle-slider .slider-center {
+    position: relative;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    left: 10%;
+    top: 12%;
+    background-color: #b7e2ba;
+    cursor: pointer;
+}
+
+.toggle-slider.active .slider-center {
+    left: auto; /* Resets left */
+    left: 50%; /* Moves the slider to the right */
+}
+.option-container {
+    width: 50%;
+    height: 300px; /* Try using pixels or adjust the height */
+    margin: 40px 40px 40px 0;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tags-container input {
+    display: block; /* Ensures inputs stack vertically */
+    margin: 1% 0; /* Spacing between inputs */
 }

@@ -20,27 +20,65 @@
 
 					<!-- Header End -->
 
+					<!-- Input Start -->
 					<div class="flex-container">
 						<input type="text" name="fname" placeholder="First Name" required>
 						<input type="email" name="email" placeholder="Email Address" required>
-						<input type="password" name="password" placeholder="Password" required>
+						<input type="password" name="password" placeholder="Select Password" required>
 					</div>
 					<div class="flex-container">
 						<input type="text" name="lname" placeholder="Last Name" required>
 						<input type="text" name="org" placeholder="Organization" required>
 						<input type="password" name="password-again" placeholder="Retype Password" required>
-						
 					</div>
 						<div class="msg">{{ msg }}</div>
+					<!-- Input End -->
 				</div>
 			</div>
 
 			<div class="tags-container">
 				<div class="offset">
+					<!-- Selection Header Start -->
 					<h3>Select Account Type</h3>
 
+					<div class="flex-container">
+						<div class="standard-text">Bill monthly&nbsp;&nbsp;</div>
+
+						<div class="toggle-slider" onclick="toggleSlider(this)">
+							<div class="slider-center"></div>
+						</div>
+						
+						<script>
+							function toggleSlider(element) {
+								element.classList.toggle('active');
+							}
+						</script>
+
+						<div class="standard-text">&nbsp;&nbsp;Bill annually</div>
+					</div>
+					<!-- Selection Header End -->
+
+					<div class="flex-container">
+						<div class="option-container">
+							
+						</div>
+						<div class="option-container">
+							
+						</div>
+					</div>
+
+					<div class="flex-container">
+						<div class="option-container">
+							
+						</div>
+						<div class="option-container">
+							
+						</div>
+					</div>
+
+
 					<input type="text" name="tags" placeholder="Tags" required>
-					<input type="submit" value="Register">
+					<input type="submit" value="Get Started">
 				</div>
 			</div>
 		</form>
