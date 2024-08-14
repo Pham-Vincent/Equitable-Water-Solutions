@@ -181,3 +181,19 @@ body, html {
     border: 2px solid #0a2b57;
     color: #b7e2ba;
 }
+
+.tags-container input[type=submit] {
+    all: unset;
+    text-align: center;
+    margin-top: 1%;
+    width: 132px;
+    height: 45px;
+    background: #289D7A 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    opacity: 1;
+    color: white;
+    font: normal normal bold 16px/26px Roboto;
+    letter-spacing: 0px;
+    cursor: pointer;
+    border-color: #289D7A;
+}
