@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@700&display=swap');
+
+body, html {
+    background-color: #e5e9ed;
+    overflow: hidden;
+}
+
+.dashboard-flex-container {
+    display: flex;
+    height: 100%;
+}
+
+.left-panel {
+    position: fixed;
+    width: 25%;
+    height: 100%;
+    background-color: #0a2b57;
+}
+
+.left-panel .center-container {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.left-panel .center-container h1 {
+    font: normal normal bold 35px/43px 'Radio Canada Big', sans-serif;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.right-panel {
+    background-color: #e5e9ed;
+    margin-left: 25%;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.right-panel .right-container {
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.right-panel .right-container .square-containers {
+    border-radius: 5px;
+    width: 85%;
+    height: auto;
+    background-color: white;
+}

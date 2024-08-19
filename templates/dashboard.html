@@ -1,8 +1,23 @@
 {% extends 'layout.html' %}
 
-{% block title %}Team Page{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 
+<div class="dashboard-flex-container">
+    <div class="left-panel">
+        <div class="center-container">
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-container">
+            <div class="square-containers">
+            
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

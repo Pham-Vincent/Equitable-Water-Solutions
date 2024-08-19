@@ -51,6 +51,8 @@ CSS for the navbar
 }
 
 .navtop div h1 img{
+    position: fixed;
+    padding-left: 5%;
     width:6.2em; 
     height:1.8em;
 }
@@ -233,8 +235,8 @@ body{
   }
   
   .content {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     margin-top: 60px;
   }
 
