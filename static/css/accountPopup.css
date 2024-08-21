@@ -23,6 +23,7 @@
     background: #DBEFD4 0% 0% no-repeat padding-box;
     font: normal normal bold 14px/20px Roboto;
     border-radius: 5px;
+    user-select: none;
 }
 
 .button.active .account-options {

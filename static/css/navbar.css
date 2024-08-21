@@ -59,7 +59,8 @@ CSS for the navbar
 
 .navtop div a{
     text-decoration: none;
-    color: #1A1A1A;
+    color: #0a2b57;
+    user-select: none;
 }
 .navtop .nav-options span{
     padding: 3px 6px;
@@ -82,7 +83,7 @@ CSS for the navbar
     border-radius: 5px;
     width: auto;
     height: auto;
-    color:  #1A1A1A;
+    color:  #0a2b57;
     font: normal normal bold 18px/24px Roboto;
 }
 
@@ -110,10 +111,10 @@ CSS for the navbar
 }
 
 .navtop .button {
-    background-color: #04AA6D; /* Green */
+    background-color: #289d7a; /* Green */
     border: none;
     border-radius: 30px;
-    padding: 0 48px;
+    padding: 0 36px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -122,11 +123,32 @@ CSS for the navbar
     position:relative;
 }
 
+.navtop .button:hover {
+    background-color: #0a2b57; /* Ensure the color stays the same on hover */
+}
+
+.navtop .button.active {
+    background-color: #0a2b57; /* Active background color */
+}
+
+.navtop .button.active span {
+    color: #DBEFD4; /* Active text color */
+    font-weight: bold; /* Active text weight */
+}
+
 .navtop .button span {
     color: white;
     text-align: center;
     line-height: 1em;
-    font-size: 14px;
+    font: normal normal normal 14px/22px Roboto;
+}
+
+.navtop .button:hover span {
+    text-align: center;
+    line-height: 1em;
+    font: normal normal bold 14px/22px Roboto;
+    letter-spacing: 0px;
+    color: #DBEFD4;
 }
 
 .navtop .button .account-options {
@@ -153,10 +175,6 @@ CSS for the navbar
     top: -10px; /* Position triangle above the pop-up */
     left: 50%;
     transform: translateX(-50%);
-}
-
-.navtop .button.active .account-options {
-    display: block; /* Show the pop-up when the button is active */
 }
 
 

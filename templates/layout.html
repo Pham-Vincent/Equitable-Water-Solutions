@@ -73,9 +73,8 @@
                 <div class="grey-back">
                     <div class="login-container">
                         {% if 'loggedin' in session %}
-                        <!-- <a class="button" href="{{ url_for('logout') }}"><span>{{ session.get('username') }}</span></a> -->
-                        <div class="button" onclick="openLoginMenu()">
-                            <a><span>{{ session.get('username') }}</span></a>
+                        <div class="button">
+                            <a><span>{{ session.get('username') }}&nbsp;{{ session.get('lastname') }}</span></a>
 
                             <!-- Account Options Popup Start -->
                             <div class="account-options" id="loginMenu">
@@ -131,22 +130,25 @@
     <!-- Login Form Popup End -->
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const button = document.querySelector('.navtop .button');
+        const popup = document.querySelector('.form-popup');
+
+        button.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from bubbling up to document
+            button.classList.toggle('active');
+            document.getElementById("loginMenu").style.display = "block";
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!button.contains(event.target) && !popup.contains(event.target)) {
+                button.classList.remove('active');
+                closeForm();
+            }
+        });
+    });
+
     document.getElementById('overlay').addEventListener('click', closeForm);
-
-    // Function to handle clicks outside the login menu
-    document.addEventListener('click', function(event) {
-    var loginMenu = document.getElementById("loginMenu");
-    var button = document.querySelector(".button");
-
-    // Check if the click is outside the login menu and button
-    if (!loginMenu.contains(event.target) && !button.contains(event.target)) {
-        closeForm();
-    }
-});
-
-    function openLoginMenu() {
-        document.getElementById("loginMenu").style.display = "block";
-    }
 
     function openForm() {
         document.getElementById("myForm").style.display = "block";

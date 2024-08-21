@@ -63,6 +63,7 @@ def registerFunction():
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['fname']
+            session['lastname'] = account['lname']
             cursor.close()
             conn.close()
             # Redirect to map page
@@ -95,6 +96,7 @@ def loginFunction():
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['fname']
+            session['lastname'] = account['lname']
             cursor.close()
             conn.close()
             # Redirect to map page
@@ -106,7 +108,7 @@ def loginFunction():
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect email/password!'
     msg=''
-    return render_template('login.html', msg=msg)
+    return render_template('index.html', msg=msg)
 
 
 #Used to check session variables on each page to validate user is logged in

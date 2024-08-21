@@ -35,19 +35,20 @@ body, html {
     display: flex;
     flex-direction: column;
     width: 75%;
-    height: auto;
-    justify-content: center;
+    height: 100vh;
+    justify-content: flex-start;
     align-items: center;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .right-panel .right-container {
     padding-top: 5%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
+    height: auto;
 }
 
 .right-panel .right-container .square-containers {
@@ -55,4 +56,5 @@ body, html {
     width: 85%;
     height: auto;
     background-color: white;
+    margin-bottom: 20px;
 }
