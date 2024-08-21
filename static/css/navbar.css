@@ -119,6 +119,7 @@ CSS for the navbar
     align-items: center;
     justify-content: center;
     height: 65%;
+    position:relative;
 }
 
 .navtop .button span {
@@ -126,6 +127,36 @@ CSS for the navbar
     text-align: center;
     line-height: 1em;
     font-size: 14px;
+}
+
+.navtop .button .account-options {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: calc(100% + 10px); /* Position the pop-up below the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1000;
+    width: 170px;
+}
+
+.navtop .button .triangle {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    position: absolute;
+    top: -10px; /* Position triangle above the pop-up */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navtop .button.active .account-options {
+    display: block; /* Show the pop-up when the button is active */
 }
 
 

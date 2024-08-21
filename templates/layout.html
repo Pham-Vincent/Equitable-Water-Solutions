@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loginPopup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accountPopup.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Radio Canada">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -72,7 +73,23 @@
                 <div class="grey-back">
                     <div class="login-container">
                         {% if 'loggedin' in session %}
-                        <a class="button" href="{{ url_for('logout') }}"><span>{{ session.get('username') }}</span></a>
+                        <!-- <a class="button" href="{{ url_for('logout') }}"><span>{{ session.get('username') }}</span></a> -->
+                        <div class="button" onclick="openLoginMenu()">
+                            <a><span>{{ session.get('username') }}</span></a>
+
+                            <!-- Account Options Popup Start -->
+                            <div class="account-options" id="loginMenu">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li>View Profile</li>
+                                    <li>Account Settings</li>
+                                    <li>Support</li>
+                                    <li class="logoout-button"><a href="{{ url_for('logout') }}">Log Out</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Account Options Popup End -->
+                        </div>
                         {% else %}
                         <button class="button" onclick="openForm()"><span>Log In</span></button>
                         {% endif %}
@@ -110,8 +127,26 @@
             <h2></h2>
         </form>
     </div>
+
+    <!-- Login Form Popup End -->
+
     <script>
     document.getElementById('overlay').addEventListener('click', closeForm);
+
+    // Function to handle clicks outside the login menu
+    document.addEventListener('click', function(event) {
+    var loginMenu = document.getElementById("loginMenu");
+    var button = document.querySelector(".button");
+
+    // Check if the click is outside the login menu and button
+    if (!loginMenu.contains(event.target) && !button.contains(event.target)) {
+        closeForm();
+    }
+});
+
+    function openLoginMenu() {
+        document.getElementById("loginMenu").style.display = "block";
+    }
 
     function openForm() {
         document.getElementById("myForm").style.display = "block";
@@ -121,10 +156,9 @@
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
         document.getElementById("overlay").style.display = "none";
+        document.getElementById("loginMenu").style.display = "none";
     }
     </script>
-
-    <!-- Login Form Popup End -->
 
     <div class="content">
         {% block content %}{% endblock %}
