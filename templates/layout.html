@@ -39,7 +39,6 @@
             }
         }
     </script>
-    <!-- Material Components Import Ends Here -->
 
     <!-- Chatbot Styling -->
      <link rel="stylesheet" href={{ url_for('static', filename='css/chatbot.css') }}>
@@ -50,7 +49,7 @@
      <!-- Chatbot JS -->
      <script src="{{ url_for('static', filename='js/chatbot.js') }}" defer></script>
      <!-- End: Chatbot JS -->
-
+     {% block head %}{% endblock %}
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
@@ -99,7 +98,7 @@
    
 
     <!-- Login Form Popup Start -->
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay-login" id="overlay-login"></div>
 
     <div class="form-popup" id="myForm">
         <div id="close-button" onclick="closeForm()"><img src="static/images/close-login.png" alt="Close"></div>
@@ -148,16 +147,16 @@
         });
     });
 
-    document.getElementById('overlay').addEventListener('click', closeForm);
+    document.getElementById('overlay-login').addEventListener('click', closeForm);
 
     function openForm() {
         document.getElementById("myForm").style.display = "block";
-        document.getElementById('overlay').style.display = "block";
+        document.getElementById('overlay-login').style.display = "block";
     }
   
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
+        document.getElementById("overlay-login").style.display = "none";
         document.getElementById("loginMenu").style.display = "none";
     }
     </script>

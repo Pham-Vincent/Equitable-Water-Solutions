@@ -138,7 +138,7 @@
 }
 
 /* The overlay element */
-.overlay {
+.overlay-login {
     display: none;
     position: fixed;
     top: 0;
