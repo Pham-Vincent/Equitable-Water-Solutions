@@ -132,7 +132,7 @@ def login():
 #Sets up profile page only when logged in
 def profile():
     checkLogin('profile.html')
-    return redirect(url_for('login'))
+    return render_template('profile.html')
 
 @app.route('/dashboard')
 #Sets up dashboard page only when logged in
