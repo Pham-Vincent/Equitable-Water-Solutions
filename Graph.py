@@ -199,22 +199,14 @@ def Virginia_Tidal_Graph(WithdrawValues):
 # This function creates a heatmap to display salinity values at different depths
 def MultiDepthGraphing(marker_title,Depth_df):
   #Color Scale For HeatMap
-  """ custom_colorscale = [
-    [0.0, '#d0d3f0'],    # Very light blue
-    [0.1, '#a7aee2'],    # Light blue
-    [0.2, '#7e8bd4'],    # Slightly darker light blue
-    [0.3, '#5565c6'],    # Medium light blue
-    [0.4, '#3e4db8'],    # Medium blue
-    [0.5, '#3137ad'],    # Darker medium blue
-    [0.6, '#26309d'],    # Dark blue
-    [0.7, '#1e288d'],    # Darker blue
-    [0.8, '#171e7d'],    # Even darker blue
-    [0.9, '#10146d'],    # Very dark blue
-    [0.95, '#090959'],
-    [1.0,'#050547']    # Darkest blue
-] """
-
-
+  custom_colorscale = [
+      [0.0, '#9597c2'],    # Lightest blue
+      [0.2, '#5b60b0'],   # Lighter blue
+      [0.4, '#474b96'],   # Light blue
+      [0.6, '#1d1f80'],   # Dark blue
+      [0.8, '#0f1180'],   # Blue
+      [1.0, '#030582']   # Dark blue
+  ]
   config = {'displaylogo': False,}
 
   #Selects only the Depths That Want to be plotted
@@ -225,22 +217,18 @@ def MultiDepthGraphing(marker_title,Depth_df):
 
   #Reorders The DataFrame as it gets Automatically Sorted in alphabetical order when grouping by month
   Depth_df = Depth_df[[4,3,7,0,8,6,5,1,11,10,9,2]]
-  
+
   #Months Go In their own DF
   new_index = Depth_df.iloc[0]
 
   #Removes Months from DF
   Depth_df= Depth_df[1:]
+
   #Changes Names from Depth:0 -> 0 
   Depth_df.index=[0,5,10,15,20,25,30]
   Depth_df.columns = new_index
   #Graphing of the DataFrame
-  Depth_df['Depth'] = Depth_df.index
-  print(Depth_df)
-  df_melted = Depth_df.melt(id_vars='Depth',var_name ='Month',value_name='Salinity')
-  fig = px.line(df_melted, x='Month', y='Salinity', color='Depth', title='Monthly Values at Different Depths')
-  fig.show()
-  """ fig = px.imshow(Depth_df, color_continuous_scale=custom_colorscale, aspect="auto")
+  fig = px.imshow(Depth_df, color_continuous_scale=custom_colorscale, aspect="auto")
   fig.update_layout(
       title= '<b>2022 Depth Salinity Information</b>',
       title_x=0.42,
@@ -266,7 +254,7 @@ def MultiDepthGraphing(marker_title,Depth_df):
   fig.update_traces(
       hovertemplate='<br>Month: %{x}<br>Depth: %{y}<br>Salinity: %{z}<extra></extra>',
 
-  ) """
+  )
 
   graph_html = pio.to_html(fig, full_html=False,config=config)
   Depth_json='<div id="DepthHeatMap_html">' + graph_html + '<div>'
