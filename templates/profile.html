@@ -1,21 +1,21 @@
 {% extends 'layout.html' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<h2>Profile Page</h2>
-<div>
-    <p>Your account details are below:</p>
-    <table>
-        <tr>
-            <td>Username: {{ account['username'] }}</td>
-        </tr>
-        <tr>
-            <td>Password: ******</td>
-        </tr>
-        <tr>
-            <td>Email: {{ account['email'] }}</td>
-        </tr>
-    </table>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+<div class="dashboard-flex-container">
+    <div class="left-panel">
+        <div class="center-container">
+            <h1>Profile</h1>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-container">
+            
+        </div>
+    </div>
 </div>
+
 {% endblock %}

@@ -1,12 +1,12 @@
 /* The popup form - hidden by default */
 .form-popup {
     width: 50%;
-    height: 60%;
+    min-height: 60%;
     display: none;
     position: fixed;
     border: 3px solid #f1f1f1;
     z-index: 9;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 20px #1A1A1A3B;
@@ -138,7 +138,7 @@
 }
 
 /* The overlay element */
-.overlay {
+.overlay-login {
     display: none;
     position: fixed;
     top: 0;

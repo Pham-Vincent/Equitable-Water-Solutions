@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loginPopup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accountPopup.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Radio Canada">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/@material/layout-grid@latest/dist/mdc.layout-grid.css">
     <link rel="stylesheet" href="https://unpkg.com/@material/card@latest/dist/mdc.card.css">
     <link rel="stylesheet" href="https://unpkg.com/@material/ripple@latest/dist/mdc.ripple.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- jquery function to create an "active" class in span for the currently active navbar page -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
@@ -26,7 +27,18 @@
             });
         });
     </script>
-    <!-- Material Components Import Ends Here -->
+
+    <script>
+        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "small-bar") {
+                x.className += "-responsive";
+            } else {
+                x.className = "small-bar";
+            }
+        }
+    </script>
 
     <!-- Chatbot Styling -->
      <link rel="stylesheet" href={{ url_for('static', filename='css/chatbot.css') }}>
@@ -37,38 +49,56 @@
      <!-- Chatbot JS -->
      <script src="{{ url_for('static', filename='js/chatbot.js') }}" defer></script>
      <!-- End: Chatbot JS -->
-
+     {% block head %}{% endblock %}
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body class="{% if 'loggedin' in session %}loggedin{% else %}loggedout{% endif %}">
-    <nav class="navtop">
-        <div>
-            <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastGreenText.svg" alt="logo" style="width:6.2em; height:1.8em;"></a></h1>
-
-            <div class="nav-options">
-                <a href="{{ url_for('index') }}"><span>Home</span></a>
-                {% if 'loggedin' in session %}
-                <a href="{{ url_for('dashboard') }}"><span>Dashboard</span></a>
-                <a href="{{ url_for('map') }}"><span>Map Tool</span></a>
-                {% endif %}
-                <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
-                <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
-
-            </div>
-
-            <div class="grey-back">
-                <div class="login-container">
+    
+   
+        <nav class="navtop">
+            <div id="div1">
+                <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastGreenText.svg" alt="logo"></a></h1>
+    
+                <div class="nav-options">
+                    <a href="{{ url_for('index') }}"><span>Home</span></a>
                     {% if 'loggedin' in session %}
-                    <a class="button" href="{{ url_for('logout') }}"><span>{{ session.get('username') }}</span></a>
-                    {% else %}
-                    <button class="button" onclick="openForm()"><span>Log In</span></button>
+                    <a href="{{ url_for('dashboard') }}"><span>Dashboard</span></a>
+                    <a href="{{ url_for('map') }}"><span>Map Tool</span></a>
                     {% endif %}
+                    <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
+                    <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
+
+                </div>
+                <div class="grey-back">
+                    <div class="login-container">
+                        {% if 'loggedin' in session %}
+                        <div class="button">
+                            <a><span>{{ session.get('username') }}&nbsp;{{ session.get('lastname') }}</span></a>
+
+                            <!-- Account Options Popup Start -->
+                            <div class="account-options" id="loginMenu">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li><a href="{{ url_for('profile') }}">View Profile</a></li>
+                                    <li>Account Settings</li>
+                                    <li>Support</li>
+                                    <li class="logoout-button"><a href="{{ url_for('logout') }}">Log Out</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Account Options Popup End -->
+                        </div>
+                        {% else %}
+                        <button class="button" onclick="openForm()"><span>Log In</span></button>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+   
 
     <!-- Login Form Popup Start -->
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay-login" id="overlay-login"></div>
 
     <div class="form-popup" id="myForm">
         <div id="close-button" onclick="closeForm()"><img src="static/images/close-login.png" alt="Close"></div>
@@ -92,23 +122,44 @@
             <h2>Don't have an account yet?</h2>
 
             <a class="new-account-button" href="{{ url_for('register') }}"><span>Click here to create an account</span></a>
+            <h2></h2>
         </form>
     </div>
+
+    <!-- Login Form Popup End -->
+
     <script>
-    document.getElementById('overlay').addEventListener('click', closeForm);
+    document.addEventListener('DOMContentLoaded', function() {
+        const button = document.querySelector('.navtop .button');
+        const popup = document.querySelector('.form-popup');
+
+        button.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from bubbling up to document
+            button.classList.toggle('active');
+            document.getElementById("loginMenu").style.display = "block";
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!button.contains(event.target) && !popup.contains(event.target)) {
+                button.classList.remove('active');
+                closeForm();
+            }
+        });
+    });
+
+    document.getElementById('overlay-login').addEventListener('click', closeForm);
 
     function openForm() {
         document.getElementById("myForm").style.display = "block";
-        document.getElementById('overlay').style.display = "block";
+        document.getElementById('overlay-login').style.display = "block";
     }
   
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
+        document.getElementById("overlay-login").style.display = "none";
+        document.getElementById("loginMenu").style.display = "none";
     }
     </script>
-
-    <!-- Login Form Popup End -->
 
     <div class="content">
         {% block content %}{% endblock %}

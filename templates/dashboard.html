@@ -1,8 +1,86 @@
 {% extends 'layout.html' %}
 
-{% block title %}Team Page{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 
+<div class="dashboard-flex-container">
+    <div class="left-panel">
+        <div class="center-container">
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-container">
+            <div class="square-containers">
+                <img src="static\images\dashboard-temp-img.png" referrerpolicy="no-referrer" alt="dashboard img" style="width:100%; height:100%;">
+            </div>
+            <!--
+            <div class="square-containers">
+                <div  class="margin-container">
+                    <h2>Salinity Concentration Forecast</h2>
+
+                    <h5>Salt Type:</h5>
+                    <div class="select-button" onclick="toggleSelect(this)"><div class="inner"></div></div>
+
+                    <div class="slider-container">
+                        <div class="line"></div>
+                        <img src="static\images\dashboard-slider-icon.png" alt="slider" class="slider-image" id="slider">
+                    </div>
+                </div>
+            </div>
+            -->
+            <div class="square-containers">
+                <img src="static\images\dashboard-temp-img2.png" referrerpolicy="no-referrer" alt="dashboard img" style="width:100%; height:100%;">
+            </div>
+            <script>
+                function toggleSelect(button) {
+                    // Get the .inner element inside the clicked .select-button
+                    const innerElement = button.querySelector('.inner');
+
+                    // Deactivate all other .inner elements
+                    const allInnerElements = document.querySelectorAll('.select-button .inner');
+                    allInnerElements.forEach(inner => {
+                        if (inner !== innerElement) {
+                            inner.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the 'active' class on the clicked button's .inner element
+                    innerElement.classList.toggle('active');
+                }
+
+                const slider = document.getElementById('slider');
+                const sliderContainer = document.querySelector('.slider-container');
+
+                let isDragging = false;
+
+                slider.addEventListener('mousedown', function(event) {
+                    isDragging = true;
+                    document.body.style.cursor = 'grabbing'; // Change cursor to grabbing
+                });
+
+                document.addEventListener('mouseup', function() {
+                    isDragging = false;
+                    document.body.style.cursor = 'default'; // Reset cursor
+                });
+
+                document.addEventListener('mousemove', function(event) {
+                    if (!isDragging) return; // Only move the slider if the mouse is being held down
+
+                    const containerRect = sliderContainer.getBoundingClientRect();
+                    let left = event.clientX - containerRect.left - (slider.clientWidth / 2);
+
+                    // Constrain slider within the container
+                    if (left < 0) left = 0;
+                    if (left > containerRect.width - slider.clientWidth) left = containerRect.width - slider.clientWidth;
+
+                    slider.style.left = `${left}px`;
+                });
+            </script>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

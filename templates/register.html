@@ -4,31 +4,148 @@
 		<meta charset="utf-8">
 		<title>Register</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
-		<div class="register">
-			<h1>Register</h1>
-			<div class="links">
-				<a href="{{ url_for('login') }}">Login</a>
-				<a href="{{ url_for('register') }}" class="active">Register</a>
+		<form action="{{ url_for('register') }}" method="post" autocomplete="off" onsubmit="return validateForm()">
+			<div class="register-form-container">
+				<div class="offset">
+					<!-- Header Start -->
+					<div class="flex-container">
+						<div class="main-title">Get Started with&nbsp;</div>
+						<div class="saltcast">SaltCast</div>
+						<div class="main-title">.</div>
+					</div>
+
+					<h3>Create an Account</h3>
+
+					<!-- Header End -->
+
+					<!-- Input Start -->
+					<div class="flex-container">
+						<input type="text" name="fname" placeholder="First Name" required>
+						<input type="email" name="email" placeholder="Email Address" required>
+						<input type="password" name="password" placeholder="Select Password" required>
+					</div>
+					<div class="flex-container">
+						<input type="text" name="lname" placeholder="Last Name" required>
+						<input type="text" name="org" placeholder="Organization">
+						<input type="password" name="password-again" placeholder="Retype Password" required>
+					</div>
+						<div class="msg">{{ msg }}</div>
+					<!-- Input End -->
+				</div>
 			</div>
-			<form action="{{ url_for('register') }}" method="post" autocomplete="off">
-				<label for="username">
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<label for="email">
-					<i class="fas fa-envelope"></i>
-				</label>
-				<input type="email" name="email" placeholder="Email" id="email" required>
-				<div class="msg">{{ msg }}</div>
-				<input type="submit" value="Register">
-			</form>
-		</div>
+
+			<div class="tags-container">
+				<div class="offset">
+					<!-- Selection Header Start -->
+					<h3>Select Account Type</h3>
+
+					<div class="flex-container">
+						<div class="standard-text">Bill monthly&nbsp;&nbsp;</div>
+
+						<div class="toggle-slider" onclick="toggleSlider(this)">
+							<div class="slider-center"></div>
+						</div>
+						
+						<script>
+							function toggleSlider(element) {
+								element.classList.toggle('active');
+							}
+						</script>
+
+						<div class="standard-text">&nbsp;&nbsp;Bill annually</div>
+					</div>
+					<!-- Selection Header End -->
+
+					<div class="flex-container">
+						<div class="option-container">
+							<div class="flex-container">
+								<div class="pricing-text">$x</div>
+								<div class="standard-text">&nbsp;&nbsp;/month</div>
+							</div>
+							<div class="bold-description">For Salinity Exposure Data</div>
+							<div class="standard-text">Basic Account</div>
+							<div class="delimeter"></div>
+							<div class="button-location">
+								<div class="select-button" onclick="toggleSelect(this, 'basic')">Select</div>
+							</div>
+						</div>
+						<div class="option-container">
+							<div class="flex-container">
+								<div class="pricing-text">$x</div>
+								<div class="standard-text">&nbsp;&nbsp;/month</div>
+							</div>
+							<div class="bold-description">For Salinity Exposure Data</div>
+							<div class="standard-text">Premium Account</div>
+							<div class="delimeter"></div>
+							<div class="button-location">
+								<div class="select-button" onclick="toggleSelect(this, 'premium')">Select</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="flex-container">
+						<div class="option-container">
+							<div class="flex-container">
+								<div class="pricing-text">$x</div>
+								<div class="standard-text">&nbsp;&nbsp;/month</div>
+							</div>
+							<div class="bold-description">For API Access</div>
+							<div class="delimeter"></div>
+
+						</div>
+						<div class="option-container">
+							<div class="flex-container">
+								<div class="pricing-text">$x</div>
+								<div class="standard-text">&nbsp;&nbsp;/month</div>
+							</div>
+							<div class="bold-description">For Custom Solutions</div>
+							<div class="delimeter"></div>
+							<div class="button-location">
+								<div class="select-button" onclick="toggleSelect(this, 'custom')">Select</div>
+							</div>
+						</div>
+					</div>
+
+					<input type="hidden" id="selectedTag" name="tags" value="">
+
+					<script>
+						function toggleSelect(element, tag) {
+							const buttons = document.querySelectorAll('.select-button');
+
+							buttons.forEach(button => {
+								if(button!=element){
+									button.classList.remove('active');
+									button.textContent = "Select";
+								}
+							});
+
+							element.classList.toggle('active');
+
+							if(element.classList.contains('active')){
+								element.textContent="Selected";
+								document.getElementById('selectedTag').value = tag;
+							} else {
+								element.textContent="Select";
+								document.getElementById('selectedTag').value = "";
+							}
+						}
+
+						function validateForm() {
+							const selectedTag = document.getElementById('selectedTag').value.trim();
+
+							if (!selectedTag) {
+								alert("Please select an account type.");
+								return false;
+							}
+							return true;
+						}
+					</script>
+
+					<input type="submit" value="Get Started">
+				</div>
+			</div>
+		</form>
 	</body>
 </html>
