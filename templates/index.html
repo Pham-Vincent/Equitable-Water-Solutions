@@ -109,9 +109,11 @@
         </div>
       </div>
       
+      {% if not 'loggedin' in session %}
       <div>
         <button class="create-account-btn"><a href="{{ url_for('register') }}">Create An Account</a></button>
       </div>
+      {% endif %}
   
     </div>
 
