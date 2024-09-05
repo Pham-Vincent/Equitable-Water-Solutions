@@ -11,6 +11,20 @@
             <h6>Hello,</h6>
             <h1>{{ session.get('username') }}</h1>
             <div class="line"></div>
+
+            <div class="bottom">
+                <h5>Account</h5>
+                <div class="line"></div>
+                <h5>Manage Subscriptions</h5>
+                <div class="line"></div>
+                <h5>Financial & Payments</h5>
+                <div class="line"></div>
+                <h5>Preferences</h5>
+                <div class="line"></div>
+                <h5>Notifications</h5>
+                <div class="line"></div>
+                <h5><a href="{{ url_for('logout') }}">Log Out</a></h5>
+            </div>
         </div>
     </div>
     <div class="right-panel">
