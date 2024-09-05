@@ -13,28 +13,110 @@
     </ul>
 
     <div class="page-content">
-      <div>
-        <h1>
-          <span style="font-style:italic">SaltCast </span> loading...
-        </h1>
-        <p>SaltCast is a salinity management tool that helps protect drinking water safety, sustainable freshwater use, and infrastructure integrity under climate change. It integrates advanced hydrological and oceanographic models, AI-based algorithms, and ion-specific measurements to deliver actionable information.</p>
-        <hr style="color: white;">
-        <div class="journey">
+      
+      <div class="block-1">
+        <div>
           <h1>
-            Our Journey So Far...
+            This is <span style="font-style:italic;"> SaltCast.</span>
           </h1>
-  
-          <p>Meet the team on our <a href="{{ url_for('aboutus') }}" >Contact Us</a> page.</p>
-          <p>Check out our Research Papers <a href="{{ url_for('research') }}" >here</a></p>
+          <h2>Forecasting salt exposure to protect water resources and infrastructure.</h2>
+          <p>SaltCast is a salinity management tool that helps protect drinking water safety, sustainable freshwater use, and infrastructure integrity under climate change. It integrates advanced hydrological and oceanographic models, AI-based algorithms, and ion-specific measurements to deliver actionable information.</p>
         </div>
+        <img src="static/images/SaltCastLogoGreen.svg">
       </div>
 
-      <img src="static/images/SaltCastLogoGreen.svg">
-      
     </div>
 
   </div>
+
+  <div class="block-2">
+    <div class="block-2-content">
+      <h1>SaltCast Delivers.</h1>
+      <div class="block-2-split">
+        <div class="block-2-A">
+          <img src="static/images/HomePage-Images/block-2-A-image.png">
+          <div class="block-2-A-description">
+            <p class="p-1">Salinity Exposure Forecasting</p>
+            <p class="p-2">Forecasting salinity, specific conductance, chloride, and sodium at user-specified locations from hours to decades</p>
+          </div>
+        </div>
+        <div class="block-2-B">
+          <img src="static/images/HomePage-Images/block-2-B-image.png">
+          <div class="block-2-B-description">
+            <p class="p-1">Corrosion Exposure Forecasting </p>
+            <p class="p-2">Forecasting chloride to sulfate mass ratios, pH, alkalinity, and hardness trends from acute to chronic conditions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-3">
+    <div class="block-3-A">
+      <h1>Why Now?</h1>
+      <p style="font: normal normal normal 16px/24px Roboto;">Tidal rivers and estuaries are becoming saltier, impacting freshwater users and infrastructure operations. Accelerating sea level rise, deepening droughts, and increased water consumption are driving saltwater intrusion from the ocean, while changes in land-use are leading to freshwater salinization.</p>
+
+      <h1>Why SaltCast?</h1>
+      <p style="font: normal normal normal 16px/24px Roboto;">SaltCast uses a cutting-edge watershed-estuary model to simulate the transport and fate of major salt ions. The model output is combined with artificial intelligence algorithms to identify management strategies. Read papers from our leading scientists <a href="{{ url_for('research') }}" style="font: normal normal bold 16px/24px Roboto;">here.</a></p>
+    </div>
+    <div class="block-3-B">
+      <h1>How Does SaltCast Help Me?</h1>
+      <p style="font: italic normal normal 20px/28px Roboto; font-weight: 500;">Get ready today and avoid tomorrow’s emergency.</p>
+      <p style="font: normal normal normal 16px/24px Roboto;">Accurate predictions of saltwater intrusion and a decision support system for salinity and corrosion management will increase the resilience of coastal infrastructure, increase water security, and protect public health at a lower cost to you.</p>
+    </div>
+  </div>
+
+  <div class="block-4">
+    <div class="block-4-content">
+      <h1>5 Ways to Get Started Today.</h1>
+      <div class="step-1">
+        <img src="static/images/HomePage-Images/step-1.svg">
+        <div class="step-description">
+          <p class="step-title">For Salinity Data, Operations & Management (short term, higher data resolution)</p>
+          <p class="step-instruction">Create a basic or premium account for 2 month, detailed salinity data forecasting and hindcasting.</p>
+        </div>
+      </div>
+
+      <div class="step-2">
+        <img src="static/images/HomePage-Images/step-2.svg">
+        <div class="step-description">
+          <p class="step-title">For Salinity Data, Long Term Planning (long term, general data resolution)</p>
+          <p class="step-instruction">Create a basic or premium account for 100 year collated salinity data forecasting and hindcasting.</p>
+        </div>
+      </div>
+
+      <div class="step-3">
+        <img src="static/images/HomePage-Images/step-3.svg">
+        <div class="step-description">
+          <p class="step-title">For Corrosion Exposure Data</p>
+          <p class="step-instruction">Create a basic or premium account for 50 year corrosion exposure forecasting and hindcasting.</p>
+        </div>
+      </div>
+
+      <div class="step-4">
+        <img src="static/images/HomePage-Images/step-4.svg">
+        <div class="step-description">
+          <p class="step-title">API Account</p>
+          <p class="step-instruction">Access the API to perform your own analyses with our data.</p>
+        </div>
+      </div>
+
+      <div class="step-5">
+        <img src="static/images/HomePage-Images/step-5.svg">
+        <div class="step-description">
+          <p class="step-title">Custom Solutions</p>
+          <p class="step-instruction">Reach out to us for custom data forecasting solutions that suit your business needs.</p>
+        </div>
+      </div>
+      
+      <div>
+        <button class="create-account-btn"><a href="{{ url_for('register') }}">Create An Account</a></button>
+      </div>
   
+    </div>
+
+  </div>
+   
   
 
 {% endblock %}
