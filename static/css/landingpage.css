@@ -4,95 +4,250 @@ CSS for index.html to syle the landing/coming soon page
 
 /* defines a flex to split to page into 2 halfs (div/img) */
 
+
 .page-content{
-    width: 85%;
-    height: 100%;
+   width: 85%;
+   height: 100%;
+   display: flex;
+   margin:8% auto;
+   flex-direction: column;
+}
+.block-1{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10em;
-    margin: 10% auto;
+    gap: 15em;
     z-index: 1;
 }
 
-.page-content > div{
+.block-1 > div{
     width: auto;
-    padding: 0 0 30px 0;
+    margin-right: 8%;
     z-index: 1;
 }
-.page-content h1{
+.block-1 h1{
     align-items: center;
     text-align: center;
     font-size: 60px;
     color:white;
     text-align:left;
     font: normal normal bold 50px/55px Roboto;
+    margin:10px 0 10px 0;
 }
 
- .page-content img{
+.block-1 h2{
+   color:white;
+   font: italic normal bold 20px/28px Roboto;
+   font-weight: 500;
+   margin:0;
+   padding:0;
+}
+
+ .block-1 img{
     border-radius: 50%;
-    width: 460px;
-    height: 460px;
+    width: 100%;
+    height: 100%;
     margin-bottom: 0;
     background-color: rgba(255, 255, 255, 0.126);
     z-index: 1;
  }
 
- .page-content p{
+ .block-1 p{
     color: white;
     font:normal normal normal 16px/24px Roboto;
     text-align:left;
+    margin:10px 0 10px 0;
  }
 
- .journey a:link{
-    color: white;
+.block-2{
+   height: fit-content;
+   width: 100%;
+   background-color: white;
+   z-index: 2;
+   margin-top: -5%;
  }
 
- .journey a:visited{
-    color: white;
+ .block-2-content{
+   width: 100%;
+   height: auto;
+   color: #0A2B57;
  }
 
- .journey a:hover{
-    color: black;
-    transition: 0.2s;
+ .block-2-content h1{
+   margin: 0;
  }
 
- .journey h1{
-    font: normal normal bold 35px/43px Roboto;
+ .block-3{
+   height: fit-content;
+   width: 100%;
+   background-color: rgb(152, 152, 152);
+   z-index: 2;
+   display: flex;
+   flex-direction: row;
+   gap:0;
  }
 
- .journey p{
-    font: italic normal normal 20px/28px Roboto;
-    font-style: italic;
-    font-weight: 500;
+ .block-3-A{
+   background-color: #E5E9ED;
+   width: 50%;
+   height: auto;
+   padding: 3% 3% 3% 7.5%;
+   box-sizing: border-box; /* Ensures padding is included in the width */
+   color: #0A2B57;
  }
 
+ .block-3-B{
+   background-color: #0A2B57;
+   width: 50%;
+   height: auto;
+   padding: 3% 7.5% 3% 3%;
+   color: white;
+   box-sizing: border-box; /* Ensures padding is included in the width */
+ }
+
+ .block-4{
+   height: fit-content;
+   width: 100%;
+   background-color: rgb(255, 255, 255);
+   z-index: 2;
+ }
+
+ .block-4-content{
+   width: 100%;
+   height: auto;
+   color: #0A2B57;
+   padding: 3% 7.5% 3% 7.5%;
+   box-sizing: border-box; /* Ensures padding is included in the width */
+   display: flex;
+   flex-direction: column;
+   gap: 1em;
+ }
+
+ .step-1, .step-2, .step-3, .step-4, .step-5{
+   display: flex;
+   flex-direction: row;
+   gap: 1em;
+   align-items: center;
+ }
+
+ .step-description p{
+   margin: 0;
+ }
+
+ .step-title{
+   font: italic normal bold 20px/28px Roboto;
+   font-weight: 500;
+ }
+
+ .step-instruction{
+   font: normal normal normal 16px/24px Roboto;
+ }
+
+ .create-account-btn{
+   background-color: #289D7A;
+   border-radius: 20%;
+   border: none;
+ }
+
+.block-2-split{
+   display: flex;
+   flex-direction: row;
+   gap: 0;
+   margin-top:-3%;
+}
+
+.block-2-split img{
+   width: 50%;
+   height: 55%;
+}
+
+.block-2-A, .block-2-B{
+   display: flex;
+   flex-direction: row;
+   width: 50%;
+   height: auto;
+   align-items: center;
+   box-sizing: border-box;
+   padding: 0 5% 0 0;
+   gap: 1em;
+}
+
+.block-2-A{
+   padding-left: 7.5%;
+}
+
+.block-2-B{
+   padding-right: 7.5%;
+}
+
+.block-2-A-description, .block-2-B-description{
+   margin-right: 5%;
+}
+
+.block-2-A p, .block-2-B p{
+   margin:0;
+}
+
+.p-1{
+   font: italic normal normal 20px/24px Roboto;
+   font-weight: 500;
+}
+
+.p-2{
+   font: normal normal normal 16px/24px Roboto;
+}
+
+.block-2 h1{
+   padding: 3% 0 0 7.5%;
+}
+
+.create-account-btn{
+   background-color: #289d7a;
+   border-radius: 23px;
+   border: none;
+   color: white;
+   width: 180px;
+   height: 40px;
+   font: normal normal bold 16px/26px Roboto;
+   cursor: pointer;
+   margin-top: 2%;
+}
+
+.block-4 a, .block-4:visited{
+   color: white;
+   font: normal normal bold 16px/26px Roboto;
+   text-decoration: none;
+}
+
+.block-3 a:visited{
+   color: black;
+}
 
  @media screen and (max-width: 650px) {
 
-    .page-content{
+    block-1{
         display:contents;
     }
 
-    .page-content img{
+    block-1 img{
         margin: 0 auto;
      }
 
-     .page-content h1{
+     block-1 h1{
         font: italic normal bold 35px/48px Roboto;
         padding-top: 10%;
      }
 
-     .page-content p{
+     block-1 p{
         font: normal normal normal 14px/22px Roboto;
      }
 
-     .page-content > div{
+     block-1 > div{
         width: 85%;
         margin: 0 auto;
      }
 
-     .page-content img{
+     block-1 img{
         height: 70%;
         width: 70%;
         display: block;
@@ -100,18 +255,6 @@ CSS for index.html to syle the landing/coming soon page
         z-index: 2;
      }
 
-     .journey h1{
-        font: normal normal bold 22px/30px Roboto;
-        margin: auto 0 5px 0;
-     }
-    
-     .journey p{
-        font: italic normal normal 16px/24px Roboto;
-        font-weight: 500;
-        margin: 5px 0;
-     }
-
-     
  }
 
  
