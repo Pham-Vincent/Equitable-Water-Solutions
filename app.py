@@ -19,6 +19,7 @@ from Graph import *
 from login import *
 from About import *
 from FeatureExtraction import *
+from LocationPinning import * 
 from dotenv import load_dotenv
 import os
 import pandas as pd
@@ -168,6 +169,16 @@ def contactus():
 def research():
     checkLogin('research.html')
     return render_template('research.html')
+
+@app.route('/session-data')
+def sessionData():
+  return(retrieve_sessionid())
+
+#Utilized to Pin location into the Database
+@app.route('/pin-location',methods=['POST'])
+def pinLocation():
+  return(add_pin_to_database( request.get_json()))
+
   
 if __name__ == '__main__':
   app.run(debug=True)
