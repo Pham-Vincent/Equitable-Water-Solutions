@@ -59,6 +59,9 @@ body, html {
     background-color: white;
     margin-bottom: 20px;
 }
+.square-containers p {
+margin:.5%;
+}
 
 .square-containers .margin-container {
     margin: 30px;

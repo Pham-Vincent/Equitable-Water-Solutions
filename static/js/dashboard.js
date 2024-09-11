@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
 
       series: [{
-          name: 'Tokyo',
+          name: 'Salinity',
           marker: {
               enabled: false
           },
