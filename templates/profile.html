@@ -11,27 +11,104 @@
             <h6>Hello,</h6>
             <h1>{{ session.get('username') }}</h1>
             <div class="line"></div>
-
+    
             <div class="bottom">
-                <h5>Account</h5>
-                <div class="line"></div>
-                <h5>Manage Subscriptions</h5>
-                <div class="line"></div>
-                <h5>Financial & Payments</h5>
-                <div class="line"></div>
-                <h5>Preferences</h5>
-                <div class="line"></div>
-                <h5>Notifications</h5>
-                <div class="line"></div>
+                <h5 class="sidebar-item">Account</h5>
+                
+                <h5 class="sidebar-item" data-section="subscriptions">Manage Subscriptions</h5>
+                
+                <h5 class="sidebar-item">Financial & Payments</h5>
+               
+                <h5 class="sidebar-item" data-section="preferences">Preferences</h5>
+              
+                <h5 class="sidebar-item" >Notifications</h5>
+            
                 <h5><a href="{{ url_for('logout') }}">Log Out</a></h5>
             </div>
         </div>
     </div>
+    
+    </div>
     <div class="right-panel">
         <div class="right-container">
-            
+            <div id="account" style="display: none;">
+                <!-- Account content goes here -->
+            </div>
+            <div id="subscriptions" style="display: none;">
+                <h1>Manage Subscription</h1>
+                <!-- Manage Subscriptions content goes here -->
+            </div>
+            <div id="payments" style="display: none;">
+                <!-- Financial & Payments content goes here -->
+            </div>
+            <div id="preferences" style="display: none;">
+                <h1>Preferences</h1>
+                <div class="stan-text">Choose from the parameters below to personalise your data delivery</div>
+
+                <div class="options-group">
+                    <div class="option-row">
+                        <span class="option-label">Units</span>
+                        <div class="option-buttons">
+                            <button class="option-btn selected">Parts per thousand (ppt)</button>
+                            <button class="option-btn">Parts per million (ppm)</button>
+                            <button class="option-btn">Grams (g)</button>
+                        </div>
+                    </div>
+                
+                    <div class="option-row">
+                        <span class="option-label">Export Format</span>
+                        <div class="option-buttons">
+                            <button class="option-btn selected">Shape file</button>
+                            <button class="option-btn">PDF</button>
+                            <button class="option-btn">CSV</button>
+                        </div>
+                    </div>
+                
+                    <div class="option-row">
+                        <span class="option-label">Forecasting Iteration</span>
+                        <div class="option-buttons">
+                            <button class="option-btn">Twice daily</button>
+                            <button class="option-btn selected">Daily</button>
+                            <button class="option-btn">Weekly</button>
+                        </div>
+                    </div>
+                
+                    <div class="option-row">
+                        <span class="option-label">Hindcasting Range</span>
+                        <div class="option-buttons">
+                            <button class="option-btn">None</button>
+                            <button class="option-btn">30 Years Prior</button>
+                            <button class="option-btn selected">90 Years Prior</button>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Save Changes">
+                <!-- Preferences content goes here -->
+            </div>
+            <div id="notifications" style="display: none;">
+                <!-- Notifications content goes here -->
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const section = this.getAttribute('data-section');
+                
+                // Hide all sections first
+                document.querySelectorAll('.right-container > div').forEach(div => {
+                    div.style.display = 'none';
+                });
+
+                // Show the selected section
+                document.querySelector(`#${section}`).style.display = 'block';
+            });
+        });
+    });
+</script>
 
 {% endblock %}
