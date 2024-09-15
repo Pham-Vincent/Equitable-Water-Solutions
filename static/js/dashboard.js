@@ -79,3 +79,255 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    Highcharts.chart('dashboard-barchart-1', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Number of days below the LO Threshold in the next 60 days.',
+            style: {
+                fontSize: '16px',
+                fontFamily: 'Roboto'
+            }
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                autoRotation: [-45, -90],
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 100, // Set the maximum value for the Y-axis
+            lineWidth: 1.5,
+            tickInterval: 25, 
+            minorTickInterval: 25, 
+            minorTickLength: 15, 
+            minorTickWidth: 1.5,
+            tickColor: '#000000',
+            minorTickColor: ' #000000',
+            title: {
+                text: 'Number of Days',
+                style: {
+                    fontSize: '12px',
+                    fontFamily: 'Roboto',
+                    fontWeight: 'bold',
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Number of Days: <b>{point.y:.1f}</b>'
+        },
+        series: [{
+            name: 'Population',
+            colors: [
+                '#7CB935'
+            ],
+            colorByPoint: true,
+            groupPadding: 0,
+            data: [
+                ['Cl', 62.5],
+                ['Na', 37.5],
+                ['Ca', 50],
+                ['K', 50],
+                ['Br', 75],
+                ['Mg', 25],
+                ['SO', 25]
+            ],
+            dataLabels: {
+                enabled: false,
+                rotation: -90,
+                color: '#FFFFFF',
+                inside: true,
+                verticalAlign: 'top',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    Highcharts.chart('dashboard-barchart-2', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Number of days above the HI Threshold in the next 60 days.',
+            style: {
+                fontSize: '16px',
+                fontFamily: 'Roboto'
+            }
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                autoRotation: [-45, -90],
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 100, // Set the maximum value for the Y-axis
+            lineWidth: 1.5,
+            tickInterval: 25, 
+            minorTickInterval: 25, 
+            minorTickLength: 15, 
+            minorTickWidth: 1.5, 
+            tickColor: '#000000',
+            minorTickColor: ' #000000',
+            title: {
+                text: 'Number of Days',
+                style: {
+                    fontSize: '12px',
+                    fontFamily: 'Roboto',
+                    fontWeight: 'bold',
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'PNumber of Days: <b>{point.y:.1f}</b>'
+        },
+        series: [{
+            name: 'Population',
+            colors: [
+                '#797EF6'
+            ],
+            colorByPoint: true,
+            groupPadding: 0,
+            data: [
+                ['Cl', 62.5],
+                ['Na', 37.5],
+                ['Ca', 50],
+                ['K', 50],
+                ['Br', 75],
+                ['Mg', 25],
+                ['SO', 25]
+            ],
+            dataLabels: {
+                enabled: false,
+                rotation: -90,
+                color: '#FFFFFF',
+                inside: true,
+                verticalAlign: 'top',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    Highcharts.chart('dashboard-barchart-3', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Number of days between the LO & HI Thresholds in the next 60 days.',
+            style: {
+                fontSize: '16px',
+                fontFamily: 'Roboto'
+            }
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                autoRotation: [-45, -90],
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 100,  
+            lineWidth: 1.5,
+            tickInterval: 25, 
+            minorTickInterval: 25, 
+            minorTickLength: 15, 
+            minorTickWidth: 1.5, 
+            tickColor: '#000000',
+            minorTickColor: ' #000000',
+            title: {
+                text: 'Number of Days',
+                style: {
+                    fontSize: '12px',
+                    fontFamily: 'Roboto',
+                    fontWeight: 'bold',
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Number of Days: <b>{point.y:.1f}</b>'
+        },
+        series: [{
+            name: 'Population',
+            colors: [
+                '#0A2B57'
+            ],
+            colorByPoint: true,
+            groupPadding: 0,
+            data: [
+                ['Cl', 62.5],
+                ['Na', 37.5],
+                ['Ca', 50],
+                ['K', 50],
+                ['Br', 75],
+                ['Mg', 25],
+                ['SO', 25],
+            ],
+            dataLabels: {
+                enabled: false,
+                rotation: -90,
+                color: '#FFFFFF',
+                inside: true,
+                verticalAlign: 'top',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
