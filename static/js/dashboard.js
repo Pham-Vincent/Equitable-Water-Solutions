@@ -79,3 +79,153 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+Highcharts.chart('dashboard-saltdial', {
+
+    chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false,
+        height: '50%'
+    },
+
+    title: {
+        text:""
+    },
+
+    pane: {
+        startAngle: -150,
+        endAngle: 149.9,
+        background: null,
+        center: ['50%', '60%'],
+        size: '110%'
+    },
+
+    // the value axis
+    yAxis: {
+        min: 0,
+        max: 390,  // Adjust according to how many labels (words) you need
+        tickLength: 0,
+        minorTickInterval: null,
+        labels: {
+            distance: -20,
+            style: {
+                fontSize: '12px',
+                color:'white',
+                fontFamily:'Roboto',
+                fontWeight:'bold',
+            },
+            formatter: function () {
+                // Map the numerical values to specific words
+                const words = {
+                    50:'<span class="low">Low</span>',
+                    150: '<span class="medium">Medium</span>',
+                    250: '<span class="mid-high">Mid-High</span>',
+                    350: '<span class="high">High</span>',
+                };
+                return words[this.value] || '';
+            },
+            useHTML: true
+            
+        },
+        lineWidth: 0,
+        plotBands: [
+            createPlotBand(0, 90, '#50bcb9'),
+            createPlotBand(100, 190, '#3d8c96'),
+            createPlotBand(200, 290, '#265471'),
+            createPlotBand(300, 390, '#173058','High')
+        ]
+    },
+    
+    series: [{
+        name: 'Salinity',
+        data: [200],
+        tooltip: {
+            valueSuffix: ' ppm'
+        },
+        dataLabels: {
+            format: '{y} ppm',
+            borderWidth: 0,
+            color: (
+                Highcharts.defaultOptions.title &&
+                Highcharts.defaultOptions.title.style &&
+                Highcharts.defaultOptions.title.style.color
+            ) || '#333333',
+            style: {
+                fontSize: '16px'
+            }
+        },
+        dial: {
+            radius: '80%',
+            backgroundColor: '#797EF6',
+            baseWidth: 12,
+            baseLength: '0%',
+            rearLength: '0%'
+        },
+        pivot: {
+            backgroundColor: 'white',
+            radius: 10,
+            borderColor: '#333333',
+            borderWidth: .5,
+            shadow: {
+                color: 'rgba(0, 0, 0, 0.5)', // Shadow color
+                offsetX: 2,                 // Horizontal shadow offset
+                offsetY: 2,                 // Vertical shadow offset
+                opacity: 0.5,               // Shadow opacity
+                width: 5                    // Shadow spread
+            }
+            
+        }
+
+    }]
+    
+
+});
+
+// Add some life
+setInterval(() => {
+    const chart = Highcharts.charts[0];
+    if (chart && !chart.renderer.forExport) {
+        const point = chart.series[0].points[0],
+            inc = Math.round((Math.random() - 0.5) * 20);
+
+        let newVal = point.y + inc;
+        if (newVal < 0 || newVal > 200) {
+            newVal = point.y - inc;
+        }
+
+        point.update(newVal);
+    }
+
+}, 3000);
+
+
+
+function createPlotBand(from, to, color) {
+    return {
+        from: from,
+        to: to,
+        color: color,
+        thickness: 100,
+        outerRadius: '100%',  // Full outer radius
+        innerRadius: '50%',
+        borderRadius: '20%',
+        label: {
+            zIndex: 1,
+            verticalAlign: 'middle',
+            style: {
+                color: 'black',
+                textAlign: 'center',
+                rotation:180
+            }
+            
+        },
+        
+    };
+}
+
+
+
+

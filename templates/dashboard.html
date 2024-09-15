@@ -5,6 +5,12 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/navigator.js"> </script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 <div class="dashboard-flex-container">
     <div class="left-panel">
         <div class="center-container">
@@ -21,6 +27,8 @@
                <p>100-200: What does this range mean</p>
                <p>200-300: What does this range mean</p>
                <p>&gt;400: What does this range mean</p>
+
+               <div id="dashboard-saltdial" style="width: 50%; height: 400px;"></div>
             </div>
            
             <!-- Link to external JavaScript file -->
