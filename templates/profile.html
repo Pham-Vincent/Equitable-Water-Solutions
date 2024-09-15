@@ -77,7 +77,9 @@
                             <div class="normal-description">Corrosion Exposure</div>
                         </div>
                         <div class="delimeter"></div>
+                        <div class="button-location">
                             <div class="add-on-button">Add to Premium</div>
+                        </div>
                     </div>
                 </div>
 
@@ -179,6 +181,20 @@
             });
         });
     });
+
+    document.querySelectorAll('.option-buttons').forEach(group => {
+    group.addEventListener('click', function(e) {
+        if (e.target.classList.contains('option-btn')) {
+            // Remove the 'selected' class from all buttons in this group
+            group.querySelectorAll('.option-btn').forEach(button => {
+                button.classList.remove('selected');
+            });
+            
+            // Add the 'selected' class to the clicked button
+            e.target.classList.add('selected');
+        }
+    });
+});
 
     function toggleSelect(element, tag) {
         const buttons = document.querySelectorAll('.select-button');

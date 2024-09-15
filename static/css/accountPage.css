@@ -257,15 +257,13 @@ input[type=submit] {
     height:1px;
     width: 100%;
     position: relative;
-    margin-bottom: 10px;
 }
 
 .button-location {
     position: relative;
-    padding-top: 10px;
-    height: 40%;
-    width: 100%;
-    min-height: 45px; /* Ensure enough space for the button */
+    height: auto;
+    width: auto;
+    min-height: 60px; /* Ensure enough space for the button */
 }
 
 .button-location .select-button {
@@ -273,40 +271,38 @@ input[type=submit] {
     width: auto;
     padding-left: 20px;
     padding-right: 20px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    border: 2px solid #289D7A;
+    background: #289d7a 0% 0% no-repeat padding-box;
+    border: 2px solid #289d7a;
     border-radius: 23px;
     opacity: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     font: normal normal bold 16px/26px Roboto;
-    color: #289D7A;
+    color: #FFFFFF;
     cursor: pointer;
     user-select: none;
-    margin-bottom: 10px; 
+    bottom: 10px;
+    right: 20px;
 }
 
 .add-on-button {
-    height: 45px;
-    width: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    padding: 10px 20px; /* Adjust padding as needed */
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 2px solid #289D7A;
     border-radius: 23px;
-    opacity: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font: normal normal bold 16px/26px Roboto;
-    color: #289D7A;
     cursor: pointer;
-    user-select: none; 
-    position: relative; /* Inside the button-location */
-    right: 0;
-    margin-left: auto;
+    white-space: nowrap; /* Ensures the button doesn't expand beyond the text width */
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    font: normal normal bold 16px/26px Roboto;
+    letter-spacing: 0px;
+    color: #289D7A;
 }
+
 
 .button-location .select-button.active {
     width: 90%;
@@ -319,4 +315,14 @@ input[type=submit] {
     border: 2px solid #b7e2ba;
 }
 
+.button-location .add-on-button.active {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    border-radius: 5px;
+    background-color: #b7e2ba;
+    color: #0a2b57;
+    border: 2px solid #b7e2ba;
+}
 /* MANAGE SUBSCRIPTIONS END */
