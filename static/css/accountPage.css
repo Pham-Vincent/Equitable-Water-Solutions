@@ -110,6 +110,7 @@ body, html {
     letter-spacing: 0px;
     color: #0A2B57;
     opacity: 1;
+    margin-bottom: 10px;
 }
 
 .right-panel .right-container .stan-text {
@@ -119,7 +120,7 @@ body, html {
     opacity: 1;
 }
 
-/* General styling */
+/* PREFERENCES START */
 .right-panel .right-container .options-group {
     box-sizing: border-box;
     width: 90%;
@@ -191,3 +192,131 @@ input[type=submit] {
     align-items: center;
     justify-content: center;
 }
+/* PREFERENCES END */
+
+
+/* MANAGE SUBSCRIPTIONS START */
+.option-container {
+    display: inline-block;
+    height: auto;
+    width: 43%; 
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin: 40px 40px 0 0;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.pricing-text {
+    text-align: left;
+    font: normal normal normal 22px/24px Radio Canada Big;
+    letter-spacing: 0px;
+    color: #289D7A;
+}
+
+.standard-text {
+    text-align: left;
+    padding: 3px 0;
+    font: normal normal normal 16px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+    user-select: none;
+}
+
+.bold-description {
+    text-align: left;
+    font: normal normal bold 20px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+    display: block;
+    margin-top: 10px;
+}
+
+.normal-description {
+    text-align: left;
+    font: normal normal normal 20px/24px Roboto;
+    letter-spacing: 0px;
+    color: #1A1A1A;
+    opacity: 1;
+    display: block;
+    margin-top: 10px;
+}
+
+.option-container .delimeter {
+    background-color: #0a2b57;
+    height:1px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.button-location {
+    position: relative;
+    padding-top: 10px;
+    height: 40%;
+    width: 100%;
+    min-height: 45px; /* Ensure enough space for the button */
+}
+
+.button-location .select-button {
+    height: 45px;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 2px solid #289D7A;
+    border-radius: 23px;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: normal normal bold 16px/26px Roboto;
+    color: #289D7A;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 10px; 
+}
+
+.add-on-button {
+    height: 45px;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 2px solid #289D7A;
+    border-radius: 23px;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: normal normal bold 16px/26px Roboto;
+    color: #289D7A;
+    cursor: pointer;
+    user-select: none; 
+    position: relative; /* Inside the button-location */
+    right: 0;
+    margin-left: auto;
+}
+
+.button-location .select-button.active {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    border-radius: 5px;
+    background-color: #b7e2ba;
+    color: #0a2b57;
+    border: 2px solid #b7e2ba;
+}
+
+/* MANAGE SUBSCRIPTIONS END */

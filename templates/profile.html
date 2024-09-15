@@ -36,7 +36,77 @@
             </div>
             <div id="subscriptions" style="display: none;">
                 <h1>Manage Subscription</h1>
-                <!-- Manage Subscriptions content goes here -->
+                <div class="stan-text">View your existing plan details, or choose from the selection below to change your plan.</div>
+
+                <div class="flex-container">
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For Salinity Exposure Data</div>
+                        <div class="standard-text">Basic Account</div>
+                        <div class="delimeter"></div>
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'basic')">Change to this Plan</div>
+                        </div>
+                    </div>
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For Salinity Exposure Data</div>
+                        <div class="standard-text">Premium Account</div>
+                        <div class="delimeter"></div>
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'premium')">Change to this Plan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="standard-text">Additional&nbsp;&nbsp;</div>
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="bold-description">Add-On:&nbsp;</div>
+                            <div class="normal-description">Corrosion Exposure</div>
+                        </div>
+                        <div class="delimeter"></div>
+                            <div class="add-on-button">Add to Premium</div>
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For API Access</div>
+                        <div class="delimeter"></div>
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'custom')">Change to this Plan</div>
+                        </div>
+                    </div>
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For Custom Solutions</div>
+                        <div class="delimeter"></div>
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'custom')">Change to this Plan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="selectedTag" name="tags" value="">
             </div>
             <div id="payments" style="display: none;">
                 <!-- Financial & Payments content goes here -->
@@ -109,6 +179,37 @@
             });
         });
     });
+
+    function toggleSelect(element, tag) {
+        const buttons = document.querySelectorAll('.select-button');
+
+        buttons.forEach(button => {
+            if(button!=element){
+                button.classList.remove('active');
+                button.textContent = "Change to this Plan";
+            }
+        });
+
+        element.classList.toggle('active');
+
+        if(element.classList.contains('active')){
+        element.textContent="Current Plan";
+        document.getElementById('selectedTag').value = tag;
+        } else {
+            element.textContent="Change to this Plan";
+            document.getElementById('selectedTag').value = "";
+        }
+    }
+
+    function validateForm() {
+        const selectedTag = document.getElementById('selectedTag').value.trim();
+
+        if (!selectedTag) {
+            alert("Please select an account type.");
+            return false;
+        }
+        return true;
+    }
 </script>
 
 {% endblock %}
