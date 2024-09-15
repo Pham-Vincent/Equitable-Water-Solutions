@@ -52,7 +52,7 @@ body, html {
     height: auto;
 }
 
-.right-panel .right-container .square-containers {
+.right-panel .right-container .square-containers, .bottom-square{
     border-radius: 5px;
     width: 85%;
     height: auto;
@@ -61,6 +61,14 @@ body, html {
 }
 .square-containers p {
 margin:.5%;
+}
+
+.square-containers{
+    margin-top: 4%;
+}
+
+.square-containers, .bottom-square{
+    padding:3.39%;
 }
 
 .square-containers .margin-container {
@@ -211,3 +219,12 @@ margin:.5%;
     }
     
     
+#dashboard-barchart-1, #dashboard-barchart-2, #dashboard-barchart-3{
+    width:50%;
+}
+
+.top-barcharts{
+    display: flex;
+    flex-direction: row;
+}
+
