@@ -1,3 +1,5 @@
+
+    
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -59,12 +61,14 @@ body, html {
     background-color: white;
     margin-bottom: 20px;
 }
+
 .square-containers p {
 margin:.5%;
 }
 
 .square-containers{
     margin-top: 4%;
+    flex-direction:row;
 }
 
 .square-containers, .bottom-square{
@@ -120,6 +124,11 @@ margin:.5%;
     background-color: #0A2B57;
 }
 
+.top-salinitycharts{
+    display: flex;
+    flex-direction: row;
+}
+
 .slider-container {
     position: relative;
     width: 300px; /* Set the width of the container */
@@ -146,6 +155,14 @@ margin:.5%;
     transition: left 0.2s ease;
 }
 
+#dashboard-barchart-1, #dashboard-barchart-2, #dashboard-barchart-3{
+    width:50%;
+}
+
+.top-barcharts{
+    display: flex;
+    flex-direction: row;
+}
 
 .low{
     margin-top: 40%;
@@ -203,7 +220,7 @@ margin:.5%;
       /* Layout Properties */
  
     margin-bottom:100%;
-    margin-left:-50%;
+    margin-left:-20%;
     transform: matrix(-0.29, 0.96, -0.96, -0.29, 0, 0);
     /* UI Properties */
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
@@ -218,13 +235,3 @@ margin:.5%;
     transform: rotate(110deg);
     }
     
-    
-#dashboard-barchart-1, #dashboard-barchart-2, #dashboard-barchart-3{
-    width:50%;
-}
-
-.top-barcharts{
-    display: flex;
-    flex-direction: row;
-}
-
