@@ -234,4 +234,18 @@ margin:.5%;
     display: inline-block;
     transform: rotate(110deg);
     }
-    
+
+    #topchart-text{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    .charttext-box{
+        width: 45%;
+        letter-spacing: var(--unnamed-character-spacing-0);
+        color: var(--unnamed-color-1a1a1a);
+        text-align: left;
+        letter-spacing: 0px;
+        color: #1A1A1A;
+        opacity: 1;
+    }
