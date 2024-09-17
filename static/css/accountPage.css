@@ -65,6 +65,8 @@ body, html {
     color: #FFFFFF;
     position: relative; /* Add this to position the pseudo-element */
     padding-bottom: 20px; /* Optional: Reset margin to ensure correct positioning */
+    cursor: pointer;
+    user-select: none;
 }
 
 .left-panel .center-container .bottom h5::after {
