@@ -1,3 +1,5 @@
+
+    
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -52,12 +54,25 @@ body, html {
     height: auto;
 }
 
-.right-panel .right-container .square-containers {
+.right-panel .right-container .square-containers, .bottom-square{
     border-radius: 5px;
     width: 85%;
     height: auto;
     background-color: white;
     margin-bottom: 20px;
+}
+
+.square-containers p {
+margin:.5%;
+}
+
+.square-containers{
+    margin-top: 4%;
+    flex-direction:row;
+}
+
+.square-containers, .bottom-square{
+    padding:3.39%;
 }
 
 .square-containers .margin-container {
@@ -109,6 +124,11 @@ body, html {
     background-color: #0A2B57;
 }
 
+.top-salinitycharts{
+    display: flex;
+    flex-direction: row;
+}
+
 .slider-container {
     position: relative;
     width: 300px; /* Set the width of the container */
@@ -134,3 +154,98 @@ body, html {
     cursor: pointer;
     transition: left 0.2s ease;
 }
+
+#dashboard-barchart-1, #dashboard-barchart-2, #dashboard-barchart-3{
+    width:50%;
+}
+
+.top-barcharts{
+    display: flex;
+    flex-direction: row;
+}
+
+.low{
+    margin-top: 40%;
+    margin-left:25%;
+    transform: matrix(-0.31, -0.95, 0.95, -0.31, 0, 0);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: center;
+    font: normal normal bold 12px/11px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    display: inline-block;
+    transform: rotate(240deg);
+    }
+    .medium{
+      /* Layout Properties */
+    margin-top: 70%;
+    margin-left:25%;
+    height: 39px;
+    transform: matrix(0.78, -0.63, 0.63, 0.78, 0, 0);
+    /* UI Properties */
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: center;
+    font: normal normal bold 12px/11px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    display: inline-block;
+      transform: rotate(321deg);
+    
+    }
+    
+    .mid-high{
+      /* Layout Properties */
+      margin-top: 15%;
+      margin-left:-20%;
+      transform: matrix(0.79, 0.62, -0.62, 0.79, 0, 0);
+      /* UI Properties */
+      font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-ffffff);
+      text-align: center;
+      font: normal normal bold 12px/11px Roboto;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      display: inline-block;
+      transform: rotate(38deg);
+    }
+    
+    .high{
+      /* Layout Properties */
+ 
+    margin-bottom:100%;
+    margin-left:-20%;
+    transform: matrix(-0.29, 0.96, -0.96, -0.29, 0, 0);
+    /* UI Properties */
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: center;
+    font: normal normal bold 12px/11px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    display: inline-block;
+    transform: rotate(110deg);
+    }
+
+    #topchart-text{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    .charttext-box{
+        width: 45%;
+        letter-spacing: var(--unnamed-character-spacing-0);
+        color: var(--unnamed-color-1a1a1a);
+        text-align: left;
+        letter-spacing: 0px;
+        color: #1A1A1A;
+        opacity: 1;
+    }
