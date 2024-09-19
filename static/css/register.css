@@ -18,11 +18,11 @@ body, html {
 
 .offset {
     position: relative;
-    width: 95%;
+    width: 100%;
 }
 
 .tags-container {
-    background-color: #e9e5ed;
+    background-color: #E5E9ED;
     display: inline-block;
     height: auto;
     width: 100%;
@@ -33,6 +33,13 @@ body, html {
 .flex-container {
     display: flex;
 }
+
+.flex-container-A{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 
 .main-title {
     color: #0a2b57;
@@ -64,7 +71,7 @@ body, html {
     font: normal normal normal 16px/24px Roboto;
     letter-spacing: 0px;
     color: #1A1A1A;
-    margin: 0 20px 20px 0;
+    margin: 1% 0 1% 0;
     border: none;
     background: rgba(229, 233, 237, 0.5) 0% 0% no-repeat padding-box;
     border-radius: 5px;
@@ -78,6 +85,13 @@ body, html {
     color: #1A1A1A;
     opacity: 1;
     user-select: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.standard-text p{
+    margin: 0;
 }
 
 .toggle-slider {
@@ -97,22 +111,25 @@ body, html {
     top: 13%;
     background-color: #b7e2ba;
     cursor: pointer;
+    transition: .2s;
 }
 
 .toggle-slider.active .slider-center {
     left: auto; /* Resets left */
     left: 54%; /* Moves the slider to the right */
+    transition: .2s;
 }
 .option-container {
-    display: inline-block;
-    height: auto;
-    padding-bottom: 4%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding-bottom: 2%;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 20px;
     box-sizing: border-box;
-    width: 50%; 
-    margin: 40px 40px 0 0;
+    width: 49%;
+    margin: 1% 0 1% 0;
     background-color: white;
     border-radius: 5px;
 }
@@ -149,17 +166,19 @@ body, html {
 }
 
 .button-location {
+    display: flex;
     position: relative;
-    height: 40%;
+    height: fit-content;
     width: 100%;
+    justify-content: flex-end;
 }
 
-.button-location .select-button {
-    height: 45px;
-    width: 95px;
+.select-button {
+    height: 2.7em;
+    width: 16%;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 2px solid #289D7A;
-    border-radius: 23px;
+    border-radius: 2em;
     opacity: 1;
     display: flex;
     align-items: center;
@@ -170,9 +189,7 @@ body, html {
     opacity: 1;
     cursor: pointer;
     user-select: none;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    transition: .2s;
 }
 
 .button-location .select-button.active {
@@ -180,6 +197,7 @@ body, html {
     background: #0a2b57 0% 0% no-repeat padding-box;
     border: 2px solid #0a2b57;
     color: #b7e2ba;
+    transition: .3s;
 }
 
 .tags-container input[type=submit] {
@@ -197,3 +215,78 @@ body, html {
     cursor: pointer;
     border-color: #289D7A;
 }
+
+.features-arrow{
+    border: solid #289D7A;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin: 0 0 .4em .6em;
+    transition: .2s;
+    cursor: pointer;
+}
+
+#premium-features, #basic-features{
+    text-decoration: underline;
+    color: #289D7A; 
+    font: normal normal bold 14px/24px Roboto;
+    transition: .2s;
+    display: flex;
+    align-items:center;
+    cursor: pointer;
+}
+
+.feature-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+}
+
+.feature-row p{
+    font: normal normal normal 14px/18px Roboto;
+    margin: 0;
+}
+
+.feature-row img{
+    width: 35px; 
+    height: 35px; 
+    object-fit: cover; 
+    aspect-ratio: 1 / 1;
+    margin-right: 2%;
+}
+
+.row{
+    display: flex;
+    width: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2em;
+    margin-bottom: 3%;
+}
+
+.features-container{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    margin: 0;
+}
+
+.rotate180 {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg); 
+    transition: .2s;
+    margin: .4em 0 0 .6em;
+}
+
+  
+  .feature-text.not-checkmark {
+    color: #1a1a1a3f;
+  }
+

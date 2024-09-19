@@ -1,0 +1,143 @@
+{
+    "premiumFeatures":[
+        {
+            "feature": "Pin <b>up to 5</b> sites",
+            "basicFeature": "Pin up to 3 sites",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Export dashboard data",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Drop a pin to access custom location data",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Access state-wide data",
+            "image": "static/images/register_checkmark.png",
+            "basicImage": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Enable geolocation, or import coordinates to the map",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Select sites from pre-populated map pins",
+            "image": "static/images/register_checkmark.png",
+            "basicImage": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Select sites at different depths",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Filter sites by use, baseline salinity, and withdrawal amount",
+            "image": "static/images/register_checkmark.png",
+            "basicImage": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "View high-res salinity data daily up to 2 months in advance",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Track additional ion level changes",
+            "image": "static/images/register_checkmark.png",
+            "basicImage": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "View salinity data every 30 years up to 120 years in advance",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Evaluate salinity exposure within sectors",
+            "image": "static/images/register_checkmark.png",
+            "basicImage": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Hindcasting every 30 years up to 90 years in the past",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Calculated ratios for water quality",
+            "image": "static/images/register_checkmark.png",
+            "basicImage": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Track chloride and bromide level changes",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Simulate climate scenarios that impact salinity",
+            "image": "static/images/register_checkmark.png",
+            "basicImage": "static/images/register_notCheckmark.png"
+        }
+    ],
+
+    "basicFeatures":[
+        {
+            "feature": "Pin <b>up to 3</b> sites",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Export dashboard data",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Drop a pin to access custom location data",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Access state-wide data",
+            "image": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Enable geolocation, or import coordinates to the map",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Select sites from pre-populated map pins",
+            "image": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Select sites at different depths",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Filter sites by use, baseline salinity, and withdrawal amount",
+            "image": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "View high-res salinity data daily up to 2 months in advance",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Track additional ion level changes",
+            "image": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "View salinity data every 30 years up to 120 years in advance",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Evaluate salinity exposure within sectors",
+            "image": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Hindcasting every 30 years up to 90 years in the past",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Calculated ratios for water quality",
+            "image": "static/images/register_notCheckmark.png"
+        },
+        {
+            "feature": "Track chloride and bromide level changes",
+            "image": "static/images/register_checkmark.png"
+        },
+        {
+            "feature": "Simulate climate scenarios that impact salinity",
+            "image": "static/images/register_notCheckmark.png"
+        }
+    ]
+}

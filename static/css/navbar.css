@@ -52,7 +52,7 @@ CSS for the navbar
 
 .navtop div h1 img{
     position: fixed;
-    padding-left: 5%;
+    padding-left: 7.5%; /* right side nav bar margin */
     width:6.2em; 
     height:1.8em;
 }
@@ -104,7 +104,7 @@ CSS for the navbar
 
 .navtop .login-container{
     border-radius: 30px;
-    margin-right: 90px;
+    margin-right: 7.5vw; /* right side nav bar margin */
     display: flex;
     align-items: center;
 }
