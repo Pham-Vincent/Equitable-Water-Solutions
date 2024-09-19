@@ -45,8 +45,14 @@
                             <div class="standard-text">&nbsp;&nbsp;/month</div>
                         </div>
                         <div class="bold-description">For Salinity Exposure Data</div>
-                        <div class="standard-text">Basic Account</div>
+                        <div class="standard-text">
+                            <p>Basic Account</p>
+                            <p id="basic-features" onclick="toggleVisibility('basic')">View Features<i class="features-arrow" id="basic-arrow"></i></p>
+                        </div>
                         <div class="delimeter"></div>
+
+                        <div class="feature-container" id="basic-features-list" style="display: none;"></div>
+
                         <div class="button-location">
                             <div class="select-button" onclick="toggleSelect(this, 'basic')">Change to this Plan</div>
                         </div>
@@ -57,8 +63,14 @@
                             <div class="standard-text">&nbsp;&nbsp;/month</div>
                         </div>
                         <div class="bold-description">For Salinity Exposure Data</div>
-                        <div class="standard-text">Premium Account</div>
+                        <div class="standard-text">
+                            <p>Premium Account</p>
+                            <p id="basic-features" onclick="toggleVisibility('premium')">View Features<i class="features-arrow" id="basic-arrow"></i></p>
+                        </div>
                         <div class="delimeter"></div>
+
+                        <div class="feature-container" id="premium-features-list" style="display: none;"></div>
+
                         <div class="button-location">
                             <div class="select-button" onclick="toggleSelect(this, 'premium')">Change to this Plan</div>
                         </div>
@@ -226,6 +238,73 @@
         }
         return true;
     }
+</script>
+
+<!--view features script-->
+<script>
+						
+    document.addEventListener('DOMContentLoaded', function(){
+    const premiumContainer = document.getElementById('premium-features-list');
+    const basicContainer = document.getElementById('basic-features-list');
+    fetch('static/json/features_list.json')
+    .then(response => response.json())
+    .then(features => {
+        const premiumFeatures = features.premiumFeatures;
+        const basicFeatures = features.basicFeatures;
+        premiumContainer.innerHTML = returnFeatures(premiumFeatures);
+        basicContainer.innerHTML = returnFeatures(basicFeatures);
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
+    });
+
+    function returnFeatures(features) {
+        const columns = 2;
+        let html = "";
+
+        for (let i = 0; i < features.length; i += columns) {
+            html += '<div class="row">';
+            for (let j = i; j < i + columns && j < features.length; j++) {
+                const feature = features[j];
+                const isNotCheckmark = feature.image.includes('register_notCheckmark.png');
+                const textClass = isNotCheckmark ? 'feature-text not-checkmark' : 'feature-text';
+                html += `
+                    <div class="feature-row">
+                        <img src="${feature.image}" referrerpolicy="no-referrer">
+                        <p class="${textClass}">${feature.feature}</p>
+                    </div>`;
+            }
+            html += '</div>';
+        }
+
+        return html;
+    }
+
+    // Function to toggle the visibility of the premium features list
+    function toggleVisibility(accountType) {
+        if(accountType==='premium'){
+            container = document.getElementById('premium-features-list');
+            toggleButton = document.getElementById('premium-features');
+            arrow = document.querySelector('#premium-arrow');
+        }
+        else{
+            container = document.getElementById('basic-features-list');
+            toggleButton = document.getElementById('basic-features');
+            arrow = document.querySelector('#basic-arrow');
+        }
+        
+        
+        // Toggle visibility
+        if (container.style.display === "none") {
+            container.style.display = "block";
+            toggleButton.firstChild.textContent = "Close Features"; 
+            arrow.classList.toggle('rotate180');
+        } else {
+            container.style.display = "none";
+            toggleButton.firstChild.textContent = "View Features";
+            arrow.classList.toggle('rotate180');
+        }
+    }
+    
 </script>
 
 {% endblock %}

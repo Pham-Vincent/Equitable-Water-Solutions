@@ -3,7 +3,10 @@
 
 body, html {
     background-color: #e5e9ed;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
 }
 
 .dashboard-flex-container {
@@ -95,16 +98,19 @@ body, html {
     display: flex;
     flex-direction: column;
     width: 75%;
-    height: 100vh;
+    height: auto;
     justify-content: flex-start;
     align-items: center;
     overflow-y: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .right-panel .right-container {
     padding-left:10%;
     width: 100%;
     height: auto;
+    padding-bottom: 1%;
 }
 
 .right-panel .right-container h1 {
@@ -232,6 +238,9 @@ input[type=submit] {
     color: #1A1A1A;
     opacity: 1;
     user-select: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .bold-description {
@@ -308,13 +317,11 @@ input[type=submit] {
 
 .button-location .select-button.active {
     width: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-    right: auto;
     border-radius: 5px;
     background-color: #b7e2ba;
     color: #0a2b57;
     border: 2px solid #b7e2ba;
+    margin: 0 auto;
 }
 
 .button-location .add-on-button.active {
