@@ -22,15 +22,18 @@ body, html {
 }
 
 .left-panel .center-container {
-    width: 80%;
-    height: 100%;
-    padding-left: 20%;
+    width: 100%;
+    height: 100vh;
     padding-top: 5%;
     position: relative;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
 }
 
 .left-panel .center-container h1 {
     font: normal normal bold 50px/55px Radio Canada Big;
+    padding-left: 20%;
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
@@ -40,6 +43,7 @@ body, html {
 
 .left-panel .center-container h6 {
     font: italic normal normal 35px/55px Radio Canada Big;
+    padding-left: 20%;
     letter-spacing: 0px;
     color: #FFFFFF;
     margin-bottom: 0;
@@ -47,20 +51,21 @@ body, html {
 }
 
 .left-panel .center-container .line {
+    position: relative;
     background-color: #e5e9ed;
     height: 1px;
-    width: 80%;
+    margin-left: 20%;
+    width: 60%;
     opacity: 0.5;
 }
 
 .left-panel .center-container .bottom {
-    width: 15%;
-    position: fixed;
+    width: 100%;
+    position: relative;
+    margin-top: auto;
     bottom: 0;
-    margin-bottom: 1%;
+    margin-bottom: 18%;
 }
-
-
 
 .left-panel .center-container .bottom h5 {
     font: normal normal normal 16px/18px Roboto;
@@ -70,6 +75,9 @@ body, html {
     padding-bottom: 20px; /* Optional: Reset margin to ensure correct positioning */
     cursor: pointer;
     user-select: none;
+    margin-bottom: 0;
+    padding-left: 20%;
+    width: calc(100% - 20%);
 }
 
 .left-panel .center-container .bottom h5::after {
@@ -78,10 +86,25 @@ body, html {
     position: absolute;
     bottom: 0; /* Position the pseudo-element at the bottom */
     left: 0;
-    width: 100%;
+    width: 60%;
+    margin-left: 20%;
+    margin-bottom:0px;
     border-bottom: 1px solid #e5e9ed;
     opacity: 0.5; /* Set the opacity for the border */
     pointer-events: none; /* Ensure it does not interfere with text interaction */
+}
+
+.left-panel .center-container .bottom h5.active {
+    background-color: #FFFFFF;
+    color: #0a2b57;
+    font: normal normal bold 16px/18px Roboto;
+    padding-top:27px;
+    margin-top:0px;
+    width: calc(100% - 20%);
+    left: 0;
+    right: 0;
+    display: block;
+    position: relative;
 }
 
 .left-panel .center-container .bottom h5 a {

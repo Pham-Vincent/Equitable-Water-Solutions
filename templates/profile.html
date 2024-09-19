@@ -34,7 +34,7 @@
             <div id="account" style="display: none;">
                 <!-- Account content goes here -->
             </div>
-            <div id="subscriptions" style="display: none;">
+            <div id="subscriptions">
                 <h1>Manage Subscription</h1>
                 <div class="stan-text">View your existing plan details, or choose from the selection below to change your plan.</div>
 
@@ -179,6 +179,12 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const subscriptionItem = document.querySelector('.sidebar-item[data-section="subscriptions"]');
+    
+        if (subscriptionItem) {
+            subscriptionItem.classList.add('active'); // Add the active class
+        }
+
         document.querySelectorAll('.sidebar-item').forEach(item => {
             item.addEventListener('click', function() {
                 const section = this.getAttribute('data-section');
@@ -190,9 +196,19 @@
 
                 // Show the selected section
                 document.querySelector(`#${section}`).style.display = 'block';
+
+                // Handle active state for h5 elements
+                document.querySelectorAll('.left-panel .center-container .bottom h5').forEach(h5 => {
+                    h5.classList.remove('active'); // Remove active class from all h5s
+                });
+
+                // Add active class to the clicked h5
+                this.classList.add('active');
             });
         });
     });
+
+    
 
     document.querySelectorAll('.option-buttons').forEach(group => {
     group.addEventListener('click', function(e) {
