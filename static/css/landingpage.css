@@ -65,16 +65,22 @@ CSS for index.html to syle the landing/coming soon page
    background-color: white;
    z-index: 2;
    margin-top: -5%;
+   padding-top: 3em;
+   padding-bottom: 4em;
  }
 
  .block-2-content{
+   display: flex;
+   flex-direction: column;
    width: 100%;
    height: auto;
    color: #0A2B57;
+   gap:3em;
  }
 
+
  .block-2-content h1{
-   margin: 0;
+   padding: 0 0 0 7.5%;
  }
 
  .block-3{
@@ -157,8 +163,8 @@ CSS for index.html to syle the landing/coming soon page
 }
 
 .block-2-split img{
-   width: 50%;
-   height: 55%;
+   width: 200px;
+   height: 200px;
 }
 
 .block-2-A, .block-2-B{
@@ -195,10 +201,6 @@ CSS for index.html to syle the landing/coming soon page
 
 .p-2{
    font: normal normal normal 16px/24px Roboto;
-}
-
-.block-2 h1{
-   padding: 3% 0 0 7.5%;
 }
 
 .create-account-btn{

@@ -21,8 +21,6 @@ body, html {
 }
 
 .left-panel .center-container {
-    width: 100%;
-    height: 100vh;
     padding-top: 5%;
     position: relative;
     display: flex;
@@ -36,6 +34,7 @@ body, html {
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
+    margin-left: 7.5vw;
 }
 
 .right-panel {
@@ -47,17 +46,17 @@ body, html {
     height: 100vh;
     justify-content: flex-start;
     align-items: center;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .right-panel .right-container {
-    padding-top: 5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: auto;
+    margin-top: 60px; /* nav bar height */
 }
 
 .right-panel .right-container .square-containers, .bottom-square{
@@ -65,24 +64,20 @@ body, html {
     width: 85%;
     height: auto;
     background-color: white;
-    margin-bottom: 20px;
 }
 
 .square-containers p {
-margin:.5%;
+    margin:.5%;
 }
 
 .square-containers{
-    margin-top: 4%;
+    margin-top: 2.5%; 
     flex-direction:row;
+    margin-bottom: 2.5%;
 }
 
 .square-containers, .bottom-square{
     padding:3.39%;
-}
-
-.square-containers .margin-container {
-    margin: 30px;
 }
 
 .square-containers .margin-container h2 {
@@ -128,6 +123,10 @@ margin:.5%;
 
 .square-containers .margin-container .select-button .inner.active {
     background-color: #0A2B57;
+}
+
+.bottom-square{
+    margin-bottom: 2.5%;
 }
 
 .top-salinitycharts{
@@ -251,6 +250,123 @@ margin:.5%;
         color: #1A1A1A;
         opacity: 1;
     }
+
+
+    .top-section{
+        width: 60%;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        gap: 2em;
+      }
+
+
+    .slidecontainer {
+        width: 70%; /* Width of the outside container */
+        margin-right: 1em;
+      }
+      
+      /* The slider itself */
+      .slider {
+        -webkit-appearance: none;  /* Override default CSS styles */
+        appearance: none;
+        width: 100%; /* Full-width */
+        height: 3px; /* Specified height */
+        background: #191919; /* Grey background */
+        outline: none; /* Remove outline */
+        opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+      }
+      
+      /* Mouse-over effects */
+      .slider:hover {
+        opacity: 1; /* Fully shown on mouse-over */
+      }
+      
+      /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 25px; /* Set a specific slider handle width */
+        height: 25px; /* Slider handle height */
+        background: #04AA6D; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+        border-radius: 100%;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px; /* Set a specific slider handle width */
+        height: 25px; /* Slider handle height */
+        background: #04AA6D; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+      }
+
+      .slidecontainer .grey-box{
+        display: flex;
+        justify-content:flex-end;
+        align-items: center;
+        background-color: #E5E9ED;
+        font: normal normal normal 10px/24px Roboto;
+        color: #1A1A1A;
+        height: 2em;
+        width: auto;
+        padding-right: 2%;
+        margin-bottom: 1em;
+      }
+
+      .slidecontainer p{
+        margin: 0 0 1em 0;
+        font: normal normal bold 16px/24px Roboto;
+        color: #1A1A1A;
+      }
+
+      .ticks{
+        margin-top: .5em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .tick-label{
+        font: normal normal normal 10px/24px Roboto;
+        color: #1A1A1A;
+      }
+
+      .horizontal-divider{
+        border: 2px solid #E5E9ED;
+        margin-bottom: 2em;
+        margin-top: 1em;
+      }
+
+      .square-containers h1, .bottom-square h1{
+        font: italic normal normal 20px/28px Roboto;
+        color: #0A2B57;
+        font-weight: 500;
+      }
+
+      .radio-buttons{
+        width: 30%;
+        margin-right: -13%;
+      }
+
+      .radio-buttons p{
+        margin: 0 0 1em 0;
+        font: normal normal bold 16px/24px Roboto;
+        color: #1A1A1A;
+      }
+
+      .radio-buttons div{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin: 0;
+      }
+
+      .vertical-border{
+        border: 2px solid #E5E9ED;
+      }
+
     .projection-buttons{
         /* UI Properties */
         
@@ -352,3 +468,4 @@ margin:.5%;
         opacity: 1;
         text-decoration: none;
     }
+

@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         xAxis: {
             type: 'category',
+            lineWidth: 2,
             labels: {
                 autoRotation: [-45, -90],
                 style: {
@@ -367,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         xAxis: {
             type: 'category',
+            lineWidth: 2,
             labels: {
                 autoRotation: [-45, -90],
                 style: {
@@ -451,6 +453,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         xAxis: {
             type: 'category',
+            lineWidth: 2,
             labels: {
                 autoRotation: [-45, -90],
                 style: {
