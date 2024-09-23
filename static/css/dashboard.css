@@ -241,6 +241,7 @@ body, html {
         justify-content: space-between;
         flex-direction: row;
     }
+
     .charttext-box{
         width: 45%;
         letter-spacing: var(--unnamed-character-spacing-0);
@@ -418,6 +419,10 @@ body, html {
         padding-left: 20%;
         width: calc(100% - 20%);
         
+    }
+    
+    #dashboard-barchart-1, #dashboard-barchart-2, #dashboard-barchart-3{
+        width: 50%;
     }
 
     .left-panel .center-container .bottom h5::after {
