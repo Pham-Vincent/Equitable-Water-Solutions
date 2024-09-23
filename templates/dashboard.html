@@ -20,32 +20,112 @@
     <div class="right-panel">
         <div class="right-container">
             <div class="square-containers">
-                <div class ="top-salinitycharts">
-               <div id="dashboard-saltchart" style="width: 50%; height: 400px;"></div>
-              
+                <h1>Salinity Concentration Forecast</h1>
 
-               <div id="dashboard-saltdial" style="width: 50%; height: 400px;"></div>
-               
-               </div>
-               <div id="topchart-text"> 
-                    <div class = "charttext-box">
-                        <p><b>Ppm ranges explained:</b></p>
-                        <p>&lt;100: What does this range mean</p>
-                        <p>100-200: What does this range mean</p>
-                        <p>200-300: What does this range mean</p>
-                        <p>&gt;400: What does this range mean</p>
+                <div class="top-section">
+                    <div class="radio-buttons">
+                        <p>Salt Type:</p>
+                        <div>
+                            <span>
+                                <input type="radio" id="Chloride" name="drone"><label for="Chloride">Chloride</label>
+                            </span>
+                            <span>
+                                <input type="radio" id="Sodium" name="drone"><label for="Sodium">Sodium</label>
+                            </span>
+                        </div>
                     </div>
-                    <div class = "charttext-box">
-                        <p><b>Ppm ranges explained:</b></p>
-                        <p>&lt;100: What does this range mean</p>
-                        <p>100-200: What does this range mean</p>
-                        <p>200-300: What does this range mean</p>
-                        <p>&gt;400: What does this range mean</p>
+
+                    <div class="vertical-border"></div>
+                        
+                    <div class="slidecontainer">
+                        <p>Time Range</p>
+                        <div class="grey-box">FORECAST(days)</div>
+                        <input type="range" min="1" max="60" value="50" class="slider" id="myRange">
+                        <div class="ticks">
+                            <!-- Create tick marks at increments of 5 -->
+                            <div class="tick"><span class="tick-label">0</span></div>
+                            <div class="tick"><span class="tick-label">5</span></div>
+                            <div class="tick"><span class="tick-label">10</span></div>
+                            <div class="tick"><span class="tick-label">15</span></div>
+                            <div class="tick"><span class="tick-label">20</span></div>
+                            <div class="tick"><span class="tick-label">25</span></div>
+                            <div class="tick"><span class="tick-label">30</span></div>
+                            <div class="tick"><span class="tick-label">35</span></div>
+                            <div class="tick"><span class="tick-label">40</span></div>
+                            <div class="tick"><span class="tick-label">45</span></div>
+                            <div class="tick"><span class="tick-label">50</span></div>
+                            <div class="tick"><span class="tick-label">55</span></div>
+                            <div class="tick"><span class="tick-label">60</span></div>
+                        </div>
                     </div>
-            </div>
+                </div>
+
+                <div class="horizontal-divider"></div>
+
+                <div class ="top-salinitycharts">
+                    <div id="dashboard-saltchart" style="width: 50%; height: 400px;"></div>
+                    
+                    <div id="dashboard-saltdial" style="width: 50%; height: 400px;"></div>
+                </div>
+                <div id="topchart-text"> 
+                        <div class = "charttext-box">
+                            <p><b>Ppm ranges explained:</b></p>
+                            <p>&lt;100: What does this range mean</p>
+                            <p>100-200: What does this range mean</p>
+                            <p>200-300: What does this range mean</p>
+                            <p>&gt;400: What does this range mean</p>
+                        </div>
+                        <div class = "charttext-box">
+                            <p><b>Ppm ranges explained:</b></p>
+                            <p>&lt;100: What does this range mean</p>
+                            <p>100-200: What does this range mean</p>
+                            <p>200-300: What does this range mean</p>
+                            <p>&gt;400: What does this range mean</p>
+                        </div>
+                </div>
             </div>
 
             <div class="bottom-square">
+                <h1>Number of days with High Salinity</h1>
+                <div class="top-section">
+                    <div class="radio-buttons">
+                        <p>Salt Type:</p>
+                        <div>
+                            <span>
+                                <input type="checkbox" id="Chloride" name="drone"><label for="Chloride">Chloride</label>
+                            </span>
+                            <span>
+                                <input type="checkbox" id="Sodium" name="drone"><label for="Sodium">Sodium</label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="vertical-border"></div>
+                        
+                    <div class="slidecontainer">
+                        <p>Time Range</p>
+                        <div class="grey-box">FORECAST(days)</div>
+                        <input type="range" min="1" max="60" value="50" class="slider" id="myRange">
+                        <div class="ticks">
+                            <!-- Create tick marks at increments of 5 -->
+                            <div class="tick"><span class="tick-label">0</span></div>
+                            <div class="tick"><span class="tick-label">5</span></div>
+                            <div class="tick"><span class="tick-label">10</span></div>
+                            <div class="tick"><span class="tick-label">15</span></div>
+                            <div class="tick"><span class="tick-label">20</span></div>
+                            <div class="tick"><span class="tick-label">25</span></div>
+                            <div class="tick"><span class="tick-label">30</span></div>
+                            <div class="tick"><span class="tick-label">35</span></div>
+                            <div class="tick"><span class="tick-label">40</span></div>
+                            <div class="tick"><span class="tick-label">45</span></div>
+                            <div class="tick"><span class="tick-label">50</span></div>
+                            <div class="tick"><span class="tick-label">55</span></div>
+                            <div class="tick"><span class="tick-label">60</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="horizontal-divider"></div>
                 <div class="top-barcharts">
                     <div id="dashboard-barchart-1"></div>
                     <div id="dashboard-barchart-2"></div>
