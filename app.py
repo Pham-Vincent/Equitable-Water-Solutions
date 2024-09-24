@@ -26,7 +26,6 @@ from flask_cors import CORS
 
 
 # AI Imports
-import json
 from chatbot.scripts.chatbot import Chatbot
 from chatbot.scripts.routes import setup_routes
 
