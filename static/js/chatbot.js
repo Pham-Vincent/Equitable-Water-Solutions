@@ -1,5 +1,3 @@
-let API_BASE_URL;
-
 // DOM Elements
 const chatbotToggler = document.querySelector(".chatbot-toggler"); // Button to toggle the chatbot
 const closeBtn = document.querySelector(".close-btn"); // Button to close the chatbot
@@ -50,15 +48,12 @@ const showError = (message) => {
 async function initializeChat() {
     try {        
         // Send a POST request to the server to initialize the chat session
-        const initResponse = await fetch(`${API_BASE_URL}/initialize`, {
+        const initResponse = await fetch('/initialize-ai-chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                project_name: 'Salinity',
-                database_name: 'main',
                 session_id: '',
             }),
-            credentials: 'include',
         });
 
         // Check if the response is OK
@@ -69,7 +64,7 @@ async function initializeChat() {
         // Parse the response as JSON
         const initData = await initResponse.json();
 
-        // Store the session ID recieved by the server
+        // Store the session ID recieved
         sessionId = initData.session_id;
         console.log('Initialized session ID:', initData.session_id);
 
@@ -87,61 +82,45 @@ async function initializeChat() {
 const generateResponse = async (incomingChatLi) => {
     const messageElement = incomingChatLi.querySelector("p");
 
-    // Close the existing EventSource if it exists
-    if (eventSource) {
-        eventSource.close();
-    }
-
     try {
-        console.log('Creating new EventSource');
-        const url = new URL(`${API_BASE_URL}/stream`);
+        const response = await fetch('/ai-stream', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                prompt: userMessage,
+                session_id: sessionId || '',
+            }),
+        });
 
-        // Append the user's message and session ID to the URL
-        url.searchParams.append('prompt', userMessage);
-        url.searchParams.append('session_id', sessionId || '');
-        
-        // Create a new EventSource object to receive the server-sent events
-        eventSource = new EventSource(url);
+        if (!response.ok) {
+            throw new Error('Failed to generate response');
+        }
 
-        eventSource.onmessage = (event) => {
-            console.log('Received message:', event.data);
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
 
-            // Replace the "Thinking..." message with the first chunk of the response
-            if (messageElement.innerHTML === "Thinking...") {
-                messageElement.innerHTML = event.data;
-            } else {
-                // Following the first chunk replacing "Thinking...", append subsequent chunks to the existing message
-                messageElement.innerHTML += event.data;
+        let isFirstChunk = true;
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
+                break;
             }
 
-            // Scroll to the bottom of the chatbox to show the new message
+            const chunk = decoder.decode(value);
+            if (chunk === "end-of-stream") {
+                break;
+            } else if (messageElement.innerHTML === "Thinking...") {
+                messageElement.innerHTML = chunk;
+            } else {
+                messageElement.innerHTML += chunk;
+            }
+
             chatbox.scrollTo(0, chatbox.scrollHeight);
-        };
-        
-        // Event listener for when the message stream is completed by the server
-        eventSource.addEventListener("end-of-stream", () => {
-            console.log("Message stream completed by server.")
-            eventSource.close();
-        })
-
-        // Event listener for when the EventSource connection fails
-        eventSource.onerror = (error) => {
-            if (eventSource.readyState === EventSource.CLOSED) {
-                console.log('EventSource closed normally.');
-            } else {
-                console.error('EventSource failed:', error);
-                messageElement.innerHTML += "<br>Error: Couldn't complete the request.";
-            }
-            eventSource.close();
-        };
-
-        // Event listener for when the EventSource connection is opened
-        eventSource.onopen = () => {
-            console.log('EventSource connection opened');
-        };
+        }
     } catch (error) {
-        console.error('Error setting up EventSource:', error);
-        messageElement.innerHTML += "<br>Error: Couldn't connect to the server.";
+        console.error('Error during chat response generation:', error);
+        showError("Failed to generate response. Please try again later.");
     }
 }
 
@@ -202,14 +181,5 @@ chatbotToggler.addEventListener("click", () => document.body.classList.toggle("s
 
 // Initialize the chat when the script loads
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/ApiKey')
-        .then(response => response.json())
-        .then(config => {
-            API_BASE_URL = config.bot_url;
-            initializeChat();
-        })
-        .catch(error => {
-            console.error('Error fetching AI base URL:', error);
-            showError("Failed to initialize chat. Please try again later. From chatbot.js, document.addEventListener('DOMContentLoaded', () => { ... });");
-        })
+    initializeChat();
 });

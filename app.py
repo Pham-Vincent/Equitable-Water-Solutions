@@ -23,6 +23,14 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 from flask_cors import CORS
+
+
+# AI Imports
+import json
+from chatbot.scripts.utils import generate_session_id
+from chatbot.scripts.chatbot import Chatbot
+from chatbot.scripts.routes import setup_routes
+
 #Path To Env File
 dotenv_path='static/env/.env'
 #Opens Env File
@@ -36,6 +44,13 @@ CORS(app)
 
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
+
+chatbot = Chatbot(
+  project_name="Salinity",
+  database_name="index",
+)
+
+setup_routes(app, chatbot)
 
 #Purpose is to Return the Map API Key without revealing it to public
 @app.route('/ApiKey')
@@ -168,7 +183,7 @@ def contactus():
 def research():
     checkLogin('research.html')
     return render_template('research.html')
-  
+
 if __name__ == '__main__':
   app.run(debug=True)
 
