@@ -9,9 +9,6 @@ from .search_utils import (
     WebSearchDecision,
 )
 from .session_utils import generate_session_id
-from .database_utils import (
-    get_openai_api_key,
-)
 from .json_utils import pretty_print_json, ChatbotJSONEncoder
 
 __all__ = [
@@ -27,7 +24,6 @@ __all__ = [
     "should_web_search",
     "generate_search_query",
     "generate_session_id",
-    "get_openai_api_key",
     "pretty_print_json",
     "ChatbotJSONEncoder",
 ]

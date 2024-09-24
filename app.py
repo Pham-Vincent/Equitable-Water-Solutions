@@ -27,7 +27,6 @@ from flask_cors import CORS
 
 # AI Imports
 import json
-from chatbot.scripts.utils import generate_session_id
 from chatbot.scripts.chatbot import Chatbot
 from chatbot.scripts.routes import setup_routes
 
@@ -45,9 +44,10 @@ CORS(app)
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
+openai_api_key = os.getenv('OPENAI_API_KEY')
 chatbot = Chatbot(
+  api_key=openai_api_key,
   project_name="Salinity",
-  database_name="index",
 )
 
 setup_routes(app, chatbot)
@@ -56,8 +56,7 @@ setup_routes(app, chatbot)
 @app.route('/ApiKey')
 def APIKEY():
     map_key = os.getenv('MAP_KEY')
-    botURL = os.getenv('CHATBOT_URL')
-    return jsonify({'mapKey': map_key, 'bot_url': botURL})
+    return jsonify({'mapKey': map_key})
 
 # Route to create a heatmap for salinity at multiple depths
 @app.route('/create_MultiDepth_graph',methods=['GET','POST'])

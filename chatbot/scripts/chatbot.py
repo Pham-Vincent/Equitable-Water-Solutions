@@ -57,6 +57,7 @@ class Chatbot:
 
     def __init__(
         self,
+        api_key: str,
         project_name: str = ChatbotConfig.DEFAULT_PROJECT_NAME,
         database_name: str = ChatbotConfig.DEFAULT_DATABASE_NAME,
         temperature: float = ChatbotConfig.DEFAULT_TEMPERATURE,
@@ -77,7 +78,7 @@ class Chatbot:
         """
         self.project_name = project_name
         self.database_name = database_name
-        self.api_key = get_openai_api_key()
+        self.api_key = api_key
 
         # Set up in-memory cache to prevent api calls for identical prompts
         set_llm_cache(InMemoryCache())
