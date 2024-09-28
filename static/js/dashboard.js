@@ -1,46 +1,116 @@
-var currentChecked;
-var saltdata;
-function updateSaltData(){
-    var radios = document.querySelectorAll('input[type="radio"][name="projection"]');
+
+
+function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan){
+    saltdata = [
+        {x: 0, y: 40},
+        {x: 5, y: 29.9},
+        {x: 10, y: 71.5},
+        {x: 15, y: 106.4},
+        {x: 20, y: 129.2},
+        {x: 25, y: 144.0},
+        {x: 30, y: 176.0},
+        {x: 35, y: 380},
+        {x: 40, y: 148.5},
+        {x: 45, y: 216.4},
+        {x: 50, y: 194.1},
+        {x: 55, y: 95.6},
+        {x: 60, y: 54.4}
+    ],
+     xtitleName = '<b>Time(days)<b>',
+     barchartData1=
+     [
+     ['Cl', 62.5],
+     ['Na', 37.5],
+     ['Ca', 50],
+     ['K', 50],
+     ['Br', 75],
+     ['Mg', 25],
+     ['SO', 25]
+    ],
+    barchartData2=[
+        ['Cl', 65],
+    ['Na', 30],
+    ['Ca', 50],
+    ['K', 40],
+    ['Br', 70],
+    ['Mg', 20],
+    ['SO', 25]
+
+    ],
+    barchartData3=[
+        ['Cl', 55],
+        ['Na', 25],
+        ['Ca', 40],
+        ['K', 35],
+        ['Br', 60],
+        ['Mg', 15],
+        ['SO', 20]
+    ],
+    Timespan = document.getElementById("myRange").value;
+    return [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan]
+     
+
+    
+}
+function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan){
+    saltdata = [
+        {x: 0, y:80 },
+        {x: 5, y: 200},
+        {x: 10, y: 200},
+        {x: 20, y: 380},
+        {x: 25, y:250},
+        {x: 30, y: 250},
+    ],
+    xtitleName = '<b>Time(years)<b>',
+    barchartData1 =
+    [
+        ['Cl', 90],
+        ['Na', 65],
+        ['Ca', 80],
+        ['K', 75],
+        ['Br', 95],
+        ['Mg', 40],
+        ['SO', 55]
+    ],
+    barchartData2=
+    [
+    ['Cl', 70],
+    ['Na', 50],
+    ['Ca', 60],
+    ['K', 55],
+    ['Br', 85],
+    ['Mg', 35],
+    ['SO', 45],
+    ]
+    barchartData3=
+    [
+    ['Cl', 80],
+    ['Na', 40],
+    ['Ca', 70],
+    ['K', 60],
+    ['Br', 90],
+    ['Mg', 30],
+    ['SO', 50]],
+    Timespan = document.getElementById("myRange").value;
+    return [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan]
+
+
+    
+}
+function updateGraphs(currentChecked,saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan){
+    let radios = document.querySelectorAll('input[type="radio"][name="projection"]');
     radios.forEach(function(radio){
         if(radio.checked){
             currentChecked=radio.value
         }
     })
+
     if(currentChecked == 'shortTerm')
     {
-         saltdata = [
-            {x: 0, y: 40},
-            {x: 5, y: 29.9},
-            {x: 10, y: 71.5},
-            {x: 15, y: 106.4},
-            {x: 20, y: 129.2},
-            {x: 25, y: 144.0},
-            {x: 30, y: 176.0},
-            {x: 35, y: 380},
-            {x: 40, y: 148.5},
-            {x: 45, y: 216.4},
-            {x: 50, y: 194.1},
-            {x: 55, y: 95.6},
-            {x: 60, y: 54.4}
-        ]
+         [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan] = shortTermChanges();
     }
     else{
-         saltdata = [
-            {x: 0, y: 50},
-            {x: 5, y: 60},
-            {x: 10, y: 90},
-            {x: 15, y: 120},
-            {x: 20, y: 150},
-            {x: 25, y: 200},
-            {x: 30, y: 250},
-            {x: 35, y: 380},
-            {x: 40, y: 220},
-            {x: 45, y: 300},
-            {x: 50, y: 340},
-            {x: 55, y: 130},
-            {x: 60, y: 75}
-        ]
+        [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan]= longTermChanges();
     }
     Highcharts.chart('dashboard-saltchart', {
         chart: {
@@ -52,13 +122,13 @@ function updateSaltData(){
         },
         xAxis: {
             title: {
-                text: '<b>Time(days)</b>'
+                text: xtitleName
             },
             // Set type to linear for numeric x-axis
             type: 'linear',
             // Remove categories to use actual numerical values on x-axis
             min: 0,
-            max:60,
+            max:parseInt(Timespan, 10),
             gridLineWidth: .5,
             tickInterval: 5,
         },
@@ -107,17 +177,7 @@ function updateSaltData(){
           enabled: false // Disable the legend
       }
     });
-}
-$(function() {
-    updateSaltData()
-    $('input[type="radio"][name="projection"]').change(function(){ 
-        updateSaltData()
-        console.log(saltdata)
-    })
-    
-    
-});
-Highcharts.chart('dashboard-saltdial', {
+    Highcharts.chart('dashboard-saltdial', {
 
     chart: {
         type: 'gauge',
@@ -266,7 +326,7 @@ function createPlotBand(from, to, color) {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
+
     Highcharts.chart('dashboard-barchart-1', {
         chart: {
             type: 'column'
@@ -324,15 +384,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             colorByPoint: true,
             groupPadding: 0,
-            data: [
-                ['Cl', 62.5],
-                ['Na', 37.5],
-                ['Ca', 50],
-                ['K', 50],
-                ['Br', 75],
-                ['Mg', 25],
-                ['SO', 25]
-            ],
+            data: barchartData1,
             dataLabels: {
                 enabled: false,
                 rotation: -90,
@@ -348,10 +400,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }]
     });
-});
 
 
-document.addEventListener('DOMContentLoaded', function () {
+
+
     Highcharts.chart('dashboard-barchart-2', {
         chart: {
             type: 'column'
@@ -409,15 +461,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             colorByPoint: true,
             groupPadding: 0,
-            data: [
-                ['Cl', 62.5],
-                ['Na', 37.5],
-                ['Ca', 50],
-                ['K', 50],
-                ['Br', 75],
-                ['Mg', 25],
-                ['SO', 25]
-            ],
+            data: barchartData2,
             dataLabels: {
                 enabled: false,
                 rotation: -90,
@@ -433,10 +477,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }]
     });
-});
 
 
-document.addEventListener('DOMContentLoaded', function () {
+
+
     Highcharts.chart('dashboard-barchart-3', {
         chart: {
             type: 'column'
@@ -494,15 +538,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             colorByPoint: true,
             groupPadding: 0,
-            data: [
-                ['Cl', 62.5],
-                ['Na', 37.5],
-                ['Ca', 50],
-                ['K', 50],
-                ['Br', 75],
-                ['Mg', 25],
-                ['SO', 25],
-            ],
+            data: barchartData3,
             dataLabels: {
                 enabled: false,
                 rotation: -90,
@@ -518,4 +554,22 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }]
     });
+}
+
+
+
+
+
+$(function() {
+
+
+    updateGraphs()
+    $('input[type="radio"][name="projection"]').change(function(){ 
+        updateGraphs()
+    })
+    $('input[type="range"][id="myRange"]').change(function(){
+        updateGraphs()
+    })
+    
+    
 });
