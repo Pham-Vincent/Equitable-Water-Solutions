@@ -176,6 +176,10 @@ def contactus():
 def research():
     checkLogin('research.html')
     return render_template('research.html')
+
+@app.route('/antonia')
+def antonia():
+   return render_template('Antonia.html')
   
 if __name__ == '__main__':
   app.run(debug=True)
