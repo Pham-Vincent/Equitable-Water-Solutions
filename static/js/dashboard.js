@@ -54,12 +54,15 @@ function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barcha
 }
 function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan){
     saltdata = [
-        {x: 0, y:80 },
+        {x: 0, y: 80},
         {x: 5, y: 200},
         {x: 10, y: 200},
         {x: 20, y: 380},
-        {x: 25, y:250},
+        {x: 25, y: 250},
         {x: 30, y: 250},
+        {x: 40, y: 300},
+        {x: 50, y: 350},
+        {x: 60, y: 330}
     ],
     xtitleName = '<b>Time(years)<b>',
     barchartData1 =
@@ -92,6 +95,7 @@ function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchar
     ['Mg', 30],
     ['SO', 50]],
     Timespan = document.getElementById("myRange").value;
+    console.log(Timespan)
     return [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan]
 
 
