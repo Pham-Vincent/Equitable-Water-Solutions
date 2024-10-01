@@ -20,6 +20,10 @@ body, html {
     background-color: #0a2b57;
 }
 
+.center-container, .bottom{
+    margin-left: 6.5%;
+}
+
 .left-panel .center-container {
     padding-top: 5%;
     position: relative;
@@ -56,7 +60,8 @@ body, html {
     align-items: center;
     width: 100%;
     height: auto;
-    margin-top: 60px; /* nav bar height */
+    padding-bottom: 9%;
+    padding-top: 4%;
 }
 
 .right-panel .right-container .square-containers, .bottom-square{
@@ -71,7 +76,6 @@ body, html {
 }
 
 .square-containers{
-    margin-top: 2.5%; 
     flex-direction:row;
     margin-bottom: 2.5%;
 }
@@ -123,10 +127,6 @@ body, html {
 
 .square-containers .margin-container .select-button .inner.active {
     background-color: #0A2B57;
-}
-
-.bottom-square{
-    margin-bottom: 2.5%;
 }
 
 .top-salinitycharts{
@@ -252,9 +252,13 @@ body, html {
         opacity: 1;
     }
 
+    .charttext-box p{
+        margin-bottom: .5em;
+    }
+
 
     .top-section{
-        width: 60%;
+        width: 100%;
         height: fit-content;
         display: flex;
         flex-direction: row;
@@ -263,7 +267,7 @@ body, html {
 
 
     .slidecontainer {
-        width: 70%; /* Width of the outside container */
+        width: 40%; /* Width of the outside container */
         margin-right: 1em;
       }
       
@@ -347,7 +351,7 @@ body, html {
       }
 
       .radio-buttons{
-        width: 30%;
+        width: 20%;
         margin-right: -13%;
       }
 
@@ -473,4 +477,45 @@ body, html {
         opacity: 1;
         text-decoration: none;
     }
+
+    .bottom button{
+        background-color: #04AA6D;
+        border-radius: 20em;
+        color: white;
+        width: 50%;
+        height: 25%;
+        font: normal normal bold 16px/26px Roboto;
+        border: none;
+        margin-left: 20%;
+        margin-top: 5%;
+        margin-bottom: 10%;
+    }
+
+    .bottom{
+        padding-right: 3%;
+    }
+
+    .long-term-radio-buttons .buttons, .long-term-radio-buttons .labels{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .long-term-radio-buttons .buttons{
+        justify-content: center;
+    }
+
+    .long-term-radio-buttons .split-layout{
+        display: flex;
+        flex-direction: row;
+        gap: 2em;
+    }
+
+    .long-term-radio-buttons p{
+        margin: 0 0 1em 0;
+        font: normal normal bold 16px/24px Roboto;
+        color: #1A1A1A;
+    }
+
+
 

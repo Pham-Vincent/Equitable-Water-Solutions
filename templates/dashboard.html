@@ -29,6 +29,7 @@
                 <h5>Add Location 1</h5>
                 <h5>Add Location 2</h5>
                 <h5>Add Location 3</h5>
+                <button>Export Dashboard</button>
             </div>
         </div>
     </div>
@@ -55,7 +56,7 @@
                     <div class="slidecontainer">
                         <p>Time Range</p>
                         <div class="grey-box">FORECAST(days)</div>
-                        <input type="range" min="1" max="60" value="50" class="slider" id="myRange">
+                        <input type="range" min="1" max="60" value="60" class="slider" id="myRange">
                         <div class="ticks">
                             <!-- Create tick marks at increments of 5 -->
                             <div class="tick"><span class="tick-label">0</span></div>
@@ -73,6 +74,26 @@
                             <div class="tick"><span class="tick-label">60</span></div>
                         </div>
                     </div>
+
+                    <!-- content that is only visible when longterm radio button selected -->
+                    <div class="vertical-border" id="long-term-vert-bar"></div>
+
+                    <div class="long-term-radio-buttons">
+                        <p>Climate Simulator:</p>
+                        <div class="split-layout">
+                            <div class="labels">
+                                <label for="None">None</label>
+                                <label for="Low-Mid">Low-Mid (SSP 2.45)</label>
+                                <label for="Mid-High">Mid-High (SSP 5.85)</label>
+                            </div>
+                            <div class="buttons">
+                                <input type="radio" id="none" name="done2">
+                                <input type="radio" id="Low-Mid" name="drone2">
+                                <input type="radio" id="Mid-High" name="drone2">
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div class="horizontal-divider"></div>
@@ -91,11 +112,11 @@
                             <p>&gt;400: What does this range mean</p>
                         </div>
                         <div class = "charttext-box">
-                            <p><b>Ppm ranges explained:</b></p>
-                            <p>&lt;100: What does this range mean</p>
-                            <p>100-200: What does this range mean</p>
-                            <p>200-300: What does this range mean</p>
-                            <p>&gt;400: What does this range mean</p>
+                            <p><b>Threshhold definitions:</b></p>
+                            <p><b>Low:</b> Can expect this to happen</p>
+                            <p><b>Medium:</b> Can expect this to happen</p>
+                            <p><b>Mid-High:</b> Can expect this to happen</p>
+                            <p><b>High:</b> Can expect this to happen</p>
                         </div>
                 </div>
             </div>
@@ -120,7 +141,7 @@
                     <div class="slidecontainer">
                         <p>Time Range</p>
                         <div class="grey-box">FORECAST(days)</div>
-                        <input type="range" min="1" max="60" value="50" class="slider" id="myRange">
+                        <input type="range" min="1" max="60" value="60" class="slider" id="myRange">
                         <div class="ticks">
                             <!-- Create tick marks at increments of 5 -->
                             <div class="tick"><span class="tick-label">0</span></div>

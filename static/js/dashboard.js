@@ -561,6 +561,33 @@ function createPlotBand(from, to, color) {
 }
 
 
+// Function to toggle visibility of content for long term and short radio buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const shortTermRadio = document.getElementById('shortTerm');
+    const longTermRadio = document.getElementById('longTerm');
+    const vertical_bar = document.getElementById('long-term-vert-bar');
+    const climate_buttons = document.querySelector('.long-term-radio-buttons')
+  
+    // Function to toggle content visibility based on the selected radio button
+    function toggleContent() {
+      if (longTermRadio.checked) {
+        vertical_bar.style.display = 'block';
+        climate_buttons.style.display = 'block'; 
+      } else if (shortTermRadio.checked) {
+        vertical_bar.style.display = 'none'; 
+        climate_buttons.style.display = 'none';
+      }
+    }
+  
+    // Attach the function to the change event for both radio buttons
+    shortTermRadio.addEventListener('change', toggleContent);
+    longTermRadio.addEventListener('change', toggleContent);
+  
+    // Call the function initially to set the correct visibility
+    toggleContent();
+  });
+
+
 
 
 
