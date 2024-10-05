@@ -69,6 +69,7 @@
   <div class="block-4">
     <div class="block-4-content">
       <h1>5 Ways to Get Started Today.</h1>
+
       <div class="step-1">
         <img src="static/images/HomePage-Images/step-1.svg">
         <div class="step-description">
@@ -109,7 +110,8 @@
         </div>
       </div>
       
-      {% if not 'loggedin' in session %}
+      
+      {% if 'loggedin' not in session %}
       <div>
         <button class="create-account-btn"><a href="{{ url_for('register') }}">Create An Account</a></button>
       </div>

@@ -1,3 +1,5 @@
+
+    
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -18,9 +20,17 @@ body, html {
     background-color: #0a2b57;
 }
 
+.center-container, .bottom{
+    margin-left: 6.5%;
+}
+
 .left-panel .center-container {
-    text-align: center;
     padding-top: 5%;
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    height: 100vh;
 }
 
 .left-panel .center-container h1 {
@@ -28,6 +38,7 @@ body, html {
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
+    margin-left: 25%;
 }
 
 .right-panel {
@@ -39,29 +50,38 @@ body, html {
     height: 100vh;
     justify-content: flex-start;
     align-items: center;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .right-panel .right-container {
-    padding-top: 5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: auto;
+    padding-bottom: 9%;
+    padding-top: 4%;
 }
 
-.right-panel .right-container .square-containers {
+.right-panel .right-container .square-containers, .bottom-square{
     border-radius: 5px;
     width: 85%;
     height: auto;
     background-color: white;
-    margin-bottom: 20px;
 }
 
-.square-containers .margin-container {
-    margin: 30px;
+.square-containers p {
+    margin:.5%;
+}
+
+.square-containers{
+    flex-direction:row;
+    margin-bottom: 2.5%;
+}
+
+.square-containers, .bottom-square{
+    padding:3.39%;
 }
 
 .square-containers .margin-container h2 {
@@ -109,6 +129,11 @@ body, html {
     background-color: #0A2B57;
 }
 
+.top-salinitycharts{
+    display: flex;
+    flex-direction: row;
+}
+
 .slider-container {
     position: relative;
     width: 300px; /* Set the width of the container */
@@ -134,3 +159,363 @@ body, html {
     cursor: pointer;
     transition: left 0.2s ease;
 }
+
+.top-barcharts{
+    display: flex;
+    flex-direction: row;
+}
+
+.low{
+    margin-top: 40%;
+    margin-left:25%;
+    transform: matrix(-0.31, -0.95, 0.95, -0.31, 0, 0);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: center;
+    font: normal normal bold 12px/11px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    display: inline-block;
+    transform: rotate(240deg);
+    }
+    .medium{
+      /* Layout Properties */
+    margin-top: 70%;
+    margin-left:25%;
+    height: 39px;
+    transform: matrix(0.78, -0.63, 0.63, 0.78, 0, 0);
+    /* UI Properties */
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: center;
+    font: normal normal bold 12px/11px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    display: inline-block;
+      transform: rotate(321deg);
+    
+    }
+    
+    .mid-high{
+      /* Layout Properties */
+      margin-top: 15%;
+      margin-left:-20%;
+      transform: matrix(0.79, 0.62, -0.62, 0.79, 0, 0);
+      /* UI Properties */
+      font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-ffffff);
+      text-align: center;
+      font: normal normal bold 12px/11px Roboto;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      display: inline-block;
+      transform: rotate(38deg);
+    }
+    
+    .high{
+      /* Layout Properties */
+ 
+    margin-bottom:100%;
+    margin-left:-20%;
+    transform: matrix(-0.29, 0.96, -0.96, -0.29, 0, 0);
+    /* UI Properties */
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/11px var(--unnamed-font-family-roboto);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: center;
+    font: normal normal bold 12px/11px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    display: inline-block;
+    transform: rotate(110deg);
+    }
+
+    #topchart-text{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .charttext-box{
+        width: 45%;
+        letter-spacing: var(--unnamed-character-spacing-0);
+        color: var(--unnamed-color-1a1a1a);
+        text-align: left;
+        letter-spacing: 0px;
+        color: #1A1A1A;
+        opacity: 1;
+    }
+
+    .charttext-box p{
+        margin-bottom: .5em;
+    }
+
+
+    .top-section{
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        gap: 2em;
+      }
+
+
+    .slidecontainer {
+        width: 40%; /* Width of the outside container */
+        margin-right: 1em;
+      }
+      
+      /* The slider itself */
+      .slider {
+        -webkit-appearance: none;  /* Override default CSS styles */
+        appearance: none;
+        width: 100%; /* Full-width */
+        height: 3px; /* Specified height */
+        background: #191919; /* Grey background */
+        outline: none; /* Remove outline */
+        opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+      }
+      
+      /* Mouse-over effects */
+      .slider:hover {
+        opacity: 1; /* Fully shown on mouse-over */
+      }
+      
+      /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 25px; /* Set a specific slider handle width */
+        height: 25px; /* Slider handle height */
+        background: #04AA6D; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+        border-radius: 100%;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px; /* Set a specific slider handle width */
+        height: 25px; /* Slider handle height */
+        background: #04AA6D; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+      }
+
+      .slidecontainer .grey-box{
+        display: flex;
+        justify-content:flex-end;
+        align-items: center;
+        background-color: #E5E9ED;
+        font: normal normal normal 10px/24px Roboto;
+        color: #1A1A1A;
+        height: 2em;
+        width: auto;
+        padding-right: 2%;
+        margin-bottom: 1em;
+      }
+
+      .slidecontainer p{
+        margin: 0 0 1em 0;
+        font: normal normal bold 16px/24px Roboto;
+        color: #1A1A1A;
+      }
+
+      .ticks{
+        margin-top: .5em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .tick-label{
+        font: normal normal normal 10px/24px Roboto;
+        color: #1A1A1A;
+      }
+
+      .horizontal-divider{
+        border: 2px solid #E5E9ED;
+        margin-bottom: 2em;
+        margin-top: 1em;
+      }
+
+      .square-containers h1, .bottom-square h1{
+        font: italic normal normal 20px/28px Roboto;
+        color: #0A2B57;
+        font-weight: 500;
+      }
+
+      .radio-buttons{
+        width: 20%;
+        margin-right: -13%;
+      }
+
+      .radio-buttons p{
+        margin: 0 0 1em 0;
+        font: normal normal bold 16px/24px Roboto;
+        color: #1A1A1A;
+      }
+
+      .radio-buttons div{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin: 0;
+      }
+
+      .vertical-border{
+        border: 2px solid #E5E9ED;
+      }
+
+    .projection-buttons{
+        /* UI Properties */
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* Probably Change Margin thing Later */
+        margin-left:25%
+    }
+    
+    .radio-item {
+        font: var(--unnamed-font-style-normal) normal var(--unnamed-font-size-16)/var(--unnamed-line-spacing-24) var(--unnamed-font-family-roboto);
+        letter-spacing: var(--unnamed-character-spacing-0);
+        color: var(--unnamed-color-ffffff);
+        text-align: left;
+        font: normal normal  16px/24px Roboto;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 1;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px; /* Adds space between the items */
+    }
+    /* Makes whichever box that is checked bolded */
+    input[type="radio"]:checked + label span {
+        font-weight: bold;
+    }
+
+    .left-panel .center-container .bottom {
+        width: 100%;
+        position: relative;
+        margin-top: auto;
+        bottom: 0;
+        margin-bottom: 25%;
+    }
+    
+    .left-panel .center-container .bottom h5 {
+        font: normal normal bold 14px/18px Roboto;
+        text-decoration: underline;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        position: relative; /* Add this to position the pseudo-element */
+        padding-bottom: 10px; /* Optional: Reset margin to ensure correct positioning */
+        padding-top: 10px;
+        cursor: pointer;
+        user-select: none;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding-left: 20%;
+        width: calc(100% - 20%);
+        
+    }
+    
+    #dashboard-barchart-1, #dashboard-barchart-2, #dashboard-barchart-3{
+        width: 50%;
+    }
+
+    .left-panel .center-container .bottom h5::after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0; 
+        left: 0;
+        width: 60%;
+        margin-left: 20%;
+        border-bottom: 1px solid #e5e9ed;
+        padding-bottom: 0;
+        opacity: 0.5; 
+        pointer-events: none;
+    }
+    
+    .left-panel .center-container .bottom h5::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0; 
+        left: 0;
+        width: 60%; 
+        margin-left: 20%; 
+        border-top: 1px solid #e5e9ed; 
+        opacity: 0.5; 
+        pointer-events: none; 
+        padding-top: 0;
+    }
+    
+    .left-panel .center-container .bottom h5.active {
+        background-color: #FFFFFF;
+        color: #0a2b57;
+        font: normal normal bold 16px/18px Roboto;
+        padding-top:27px;
+        margin-top:0px;
+        width: calc(100% - 20%);
+        left: 0;
+        right: 0;
+        display: block;
+        position: relative;
+    }
+    
+    .left-panel .center-container .bottom h5 a {
+        font: normal normal normal 16px/18px Roboto;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 1;
+        text-decoration: none;
+    }
+
+    .bottom button{
+        background-color: #04AA6D;
+        border-radius: 20em;
+        color: white;
+        width: 50%;
+        height: 25%;
+        font: normal normal bold 16px/26px Roboto;
+        border: none;
+        margin-left: 20%;
+        margin-top: 5%;
+        margin-bottom: 10%;
+    }
+
+    .bottom{
+        padding-right: 3%;
+    }
+
+    .long-term-radio-buttons .buttons, .long-term-radio-buttons .labels{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .long-term-radio-buttons .buttons{
+        justify-content: center;
+    }
+
+    .long-term-radio-buttons .split-layout{
+        display: flex;
+        flex-direction: row;
+        gap: 2em;
+    }
+
+    .long-term-radio-buttons p{
+        margin: 0 0 1em 0;
+        font: normal normal bold 16px/24px Roboto;
+        color: #1A1A1A;
+    }
+
+
+

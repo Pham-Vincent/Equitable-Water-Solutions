@@ -132,8 +132,16 @@ def login():
 @app.route('/profile')
 #Sets up profile page only when logged in
 def profile():
-    checkLogin('profile.html')
-    return render_template('profile.html')
+    if 'loggedin' in session:
+        conn = DatabaseConn()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return render_template('profile.html', account=account)
+    return render_template('index.html')
 
 @app.route('/dashboard')
 #Sets up dashboard page only when logged in
@@ -169,6 +177,11 @@ def contactus():
 def research():
     checkLogin('research.html')
     return render_template('research.html')
+
+
+@app.route('/antonia')
+def antonia():
+   return render_template('Antonia.html')
 
 @app.route('/session-data')
 def sessionData():
