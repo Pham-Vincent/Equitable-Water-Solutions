@@ -1,6 +1,6 @@
 
 
-function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan){
+function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan){
     saltdata = [
         {x: 0, y: 40},
         {x: 5, y: 29.9},
@@ -47,12 +47,13 @@ function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barcha
         ['SO', 20]
     ],
     Timespan = document.getElementById("myRange").value;
-    return [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan]
+    BarChartTimeSpan = document.getElementById("myRange2").value;
+    return [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan]
      
 
     
 }
-function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan){
+function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan){
     saltdata = [
         {x: 0, y: 80},
         {x: 5, y: 200},
@@ -95,13 +96,13 @@ function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchar
     ['Mg', 30],
     ['SO', 50]],
     Timespan = document.getElementById("myRange").value;
-    console.log(Timespan)
-    return [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan]
+    BarChartTimeSpan=document.getElementById("myRange2").value;
+    return [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan]
 
 
     
 }
-function updateGraphs(currentChecked,saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan){
+function updateGraphs(currentChecked,saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan){
     let radios = document.querySelectorAll('input[type="radio"][name="projection"]');
     radios.forEach(function(radio){
         if(radio.checked){
@@ -111,10 +112,10 @@ function updateGraphs(currentChecked,saltdata,xtitleName,barchartData1,barchartD
 
     if(currentChecked == 'shortTerm')
     {
-         [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan] = shortTermChanges();
+         [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan] = shortTermChanges();
     }
     else{
-        [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan]= longTermChanges();
+        [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan]= longTermChanges();
     }
     Highcharts.chart('dashboard-saltchart', {
         chart: {
@@ -358,7 +359,7 @@ function createPlotBand(from, to, color) {
         },
         yAxis: {
             min: 0,
-            max: 100, // Set the maximum value for the Y-axis
+            max: parseInt(BarChartTimeSpan,10), // Set the maximum value for the Y-axis
             lineWidth: 1.5,
             tickInterval: 25, 
             minorTickInterval: 25, 
@@ -435,7 +436,7 @@ function createPlotBand(from, to, color) {
         },
         yAxis: {
             min: 0,
-            max: 100, // Set the maximum value for the Y-axis
+            max: parseInt(BarChartTimeSpan,10), // Set the maximum value for the Y-axis
             lineWidth: 1.5,
             tickInterval: 25, 
             minorTickInterval: 25, 
@@ -512,7 +513,7 @@ function createPlotBand(from, to, color) {
         },
         yAxis: {
             min: 0,
-            max: 100,  
+            max: parseInt(BarChartTimeSpan,10),  
             lineWidth: 1.5,
             tickInterval: 25, 
             minorTickInterval: 25, 
@@ -599,6 +600,9 @@ $(function() {
         updateGraphs()
     })
     $('input[type="range"][id="myRange"]').change(function(){
+        updateGraphs()
+    })
+    $('input[type="range"][id="myRange2"]').change(function(){
         updateGraphs()
     })
     
