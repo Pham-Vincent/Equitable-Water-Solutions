@@ -15,64 +15,6 @@
 <script type="module" src="{{url_for('static',filename='js/Antonia.js')}}"></script>
 
 <!--
-<style>
-    .container {
-        padding-top: 5%;
-        display: flex;
-        justify-content: space-between;
-        width: 80%;
-        margin: 50px auto;
-    }
-
-    .sliders, .outputs {
-        width: 40%;
-    }
-
-    .slider {
-        margin-bottom: 20px;
-    }
-
-    .output {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .output span {
-        font-size: 30px;
-    }
-
-    .output h2, .output span .output img {
-        display: inline-block;
-    }
-
-    .sliders h1, .sliders img {
-        display: inline-block;
-        padding-right: 10px;
-    }
-
-    h1, h2 {
-        color: #FFFFFF;
-    }
-</style>
-</head>
-<body>
-
-<div class="container">
-<div class="sliders">
-    <img src="static/images/Antonia_reservoir.png" alt="Water Icon" style="width:40px;height:40px;">
-    <h1>Reservoir Level</h1>
-    <div class="slider" id="slider1"></div>
-
-    <img src="static/images/Antonia_time.png" alt="Water Icon" style="width:40px;height:40px;">
-    <h1>Time Index</h1>
-    <div class="slider" id="slider2"></div>
-
-    <img src="static/images/Antonia_weather.png" alt="Water Icon" style="width:40px;height:40px;">
-    <h1>Weather Index</h1>
-    <div class="slider" id="slider3"></div>
-</div>
 
 <div class="outputs">
     <div class="output">
@@ -113,16 +55,16 @@
                     <h1>Weather Type</h1>
                     <div class="weather-options">
                         <span>
-                            <input type="radio" id="Sunny" name="drone"><label for="Sunny">Sunny</label>
+                            <input type="radio" id="Sunny" name="weather" value="Sunny"><label for="Sunny" checked>Sunny</label>
                         </span>
                         <span>
-                            <input type="radio" id="Rain" name="drone"><label for="Rain">Rain</label>
+                            <input type="radio" id="Rain" name="weather" value="Rain"><label for="Rain">Rain</label>
                         </span>
                         <span>
-                            <input type="radio" id="Windy" name="drone"><label for="Windy">Windy</label>
+                            <input type="radio" id="Windy" name="weather" value="Windy"><label for="Windy">Windy</label>
                         </span>
                         <span>
-                            <input type="radio" id="Snow" name="drone"><label for="Snow">Snow</label>
+                            <input type="radio" id="Snow" name="weather" value="Snow"><label for="Snow">Snow</label>
                         </span>
                     </div>
                 </div>
@@ -135,7 +77,7 @@
                 <div class="slidecontainer">
                     
                     <div class="grey-box"></div>
-                    <input type="range" min="0" max="60" value="100" class="slider" id="myRange">
+                    <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
                     <div class="ticks">
                         <!-- Create tick marks at increments of 10 -->
                         <div class="tick"><span class="tick-label">0</span></div>

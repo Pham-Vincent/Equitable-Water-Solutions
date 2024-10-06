@@ -1,3 +1,7 @@
+var slider = document.getElementById("myRange");
+var selectedWeather = "Sunny";  // Default weather condition
+
+// Function to render icons
 function renderIcons() {
     this.series.forEach(series => {
         if (!series.icon) {
@@ -16,16 +20,15 @@ function renderIcons() {
         series.icon.attr({
             x: this.chartWidth / 2 - 15,        // Horizontal adjustment
             y: this.plotHeight / 2 -            // Vertical adjustment
-                series.points[0].shapeArgs.innerR -
+                series.points[0].shapeArgs.innerR - 
                 (series.points[0].shapeArgs.r -
                     series.points[0].shapeArgs.innerR) / 2 + 8 - 20
         });
     });
 }
 
-
-Highcharts.chart('gauge', {
-
+// Initialize the chart and store it in a variable
+var chart = Highcharts.chart('gauge', {
     chart: {
         type: 'solidgauge',
         height: '110%',
@@ -138,7 +141,7 @@ Highcharts.chart('gauge', {
             y: 50
         }],
         custom: {
-            icon: 'static/images/Antonia_water.png',
+            icon: 'static/images/Antonia_power.png',
             iconColor: '#ffffff'
         }
     }, {
@@ -150,9 +153,41 @@ Highcharts.chart('gauge', {
             y: 30           
         }],
         custom: {
-            icon: 'static/images/Antonia_water.png',    
+            icon: 'static/images/Antonia_downstream.png',    
             iconColor: '#ffffff'
         }
     }]
 });
 
+// Listen for changes in weather input
+document.querySelectorAll('input[name="weather"]').forEach((input) => {
+    input.addEventListener('change', function() {
+        selectedWeather = this.value;  // Update selected weather
+        updateGaugeValues();            // Recalculate the values based on weather and slider
+    });
+});
+
+// Slider event listener to dynamically change y-values
+function updateGaugeValues() {
+    var sliderValue = parseInt(slider.value);
+    
+    // Adjustments based on weather
+    var adjustments = {
+        'Sunny': { 'Baltimore': 1, 'Chester': 1, 'Power Plant': 1, 'Downstream': 1 },
+        'Rain': { 'Baltimore': 1.3, 'Chester': 1.1, 'Power Plant': 0.75, 'Downstream': 1 },
+        'Windy': { 'Baltimore': 0.9, 'Chester': 1.2, 'Power Plant': 1.1, 'Downstream': 0.85 },
+        'Snow': { 'Baltimore': 0.8, 'Chester': 0.9, 'Power Plant': 0.9, 'Downstream': 1.2 }
+    };
+    
+    // Get the current adjustment based on the selected weather
+    var adjustment = adjustments[selectedWeather];
+
+    // Update each series' y value based on weather and slider input
+    chart.series[0].setData([{ y: sliderValue * adjustment.Baltimore, color: '#173058', radius: '112%', innerRadius: '91%' }], true);
+    chart.series[1].setData([{ y: (sliderValue - 10) * adjustment.Chester, color: '#265471', radius: '90%', innerRadius: '70%' }], true);
+    chart.series[2].setData([{ y: (sliderValue - 20) * adjustment['Power Plant'], color: '#3d8c96', radius: '69%', innerRadius: '49%' }], true);
+    chart.series[3].setData([{ y: (sliderValue - 30) * adjustment.Downstream, color: '#51bcb9', radius: '48%', innerRadius: '30%' }], true);
+}
+
+// Slider event listener to update the chart when the slider changes
+slider.oninput = updateGaugeValues;

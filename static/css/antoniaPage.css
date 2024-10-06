@@ -146,6 +146,7 @@
   .tick-label{
     font: normal normal normal 12px/24px Roboto;
     color: #1A1A1A;
+    user-select: none;
   }
 
   .weather-options{
