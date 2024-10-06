@@ -4,6 +4,17 @@
 
 {% block content %}
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/antoniaPage.css') }}">
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/navigator.js"> </script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script type="module" src="{{url_for('static',filename='js/Antonia.js')}}"></script>
+
+<!--
 <style>
     .container {
         padding-top: 5%;
@@ -88,6 +99,62 @@
         <span id="output4">0</span>
     </div>
 </div>
+</div>
+-->
+
+<div class="page-container">
+    <div class="content-container">
+        <div class="output-container">
+            <div id="gauge"></div>
+        </div>
+        <div class="input-container">
+            <div class="top-input">
+                <div class="top-left-input">
+                    <h1>Weather Type</h1>
+                    <div class="weather-options">
+                        <span>
+                            <input type="radio" id="Sunny" name="drone"><label for="Sunny">Sunny</label>
+                        </span>
+                        <span>
+                            <input type="radio" id="Rain" name="drone"><label for="Rain">Rain</label>
+                        </span>
+                        <span>
+                            <input type="radio" id="Windy" name="drone"><label for="Windy">Windy</label>
+                        </span>
+                        <span>
+                            <input type="radio" id="Snow" name="drone"><label for="Snow">Snow</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="top-right-input">
+                    <h1>Time Index</h1>
+                </div>
+            </div>
+            <div class="bottom-input">
+                <h1>Resevoir Level</h1>
+                <div class="slidecontainer">
+                    
+                    <div class="grey-box"></div>
+                    <input type="range" min="0" max="60" value="100" class="slider" id="myRange">
+                    <div class="ticks">
+                        <!-- Create tick marks at increments of 10 -->
+                        <div class="tick"><span class="tick-label">0</span></div>
+                        <div class="tick"><span class="tick-label">10</span></div>
+                        <div class="tick"><span class="tick-label">20</span></div>
+                        <div class="tick"><span class="tick-label">30</span></div>
+                        <div class="tick"><span class="tick-label">40</span></div>
+                        <div class="tick"><span class="tick-label">50</span></div>
+                        <div class="tick"><span class="tick-label">60</span></div>
+                        <div class="tick"><span class="tick-label">70</span></div>
+                        <div class="tick"><span class="tick-label">80</span></div>
+                        <div class="tick"><span class="tick-label">90</span></div>
+                        <div class="tick"><span class="tick-label">100</span></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -225,28 +225,37 @@ CSS for the navbar
         display: none;
     }
 
+    .navtop .grey-back{
+        display: none;
+    }
+
     .nav-options a.icon {
         display: contents;
     }
 
     .navtop div h1 img{
-        width:70%;
-        height: 70%;
+        width:30%;
+        height: 30%;
     }
+
+    .grey-back{
+        display: none;
+    }
+
 
 }
 @media screen and (max-width: 600px) {
-    .small-bar a.icon {
+    .navtop .small-bar a.icon {
         position: absolute;
         right: 0;
         top: 0;
     }
     
-    .small-bar-responsive a span{
+    .navtop .small-bar-responsive a span{
         padding: 10px 20px;
     }
 
-    .small-bar-responsive{
+    .navtop .small-bar-responsive{
         background-color: white;
         height: 150px;
         width: auto;

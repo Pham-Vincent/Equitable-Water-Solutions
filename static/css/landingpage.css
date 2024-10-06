@@ -227,35 +227,104 @@ CSS for index.html to syle the landing/coming soon page
 
  @media screen and (max-width: 650px) {
 
-    block-1{
+    .block-1{
         display:contents;
     }
 
-    block-1 img{
+    .block-1 img{
         margin: 0 auto;
      }
 
-     block-1 h1{
+     .block-1 h1{
         font: italic normal bold 35px/48px Roboto;
         padding-top: 10%;
      }
 
-     block-1 p{
+     .block-1 p{
         font: normal normal normal 14px/22px Roboto;
      }
 
-     block-1 > div{
-        width: 85%;
-        margin: 0 auto;
+     .block-1 > div{
+        width: 100%;
+         margin:0;
      }
 
-     block-1 img{
+     .block-1 img{
         height: 70%;
         width: 70%;
         display: block;
         margin: 20px auto 20px auto;
         z-index: 2;
      }
+
+     .block-2{
+         padding-top: 1rem;
+     }
+
+     .block-2-split{
+      flex-direction: column;
+      gap: 3em;
+      margin-top: 1em;
+      padding-bottom: 4em;
+   }
+   .block-2 h1{
+      padding: 0;
+      margin: 5% 5% 0 8%;
+   }
+
+   .block-2-A, .block-2-B{
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 8%;
+      gap: 1em;
+   }
+
+   .block-2-split img{
+      width: 40%;
+      height: 45%;
+   }
+
+   .block-3{
+      height: fit-content;
+      width: 100%;
+      background-color: rgb(152, 152, 152);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap:0;
+    }
+
+    .block-3-A{
+      background-color: #E5E9ED;
+      width: 100%;
+      height: auto;
+      padding: 8%;
+      box-sizing: border-box; /* Ensures padding is included in the width */
+      color: #0A2B57;
+    }
+   
+    .block-3-B{
+      background-color: #0A2B57;
+      width: 100%;
+      height: auto;
+      padding: 8%;
+      color: white;
+      box-sizing: border-box; /* Ensures padding is included in the width */
+    }
+
+    .page-content{
+      margin: 5% auto;
+    }
+
+    .block-4-content{
+      gap: 2.5em;
+    }
+
+
 
  }
 
