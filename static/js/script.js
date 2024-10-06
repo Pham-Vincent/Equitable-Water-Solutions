@@ -22,6 +22,7 @@ export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
 export let shown = [false,true]
+let featureLayer
 
 console.log("This is for development purposes only. For development by the Salisbury University Team ;)");
 
@@ -59,7 +60,44 @@ async function initMap() {
     }
   });
   
-  
+
+  /*
+  State Outline Start
+  This code sets the feature layer to the Admin area level 1 layer which has all of the US State border information
+  Using this, the starts are found using the place ID of Maryland and Virginia, and are styled accordingly.
+  */
+  featureLayer = map.getFeatureLayer("ADMINISTRATIVE_AREA_LEVEL_1");
+
+const marylandStyleOptions = {
+  strokeColor: "#810FCB",
+  strokeOpacity: 1.0,
+  strokeWeight: 3.0,
+  fillColor: "#810FCB",  // Maryland color (purple)
+  fillOpacity: 0.5,
+};
+
+const virginiaStyleOptions = {
+  strokeColor: "#FF5733",
+  strokeOpacity: 1.0,
+  strokeWeight: 3.0,
+  fillColor: "#FF5733",  // Virginia color (orange)
+  fillOpacity: 0.5,
+};
+
+// Apply the style to the boundaries of Maryland and Virginia
+featureLayer.style = (options) => {
+  if (options.feature.placeId == "ChIJ35Dx6etNtokRsfZVdmU3r_I") {
+    // Maryland Place ID
+    return marylandStyleOptions;
+  }
+  if (options.feature.placeId == "ChIJzbK8vXDWTIgRlaZGt0lBTsA") {
+    // Virginia Place ID
+    return virginiaStyleOptions;
+  }
+};
+/*
+State Outline End
+*/
 
   //Loads GeoJSON Data from JSON file
   map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
