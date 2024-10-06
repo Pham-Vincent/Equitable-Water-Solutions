@@ -69,18 +69,18 @@ async function initMap() {
   featureLayer = map.getFeatureLayer("ADMINISTRATIVE_AREA_LEVEL_1");
 
 const marylandStyleOptions = {
-  strokeColor: "#810FCB",
+  strokeColor: "#289D7A",
   strokeOpacity: 1.0,
   strokeWeight: 3.0,
-  fillColor: "#810FCB",  // Maryland color (purple)
+  fillColor: "#289D7A",  // Maryland color (purple)
   fillOpacity: 0.5,
 };
 
 const virginiaStyleOptions = {
-  strokeColor: "#FF5733",
+  strokeColor: "#289D7A",
   strokeOpacity: 1.0,
   strokeWeight: 3.0,
-  fillColor: "#FF5733",  // Virginia color (orange)
+  fillColor: "#B7E2BA",  // Virginia color (orange)
   fillOpacity: 0.5,
 };
 
