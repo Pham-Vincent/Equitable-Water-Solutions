@@ -64,12 +64,16 @@ def registerFunction():
             session['id'] = account['id']
             session['username'] = account['fname']
             session['lastname'] = account['lname']
-
+            print(session['id'])
         # Line To Add Blank Data into the Marker Pinning 
         #<--------------------->
-        
+            query = "INSERT INTO Water_Data.Location_Pinned (id,PinnedLocation1,PinnedLocation2,PinnedLocation3) VALUES (%s,NULL,NULL,NULL)"
+            cursor.execute(query, (session['id'],))
+            conn.commit()
+
             cursor.close()
             conn.close()
+
             # Redirect to map page
             return redirect(url_for('index'))
     elif request.method == 'POST':

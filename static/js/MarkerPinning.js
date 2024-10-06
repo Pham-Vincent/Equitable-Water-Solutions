@@ -29,6 +29,10 @@ export function pinLocation(title,number){
       
     }
 })}
+// Checks if a location is already pinned at that spot and confirms whether the user wants to override it.
+export function overRide(){
+  fetch('/Override')
 
-
+}
+window.overRide = overRide
 window.pinLocation = pinLocation;
