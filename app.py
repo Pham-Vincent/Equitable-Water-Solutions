@@ -190,7 +190,7 @@ def sessionData():
 #Utilized to Pin location into the Database
 @app.route('/pin-location',methods=['POST'])
 def pinLocation():
-  return(add_pin_to_database( request.get_json()))
+  return(add_pin_to_database(request.get_json()))
 
   
 if __name__ == '__main__':

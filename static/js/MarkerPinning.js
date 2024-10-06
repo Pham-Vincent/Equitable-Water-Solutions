@@ -9,7 +9,7 @@ Date: 9/7/24
 */
 
 
-export function pinLocation(title){
+export function pinLocation(title,number){
   
   
   fetch('/session-data')
@@ -24,7 +24,7 @@ export function pinLocation(title){
         headers:{
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify({hydrocode:title, userid:data.id})
+        body:JSON.stringify({hydrocode:title, userid:data.id,pinNumber:number})
       })
       
     }

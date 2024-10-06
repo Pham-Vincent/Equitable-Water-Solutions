@@ -64,6 +64,10 @@ def registerFunction():
             session['id'] = account['id']
             session['username'] = account['fname']
             session['lastname'] = account['lname']
+
+        # Line To Add Blank Data into the Marker Pinning 
+        #<--------------------->
+        
             cursor.close()
             conn.close()
             # Redirect to map page

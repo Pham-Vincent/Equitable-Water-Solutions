@@ -15,13 +15,12 @@ def add_pin_to_database(data):
   conn = DatabaseConn()
   #Query For SQL
   mycursor = conn.cursor()
-  Query = "SELECT PinnedLocation1,PinnedLocation2,PinnedLocation3,PinnedLocation4,PinnedLocation5 FROM Location_Pinned WHERE id = \"" + str(data['userid']) + "\""
+
+  Query = "Update Water_Data.Location_Pinned SET PinnedLocation" +str(data['pinNumber']) +"=" + "\"" + str(data['hydrocode']) + "\" WHERE id = \"" + str(data['userid']) + "\""
+ 
+  
   #Executes The Query
   mycursor.execute(Query)
-  result= mycursor.fetchall()
-  print("HI")
-  print(result)
-
-
+  conn.commit()  
 
   return(None)

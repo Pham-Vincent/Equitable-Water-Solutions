@@ -115,12 +115,35 @@
     background: transparent;
 }
 
-#pin-location-button{
-    padding: 5px 15px; 
+.button-container{
+        display: flex;
+        gap: 10px; /* Add space between the elements */
+}
+
+
+#locationpin-container{
+    padding: 5px 10px; 
     border-radius: 20px;
+    margin-top: -10px;
+    height: 42px;
     border: none;
     cursor: pointer;
     align-items: center;
     background-color: lightgray;
     color: black;
+    display: flex;
+    flex-direction: column; /* Stack the items vertically */
 }
+#locationpin-container p {
+    margin: 0;
+    font-size: 14px; /* Text size for 'Pin Location' */
+    text-align: center; /* Center align the text */
+    margin-bottom: 10px; /* Space between the text and buttons */
+  }
+
+#button-wrapper {
+    display: flex;
+    gap: 5px; /* Adds spacing between the buttons */
+    margin-top: -10px; /* Adds some space above the buttons */
+  }
+  
