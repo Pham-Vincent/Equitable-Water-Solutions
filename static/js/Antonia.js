@@ -48,7 +48,7 @@ var chart = Highcharts.chart('gauge', {
     },
 
     title: {
-        text: 'Water Plant Release',
+        text: 'Resevoir Release (ppm)',
         style: {
             fontSize: '24px',
             color: '#0A2B57'
@@ -62,7 +62,7 @@ var chart = Highcharts.chart('gauge', {
         style: {
             fontSize: '16px'
         },
-        valueSuffix: '(ppg)',
+        valueSuffix: '(ppm)',
         pointFormat: '{series.name}<br>' +
             '<span style="font-size: 1.5em; color: {point.color}; ' +
             'font-weight: bold">{point.y}</span>',
@@ -200,10 +200,10 @@ function updateGaugeValues() {
     var adjustment = adjustments[selectedWeather];
 
     // Update y value based on weather and slider input
-    chart.series[0].setData([{ y: sliderValue * adjustment.Baltimore * timeAdjustment, color: '#173058', radius: '112%', innerRadius: '91%' }], true);
-    chart.series[1].setData([{ y: (sliderValue - 10) * adjustment.Chester * timeAdjustment, color: '#265471', radius: '90%', innerRadius: '70%' }], true);
-    chart.series[2].setData([{ y: (sliderValue - 20) * adjustment['Power Plant'] * timeAdjustment, color: '#3d8c96', radius: '69%', innerRadius: '49%' }], true);
-    chart.series[3].setData([{ y: (sliderValue - 30) * adjustment.Downstream * timeAdjustment, color: '#51bcb9', radius: '48%', innerRadius: '30%' }], true);
+    chart.series[0].setData([{ y: parseFloat((sliderValue * adjustment.Baltimore * timeAdjustment).toFixed(2)), color: '#173058', radius: '112%', innerRadius: '91%' }], true);
+    chart.series[1].setData([{ y: parseFloat(((sliderValue - 10) * adjustment.Chester * timeAdjustment).toFixed(2)), color: '#265471', radius: '90%', innerRadius: '70%' }], true);
+    chart.series[2].setData([{ y: parseFloat(((sliderValue - 20) * adjustment['Power Plant'] * timeAdjustment).toFixed(2)), color: '#3d8c96', radius: '69%', innerRadius: '49%' }], true);
+    chart.series[3].setData([{ y: parseFloat(((sliderValue - 30) * adjustment.Downstream * timeAdjustment).toFixed(2)), color: '#51bcb9', radius: '48%', innerRadius: '30%' }], true);
 }
 
 // Slider event listener to update the chart when the slider changes

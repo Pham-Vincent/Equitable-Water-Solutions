@@ -2,13 +2,16 @@
     width: 100vw;
     height: 100vh;
     background-color: #e5e9ed;
-    padding-top: 6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -4%; /* set page container under navbar */
 }
 
 .content-container{
     width: 85%;
     height: 70%;
-    margin: 0 auto;
+    margin: 4% auto 0 auto;
     display: flex;
     flex-direction: row;
     gap: 2em;
@@ -121,12 +124,11 @@
     display: flex;
     justify-content:flex-end;
     align-items: center;
-    background-color: #E5E9ED;
+    background-image: linear-gradient(to left, #142A54, #50BAB6);
     font: normal normal normal 10px/24px Roboto;
     color: #1A1A1A;
-    height: 2em;
+    height: 3em;
     width: auto;
-    padding-right: 2%;
     margin-bottom: 1em;
   }
 
@@ -165,7 +167,7 @@
     max-width: 8rem; /* Same as Tailwind's max-w-[8rem] */
     width: 100%;
     border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Padding around the form */
+    margin-left: 6%;
 }
 
 .form-label {
@@ -203,4 +205,8 @@
 .time-input:focus {
     border-color: #007bff; /* Change border color on focus */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+}
+
+input[type='radio'] { 
+    transform: scale(1.3); 
 }
