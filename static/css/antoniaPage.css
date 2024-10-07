@@ -160,3 +160,47 @@
   .weather-options input{
     margin-right: 1em;
   }
+
+  .form-container {
+    max-width: 8rem; /* Same as Tailwind's max-w-[8rem] */
+    width: 100%;
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding around the form */
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem; /* Spacing below label */
+    font-size: 0.875rem; /* Small text */
+    color: #ffffff; /* White text color */
+}
+
+.relative {
+    position: relative;
+}
+
+.icon-container {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust for spacing */
+    transform: translateY(-50%); /* Center vertically */
+    pointer-events: none; /* Prevent interaction with icon */
+}
+
+
+
+.time-input {
+    background-color: #f9f9f9; /* Light background for input */
+    border: 1px solid #ccc; /* Light gray border */
+    color: #333; /* Dark text */
+    padding: 0.5rem; /* Padding inside the input */
+    border-radius: 4px; /* Rounded corners for input */
+    width: 100%; /* Full width */
+    outline: none; /* Remove outline */
+    transition: border-color 0.2s ease; /* Smooth border color transition */
+}
+
+.time-input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+}

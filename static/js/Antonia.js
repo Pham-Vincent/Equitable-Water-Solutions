@@ -1,5 +1,15 @@
 var slider = document.getElementById("myRange");
 var selectedWeather = "Sunny";  // Default weather condition
+var currentTime = "12:00";
+
+var timeAdjustment = {
+  '0-4' : 0.8,
+  '4-8' : 0.9,
+  '8-12' : 1.1,
+  '12-16' : 1,
+  '16-20' : .9,
+  '20-24' : .8
+};
 
 // Function to render icons
 function renderIcons() {
@@ -167,6 +177,12 @@ document.querySelectorAll('input[name="weather"]').forEach((input) => {
     });
 });
 
+//Listen for changes to time input
+document.getElementById("time").addEventListener("input", function() {
+    currentTime = this.value;  // Update the currentTime variable
+    updateGaugeValues();       // Recalculate the values based on weather, slider, and time
+});
+
 // Slider event listener to dynamically change y-values
 function updateGaugeValues() {
     var sliderValue = parseInt(slider.value);
@@ -179,15 +195,33 @@ function updateGaugeValues() {
         'Snow': { 'Baltimore': 0.8, 'Chester': 0.9, 'Power Plant': 0.9, 'Downstream': 1.2 }
     };
     
-    // Get the current adjustment based on the selected weather
+    var timeAdjustment = getTimeAdjustment(currentTime);
+
     var adjustment = adjustments[selectedWeather];
 
-    // Update each series' y value based on weather and slider input
-    chart.series[0].setData([{ y: sliderValue * adjustment.Baltimore, color: '#173058', radius: '112%', innerRadius: '91%' }], true);
-    chart.series[1].setData([{ y: (sliderValue - 10) * adjustment.Chester, color: '#265471', radius: '90%', innerRadius: '70%' }], true);
-    chart.series[2].setData([{ y: (sliderValue - 20) * adjustment['Power Plant'], color: '#3d8c96', radius: '69%', innerRadius: '49%' }], true);
-    chart.series[3].setData([{ y: (sliderValue - 30) * adjustment.Downstream, color: '#51bcb9', radius: '48%', innerRadius: '30%' }], true);
+    // Update y value based on weather and slider input
+    chart.series[0].setData([{ y: sliderValue * adjustment.Baltimore * timeAdjustment, color: '#173058', radius: '112%', innerRadius: '91%' }], true);
+    chart.series[1].setData([{ y: (sliderValue - 10) * adjustment.Chester * timeAdjustment, color: '#265471', radius: '90%', innerRadius: '70%' }], true);
+    chart.series[2].setData([{ y: (sliderValue - 20) * adjustment['Power Plant'] * timeAdjustment, color: '#3d8c96', radius: '69%', innerRadius: '49%' }], true);
+    chart.series[3].setData([{ y: (sliderValue - 30) * adjustment.Downstream * timeAdjustment, color: '#51bcb9', radius: '48%', innerRadius: '30%' }], true);
 }
 
 // Slider event listener to update the chart when the slider changes
 slider.oninput = updateGaugeValues;
+
+function getTimeAdjustment(time){
+    var hours = parseInt(time.split(":")[0])
+
+    if(hours <= 4)
+        return timeAdjustment['0-4']
+    else if(hours <= 8)
+        return timeAdjustment['4-8']
+    else if(hours <= 12)
+        return timeAdjustment['8-12']
+    else if(hours <= 16)
+        return timeAdjustment['12-16']
+    else if(hours <= 20)
+        return timeAdjustment['16-20']
+    else 
+        return timeAdjustment['20-24']
+}
