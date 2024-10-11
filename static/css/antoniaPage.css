@@ -1,0 +1,212 @@
+.page-container{
+    width: 100vw;
+    height: 104vh;
+    background-color: #e5e9ed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -4%; /* set page container under navbar */
+}
+
+.content-container{
+    width: 85%;
+    height: 70%;
+    margin: 4% auto 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.output-container, .input-container{
+    width: 50%;
+    height: 100%;
+}
+
+.output-container{
+    background-color: white;
+    border-radius: 2%;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.289);
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column; 
+    gap: 2em;
+}
+
+.top-input, .bottom-input{
+    height: 50%;
+    width: 100%;
+}
+
+.bottom-input{
+    background-color: white;
+    border-radius: .5rem;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.289);
+}
+
+.top-input{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.top-left-input, .top-right-input{
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    border-radius: .5rem;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.289);
+}
+
+/* Gauge Styling */
+#gauge{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.top-left-input h1, .top-right-input h1, .bottom-input h1{
+    font: italic normal normal 18px/24px Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+    margin: 12% 0 0 12%;
+}
+
+.bottom-input h1{
+    margin: 6% 0 6% 6%;
+}
+
+.slidecontainer{
+    width: 88%;
+    margin: 0 auto;
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 3px; /* Specified height */
+    background: #191919; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #04AA6D; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 100%;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #04AA6D; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+  .slidecontainer .grey-box{
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    background-image: linear-gradient(to left, #142A54, #50BAB6);
+    font: normal normal normal 10px/24px Roboto;
+    color: #1A1A1A;
+    height: 3em;
+    width: auto;
+    margin-bottom: 1em;
+  }
+
+  .slidecontainer p{
+    margin: 0 0 1em 0;
+    font: normal normal bold 16px/24px Roboto;
+    color: #1A1A1A;
+  }
+
+  .ticks{
+    margin-top: .5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .tick-label{
+    font: normal normal normal 12px/24px Roboto;
+    color: #1A1A1A;
+    user-select: none;
+  }
+
+  .weather-options{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-left: 11%;
+    margin-top: 8%;
+  }
+
+  .weather-options input{
+    margin-right: 1em;
+  }
+
+  .form-container {
+    max-width: 8rem; /* Same as Tailwind's max-w-[8rem] */
+    width: 100%;
+    border-radius: 8px; /* Rounded corners */
+    margin-left: 6%;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem; /* Spacing below label */
+    font-size: 0.875rem; /* Small text */
+    color: #ffffff; /* White text color */
+}
+
+.relative {
+    position: relative;
+}
+
+.icon-container {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust for spacing */
+    transform: translateY(-50%); /* Center vertically */
+    pointer-events: none; /* Prevent interaction with icon */
+}
+
+
+
+.time-input {
+    background-color: #f9f9f9; /* Light background for input */
+    border: 1px solid #ccc; /* Light gray border */
+    color: #333; /* Dark text */
+    padding: 0.5rem; /* Padding inside the input */
+    border-radius: 4px; /* Rounded corners for input */
+    width: 100%; /* Full width */
+    outline: none; /* Remove outline */
+    transition: border-color 0.2s ease; /* Smooth border color transition */
+}
+
+.time-input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+}
+
+input[type='radio'] { 
+    transform: scale(1.3); 
+}

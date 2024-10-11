@@ -19,6 +19,7 @@ from Graph import *
 from login import *
 from About import *
 from FeatureExtraction import *
+from LocationPinning import * 
 from dotenv import load_dotenv
 import os
 import pandas as pd
@@ -144,8 +145,16 @@ def login():
 @app.route('/profile')
 #Sets up profile page only when logged in
 def profile():
-    checkLogin('profile.html')
-    return render_template('profile.html')
+    if 'loggedin' in session:
+        conn = DatabaseConn()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM Accounts where id = %s"
+        cursor.execute(query, (session['id'],))
+        account = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return render_template('profile.html', account=account)
+    return render_template('index.html')
 
 @app.route('/dashboard')
 #Sets up dashboard page only when logged in
@@ -181,6 +190,19 @@ def contactus():
 def research():
     checkLogin('research.html')
     return render_template('research.html')
+
+@app.route('/antonia')
+def antonia():
+   return render_template('Antonia.html')
+
+@app.route('/session-data')
+def sessionData():
+  return(retrieve_sessionid())
+
+#Utilized to Pin location into the Database
+@app.route('/pin-location',methods=['POST'])
+def pinLocation():
+  return(add_pin_to_database( request.get_json()))
 
 if __name__ == '__main__':
   app.run(debug=True)

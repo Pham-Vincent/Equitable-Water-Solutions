@@ -17,11 +17,12 @@ import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
-
+import { pinLocation } from './MarkerPinning.js';
 export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
 export let shown = [false,true]
+let featureLayer
 
 console.log("This is for development purposes only. For development by the Salisbury University Team ;)");
 
@@ -59,7 +60,44 @@ async function initMap() {
     }
   });
   
-  
+
+  /*
+  State Outline Start
+  This code sets the feature layer to the Admin area level 1 layer which has all of the US State border information
+  Using this, the starts are found using the place ID of Maryland and Virginia, and are styled accordingly.
+  */
+  featureLayer = map.getFeatureLayer("ADMINISTRATIVE_AREA_LEVEL_1");
+
+const marylandStyleOptions = {
+  strokeColor: "#289D7A",
+  strokeOpacity: 1.0,
+  strokeWeight: 3.0,
+  fillColor: "#289D7A",  // Maryland color (purple)
+  fillOpacity: 0.5,
+};
+
+const virginiaStyleOptions = {
+  strokeColor: "#289D7A",
+  strokeOpacity: 1.0,
+  strokeWeight: 3.0,
+  fillColor: "#B7E2BA",  // Virginia color (orange)
+  fillOpacity: 0.5,
+};
+
+// Apply the style to the boundaries of Maryland and Virginia
+featureLayer.style = (options) => {
+  if (options.feature.placeId == "ChIJ35Dx6etNtokRsfZVdmU3r_I") {
+    // Maryland Place ID
+    return marylandStyleOptions;
+  }
+  if (options.feature.placeId == "ChIJzbK8vXDWTIgRlaZGt0lBTsA") {
+    // Virginia Place ID
+    return virginiaStyleOptions;
+  }
+};
+/*
+State Outline End
+*/
 
   //Loads GeoJSON Data from JSON file
   map.data.loadGeoJson('static/json/Chesapeake_Bay_Shoreline_High_Resolution.geojson');
@@ -252,11 +290,13 @@ $.ajax({
             <p><strong style="color: rgb(70, 86, 126);">Water Source:</strong>  ${marker.descriptions.description2}</p>
             <p><strong style="color: rgb(70, 86, 126);">Use Type:</strong>  ${marker.descriptions.tag}</p>
             <button id="view-more-button" onclick="viewMore()"">View More</button>
+            <button id="pin-location-button" onclick="pinLocation('${marker.title}')"">Pin Location</button>
           </div>
         `,  
         maxWidth: 300,
         disableAutoPan: true,
       });
+      // PinLocation(marker)
 
       //Associate the infowindow with the marker
       marker.infowindow = infowindow2;

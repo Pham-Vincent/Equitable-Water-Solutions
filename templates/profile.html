@@ -3,19 +3,324 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/accountPage.css') }}">
 
 <div class="dashboard-flex-container">
     <div class="left-panel">
         <div class="center-container">
-            <h1>Profile</h1>
+            <h6>Hello,</h6>
+            <h1>{{ session.get('username') }}</h1>
+            <div class="line"></div>
+    
+            <div class="bottom">
+                <h5 class="sidebar-item" data-section="account">Account</h5>
+                
+                <h5 class="sidebar-item" data-section="subscriptions">Manage Subscriptions</h5>
+                
+                <h5 class="sidebar-item" data-section="payments">Financial & Payments</h5>
+               
+                <h5 class="sidebar-item" data-section="preferences">Preferences</h5>
+              
+                <h5 class="sidebar-item" data-section="notifications">Notifications</h5>
+            
+                <h5><a href="{{ url_for('logout') }}">Log Out</a></h5>
+            </div>
         </div>
+    </div>
+    
     </div>
     <div class="right-panel">
         <div class="right-container">
-            
+            <div id="account" style="display: none;">
+                <!-- Account content goes here -->
+            </div>
+            <div id="subscriptions">
+                <h1>Manage Subscription</h1>
+                <div class="stan-text">View your existing plan details, or choose from the selection below to change your plan.</div>
+
+                <div class="flex-container">
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For Salinity Exposure Data</div>
+                        <div class="standard-text">
+                            <p>Basic Account</p>
+                            <p id="basic-features" onclick="toggleVisibility('basic')">View Features<i class="features-arrow" id="basic-arrow"></i></p>
+                        </div>
+                        <div class="delimeter"></div>
+
+                        <div class="feature-container" id="basic-features-list" style="display: none;"></div>
+
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'basic')">Change to this Plan</div>
+                        </div>
+                    </div>
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For Salinity Exposure Data</div>
+                        <div class="standard-text">
+                            <p>Premium Account</p>
+                            <p id="basic-features" onclick="toggleVisibility('premium')">View Features<i class="features-arrow" id="basic-arrow"></i></p>
+                        </div>
+                        <div class="delimeter"></div>
+
+                        <div class="feature-container" id="premium-features-list" style="display: none;"></div>
+
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'premium')">Change to this Plan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="standard-text">Additional&nbsp;&nbsp;</div>
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="bold-description">Add-On:&nbsp;</div>
+                            <div class="normal-description">Corrosion Exposure</div>
+                        </div>
+                        <div class="delimeter"></div>
+                        <div class="button-location">
+                            <div class="add-on-button">Add to Premium</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For API Access</div>
+                        <div class="delimeter"></div>
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'custom')">Change to this Plan</div>
+                        </div>
+                    </div>
+                    <div class="option-container">
+                        <div class="flex-container">
+                            <div class="pricing-text">$x</div>
+                            <div class="standard-text">&nbsp;&nbsp;/month</div>
+                        </div>
+                        <div class="bold-description">For Custom Solutions</div>
+                        <div class="delimeter"></div>
+                        <div class="button-location">
+                            <div class="select-button" onclick="toggleSelect(this, 'custom')">Change to this Plan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="selectedTag" name="tags" value="">
+            </div>
+            <div id="payments" style="display: none;">
+                <!-- Financial & Payments content goes here -->
+            </div>
+            <div id="preferences" style="display: none;">
+                <h1>Preferences</h1>
+                <div class="stan-text">Choose from the parameters below to personalise your data delivery</div>
+
+                <div class="options-group">
+                    <div class="option-row">
+                        <span class="option-label">Units</span>
+                        <div class="option-buttons">
+                            <button class="option-btn selected">Parts per thousand (ppt)</button>
+                            <button class="option-btn">Parts per million (ppm)</button>
+                            <button class="option-btn">Grams (g)</button>
+                        </div>
+                    </div>
+                
+                    <div class="option-row">
+                        <span class="option-label">Export Format</span>
+                        <div class="option-buttons">
+                            <button class="option-btn selected">Shape file</button>
+                            <button class="option-btn">PDF</button>
+                            <button class="option-btn">CSV</button>
+                        </div>
+                    </div>
+                
+                    <div class="option-row">
+                        <span class="option-label">Forecasting Iteration</span>
+                        <div class="option-buttons">
+                            <button class="option-btn">Twice daily</button>
+                            <button class="option-btn selected">Daily</button>
+                            <button class="option-btn">Weekly</button>
+                        </div>
+                    </div>
+                
+                    <div class="option-row">
+                        <span class="option-label">Hindcasting Range</span>
+                        <div class="option-buttons">
+                            <button class="option-btn">None</button>
+                            <button class="option-btn">30 Years Prior</button>
+                            <button class="option-btn selected">90 Years Prior</button>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Save Changes">
+                <!-- Preferences content goes here -->
+            </div>
+            <div id="notifications" style="display: none;">
+                <!-- Notifications content goes here -->
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const subscriptionItem = document.querySelector('.sidebar-item[data-section="subscriptions"]');
+    
+        if (subscriptionItem) {
+            subscriptionItem.classList.add('active'); // Add the active class
+        }
+
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const section = this.getAttribute('data-section');
+                
+                // Hide all sections first
+                document.querySelectorAll('.right-container > div').forEach(div => {
+                    div.style.display = 'none';
+                });
+
+                // Show the selected section
+                document.querySelector(`#${section}`).style.display = 'block';
+
+                // Handle active state for h5 elements
+                document.querySelectorAll('.left-panel .center-container .bottom h5').forEach(h5 => {
+                    h5.classList.remove('active'); // Remove active class from all h5s
+                });
+
+                // Add active class to the clicked h5
+                this.classList.add('active');
+            });
+        });
+    });
+
+    
+
+    document.querySelectorAll('.option-buttons').forEach(group => {
+    group.addEventListener('click', function(e) {
+        if (e.target.classList.contains('option-btn')) {
+            // Remove the 'selected' class from all buttons in this group
+            group.querySelectorAll('.option-btn').forEach(button => {
+                button.classList.remove('selected');
+            });
+            
+            // Add the 'selected' class to the clicked button
+            e.target.classList.add('selected');
+        }
+    });
+});
+
+    function toggleSelect(element, tag) {
+        const buttons = document.querySelectorAll('.select-button');
+
+        buttons.forEach(button => {
+            if(button!=element){
+                button.classList.remove('active');
+                button.textContent = "Change to this Plan";
+            }
+        });
+
+        element.classList.toggle('active');
+
+        if(element.classList.contains('active')){
+        element.textContent="Current Plan";
+        document.getElementById('selectedTag').value = tag;
+        } else {
+            element.textContent="Change to this Plan";
+            document.getElementById('selectedTag').value = "";
+        }
+    }
+
+    function validateForm() {
+        const selectedTag = document.getElementById('selectedTag').value.trim();
+
+        if (!selectedTag) {
+            alert("Please select an account type.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<!--view features script-->
+<script>
+						
+    document.addEventListener('DOMContentLoaded', function(){
+    const premiumContainer = document.getElementById('premium-features-list');
+    const basicContainer = document.getElementById('basic-features-list');
+    fetch('static/json/features_list.json')
+    .then(response => response.json())
+    .then(features => {
+        const premiumFeatures = features.premiumFeatures;
+        const basicFeatures = features.basicFeatures;
+        premiumContainer.innerHTML = returnFeatures(premiumFeatures);
+        basicContainer.innerHTML = returnFeatures(basicFeatures);
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
+    });
+
+    function returnFeatures(features) {
+        const columns = 2;
+        let html = "";
+
+        for (let i = 0; i < features.length; i += columns) {
+            html += '<div class="row">';
+            for (let j = i; j < i + columns && j < features.length; j++) {
+                const feature = features[j];
+                const isNotCheckmark = feature.image.includes('register_notCheckmark.png');
+                const textClass = isNotCheckmark ? 'feature-text not-checkmark' : 'feature-text';
+                html += `
+                    <div class="feature-row">
+                        <img src="${feature.image}" referrerpolicy="no-referrer">
+                        <p class="${textClass}">${feature.feature}</p>
+                    </div>`;
+            }
+            html += '</div>';
+        }
+
+        return html;
+    }
+
+    // Function to toggle the visibility of the premium features list
+    function toggleVisibility(accountType) {
+        if(accountType==='premium'){
+            container = document.getElementById('premium-features-list');
+            toggleButton = document.getElementById('premium-features');
+            arrow = document.querySelector('#premium-arrow');
+        }
+        else{
+            container = document.getElementById('basic-features-list');
+            toggleButton = document.getElementById('basic-features');
+            arrow = document.querySelector('#basic-arrow');
+        }
+        
+        
+        // Toggle visibility
+        if (container.style.display === "none") {
+            container.style.display = "block";
+            toggleButton.firstChild.textContent = "Close Features"; 
+            arrow.classList.toggle('rotate180');
+        } else {
+            container.style.display = "none";
+            toggleButton.firstChild.textContent = "View Features";
+            arrow.classList.toggle('rotate180');
+        }
+    }
+    
+</script>
 
 {% endblock %}
