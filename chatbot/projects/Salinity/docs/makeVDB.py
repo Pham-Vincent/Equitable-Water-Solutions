@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
-# Directory containing the text files
-directory = 'unloaded'
+this_directory = os.path.dirname(os.path.abspath(__file__))
+directory = os.path.join(this_directory, 'unloaded')
 
 # List to store all documents
 all_documents = []
