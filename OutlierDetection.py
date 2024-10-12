@@ -92,7 +92,7 @@ def main():
   )
   mycursor = mydb.cursor()
   # Query To Get Desired Values from Database
-  query = "SELECT time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = 'CH2020S008(01)'"
+  query = "SELECT time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = 'PG1988S008(07)'"
 
   # Executing Query
   mycursor.execute(query)
@@ -149,6 +149,7 @@ def main():
       #Inserting Data into Anamoly DF 
       svm_anomalies.loc[i, 'Salinity'] = Salinity
       svm_anomalies.loc[i,'Time']=Time
+  print(list(svm_anomalies['Salinity']))
 
   #Converting the Time To Be Readable
   Salinity_df['Datetime'] = pd.to_datetime(Salinity_df['Time'], unit='s')

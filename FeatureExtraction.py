@@ -56,7 +56,7 @@ def AverageDailySalinity(DataFrame):
 
     CurrentDate = pd.to_datetime(CurrentDate, format='%Y-%m-%d')  
     
-    NewDates.loc[NewDates['Time'] == CurrentDate, 'Salinity'] = np.mean(Salinity_List)     
+    NewDates.loc[NewDates['Time'] == CurrentDate, 'Salinity'] = np.mean(Salinity_List) 
   
   return interpolation(NewDates)
 
