@@ -23,4 +23,32 @@ def add_pin_to_database(data):
   mycursor.execute(Query)
   conn.commit()  
 
-  return(None)
+  return "Success"
+def overridecheck(data):
+  #Establishes Connection With DB
+  conn = DatabaseConn()
+  #Query For SQL
+  mycursor = conn.cursor()
+  #Checks if any location is in the Location
+  Query = "SELECT PinnedLocation" + str(data['pinNumber']) + " FROM Water_Data.Location_Pinned WHERE id = \"" + str(data['userid']) + "\""
+  print(Query)
+  mycursor.execute(Query)
+  result = mycursor.fetchone()
+  print(result)
+  if(result[0] != None):
+    return jsonify({'Current':result[0]})
+  else:
+    Query = "SELECT * FROM Water_Data.Location_Pinned WHERE id = \"" + str(data['userid']) + "\""
+    mycursor.execute(Query)
+    result = mycursor.fetchall()
+    
+    for row in result[0]:
+      print(row)  # This will print the tuple
+  
+      if data['hydrocode'] == row:
+          print('Duplicate found')
+    return jsonify({'result':'true'})
+
+
+  
+

@@ -17,7 +17,7 @@ import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
 import { legendFunc, selectAll } from './legend.js';
-import { pinLocation } from './MarkerPinning.js';
+import { checkpinLocation } from './MarkerPinning.js';
 export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
@@ -260,9 +260,9 @@ $.ajax({
               
               <p>Pin Location </p>
               <div id="button-wrapper">
-                  <button onclick="pinLocation('${marker.title}',1)">1</button>
-                  <button onclick="pinLocation('${marker.title}',2)">2</button>
-                  <button onclick="pinLocation('${marker.title}',3)">3</button>
+                  <button onclick="checkpinLocation('${marker.title}',1)">1</button>
+                  <button onclick="checkpinLocation('${marker.title}',2)">2</button>
+                  <button onclick="checkpinLocation('${marker.title}',3)">3</button>
               </div>
 
               </div> 

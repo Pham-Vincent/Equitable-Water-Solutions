@@ -192,6 +192,10 @@ def sessionData():
 def pinLocation():
   return(add_pin_to_database(request.get_json()))
 
+@app.route('/override',methods=['POST'])
+def override():
+  return overridecheck(request.get_json())
+
   
 if __name__ == '__main__':
   app.run(debug=True)
