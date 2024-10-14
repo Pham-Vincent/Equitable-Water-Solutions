@@ -55,7 +55,9 @@ Highcharts.chart('neural-model', {
     chart: {
         type: 'line',
         parallelCoordinates: true,
-        inverted: false
+        inverted: false,
+        height: 500, // Set the height to a larger value
+        width: 750
     },
     title: false,
     accessibility: {

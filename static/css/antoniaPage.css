@@ -21,8 +21,8 @@
     margin: 3%;
     height: auto;
     
-    
 }
+
 
 .input-container{
     display: flex;
@@ -52,7 +52,7 @@
     align-items: center;
     margin: 0;
     padding: 0;
-    width: 40%;
+    width: 45%;
 }
 
 .neural-model-container > .neural-model{
@@ -65,6 +65,7 @@
     flex-direction: column;
     width: 30%;
     margin-left: 0;
+    margin-right: 0;
     gap: .2em;
 }
 
@@ -74,23 +75,23 @@
     font-weight: 600;
 }
 
+
 .location-label {
     text-align: center;
     font-size: 1.2em;
     margin-top: -1em; 
-    font: italic normal normal 1rem Roboto;
+    font: normal normal normal 1rem Roboto;
     color: #0A2B57;
     font-weight: 600;
 }
 
-/*
-.output-container p{
-    margin-top: 10rem;
-    font: italic normal normal 1rem Roboto;
+
+.output-container h1{
+    font: normal normal normal 2rem Roboto;
     color: #0A2B57;
     font-weight: 600;
 }
-*/
+
 
 
 /* change background position to change height of water */
