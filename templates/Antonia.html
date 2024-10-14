@@ -14,10 +14,84 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script type="module" src="{{url_for('static',filename='js/Antonia.js')}}"></script>
+<script src="https://code.highcharts.com/modules/parallel-coordinates.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script type="module" src="{{url_for('static',filename='js/neural-network.js')}}"></script>
 
 <div class="page-container">
-    <div class="content-container">
+    <div class="content-box">
+        <div class="input-container">
+            
+            <span>
+                <div class="slidecontainer">
+                    <h1>Resevoir Level</h1>
+                    <div class="grey-box"></div>
+                    <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
+                    <div class="ticks">
+                        
+                        <div class="tick"><span class="tick-label">0</span></div>
+                        <div class="tick"><span class="tick-label">10</span></div>
+                        <div class="tick"><span class="tick-label">20</span></div>
+                        <div class="tick"><span class="tick-label">30</span></div>
+                        <div class="tick"><span class="tick-label">40</span></div>
+                        <div class="tick"><span class="tick-label">50</span></div>
+                        <div class="tick"><span class="tick-label">60</span></div>
+                        <div class="tick"><span class="tick-label">70</span></div>
+                        <div class="tick"><span class="tick-label">80</span></div>
+                        <div class="tick"><span class="tick-label">90</span></div>
+                        <div class="tick"><span class="tick-label">100</span></div>
+                    </div>
+                </div>
+            </span>
+            
+            <span>
+                <div class="slidecontainer">
+                    <h1>Time Index</h1>
+                    <div class="grey-box"></div>
+                    <input type="range" min="1" max="355" value="356" class="slider" id="myRange">
+                    <div class="ticks">
+                        
+                        <div class="tick"><span class="tick-label">1</span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label"></span></div>
+                        <div class="tick"><span class="tick-label">356</span></div>
+                    </div>
+                </div>
+            </span>
+            
+        </div>
+        <div class="neural-model-container">
+            <h1>Water Release Decision Model</h1>
+            <div id="neural-model"></div>
+        </div>
+        <div class="output-container">
+            <div id="baltimore">
+                <h1>70 (ppm)</h1> <!-- output value to be updated -->
+            </div>
+            <p class="location-label">Baltimore release</p>
+            <div id="chester">
+                <h1>45 (ppm)</h1>
+            </div>
+            <p class="location-label">Chester release</p>
+            <div id="powerplant">
+                <h1>89 (ppm)</h1>
+            </div>
+            <p class="location-label">Power Plant release</p>
+            <div id="downstream">
+                <h1>22 (ppm)</h1>
+            </div>
+            <p class="location-label">Downstream release</p>
+        </div>
+    </div>
+    <!--
+        <div class="content-container">
         <div class="output-container">
             <div id="gauge"></div>
         </div>
@@ -62,7 +136,7 @@
                     <div class="grey-box"></div>
                     <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
                     <div class="ticks">
-                        <!-- Create tick marks at increments of 10 -->
+                        
                         <div class="tick"><span class="tick-label">0</span></div>
                         <div class="tick"><span class="tick-label">10</span></div>
                         <div class="tick"><span class="tick-label">20</span></div>
@@ -80,6 +154,8 @@
             </div>
         </div>
     </div>
+    -->
+    
 </div>
 
 {% endblock %}

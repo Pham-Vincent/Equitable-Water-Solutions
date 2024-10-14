@@ -8,6 +8,126 @@
     margin-top: -4%; /* set page container under navbar */
 }
 
+.content-box{
+    width: 85%;
+    height: 70%;
+    margin: 4% auto 0 auto;
+    background-color: white;
+    border-radius: 1em;
+    display: flex;
+}
+
+.input-container, .output-container, .neural-model-container{
+    margin: 3%;
+    height: auto;
+    
+    
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-right: 0;
+    width: 30%;
+}
+
+.slidecontainer h1{
+    font: italic normal normal 1.5rem Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+}
+
+.input-container > span{
+    width: auto;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.neural-model-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 40%;
+}
+
+.neural-model-container > .neural-model{
+    height: 100%;
+}
+
+.output-container{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 0;
+    gap: .2em;
+}
+
+.neural-model-container h1{
+    font: italic normal normal 2rem Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+}
+
+.location-label {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: -1em; 
+    font: italic normal normal 1rem Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+}
+
+/*
+.output-container p{
+    margin-top: 10rem;
+    font: italic normal normal 1rem Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+}
+*/
+
+
+/* change background position to change height of water */
+#baltimore, #chester, #downstream, #powerplant{
+    width: auto;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3% 30% 3% 30%;
+    border: 3px solid black;  
+    padding: 10px;  
+    box-sizing: border-box;
+    background-image: url('../images/wave.png');
+    background-size: 200px 100px;  
+    background-repeat: repeat-x;
+    animation: flow 10s linear infinite;
+    filter: brightness(1.5);
+}
+
+/* background-postion: x y; change y to change height (best range for image .2em-6em) */
+@keyframes flow{
+    0%{
+        background-position: 0px 3em;
+    }
+    100%{
+        background-position: 1000px 3em;
+    }
+}
+
+
+
+
+
+
+
+/*
 .content-container{
     width: 85%;
     height: 70%;
@@ -59,7 +179,7 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.289);
 }
 
-/* Gauge Styling */
+/* Gauge Styling 
 #gauge{
     height: 100%;
     width: 70%;
@@ -78,46 +198,46 @@
 .bottom-input h1{
     margin: 6% 0 6% 6%;
 }
-
+*/
 .slidecontainer{
     width: 88%;
     margin: 0 auto;
 }
 
-/* The slider itself */
+ 
 .slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
+    -webkit-appearance: none;  
     appearance: none;
-    width: 100%; /* Full-width */
-    height: 3px; /* Specified height */
-    background: #191919; /* Grey background */
-    outline: none; /* Remove outline */
-    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    width: 100%; 
+    height: 3px; 
+    background: #191919; 
+    outline: none; 
+    opacity: 0.7; 
+    -webkit-transition: .2s; 
     transition: opacity .2s;
   }
   
-  /* Mouse-over effects */
+  
   .slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
+    opacity: 1; 
   }
   
-  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+
   .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
+    -webkit-appearance: none; 
     appearance: none;
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #04AA6D; /* Green background */
-    cursor: pointer; /* Cursor on hover */
+    width: 25px; 
+    height: 25px; 
+    background: #04AA6D; 
+    cursor: pointer; 
     border-radius: 100%;
   }
   
   .slider::-moz-range-thumb {
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #04AA6D; /* Green background */
-    cursor: pointer; /* Cursor on hover */
+    width: 25px; 
+    height: 25px; 
+    background: #04AA6D; 
+    cursor: pointer; 
   }
 
   .slidecontainer .grey-box{
@@ -151,6 +271,8 @@
     user-select: none;
   }
 
+  /*
+
   .weather-options{
     display: flex;
     flex-direction: column;
@@ -164,17 +286,17 @@
   }
 
   .form-container {
-    max-width: 8rem; /* Same as Tailwind's max-w-[8rem] */
+    max-width: 8rem; 
     width: 100%;
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 8px; 
     margin-left: 6%;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 0.5rem; /* Spacing below label */
-    font-size: 0.875rem; /* Small text */
-    color: #ffffff; /* White text color */
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem; 
+    color: #ffffff;
 }
 
 .relative {
@@ -184,29 +306,30 @@
 .icon-container {
     position: absolute;
     top: 50%;
-    right: 10px; /* Adjust for spacing */
-    transform: translateY(-50%); /* Center vertically */
-    pointer-events: none; /* Prevent interaction with icon */
+    right: 10px; 
+    transform: translateY(-50%); 
+    pointer-events: none; 
 }
 
 
 
 .time-input {
-    background-color: #f9f9f9; /* Light background for input */
-    border: 1px solid #ccc; /* Light gray border */
-    color: #333; /* Dark text */
-    padding: 0.5rem; /* Padding inside the input */
-    border-radius: 4px; /* Rounded corners for input */
-    width: 100%; /* Full width */
-    outline: none; /* Remove outline */
-    transition: border-color 0.2s ease; /* Smooth border color transition */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc; 
+    color: #333; 
+    padding: 0.5rem; 
+    border-radius: 4px; 
+    width: 100%; 
+    outline: none; 
+    transition: border-color 0.2s ease; 
 }
 
 .time-input:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }
 
 input[type='radio'] { 
     transform: scale(1.3); 
 }
+*/
