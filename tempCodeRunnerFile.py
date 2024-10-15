@@ -1,1 +1,0 @@
-add_pin_to_database(request.get_json()

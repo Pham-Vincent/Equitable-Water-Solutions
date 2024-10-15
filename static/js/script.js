@@ -273,9 +273,6 @@ $.ajax({
         disableAutoPan: true,
       });
 
-      //<div id="pin-location-button" onclick="pinLocation('${marker.title}')"">Pin Location</div>
-      // PinLocation(marker)
-
       //Associate the infowindow with the marker
       marker.infowindow = infowindow2;
       

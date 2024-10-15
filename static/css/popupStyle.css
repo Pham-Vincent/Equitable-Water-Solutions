@@ -1,5 +1,5 @@
 /* popup window styling*/
-#popup {
+#popup{
     display: none;
     position: absolute;
     top: 50%;
@@ -147,3 +147,19 @@
     margin-top: -10px; /* Adds some space above the buttons */
   }
   
+ 
+  #errorpopup{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 0px;
+    z-index: 1000;
+    height: 200px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+  }

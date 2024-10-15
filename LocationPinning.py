@@ -36,17 +36,17 @@ def overridecheck(data):
   result = mycursor.fetchone()
   print(result)
   if(result[0] != None):
-    return jsonify({'Current':result[0]})
+    #Returns What error it is for and the Hydrocde that needs to be overridden
+    return jsonify({'error':'override','override':result[0],})
   else:
     Query = "SELECT * FROM Water_Data.Location_Pinned WHERE id = \"" + str(data['userid']) + "\""
     mycursor.execute(Query)
     result = mycursor.fetchall()
     
-    for row in result[0]:
-      print(row)  # This will print the tuple
-  
+    for index,row in enumerate(result[0]):
       if data['hydrocode'] == row:
           print('Duplicate found')
+          return({'error':'dupe','dupeLocation': index})
     return jsonify({'result':'true'})
 
 

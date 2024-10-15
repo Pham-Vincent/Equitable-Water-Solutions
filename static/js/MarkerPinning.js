@@ -8,6 +8,7 @@ Description: This file contains methods for handling marker Pinning and exportin
 Date: 9/7/24
 */
 
+let customerrorPopup;
 
 export function checkpinLocation(title,number){
   
@@ -33,9 +34,17 @@ export function checkpinLocation(title,number){
           if (data.result === 'true') {
             pinLocation(title, number, userid);
           }
-          else {
-             alert('Cant Pin Location Because need to Override ' + data.Current)
+          else if (data.error==='override'){
+             //alert('Cant Pin Location Because need to Override ' + data.override)
+             openerrorPopup(data.error,data.override,title,number,userid)
+
           }
+          else if(data.error==='dupe'){
+            console.log(data)
+            alert('Cant Pin Location Because ' + title +' is already pinned to Location '+ data.dupeLocation)
+          }
+          
+
         })
         .catch(error => {
           console.error('Error:', error);
@@ -56,6 +65,37 @@ function pinLocation(title,number,userid){
       },
       body:JSON.stringify({hydrocode:title, userid:userid,pinNumber:number})
     })
+    closeerrorPopup()
 }
 
+
+ function closeerrorPopup(){
+  customerrorPopup = document.getElementById('errorpopup');
+  customerrorPopup.style.display = 'none';
+
+  document.getElementById('errorpopup').style.visibility = 'hidden'
+  document.getElementById('erroroverlay').style.display = 'none';
+
+ }
+export function openerrorPopup(error,data1,title,number,userid)
+{
+  document.getElementById('errorpopup').style.visibility = 'visible';
+  customerrorPopup = document.getElementById('errorpopup');
+  customerrorPopup.innerHTML = `
+  <div>
+  <p>${error === 'override' ? "Override: Are you sure you want to override :"+data1 : "Are you sure you want to Add A Duplicate"}</p>
+  <div>
+	<button onclick="pinLocation('${title}','${number}','${userid}')"">Yes</button>
+  <button onclick="closeerrorPopup()">No</button>
+  </div>
+
+    </div>
+`;
+    customerrorPopup.style.display = 'block';
+    document.getElementById('erroroverlay').style.display = 'block'; 
+
+}
+window.closeerrorPopup= closeerrorPopup
+window.pinLocation = pinLocation
 window.checkpinLocation = checkpinLocation;
+window.openerrorPopup = openerrorPopup
