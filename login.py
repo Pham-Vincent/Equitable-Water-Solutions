@@ -122,3 +122,4 @@ def checkLogin(html):
         cursor.close()
         conn.close()
         return render_template(html, account=account)
+

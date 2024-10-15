@@ -19,10 +19,17 @@ from Graph import *
 from login import *
 from About import *
 from FeatureExtraction import *
+from LocationPinning import * 
 from dotenv import load_dotenv
 import os
 import pandas as pd
 from flask_cors import CORS
+
+
+# AI Imports
+from chatbot.scripts.chatbot import Chatbot
+from chatbot.scripts.routes import setup_routes
+
 #Path To Env File
 dotenv_path='static/env/.env'
 #Opens Env File
@@ -37,12 +44,19 @@ CORS(app)
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
+openai_api_key = os.getenv('OPENAI_API_KEY')
+chatbot = Chatbot(
+  api_key=openai_api_key,
+  project_name="Salinity",
+)
+
+setup_routes(app, chatbot)
+
 #Purpose is to Return the Map API Key without revealing it to public
 @app.route('/ApiKey')
 def APIKEY():
     map_key = os.getenv('MAP_KEY')
-    botURL = os.getenv('CHATBOT_URL')
-    return jsonify({'mapKey': map_key, 'bot_url': botURL})
+    return jsonify({'mapKey': map_key})
 
 # Route to create a heatmap for salinity at multiple depths
 @app.route('/create_MultiDepth_graph',methods=['GET','POST'])
@@ -180,7 +194,16 @@ def research():
 @app.route('/antonia')
 def antonia():
    return render_template('Antonia.html')
-  
+
+@app.route('/session-data')
+def sessionData():
+  return(retrieve_sessionid())
+
+#Utilized to Pin location into the Database
+@app.route('/pin-location',methods=['POST'])
+def pinLocation():
+  return(add_pin_to_database( request.get_json()))
+
 if __name__ == '__main__':
   app.run(debug=True)
 

@@ -4,7 +4,7 @@ config.js
 !persons.json
 !Chesapeake_Bay_Shoreline_Low_Resolution.json
 *.csv
-*.xlsx
+
 venv
 *.pyc
 dist
@@ -16,4 +16,19 @@ test-app
 !ResearchPapers.json
 references
 !features_list.json
-chatbot
+
+# AI ignores
+loaded/
+unloaded/
+*.txt.faiss
+*.txt.pkl
+*.pkl
+MergeTest.faiss
+statData/
+loaddocs.py
+*.xlsx
+markdown_buffer.py
+mergeDatabase.py
+builddata.py
+helpers/
+

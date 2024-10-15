@@ -68,6 +68,7 @@
     background-color: lightgray;
     color: black;
 }
+
 /*changes view more colors on hover*/
 #view-more-button:hover{
     background-color: rgb(70, 86, 126);
@@ -112,4 +113,14 @@
     outline: none;
     border: none;
     background: transparent;
+}
+
+#pin-location-button{
+    padding: 5px 15px; 
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    background-color: lightgray;
+    color: black;
 }
