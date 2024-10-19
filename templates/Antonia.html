@@ -72,20 +72,24 @@
             <div id="neural-model"></div>
         </div>
         <div class="output-container">
-            <div id="baltimore">
+            <div class="wave-container" id="balt">
+                <div id="baltimore"></div>
                 <h1>70 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Baltimore release</p>
-            <div id="chester">
-                <h1>45 (ppm)</h1>
+            <div class="wave-container" id="chest">
+                <div id="chester"></div>
+                <h1>35 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Chester release</p>
-            <div id="powerplant">
-                <h1>89 (ppm)</h1>
+            <div class="wave-container" id="power">
+                <div id="powerplant"></div>
+                <h1>89 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Power Plant release</p>
-            <div id="downstream">
-                <h1>22 (ppm)</h1>
+            <div class="wave-container" id="down">
+                <div id="downstream"></div>
+                <h1>32 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Downstream release</p>
         </div>
@@ -96,10 +100,10 @@
         const reservoirSlider = document.getElementById('reservoirSlider');
         const timeIndexSlider = document.getElementById('timeIndexSlider');
 
-        const baltimoreOutput = document.querySelector('#baltimore h1');
-        const chesterOutput = document.querySelector('#chester h1');
-        const powerPlantOutput = document.querySelector('#powerplant h1');
-        const downstreamOutput = document.querySelector('#downstream h1');
+        const baltimoreOutput = document.querySelector('#balt h1');
+        const chesterOutput = document.querySelector('#chest h1');
+        const powerPlantOutput = document.querySelector('#power h1');
+        const downstreamOutput = document.querySelector('#down h1');
 
         // Function to calculate ppm based on slider values
         function calculatePPM() {
@@ -117,8 +121,29 @@
             chesterOutput.textContent = `${Math.round(chesterPPM)} (ppm)`;
             powerPlantOutput.textContent = `${Math.round(powerPlantPPM)} (ppm)`;
             downstreamOutput.textContent = `${Math.round(downstreamPPM)} (ppm)`;
+
+            // Adjust heights based on ppm values
+            adjustWaveHeight('baltimore', baltimorePPM);
+            adjustWaveHeight('chester', chesterPPM);
+            adjustWaveHeight('powerplant', powerPlantPPM);
+            adjustWaveHeight('downstream', downstreamPPM);
         }
 
+        // Function to adjust the height of wave containers based on PPM
+        function adjustWaveHeight(id, ppm) {
+            const waveElement = document.querySelector(`#${id}`);
+    
+            // Calculate height percentage based on ppm
+            const maxPPM = 120;
+            const minHeight = 100;  // 100%
+            const maxHeight = 275;   // 275%
+
+            const heightPercentage = (ppm / maxPPM) * (maxHeight - minHeight) + minHeight;
+
+            // Set the height of the wave element
+            waveElement.style.height = `${heightPercentage}%`;
+        }
+        
         // Add event listeners to both sliders
         reservoirSlider.addEventListener('input', calculatePPM);
         timeIndexSlider.addEventListener('input', calculatePPM);
