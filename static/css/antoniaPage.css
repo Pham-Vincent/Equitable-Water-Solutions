@@ -20,19 +20,18 @@
 .input-container, .output-container, .neural-model-container{
     margin: 3%;
     height: auto;
-    
 }
 
 
 .input-container{
     display: flex;
     flex-direction: column;
-    margin-right: 0;
     width: 30%;
+    z-index: 3;
 }
 
 .slidecontainer h1{
-    font: italic normal normal 1.5rem Roboto;
+    font: italic normal normal 1.2rem Roboto;
     color: #0A2B57;
     font-weight: 600;
 }
@@ -50,13 +49,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 0;
-    width: 45%;
+    transform: translateX(1em);
+    width: 30%;
 }
 
 .neural-model-container > .neural-model{
     height: 100%;
+    width: 100%;
 }
 
 .output-container{
@@ -70,10 +69,12 @@
     gap: .2em;
     justify-content: center;     
     align-items: center; 
+    
+    gap: -2%;
 }
 
 .neural-model-container h1{
-    font: italic normal normal 2rem Roboto;
+    font: italic normal normal 1.5rem Roboto;
     color: #0A2B57;
     font-weight: 600;
 }
@@ -82,10 +83,11 @@
 .location-label {
     text-align: center;
     font-size: 1.2em;
-    margin-top: -1em; 
+    margin-top: -.5em; 
     font: normal normal normal 1rem Roboto;
     color: #0A2B57;
     font-weight: 600;
+    margin-bottom: 0;
 }
 
 
