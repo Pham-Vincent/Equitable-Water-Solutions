@@ -182,7 +182,7 @@ def research():
 @app.route('/antonia')
 def antonia():
    return render_template('Antonia.html')
-
+#returns the  information of the logged in user
 @app.route('/session-data')
 def sessionData():
   return(retrieve_sessionid())
@@ -192,13 +192,14 @@ def sessionData():
 def pinLocation():
   return(add_pin_to_database(request.get_json()))
 
+# Checks for override and duplication when pinning a marker
 @app.route('/override',methods=['POST'])
 def override():
   return overridecheck(request.get_json())
 
+
 @app.route('/locations-pinned',methods=['POST'])
 def pinnedLocations():
-  print(request.get_json())
   return returnPinned(request.get_json())
 
   

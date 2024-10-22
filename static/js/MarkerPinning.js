@@ -10,17 +10,20 @@ Date: 9/7/24
 
 let customerrorPopup;
 
+
+/* Check whether the location can be pinned or will result in an error */
 export function checkpinLocation(title,number){
   
-  
+  /*Fetches user information*/
   fetch('/session-data')
   .then(response => response.json())
   .then(data => {
+    /*Checks if user is logged in*/
     if(data.id == null){
       alert('Need To Login')
     }else{
       var userid = data.id
-
+      /* Checks whether there is a duplicate ID or if the location is already pinned at the specified number */
       fetch('/override', {
         method: 'POST',
         headers: {
@@ -30,15 +33,16 @@ export function checkpinLocation(title,number){
       })
         .then(response1 => response1.json())
         .then(data => {
-          
+          /* The location is currently empty and can be pinned */
           if (data.result === 'true') {
             pinLocation(title, number, userid);
           }
+          /*The location is currently not empty and can't be pinned */
           else if (data.error==='override'){
-             //alert('Cant Pin Location Because need to Override ' + data.override)
              openerrorPopup(data.error,data.override,title,number,userid)
 
           }
+          /* The location has already been pinned at a different number */
           else if(data.error==='dupe'){
             openerrorPopup(data.error,data.dupeLocation,title,number,userid)
           }
@@ -54,6 +58,7 @@ export function checkpinLocation(title,number){
   }
 })}
 
+/* This Function updates the database with new Pinned Location */
 function pinLocation(title,number,userid){
   fetch('/pin-location',
     {
@@ -66,8 +71,8 @@ function pinLocation(title,number,userid){
     closeerrorPopup()
 }
 
-
- function closeerrorPopup(){
+/* This Closes the Overlay and errorPopup */
+ export function closeerrorPopup(){
   customerrorPopup = document.getElementById('errorpopup');
   customerrorPopup.style.display = 'none';
 
@@ -75,13 +80,15 @@ function pinLocation(title,number,userid){
   document.getElementById('erroroverlay').style.display = 'none';
 
  }
+ /* This Opens the Overlay and errorPopup */
 export function openerrorPopup(error,data1,title,number,userid)
 {
-  console.log(data1)
   document.getElementById('errorpopup').style.visibility = 'visible';
 const customerrorPopup = document.getElementById('errorpopup');
 
+// This generates the custom error popup with a message and response buttons
 customerrorPopup.innerHTML = `
+ <div id="close-error-button" onclick="closeerrorPopup()"><img src="static/images/error-close.svg" alt="Close"></div>
   <div class = "error-content">
     <p>${error === 'override' ? 
     "Override: Are you sure you want to override: " + data1[number] : 

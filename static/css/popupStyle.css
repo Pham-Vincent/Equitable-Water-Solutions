@@ -147,7 +147,7 @@
     margin-top: -10px; /* Adds some space above the buttons */
   }
   
- 
+   /*  This is all for Pinning Locations*/
   #errorpopup{
     display: none;
     position: absolute;
@@ -190,7 +190,8 @@
     position: relative;
     border:none;
     height: 5em;
-    margin-top:-5%
+    margin-top:-5%;
+    cursor: pointer;
   }
   .error-content{
     display: flex;
@@ -199,6 +200,7 @@
 
 
   }
+
 
   .yes-button{
    background-color: #fc7169;
@@ -212,3 +214,11 @@
    text-transform: uppercase;
    color: #fff;
   }
+  #close-error-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    color:#0143c8;
+}
+  

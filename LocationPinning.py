@@ -10,6 +10,7 @@ def retrieve_sessionid():
   else:
     return {'id': None}
 
+# Adds the pinned location to the database
 def add_pin_to_database(data):
   #Establishes Connection With DB
   conn = DatabaseConn()
@@ -25,7 +26,7 @@ def add_pin_to_database(data):
 
   return "Success"
 
-
+# Checks for override and duplication when pinning a marker
 def overridecheck(data):
   #Establishes Connection With DB
   conn = DatabaseConn()
@@ -55,6 +56,7 @@ def overridecheck(data):
     #Nothing in that Pinnedlocation so can pin
     return jsonify({'result':'true'})
 
+# Returns all the locations currently pinned by the user
 def returnPinned(data):
   #Establishes Connection With DB
   conn = DatabaseConn()
