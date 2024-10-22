@@ -40,8 +40,7 @@ export function checkpinLocation(title,number){
 
           }
           else if(data.error==='dupe'){
-            console.log(data)
-            alert('Cant Pin Location Because ' + title +' is already pinned to Location '+ data.dupeLocation)
+            openerrorPopup(data.error,data.dupeLocation,title,number,userid)
           }
           
 
@@ -56,7 +55,6 @@ export function checkpinLocation(title,number){
 })}
 
 function pinLocation(title,number,userid){
-  console.log(userid)
   fetch('/pin-location',
     {
       method:'POST',
@@ -79,20 +77,26 @@ function pinLocation(title,number,userid){
  }
 export function openerrorPopup(error,data1,title,number,userid)
 {
+  console.log(data1)
   document.getElementById('errorpopup').style.visibility = 'visible';
-  customerrorPopup = document.getElementById('errorpopup');
-  customerrorPopup.innerHTML = `
-  <div>
-  <p>${error === 'override' ? "Override: Are you sure you want to override :"+data1 : "Are you sure you want to Add A Duplicate"}</p>
-  <div>
-	<button onclick="pinLocation('${title}','${number}','${userid}')"">Yes</button>
-  <button onclick="closeerrorPopup()">No</button>
-  </div>
+const customerrorPopup = document.getElementById('errorpopup');
 
+customerrorPopup.innerHTML = `
+  <div class = "error-content">
+    <p>${error === 'override' ? 
+    "Override: Are you sure you want to override: " + data1[number] : 
+    "Add duplicate (" + title + ")?, it is already pinned to " + data1 + "?"}
+</p>
+    <div id="error-response-container">
+      <button class="error-response-button yes-button" onclick="pinLocation('${title}', '${number}', '${userid}')">Yes</button>
+      <button class="error-response-button no-button" onclick="closeerrorPopup()">No</button>
     </div>
+  </div>
 `;
-    customerrorPopup.style.display = 'block';
-    document.getElementById('erroroverlay').style.display = 'block'; 
+
+customerrorPopup.style.display = 'block';
+document.getElementById('erroroverlay').style.display = 'block';
+
 
 }
 window.closeerrorPopup= closeerrorPopup

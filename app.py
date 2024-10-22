@@ -196,6 +196,11 @@ def pinLocation():
 def override():
   return overridecheck(request.get_json())
 
+@app.route('/locations-pinned',methods=['POST'])
+def pinnedLocations():
+  print(request.get_json())
+  return returnPinned(request.get_json())
+
   
 if __name__ == '__main__':
   app.run(debug=True)
