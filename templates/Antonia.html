@@ -5,8 +5,6 @@
 {% block content %}
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/antoniaPage.css') }}">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/navigator.js"> </script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
@@ -72,20 +70,24 @@
             <div id="neural-model"></div>
         </div>
         <div class="output-container">
-            <div id="baltimore">
+            <div class="wave-container" id="balt">
+                <div id="baltimore"></div>
                 <h1>70 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Baltimore release</p>
-            <div id="chester">
-                <h1>45 (ppm)</h1>
+            <div class="wave-container" id="chest">
+                <div id="chester"></div>
+                <h1>35 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Chester release</p>
-            <div id="powerplant">
-                <h1>89 (ppm)</h1>
+            <div class="wave-container" id="power">
+                <div id="powerplant"></div>
+                <h1>89 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Power Plant release</p>
-            <div id="downstream">
-                <h1>22 (ppm)</h1>
+            <div class="wave-container" id="down">
+                <div id="downstream"></div>
+                <h1>32 (ppm)</h1> <!-- output value to be updated -->
             </div>
             <p class="location-label">Downstream release</p>
         </div>
@@ -96,10 +98,10 @@
         const reservoirSlider = document.getElementById('reservoirSlider');
         const timeIndexSlider = document.getElementById('timeIndexSlider');
 
-        const baltimoreOutput = document.querySelector('#baltimore h1');
-        const chesterOutput = document.querySelector('#chester h1');
-        const powerPlantOutput = document.querySelector('#powerplant h1');
-        const downstreamOutput = document.querySelector('#downstream h1');
+        const baltimoreOutput = document.querySelector('#balt h1');
+        const chesterOutput = document.querySelector('#chest h1');
+        const powerPlantOutput = document.querySelector('#power h1');
+        const downstreamOutput = document.querySelector('#down h1');
 
         // Function to calculate ppm based on slider values
         function calculatePPM() {
@@ -117,8 +119,29 @@
             chesterOutput.textContent = `${Math.round(chesterPPM)} (ppm)`;
             powerPlantOutput.textContent = `${Math.round(powerPlantPPM)} (ppm)`;
             downstreamOutput.textContent = `${Math.round(downstreamPPM)} (ppm)`;
+
+            // Adjust heights based on ppm values
+            adjustWaveHeight('baltimore', baltimorePPM);
+            adjustWaveHeight('chester', chesterPPM);
+            adjustWaveHeight('powerplant', powerPlantPPM);
+            adjustWaveHeight('downstream', downstreamPPM);
         }
 
+        // Function to adjust the height of wave containers based on PPM
+        function adjustWaveHeight(id, ppm) {
+            const waveElement = document.querySelector(`#${id}`);
+    
+            // Calculate height percentage based on ppm
+            const maxPPM = 120;
+            const minHeight = 100;  // 100%
+            const maxHeight = 275;   // 275%
+
+            const heightPercentage = (ppm / maxPPM) * (maxHeight - minHeight) + minHeight;
+
+            // Set the height of the wave element
+            waveElement.style.height = `${heightPercentage}%`;
+        }
+        
         // Add event listeners to both sliders
         reservoirSlider.addEventListener('input', calculatePPM);
         timeIndexSlider.addEventListener('input', calculatePPM);
@@ -126,71 +149,6 @@
         // Initial calculation to set ppm values based on default slider positions
         calculatePPM();
     </script>
-    <!--
-        <div class="content-container">
-        <div class="output-container">
-            <div id="gauge"></div>
-        </div>
-        <div class="input-container">
-            <div class="top-input">
-                <div class="top-left-input">
-                    <h1>Weather Type</h1>
-                    <div class="weather-options">
-                        <span>
-                            <input type="radio" id="Sunny" name="weather" value="Sunny"><label for="Sunny" checked>Sunny</label>
-                        </span>
-                        <span>
-                            <input type="radio" id="Rain" name="weather" value="Rain"><label for="Rain">Rain</label>
-                        </span>
-                        <span>
-                            <input type="radio" id="Windy" name="weather" value="Windy"><label for="Windy">Windy</label>
-                        </span>
-                        <span>
-                            <input type="radio" id="Snow" name="weather" value="Snow"><label for="Snow">Snow</label>
-                        </span>
-                    </div>
-                </div>
-                <div class="top-right-input">
-                    <h1>Time Index</h1>
-                    <form class="form-container">
-                        <label for="time" class="form-label">Select time:</label>
-                        <div class="relative">
-                            <div class="icon-container">
-                                <svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
-                                </svg>
-                            </div>
-                            <input type="time" id="time" class="time-input" min="09:00" max="18:00" value="00:00" required />
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="bottom-input">
-                <h1>Resevoir Level</h1>
-                <div class="slidecontainer">
-                    
-                    <div class="grey-box"></div>
-                    <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
-                    <div class="ticks">
-                        
-                        <div class="tick"><span class="tick-label">0</span></div>
-                        <div class="tick"><span class="tick-label">10</span></div>
-                        <div class="tick"><span class="tick-label">20</span></div>
-                        <div class="tick"><span class="tick-label">30</span></div>
-                        <div class="tick"><span class="tick-label">40</span></div>
-                        <div class="tick"><span class="tick-label">50</span></div>
-                        <div class="tick"><span class="tick-label">60</span></div>
-                        <div class="tick"><span class="tick-label">70</span></div>
-                        <div class="tick"><span class="tick-label">80</span></div>
-                        <div class="tick"><span class="tick-label">90</span></div>
-                        <div class="tick"><span class="tick-label">100</span></div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
     
 </div>
 
