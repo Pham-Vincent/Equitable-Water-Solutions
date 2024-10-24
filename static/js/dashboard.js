@@ -608,3 +608,41 @@ $(function() {
     
     
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const headings = document.querySelectorAll('.bottom h5');
+
+fetch('/session-data')
+  .then(response => response.json())
+  .then(data => {
+    if(data.id == null){
+    headings[0].textContent = 'Add Location 1';
+    headings[1].textContent = 'Add Location 2';
+    headings[2].textContent = 'Add Location 3';
+    }
+    var userid = data.id
+    fetch('/locations-pinned',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userid: userid}),
+    })
+    .then(response1 => response1.json())
+    .then(data => {
+        if(data[0][0] != null){
+        headings[0].textContent = data[0][0];
+        }
+        if(data[0][1] != null){
+            headings[1].textContent = data[0][1];
+            }
+        if(data[0][2] != null){
+            headings[2].textContent = data[0][2];
+            }
+        })
+
+})
+
+   
+});
