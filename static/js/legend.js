@@ -17,19 +17,12 @@ var states = ['Maryland', 'Virginia'];
 var tags = ['Agriculture', 'Aquaculture','Commercial','Fossil Power', 'Industrial','Irrigation','Manufacturing','Mining','Municipal','Nuclear Power','Other'];
 
 var useTypes = new Map;
-useTypes.set('Maryland',true);
-useTypes.set('Virginia',true);
-useTypes.set('Agriculture',true);
-useTypes.set('Aquaculture',true);
-useTypes.set('Commercial',true);
-useTypes.set('Fossil Power',true);
-useTypes.set('Industrial',true);
-useTypes.set('Irrigation',true);
-useTypes.set('Manufacturing',true);
-useTypes.set('Mining',true);
-useTypes.set('Municipal',true);
-useTypes.set('Nuclear Power',true);
-useTypes.set('Other',true);
+
+// Iterates through all the states and sets each states key to true 
+states.forEach((state) => useTypes.set(state,true));
+
+// Iterates through all the tags and sets each tag key to true 
+tags.forEach((tag) => useTypes.set(tag,true));
 
 /*
 Name: setMapOnAll

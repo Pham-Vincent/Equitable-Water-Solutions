@@ -1,5 +1,7 @@
 
 
+
+//Function to update values when Short Term is Clicked 
 function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan){
     saltdata = [
         {x: 0, y: 40},
@@ -53,6 +55,9 @@ function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barcha
 
     
 }
+
+//Function to update values when LongTerm is Clicked 
+
 function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan){
     saltdata = [
         {x: 0, y: 80},
@@ -102,10 +107,15 @@ function longTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchar
 
     
 }
+
+
+// Function to initiate graph creation and call functions to update the graph
 function updateGraphs(currentChecked,saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan){
     let radios = document.querySelectorAll('input[type="radio"][name="projection"]');
     radios.forEach(function(radio){
+        //Checks if Long Term or Short Term is currently selected
         if(radio.checked){
+            //Keeps track if Long term or Short Term is selected
             currentChecked=radio.value
         }
     })
@@ -117,6 +127,14 @@ function updateGraphs(currentChecked,saltdata,xtitleName,barchartData1,barchartD
     else{
         [saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan]= longTermChanges();
     }
+
+
+
+
+
+
+    //                            Linechart 1 Code 
+//<------------------------------------------------------------------------------------>
     Highcharts.chart('dashboard-saltchart', {
         chart: {
             type: 'line'
@@ -182,6 +200,12 @@ function updateGraphs(currentChecked,saltdata,xtitleName,barchartData1,barchartD
           enabled: false // Disable the legend
       }
     });
+
+
+
+
+    //                            Saltdial 1 Code 
+//<------------------------------------------------------------------------------------>
     Highcharts.chart('dashboard-saltdial', {
 
     chart: {
@@ -330,8 +354,8 @@ function createPlotBand(from, to, color) {
 }
 
 
-
-
+//                            Barchart 1 Code 
+//<------------------------------------------------------------------------------------>
     Highcharts.chart('dashboard-barchart-1', {
         chart: {
             type: 'column'
@@ -407,7 +431,8 @@ function createPlotBand(from, to, color) {
     });
 
 
-
+//                            Barchart 2 Code 
+//<------------------------------------------------------------------------------------>
 
     Highcharts.chart('dashboard-barchart-2', {
         chart: {
@@ -485,7 +510,8 @@ function createPlotBand(from, to, color) {
 
 
 
-
+//                            Barchart 3 Code 
+//<------------------------------------------------------------------------------------>
     Highcharts.chart('dashboard-barchart-3', {
         chart: {
             type: 'column'
