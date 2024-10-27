@@ -84,13 +84,8 @@ export function legendFunc(id) {
     //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
     
-    let tempMarkers;
-    if(id === "Maryland"||id === "Virginia"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state === id);
-    }
-    else{
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
-    }
+    let tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
+    
     //if checked -> show markers
     if (checkbox.checked) {
         setMapOnAll(map, tempMarkers, id);
@@ -161,20 +156,11 @@ Usage: selecting/deselecting all checkboxes of either Use Type or States will se
 */
 function checkSelectAll(){
     //grabs select all checkboxes by HTML id
-    const statesBox = document.getElementById("States-checkbox");
     const typeBox = document.getElementById("types-checkbox");
   
     let typesFalse = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === false); //if all types are false, returns true
     let typesTrue = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === true); //if all types are true, returns true
-    let statesFalse = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === false); //if all states are false, returns true
-    let statesTrue = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === true); //if all states are true, returns true
-
-    if(statesFalse){
-        statesBox.checked = false;
-    }
-    if(statesTrue){
-        statesBox.checked = true;
-    }
+   
     if(typesTrue){
         typeBox.checked = true;
     }
@@ -183,7 +169,17 @@ function checkSelectAll(){
     }
     
 }
+
+export function swapBackground(id){
+    let rangeBox = document.getElementById("range-box");
+    if(id==='long')
+        rangeBox.style.backgroundImage = 'url(../static/images/long-range.png)';
+    else{
+        rangeBox.style.backgroundImage = 'url(../static/images/short-range.png)'; 
+    }
+}
 //makes functions globally accessible
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
 window.selectAll = selectAll;
+window.swapBackground = swapBackground;

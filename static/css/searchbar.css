@@ -7,12 +7,31 @@
   padding: 10px;
   border-radius: 23px;
   background: #ffffff;
-  margin-left: 2%;
-  /* Formally 5% but changed because removed Navbar Temp */
-  margin-top: 1%;
-  position: absolute;
+  position: relative;
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-right: 7.7%;
+  height: 1.5em;
+}
+
+.search-wrapper{
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%;
+  height: auto;
+  background-color: #0A2B57;
+  z-index: 2;
+  padding: .5em;
+  box-sizing: border-box;
+  position: fixed;
+}
+
+.search-wrapper p{
+  font: italic normal normal 20px/28px Roboto;
+  font-weight: 500;
+  color: white;
+  margin: 0 0 0 7.4%;
 }
 
 .autocomplete {

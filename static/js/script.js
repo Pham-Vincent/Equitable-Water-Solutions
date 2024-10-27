@@ -16,7 +16,7 @@ import config from './config.js';
 import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
-import { legendFunc, selectAll } from './legend.js';
+import { legendFunc, selectAll, swapBackground } from './legend.js';
 import { pinLocation } from './MarkerPinning.js';
 export let map;
 export let markers = []; //stores markers used in search()
@@ -343,6 +343,7 @@ document.getElementById('overlay').addEventListener('click', closePopup);
 function callFunction(id, source){
   legendFunc(id);
   selectAll(id, source);
+  swapBackground(id);
 }
 window.callFunction = callFunction;
 
