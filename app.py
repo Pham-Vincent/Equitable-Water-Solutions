@@ -1,9 +1,11 @@
 
 """ 
 Title:app.py
-Author: Vincent Pham
+Author: Vincent Pham, Nicholas Gammel
 
-Functionality: The purpose of this file is to showcase various HTML files and enable the integration of Python into our project. Through JavaScript, we can transmit signals to Python, facilitating the dynamic loading of images or opening of different HTML files. Presently, it effectively supports the dynamic loading of graphs.
+Functionality: The purpose of this file is to showcase various HTML files and enable the integration of Python into our project. 
+Through JavaScript, we can transmit signals to Python, facilitating the dynamic loading of images or opening of different HTML files. 
+It effectively supports the dynamic loading of graphs, supports a connection to the database for login/register/pinning.
 
 
 Output: Python Generated Images,Displays Webpage
@@ -21,12 +23,12 @@ import pandas as pd
 from flask_cors import CORS
 import sys
 sys.path.append('static/python')
-from Database import *
-from Graph import *
-from login import *
-from About import *
-from FeatureExtraction import *
-from LocationPinning import * 
+from static.python.Database import *
+from static.python.Graph import *
+from static.python.login import *
+from static.python.About import *
+from static.python.FeatureExtraction import *
+from static.python.LocationPinning import * 
 
 # AI Imports
 from chatbot.scripts.chatbot import Chatbot
