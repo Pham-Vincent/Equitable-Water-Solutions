@@ -1,5 +1,5 @@
 /* popup window styling*/
-#popup {
+#popup{
     display: none;
     position: absolute;
     top: 50%;
@@ -115,12 +115,110 @@
     background: transparent;
 }
 
-#pin-location-button{
-    padding: 5px 15px; 
+.button-container{
+        display: flex;
+        gap: 10px; /* Add space between the elements */
+}
+
+
+#locationpin-container{
+    padding: 5px 10px; 
     border-radius: 20px;
+    margin-top: -10px;
+    height: 42px;
     border: none;
     cursor: pointer;
     align-items: center;
     background-color: lightgray;
     color: black;
+    display: flex;
+    flex-direction: column; /* Stack the items vertically */
 }
+#locationpin-container p {
+    margin: 0;
+    font-size: 14px; /* Text size for 'Pin Location' */
+    text-align: center; /* Center align the text */
+    margin-bottom: 10px; /* Space between the text and buttons */
+  }
+
+#button-wrapper {
+    display: flex;
+    gap: 5px; /* Adds spacing between the buttons */
+    margin-top: -10px; /* Adds some space above the buttons */
+  }
+  
+   /*  This is all for Pinning Locations*/
+  #errorpopup{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 0px;
+    z-index: 1000;
+    height: 170px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15%;
+     overflow: hidden; 
+     padding-top: 3em;
+  }
+  #errorpopup p{
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto; /* Center the p element */
+    background: #fff;
+    border-radius: .25em .25em .4em .4em;
+    text-align: center;
+   
+    
+   
+  }
+  
+  #error-response-container{
+    display: flex;
+    padding-top: 20%;
+    width: 100%;
+    height: 100%;
+
+  }
+  
+  .error-response-button{
+    width:50%;
+    display: block;
+    position: relative;
+    border:none;
+    height: 5em;
+    margin-top:-5%;
+    cursor: pointer;
+  }
+  .error-content{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+
+  }
+
+
+  .yes-button{
+   background-color: #fc7169;
+   line-height: 60px;
+   text-transform: uppercase;
+   color: #fff;
+  }
+  .no-button{
+   background-color: #b6bece;
+   line-height: 60px;
+   text-transform: uppercase;
+   color: #fff;
+  }
+  #close-error-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    color:#0143c8;
+}
+  

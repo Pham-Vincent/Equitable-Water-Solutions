@@ -16,8 +16,10 @@ import config from './config.js';
 import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
+
 import { legendFunc, selectAll, swapBackground } from './legend.js';
-import { pinLocation } from './MarkerPinning.js';
+import { checkpinLocation,closeerrorPopup } from './MarkerPinning.js';
+
 export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
@@ -289,14 +291,27 @@ $.ajax({
             <p><strong style="color: rgb(70, 86, 126);">County:</strong>  ${marker.descriptions.description1}</p>
             <p><strong style="color: rgb(70, 86, 126);">Water Source:</strong>  ${marker.descriptions.description2}</p>
             <p><strong style="color: rgb(70, 86, 126);">Use Type:</strong>  ${marker.descriptions.tag}</p>
-            <button id="view-more-button" onclick="viewMore()"">View More</button>
-            <button id="pin-location-button" onclick="pinLocation('${marker.title}')"">Pin Location</button>
+            
+            <div class = "button-container">
+              <button id="view-more-button" onclick="viewMore()"">View More</button>
+              
+              
+              <div id= "locationpin-container">
+              
+              <p>Pin Location </p>
+              <div id="button-wrapper">
+                  <button onclick="checkpinLocation('${marker.title}',1)">1</button>
+                  <button onclick="checkpinLocation('${marker.title}',2)">2</button>
+                  <button onclick="checkpinLocation('${marker.title}',3)">3</button>
+              </div>
+
+              </div> 
+            </div>
           </div>
         `,  
         maxWidth: 300,
         disableAutoPan: true,
       });
-      // PinLocation(marker)
 
       //Associate the infowindow with the marker
       marker.infowindow = infowindow2;
@@ -338,6 +353,7 @@ $(document).one("ajaxStop",function() {
 
 //closes popup upon clicking overlay
 document.getElementById('overlay').addEventListener('click', closePopup);
+document.getElementById('erroroverlay').addEventListener('click', closeerrorPopup);
 
 //handles calling legend functions();
 function callFunction(id, source){

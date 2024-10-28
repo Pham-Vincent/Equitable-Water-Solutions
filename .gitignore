@@ -16,7 +16,7 @@ test-app
 !ResearchPapers.json
 references
 !features_list.json
-
+__pycache__
 # AI ignores
 loaded/
 unloaded/

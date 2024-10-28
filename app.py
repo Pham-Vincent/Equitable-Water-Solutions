@@ -14,17 +14,19 @@ Date:4/25/2024
 #Import necessary libraries
 
 from flask import Flask,jsonify,render_template,request, redirect, url_for, session
+
+from dotenv import load_dotenv
+import os
+import pandas as pd
+from flask_cors import CORS
+import sys
+sys.path.append('static/python')
 from Database import *
 from Graph import *
 from login import *
 from About import *
 from FeatureExtraction import *
 from LocationPinning import * 
-from dotenv import load_dotenv
-import os
-import pandas as pd
-from flask_cors import CORS
-
 
 # AI Imports
 from chatbot.scripts.chatbot import Chatbot
@@ -194,7 +196,7 @@ def research():
 @app.route('/antonia')
 def antonia():
    return render_template('Antonia.html')
-
+#returns the  information of the logged in user
 @app.route('/session-data')
 def sessionData():
   return(retrieve_sessionid())
@@ -202,7 +204,17 @@ def sessionData():
 #Utilized to Pin location into the Database
 @app.route('/pin-location',methods=['POST'])
 def pinLocation():
-  return(add_pin_to_database( request.get_json()))
+  return(add_pin_to_database(request.get_json()))
+
+# Checks for override and duplication when pinning a marker
+@app.route('/override',methods=['POST'])
+def override():
+  return overridecheck(request.get_json())
+
+
+@app.route('/locations-pinned',methods=['POST'])
+def pinnedLocations():
+  return returnPinned(request.get_json())
 
 if __name__ == '__main__':
   app.run(debug=True)
