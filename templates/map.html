@@ -14,184 +14,195 @@
   {% endblock %}
  
   {% block content %}
+
+  <!-- search bar -->
+  <div class="search-wrapper">
+    <p>Zoom into your desired area for state specific pins, or zoom further for site specific pins</p>
+    <div class="search">
+      <span class="search-icon material-symbols-outlined">search</span>
+      <input class="text" id="search-input" autocomplete="off" placeholder="Search Location">
+      <button class="material-symbols-outlined" onclick="document.getElementById('search-input').value = ''" style="border:none; background-color: rgba(255, 255, 255, 0); cursor: pointer;">close</button>
+    </div> 
+  </div>
+  <!-- search bar end -->
+
+  <div class="map-page-wrapper">
     <!-- map container -->
     <div id="map-container">
 
-      <!-- search bar -->
-      <div class="search">
-        <span class="search-icon material-symbols-outlined">search</span>
-        <input class="text" id="search-input" autocomplete="off" placeholder="Enter Location">
-        <button class="material-symbols-outlined" onclick="document.getElementById('search-input').value = ''" style="border:none; background-color: rgba(255, 255, 255, 0); cursor: pointer;">close</button>
-      </div>
-      <!-- search bar end -->
-
-    <!-- legend -->
-    <div class="legend-container">
-      <h3>Legend</h3>
-      <hr>
-      <div class="legend">
-
-        <!--legend States header-->
-        <div class="drop-down-header">
-          <label class="container" id="Select All States" style="font-weight: 600;">
-            <i class="drop-down-arrow-States" onclick="toggleDropDownState(event)"></i>
-            States
-            <input id="States-checkbox" type="checkbox" checked="checked" name="states" onchange="selectAll('Select All States', this)">
-            <span class="checkmark"></span> 
-          </label>
-        </div>
-
-        <!--legend States start-->
-        <div class="drop-down-States">
-          <label class="container" id="Virginia">
-            <img src="static/images/VAcircle.png" alt="VA icon" class="icon">
-            Virginia
-            <input type="checkbox" checked="checked" name="states" onchange="legendFunc('Virginia')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Maryland">
-            <img src="static/images/MDcircle.png" alt="MD icon" class="icon">
-            Maryland
-            <input type="checkbox" checked="checked" name="states" onchange="legendFunc('Maryland')">
-            <span class="checkmark"></span>
-          </label>
-          
-        </div>
-        <!--legend States end-->
-        <hr>
-
-        <!--Use Types header-->
-        <div class="drop-down-header">
-            <label class="container" id="Select All UseTypes" style="font-weight: 600;">
-              <i class="drop-down-arrow-UseType" onclick="toggleDropDownUseType(event)"></i>
-              Use Types
-              <input id="types-checkbox" type="checkbox" checked="checked" name="type" onchange="selectAll('Select All UseTypes', this)">
-              <span class="checkmark"></span> 
-            </label>
-        </div>
-
-        <!--Use Types start-->
-        <div class="drop-down-UseTypes">
-          <label class="container" id="Agriculture">
-            <img src="static/images/wheat.png" alt="Agriculture Icon" class="icon">
-            Agriculture
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Agriculture')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Aquaculture">
-            <img src="static/images/waterdroplet.png" alt="Aqua Culture Icon" class="icon">
-            Aqua Culture
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Aquaculture')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Commercial">
-            <img src="static/images/dollar.png" alt="Commercial Icon" class="icon">
-            Commercial
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Commercial')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Fossil Power">
-            <img src="static/images/flame.png" alt="Fossil Power icon" class="icon">
-            Fossil Power
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Fossil Power')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Industrial">
-            <img src="static/images/factory.png" alt="Industrial Icon" class="icon">
-            Industrial
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Industrial')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Irrigation">
-            <img src="static/images/irrigation.png" alt="Irrigation Icon" class="icon">
-            Irrigation
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Irrigation')">
-            <span class="checkmark"></span>
-          </label>
-          
-          <label class="container" id="Manufacturing">
-            <img src="static/images/nuclearicon.png" alt="Manufacturing Icon" class="icon">
-            Manufacturing
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Manufacturing')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Mining"> 
-            <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
-            Mining
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Mining')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Municipal">
-            <img src="static/images/institution.png" alt="Municipal Icon" class="icon">
-            Municipal
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Municipal')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Nuclear Power">
-            <img src="static/images/power.png" alt="Nuclear Power Icon" class="icon">
-            Nuclear Power
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Nuclear Power')">
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container" id="Other">
-            <img src="static/images/water-bottle.png" alt="Other Icon" class="icon">
-            Other
-            <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Other')">
-            <span class="checkmark"></span>
-          </label>
-        
-        </div>
-        <!--Use Types end-->   
-        <hr>
-        
-      </div>
-      <button class="legend-button" onclick="toggleSidebar()">
-        <i class="arrow"></i>
-      </button>
-    </div>
-      <script>
-        //function to toggle the visibility of legend on the map
-        function toggleSidebar() {
-            const sidebar = document.querySelector('.legend-container');
-            sidebar.classList.toggle('hidden');
-            const arrow = document.querySelector('.arrow');
-            arrow.classList.toggle('rotate180');
-        }
-        //toggles the visibility of the Use Types section on the legend
-        function toggleDropDownUseType(event){
-          event.preventDefault();
-          const dropdown = document.querySelector('.drop-down-UseTypes');
-          dropdown.classList.toggle('hidden');
-          const arrow = document.querySelector('.drop-down-arrow-UseType');
-          arrow.classList.toggle('rotate-arrow-UseType');
-        }
-        //toggles the visibility of the States section on the legend
-        function toggleDropDownState(event){
-          event.preventDefault();
-          const dropdown = document.querySelector('.drop-down-States');
-          dropdown.classList.toggle('hidden');
-          const arrow = document.querySelector('.drop-down-arrow-States');
-          arrow.classList.toggle('rotate-arrow-States');
-        }
-      </script>
-      <!-- legend end -->
-
-    <div id="map" style="height: 95vh; width: 100%;"></div>
+      <div id="map" style="height: 95vh; width: 100%;"></div>
       
-    <!-- popup -->
+      <!-- popup -->
       <div id="popup"></div>
       <div id="errorpopup"></div>
       <div id="erroroverlay" class="overlay"></div>
       <div id="overlay" class="overlay"></div>
     </div>
+
+    <div class="new-legend-container">
+      <div class="legend-box">
+        <div id="legend-heading">
+          <p>Legend</p>
+        </div>
+
+        <div class="legend-content">
+          <div class="content-scroll">
+            <div class="Usage-heading" id="Select All UseTypes">
+              <p>Usage Category</p>
+              <input id="types-checkbox" type="checkbox" checked="checked" name="type" onchange="selectAll('Select All UseTypes', this)">
+            </div>
+            <hr>
+            <div class="content-split">
+              <div class="left-content">
+
+                <span class="usage-type" id="Agriculture">
+                  <span>
+                    <img src="static/images/wheat.png" alt="Agriculture Icon" class="icon">
+                    <p>Agriculture</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Agriculture')">
+                </span>
+
+                <span class="usage-type" id="Aquaculture">
+                  <span>
+                    <img src="static/images/waterdroplet.png" alt="Aqua Culture Icon" class="icon">
+                    <p>Aqua Culture</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Aquaculture')">
+                </span>
+                <span class="usage-type" id="Commercial">
+                  <span>
+                    <img src="static/images/dollar.png" alt="Commercial Icon" class="icon">
+                    <p>Commercial</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Commercial')">
+                </span>
+                <span class="usage-type" id="Fossil Power">
+                  <span>
+                    <img src="static/images/flame.png" alt="Fossil Power icon" class="icon">
+                    <p>Fossil Power</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Fossil Power')">
+                </span>
+                <span class="usage-type" id="Industrial">
+                  <span>
+                    <img src="static/images/factory.png" alt="Industrial Icon" class="icon">
+                    <p>Industrial</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Industrial')">
+                </span>
+                <span class="usage-type" id="Irrigation">
+                  <span>
+                    <img src="static/images/irrigation.png" alt="Irrigation Icon" class="icon">
+                    <p>Irrigation</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Irrigation')">
+                </span>
+              </div>
+
+              <div class="right-content">
+                <span class="usage-type" id="Manufacturing">
+                  <span>
+                    <img src="static/images/nuclearicon.png" alt="Manufacturing Icon" class="icon">
+                    <p>Manufacturing</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Manufacturing')">
+                </span>
+                <span class="usage-type" id="Mining">
+                  <span>
+                    <img src="static/images/pickaxe.png" alt="Mining icon" class="icon">
+                    <p>Mining</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Mining')">
+                </span>
+                <span class="usage-type" id="Municipal">
+                  <span>
+                    <img src="static/images/institution.png" alt="Municipal Icon" class="icon">
+                    <p>Municipal</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Municipal')">
+                </span>
+                <span class="usage-type" id="Nuclear Power">
+                  <span>
+                    <img src="static/images/power.png" alt="Nuclear Power Icon" class="icon">
+                    <p>Nuclear Power</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Nuclear Power')">
+                </span>
+                <span class="usage-type" id="Other">
+                  <span>
+                    <img src="static/images/water-bottle.png" alt="Other Icon" class="icon">
+                    <p>Other</p>
+                  </span>
+                  
+                  <input type="checkbox" checked="checked" name="type" onchange="legendFunc('Other')">
+                </span>
+              </div>
+            </div>
+
+            <div class="Salinity-heading" style="margin: 2em auto auto auto;">
+              <p>Baseline Salinity</p>
+              <input type="checkbox" checked="checked">
+            </div>
+            <hr>
+            <div class="content-split">
+              <div class="left-content">
+                <span class="usage-type">
+                  <p>Tidal fresh (&lt;0.5)</p>
+                  <input type="checkbox" checked="checked">
+                </span>
+
+                <span class="usage-type">
+                  <p>Oligohaline (0.5 - 5)</p>
+                  <input type="checkbox" checked="checked">
+                </span>
+
+                <span class="usage-type">
+                  <p>Mesohaline (5 - 18)</p>     
+                  <input type="checkbox" checked="checked">
+                </span>
+              </div>
+
+              <div class="right-content">
+                <span class="usage-type">    
+                  <p>Polyhaline (18 - 30)</p>
+                  <input type="checkbox" checked="checked">
+                </span>
+
+                <span class="usage-type">
+                  <p>Euhaline (>30)</p>
+                  <input type="checkbox" checked="checked">
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="long-short-term">
+        <span>
+          <input type="radio" name="term" checked="checked" onclick="swapBackground('short')"><label>Short Term</label>
+        </span>
+        <span>
+          <input type="radio" name="term"  onclick="swapBackground('long')"><label>Long Term</label>
+        </span>
+      </div>
+
+      <div class="range-box" id="range-box"></div>
+
+      <button id="legend-btn">Pin Chesapeake Bay Sites to Dashboard</button>
+
+    </div>
+
+  </div>
 {% endblock %}

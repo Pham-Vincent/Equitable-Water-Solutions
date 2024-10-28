@@ -16,8 +16,10 @@ import config from './config.js';
 import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
-import { legendFunc, selectAll } from './legend.js';
+
+import { legendFunc, selectAll, swapBackground } from './legend.js';
 import { checkpinLocation,closeerrorPopup } from './MarkerPinning.js';
+
 export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
@@ -357,6 +359,7 @@ document.getElementById('erroroverlay').addEventListener('click', closeerrorPopu
 function callFunction(id, source){
   legendFunc(id);
   selectAll(id, source);
+  swapBackground(id);
 }
 window.callFunction = callFunction;
 
