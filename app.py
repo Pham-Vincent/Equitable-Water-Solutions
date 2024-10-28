@@ -23,12 +23,12 @@ import pandas as pd
 from flask_cors import CORS
 import sys
 sys.path.append('static/python')
-from static.python.Database import *
-from static.python.Graph import *
-from static.python.login import *
-from static.python.About import *
-from static.python.FeatureExtraction import *
-from static.python.LocationPinning import * 
+from Database import *
+from Graph import *
+from login import *
+from About import *
+from FeatureExtraction import *
+from LocationPinning import * 
 
 # AI Imports
 from chatbot.scripts.chatbot import Chatbot
