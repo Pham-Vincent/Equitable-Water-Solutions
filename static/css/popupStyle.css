@@ -1,3 +1,11 @@
+/*
+Author: William Lamuth
+
+Purpose: This file provides styling for the two layer popup on the map.html.
+
+Date: 10/31/2024
+*/
+
 /* popup window styling*/
 #popup{
     display: none;

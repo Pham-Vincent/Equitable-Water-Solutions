@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
-
 /*
-CSS for the landing page animated background
+Author: William Lamuth
+
+Purpose: This file provides styling for the landing page animated background.
+
+Date: 10/31/2024
 */
+
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 
 .area{
     background: #2f4d8f00;  

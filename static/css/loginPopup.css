@@ -1,4 +1,12 @@
-/* The popup form - hidden by default */
+/*
+Author: Nicholas Gammel
+
+Purpose: This file provides styling for login popup accessible by clicking 'login' in the top right corner.
+Pop up form - hidden by default
+
+Date: 10/31/2024
+*/
+
 .form-popup {
     width: 50%;
     min-height: 60%;

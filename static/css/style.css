@@ -1,3 +1,11 @@
+/*
+Author: William Lamuth
+
+Purpose: This file sets universal styling.
+
+Date: 10/31/2024
+*/
+
 @import 'legendStyle.css';
 @import 'popupStyle.css';
 @import 'searchbar.css';
