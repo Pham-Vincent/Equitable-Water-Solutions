@@ -18,10 +18,13 @@ import hashlib, re
 #Controls register page functionality including validating using input and storing data inside of database
 def registerFunction():
     #Checks that fields are filled
-    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'org' in request.form and 'password' in request.form and 'password-again' in request.form and 'email' in request.form and 'tags' in request.form:
+    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'password' in request.form and 'password-again' in request.form and 'email' in request.form and 'tags' in request.form:
         fname = request.form['fname']
         lname = request.form['lname']
-        organization = request.form['org']
+        if 'organization' not in request.form:
+            organization = "NULL"
+        else:
+            organization = request.form['org']
         password = request.form['password']
         password_check = request.form['password-again']
         email = request.form['email']
@@ -38,7 +41,7 @@ def registerFunction():
             msg = 'Account already exists!'
         elif password != password_check:
             msg = 'Password does not match!'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        elif not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
             msg = 'Invalid email address!'
         elif not re.match(r'[A-Za-z]+', fname):
             msg = 'First name must contain only characters!'
