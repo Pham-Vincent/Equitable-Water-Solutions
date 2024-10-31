@@ -79,6 +79,11 @@ Date: 10/31/2024
 
 /* Show chatbot when activated */
 body.show-chatbot .chatbot {
+  resize: horizontal;
+  height: 61vh;
+  max-width: 80vw;
+  min-width: 390px;
+  pointer-events: auto;
   opacity: 1; /* Make the chatbot visible */
   pointer-events: auto; /* Enable interaction when chatbot is shown */
   transform: scale(1); /* Scale up the chatbot */
@@ -110,7 +115,7 @@ body.show-chatbot .chatbot {
 /* Chatbot message container styles */
 .chatbot .chatbox {
   overflow-y: auto; /* Enable vertical scrollling */
-  height: 400px; /* Adjust to change container height */
+  height: 500px; /* Adjust to change container height */
   padding: 20px 15px 80px; /* Adjust to change padding */
 }
 
