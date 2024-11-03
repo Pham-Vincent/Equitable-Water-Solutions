@@ -57,6 +57,7 @@ Functionality includes login popup connected to the navbar and dropdown settings
 
      <!-- Chatbot JS -->
      <script src="{{ url_for('static', filename='js/chatbot.js') }}" defer></script>
+     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
      <!-- End: Chatbot JS -->
      {% block head %}{% endblock %}
 </head>
@@ -197,6 +198,39 @@ Functionality includes login popup connected to the navbar and dropdown settings
           <span id="send-btn" class="material-symbols-rounded">send</span>
         </div>
       </div>
+
+      <script>
+        // Ensure the script runs after the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            interact('.chatbot')
+                .resizable({
+                    edges: { right: true, left: true, top: true, bottom: true }, // Allow resizing from the right and bottom edges
+                    listeners: {
+                        start() {
+                            document.body.classList.add('no-select');
+                        },
+                        move(event) {
+                            let { target } = event;
+
+                            // Update the width and height of the target
+                            target.style.width = `${event.rect.width}px`;
+                            target.style.height = `${event.rect.height}px`;
+                        },
+                        end() {
+                            document.body.classList.remove('no-select');
+                        }
+                    },
+                    modifiers: [
+                        // Keep the edges within the parent container
+                        interact.modifiers.restrictSize({
+                            min: { width: 390, height: 300 }, // Set minimum size
+                            max: { width: window.innerWidth * 0.8, height: window.innerHeight * 0.8 }, // Set maximum size
+                        })
+                    ],
+                    inertia: true // Enable inertia for a smoother drag
+                });
+        });
+      </script>
       <!-- End: Chatbot -->
 </body>
 </html>
