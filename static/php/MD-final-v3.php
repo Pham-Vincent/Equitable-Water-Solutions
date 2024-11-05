@@ -44,7 +44,7 @@ and allows us to access all of the associated variables for database login
   //$sql = "SELECT ic_site_id, site_description1, state_name, county_name, lat_dd, long_dd FROM SurfaceWater_Withdrawals"; // Adjust table and column names as per your database schema
 
   //Selects all needed Information from Maryland_Tidal table in Database
-  $sql = "SELECT NewUseType, Longitude, Latitude, PermitNumber, County, streamName FROM MD_FINAL_V3";
+  $sql = "SELECT NewUseType, Longitude, Latitude, PermitNumber, County, streamName, SalinityZone FROM MD_FINAL_V3";
   $result = $conn->query($sql);
 
   $data = array();
