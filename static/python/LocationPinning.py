@@ -1,3 +1,13 @@
+""" 
+Title:LocationPinning.py
+Author: Vincent Pham
+
+Functionality: This file is designed to control Location pinning and update the database using several functions
+
+Output: Add/Change pinned marker in database
+Date:10/31/2024
+"""
+
 #This File will Contain All the Functions Utilized for location Pinning 
 from flask import Flask,jsonify,render_template,request, redirect, url_for, session
 from Database import *

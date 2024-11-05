@@ -1,9 +1,11 @@
 
 """ 
 Title:app.py
-Author: Vincent Pham
+Author: Vincent Pham, Nicholas Gammel
 
-Functionality: The purpose of this file is to showcase various HTML files and enable the integration of Python into our project. Through JavaScript, we can transmit signals to Python, facilitating the dynamic loading of images or opening of different HTML files. Presently, it effectively supports the dynamic loading of graphs.
+Functionality: The purpose of this file is to showcase various HTML files and enable the integration of Python into our project. 
+Through JavaScript, we can transmit signals to Python, facilitating the dynamic loading of images or opening of different HTML files. 
+It effectively supports the dynamic loading of graphs, supports a connection to the database for login/register/pinning.
 
 
 Output: Python Generated Images,Displays Webpage

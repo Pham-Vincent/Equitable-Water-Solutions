@@ -1,5 +1,9 @@
 /*
-CSS for the navbar
+Author: William Lamuth, Nicholas Gammel
+
+Purpose: This file provides styling for the navbar accessible on any page.
+
+Date: 10/31/2024
 */
 
 .navtop {
@@ -11,25 +15,6 @@ CSS for the navbar
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 3; 
 }
-
-/*
-.nav-container{
-    width: 100%;
-    height: 60px;
-    background-color: white;
-    position:fixed;
-    top: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-}
-.navtop {
-    background-color: white;
-    height: 60px;
-    width: 85%;
-    border: 0;
-    margin: 0 auto;
-}
-*/
 
 .navtop #div1, .nav-options {
     display: flex;

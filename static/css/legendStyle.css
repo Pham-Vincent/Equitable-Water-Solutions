@@ -1,3 +1,11 @@
+/*
+Author: William Lamuth
+
+Purpose: This file provides styling for the legend on map.html.
+
+Date: 10/31/2024
+*/
+
 /* styling for the outermost div container */
 .legend-container{
     position: absolute;

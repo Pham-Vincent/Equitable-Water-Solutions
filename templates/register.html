@@ -1,3 +1,11 @@
+<!--
+Register: Allows for new users to create accounts
+Authors: Nicholas Gammel, William Lamuth
+
+Description: 
+This page takes input from the user and creates a profile inside of the database.
+Currently every field is required, and email is the only unique key that must be unique.
+-->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,14 +30,14 @@
 
 					<!-- Input Start -->
 					<div class="flex-container-A">
-						<input type="text" name="fname" placeholder="First Name" required>
-						<input type="email" name="email" placeholder="Email Address" required>
-						<input type="password" name="password" placeholder="Select Password" required>
+						<input type="text" name="fname" placeholder="First Name*" required>
+						<input type="email" name="email" placeholder="Email Address*" required>
+						<input type="password" name="password" placeholder="Select Password*" required>
 					</div>
 					<div class="flex-container-A">
-						<input type="text" name="lname" placeholder="Last Name" required>
+						<input type="text" name="lname" placeholder="Last Name*" required>
 						<input type="text" name="org" placeholder="Organization">
-						<input type="password" name="password-again" placeholder="Retype Password" required>
+						<input type="password" name="password-again" placeholder="Retype Password*" required>
 					</div>
 						<div class="msg">{{ msg }}</div>
 					<!-- Input End -->
@@ -39,7 +47,7 @@
 			<div class="tags-container">
 				<div class="offset">
 					<!-- Selection Header Start -->
-					<h3>Select Account Type</h3>
+					<h3>Select Account Type*</h3>
 
 					<div class="flex-container">
 						<div class="standard-text">Bill monthly&nbsp;&nbsp;</div>

@@ -1,3 +1,13 @@
+/*
+title: chatbot.js
+
+Description: This file controls the chatbot functionality.
+
+Authors: Spencer Presley
+
+Date: 10/31/24
+*/
+
 // DOM Elements
 const chatbotToggler = document.querySelector(".chatbot-toggler"); // Button to toggle the chatbot
 const closeBtn = document.querySelector(".close-btn"); // Button to close the chatbot

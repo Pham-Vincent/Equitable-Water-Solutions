@@ -1,4 +1,10 @@
-/* Chatbot Styles */
+/*
+Author: Spencer Presley
+
+Purpose: This file provides styling for the chatbot.
+
+Date: 10/31/2024
+*/
 
  /* Import Poppins font */
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -11,6 +17,12 @@
   font-family: "Poppins", sans-serif; /* Set font family */
  }
  
+ .no-select, .no-select * {
+  user-select: none !important; /* Completely disable text selection */
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
 /* Chatbot toggle button styles */
 .chatbot-toggler {
   position: fixed;
@@ -55,6 +67,8 @@
  /* Main chatbot container styles */
 .chatbot {
   position: fixed;
+  display: flex;
+  flex-direction: column;
   right: 25px; /* Adjust to change container position from right */
   bottom: 75px; /* Adjust to change container position from bottom */
   width: 390px; /* Adjust to change container width */
@@ -73,6 +87,10 @@
 
 /* Show chatbot when activated */
 body.show-chatbot .chatbot {
+  height: 50vh;
+  max-width: 80vw;
+  min-width: 390px;
+  pointer-events: auto;
   opacity: 1; /* Make the chatbot visible */
   pointer-events: auto; /* Enable interaction when chatbot is shown */
   transform: scale(1); /* Scale up the chatbot */
@@ -104,8 +122,9 @@ body.show-chatbot .chatbot {
 /* Chatbot message container styles */
 .chatbot .chatbox {
   overflow-y: auto; /* Enable vertical scrollling */
-  height: 400px; /* Adjust to change container height */
+  flex: 1; /* Adjust to change container height */
   padding: 20px 15px 80px; /* Adjust to change padding */
+  max-height: calc(100% - 80px);
 }
 
 /* Scrollbar styles for chatbot and textarea */

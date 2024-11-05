@@ -7,21 +7,29 @@ Functionality: This file is designed to control functionality of Login/Register.
 Output: Session Variables for login
 Date:7/23/2024
 """
-from flask import Flask,render_template,request, redirect, url_for, session
+from flask import Flask,render_template,request, redirect, url_for, session, flash
+from itsdangerous import URLSafeTimedSerializer
 from Database import *
 from Graph import *
 from login import *
 from FeatureExtraction import *
 import hashlib, re
+import smtplib
+from email.mime.text import MIMEText
+from itsdangerous import URLSafeTimedSerializer
 
 
 #Controls register page functionality including validating using input and storing data inside of database
 def registerFunction():
+    msg=''
     #Checks that fields are filled
-    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'org' in request.form and 'password' in request.form and 'password-again' in request.form and 'email' in request.form and 'tags' in request.form:
+    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'password' in request.form and 'password-again' in request.form and 'email' in request.form and 'tags' in request.form:
         fname = request.form['fname']
         lname = request.form['lname']
-        organization = request.form['org']
+        if 'organization' not in request.form:
+            organization = "NULL"
+        else:
+            organization = request.form['org']
         password = request.form['password']
         password_check = request.form['password-again']
         email = request.form['email']
@@ -38,7 +46,7 @@ def registerFunction():
             msg = 'Account already exists!'
         elif password != password_check:
             msg = 'Password does not match!'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        elif not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
             msg = 'Invalid email address!'
         elif not re.match(r'[A-Za-z]+', fname):
             msg = 'First name must contain only characters!'
@@ -64,7 +72,8 @@ def registerFunction():
             session['id'] = account['id']
             session['username'] = account['fname']
             session['lastname'] = account['lname']
-            print(session['id'])
+            flash('A verification email has been sent to your email address. Please verify to complete registration.', 'info')
+            
         # Line To Add Blank Data into the Marker Pinning 
         #<--------------------->
             query = "INSERT INTO Water_Data.Location_Pinned (id,PinnedLocation1,PinnedLocation2,PinnedLocation3) VALUES (%s,NULL,NULL,NULL)"
@@ -79,7 +88,7 @@ def registerFunction():
     elif request.method == 'POST':
         # Form is empty
         msg = 'Please fill out the form!'
-    msg=''
+    flash(msg, 'danger')
     return render_template('register.html', msg=msg)
 
 #Uses login submission to check database for matching information
@@ -131,3 +140,21 @@ def checkLogin(html):
         conn.close()
         return render_template(html, account=account)
 
+'''
+def send_verification_email(user_email):
+    token = generate_verification_token(user_email)
+    verification_url = url_for('verify_email', token=token, _external=True)
+    body = f'Please verify your email by clicking this link: {verification_url}'
+
+    # Set up MIMEText for the email
+    msg = MIMEText(body, 'plain')
+    msg['Subject'] = 'Email Verification'
+    msg['From'] = app.config['MAIL_USERNAME']
+    msg['To'] = user_email
+
+    # Send email
+    with smtplib.SMTP(app.config['MAIL_SERVER'], app.config['MAIL_PORT']) as server:
+        server.starttls()
+        server.login(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+        server.sendmail(app.config['MAIL_USERNAME'], user_email, msg.as_string())
+'''
