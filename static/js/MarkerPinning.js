@@ -20,7 +20,7 @@ export function checkpinLocation(title,number){
   .then(data => {
     /*Checks if user is logged in*/
     if(data.id == null){
-      alert('Need To Login')
+      openloginForm();
     }else{
       var userid = data.id
       /* Checks whether there is a duplicate ID or if the location is already pinned at the specified number */
@@ -87,6 +87,7 @@ export function openerrorPopup(error,data1,title,number,userid)
 const customerrorPopup = document.getElementById('errorpopup');
 
 // This generates the custom error popup with a message and response buttons
+
 customerrorPopup.innerHTML = `
  <div id="close-error-button" onclick="closeerrorPopup()"><img src="static/images/error-close.svg" alt="Close"></div>
   <div class = "error-content">
@@ -100,7 +101,7 @@ customerrorPopup.innerHTML = `
     </div>
   </div>
 `;
-
+    
 customerrorPopup.style.display = 'block';
 document.getElementById('erroroverlay').style.display = 'block';
 

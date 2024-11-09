@@ -10,6 +10,7 @@ Functionality includes login popup connected to the navbar and dropdown settings
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Dashboard{% endblock %}</title>
@@ -27,6 +28,8 @@ Functionality includes login popup connected to the navbar and dropdown settings
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- jquery function to create an "active" class in span for the currently active navbar page -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="module" src="{{url_for('static',filename='js/script.js')}}"></script>
+
     <script>
         $(function(){
             $('a').each(function(){
@@ -96,7 +99,7 @@ Functionality includes login popup connected to the navbar and dropdown settings
                             <!-- Account Options Popup End -->
                         </div>
                         {% else %}
-                        <button class="button" onclick="openForm()"><span>Log In</span></button>
+                        <button class="button" onclick="openloginForm()"><span>Log In</span></button>
                         {% endif %}
                     </div>
                 </div>
@@ -108,7 +111,7 @@ Functionality includes login popup connected to the navbar and dropdown settings
     <div class="overlay-login" id="overlay-login"></div>
 
     <div class="form-popup" id="myForm">
-        <div id="close-button" onclick="closeForm()"><img src="static/images/close-login.png" alt="Close"></div>
+        <div id="close-button" onclick="closeloginForm()"><img src="static/images/close-login.png" alt="Close"></div>
         <h2>Sign in or create an account</h2>
         <div class="delimeter"></div>
         <form action="{{ url_for('login') }}" method="post" class="form-container">
@@ -135,38 +138,6 @@ Functionality includes login popup connected to the navbar and dropdown settings
 
     <!-- Login Form Popup End -->
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const button = document.querySelector('.navtop .button');
-        const popup = document.querySelector('.form-popup');
-
-        button.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent click from bubbling up to document
-            button.classList.toggle('active');
-            document.getElementById("loginMenu").style.display = "block";
-        });
-
-        document.addEventListener('click', function(event) {
-            if (!button.contains(event.target) && !popup.contains(event.target)) {
-                button.classList.remove('active');
-                closeForm();
-            }
-        });
-    });
-
-    document.getElementById('overlay-login').addEventListener('click', closeForm);
-
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-        document.getElementById('overlay-login').style.display = "block";
-    }
-  
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-        document.getElementById("overlay-login").style.display = "none";
-        document.getElementById("loginMenu").style.display = "none";
-    }
-    </script>
 
     <div class="content">
         {% block content %}{% endblock %}
