@@ -44,7 +44,15 @@ Currently we do not use real data and the dashboard serves as a visualization fo
     <div class="right-panel">
         
         <div class="right-container">
-           <div class = "pinnedlocation-container">
+         
+            <div id = 'Location1-container'></div>
+                
+            </div>
+           
+            <script>
+                function createpanel(){
+                    return `
+            <div class = "pinnedlocation-container">
             <p><span style="font-weight:bold;">Dropped Pin</span> at 0 ft </p>
             <p style="text-align: right;; padding-right: 1.7%;"><a href="https://saltcast.io/map" style=" color: #289D7A; ">Location 1</a></p>
            
@@ -135,7 +143,7 @@ Currently we do not use real data and the dashboard serves as a visualization fo
                 </div>
             </div>
 
-            <div class="bottom-square">
+  <div class="bottom-square">
                 <h1>Number of days with High Salinity</h1>
                 <div class="top-section">
                     <div class="radio-buttons">
@@ -180,11 +188,14 @@ Currently we do not use real data and the dashboard serves as a visualization fo
                     <div id="dashboard-barchart-2"></div>
                 </div>
                 <div id="dashboard-barchart-3"></div>
-            
-            
-                
-            </div>
-           
+                </div>
+                    `
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+            // Insert the result of createpanel() into the container
+            document.getElementById('Location1-container').innerHTML = createpanel();
+        });
+            </script>
             <!-- Link to external JavaScript file -->
     <script type="module" src="{{url_for('static',filename='js/dashboard.js')}}"></script>
         </div>

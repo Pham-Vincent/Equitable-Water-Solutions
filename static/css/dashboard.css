@@ -137,7 +137,9 @@ body, html {
 }
 
 
-
+#Location1-container{
+    width:85%
+}
 .top-salinitycharts{
     display: flex;
     flex-direction: row;

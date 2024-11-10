@@ -613,28 +613,29 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Call the function initially to set the correct visibility
     toggleContent();
+    $(function() {
+
+
+        updateGraphs()
+        $('input[type="radio"][name="projection"]').change(function(){ 
+            updateGraphs()
+        })
+        $('input[type="range"][id="myRange"]').change(function(){
+            updateGraphs()
+        })
+        $('input[type="range"][id="myRange2"]').change(function(){
+            updateGraphs()
+        })
+        
+        
+    });
   });
 
 
 
 
 
-$(function() {
 
-
-    updateGraphs()
-    $('input[type="radio"][name="projection"]').change(function(){ 
-        updateGraphs()
-    })
-    $('input[type="range"][id="myRange"]').change(function(){
-        updateGraphs()
-    })
-    $('input[type="range"][id="myRange2"]').change(function(){
-        updateGraphs()
-    })
-    
-    
-});
 
 
 document.addEventListener('DOMContentLoaded', () => {
