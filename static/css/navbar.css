@@ -1,6 +1,15 @@
 /*
 CSS for the navbar
 */
+:root{
+    --gray: #E5E9ED;
+    --salcast-green: #289D7A;
+    --black: #1A1A1A;
+    --dark-blue: #0a2b57;
+    --saltcast-light-green: #b7e2ba;
+    --white: #FFFFFF;
+    --page-highlight: #DBEFD4;
+}
 
 .navtop {
     width: 100%;
@@ -11,25 +20,6 @@ CSS for the navbar
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 3; 
 }
-
-/*
-.nav-container{
-    width: 100%;
-    height: 60px;
-    background-color: white;
-    position:fixed;
-    top: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-}
-.navtop {
-    background-color: white;
-    height: 60px;
-    width: 85%;
-    border: 0;
-    margin: 0 auto;
-}
-*/
 
 .navtop #div1, .nav-options {
     display: flex;
@@ -46,7 +36,7 @@ CSS for the navbar
     font-size: 24px;
     padding: 0;
     margin: 0;
-    color: #ffffff;
+    color: var(--white);
     font-weight: normal;
 }
 
@@ -69,7 +59,7 @@ CSS for the navbar
     margin: 0 15px 0 15px;
 }
 .navtop .nav-options a span:hover{
-    background-color: #DBEFD4;
+    background-color: var(--page-highlight);
     border-radius: 5px;
     width: auto;
     height: auto;
@@ -78,11 +68,11 @@ CSS for the navbar
 
 /* highlight the current page on the nav bar */
 .navtop .nav-options .active{
-    background-color: #DBEFD4;
+    background-color: var(--page-highlight);
     border-radius: 5px;
     width: auto;
     height: auto;
-    color:  #0a2b57;
+    color:  var(--dark-blue);
     font: normal normal bold 18px/24px Roboto;
 }
 
@@ -110,7 +100,7 @@ CSS for the navbar
 }
 
 .navtop .button {
-    background-color: #289d7a; /* Green */
+    background-color: var(--salcast-green); /* Green */
     border: none;
     border-radius: 30px;
     padding: 0 36px;
@@ -131,7 +121,7 @@ CSS for the navbar
 }
 
 .navtop .button.active span {
-    color: #DBEFD4; /* Active text color */
+    color: var(--page-highlight); /* Active text color */
     font-weight: bold; /* Active text weight */
 }
 
@@ -147,7 +137,7 @@ CSS for the navbar
     line-height: 1em;
     font: normal normal bold 14px/22px Roboto;
     letter-spacing: 0px;
-    color: #DBEFD4;
+    color: var(--page-highlight);
 }
 
 .navtop .button .account-options {
@@ -190,22 +180,22 @@ CSS for the navbar
 .small-bar-responsive a{
     text-decoration: none;
     padding: 15px;
-    color: #1A1A1A;
+    color: var(--black);
     font: normal normal normal 14px/24px Roboto;
 }
 
 .small-bar-responsive a span:hover{
-    background-color: #DBEFD4;
+    background-color: var(--page-highlight);
     border-radius: 5px;
     transition: 0.3s;
 }
 
 .small-bar-responsive .active{
-    background-color: #DBEFD4;
+    background-color: var(--page-highlight);
     border-radius: 5px;
     width: auto;
     height: auto;
-    color:  #1A1A1A;
+    color:  var(--black);
     font: normal normal bold 14px/24px Roboto;
 }
 
@@ -214,7 +204,7 @@ CSS for the navbar
 }
 
 .fa-bars{
-    color: #2cac86; 
+    color: var(--salcast-green); 
     cursor: pointer; 
 }
 

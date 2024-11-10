@@ -1,3 +1,10 @@
+
+:root{
+    --gray: #E5E9ED;
+    --salcast-green: #289D7A;
+    --black: #1A1A1A;
+    --dark-blue: #0A2B57;
+}
 .outer-research-container{
     background-color: white;
     width: 100%;
@@ -16,13 +23,13 @@
     position: relative;
     font: normal normal bold 50px/55px Roboto;
     margin: 10px 0;
-    color: #0A2B57;
+    color: var(--dark-blue);
 }
 
 .research-content > p{
     font: italic normal bold 20px/28px Roboto;
     margin: 10px 0;
-    color: #0A2B57;
+    color: var(--dark-blue);
 }
 
 .articles{
@@ -46,18 +53,18 @@
 
 #title{
     font: italic normal bold 20px/28px Roboto;
-    color: #0B2B57;
+    color: var(--dark-blue);
 }
 
 #authors{
     font: normal normal normal 14px/24px Roboto;
-    color: #1A1A1A;
+    color: var(--black);
     opacity: 0.6;
 }
 
 #description{
     font: normal normal normal 16px/24px Roboto;
-    color: #1A1A1A;
+    color: var(--black);
     word-wrap: break-word;
     overflow-wrap: break-word;
     width: 100%;
@@ -66,7 +73,7 @@
 hr {
     border: 0;
     height: 2px;
-    background: #e5e9ed;
+    background: var(--legend-bg-color);
     margin: 20px 0;
     width: 100%;
 }

@@ -3,8 +3,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+:root{
+    --gray: #E5E9ED;
+    --salcast-green: #289D7A;
+    --black: #1A1A1A;
+    --dark-blue: #0a2b57;
+    --saltcast-light-green: #b7e2ba;
+}
+
 body, html {
-    background-color: #e5e9ed;
+    background-color: var(--gray);
     overflow: hidden;
 }
 
@@ -17,7 +25,7 @@ body, html {
     position: fixed;
     width: 25%;
     height: 100%;
-    background-color: #0a2b57;
+    background-color: var(--dark-blue);
 }
 
 .center-container, .bottom{
@@ -42,7 +50,7 @@ body, html {
 }
 
 .right-panel {
-    background-color: #e5e9ed;
+    background-color: var(--gray);
     margin-left: 25%;
     display: flex;
     flex-direction: column;
@@ -85,7 +93,7 @@ body, html {
 }
 
 .square-containers .margin-container h2 {
-    color: #0a2b57;
+    color: var(--dark-blue);
     text-align: left;
     font-style: italic;
     font-variant: normal;
@@ -97,7 +105,7 @@ body, html {
 }
 
 .square-containers .margin-container h5 {
-    color: #1a1a1a;
+    color: var(--black);
     text-align: left;
     font: normal normal bold 16px/24px Roboto;
     letter-spacing: 0px;
@@ -108,7 +116,7 @@ body, html {
 .square-containers .margin-container .select-button {
     height: 20px;
     width: 20px;
-    border: 1px solid #0A2B57;
+    border: 1px solid var(--dark-blue);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -126,7 +134,7 @@ body, html {
 }
 
 .square-containers .margin-container .select-button .inner.active {
-    background-color: #0A2B57;
+    background-color: var(--dark-blue);
 }
 
 .top-salinitycharts{
@@ -248,7 +256,7 @@ body, html {
         color: var(--unnamed-color-1a1a1a);
         text-align: left;
         letter-spacing: 0px;
-        color: #1A1A1A;
+        color: var(--black);
         opacity: 1;
     }
 
@@ -295,25 +303,25 @@ body, html {
         appearance: none;
         width: 25px; /* Set a specific slider handle width */
         height: 25px; /* Slider handle height */
-        background: #04AA6D; /* Green background */
+        background: var(--salcast-green); /* Green background */
         cursor: pointer; /* Cursor on hover */
         border-radius: 100%;
       }
       
       .slider::-moz-range-thumb {
-        width: 25px; /* Set a specific slider handle width */
-        height: 25px; /* Slider handle height */
-        background: #04AA6D; /* Green background */
-        cursor: pointer; /* Cursor on hover */
+        width: 25px; 
+        height: 25px; 
+        background: var(--salcast-green); 
+        cursor: pointer; 
       }
 
       .slidecontainer .grey-box{
         display: flex;
         justify-content:flex-end;
         align-items: center;
-        background-color: #E5E9ED;
+        background-color: var(--gray);
         font: normal normal normal 10px/24px Roboto;
-        color: #1A1A1A;
+        color: var(--black);
         height: 2em;
         width: auto;
         padding-right: 2%;
@@ -323,7 +331,7 @@ body, html {
       .slidecontainer p{
         margin: 0 0 1em 0;
         font: normal normal bold 16px/24px Roboto;
-        color: #1A1A1A;
+        color: var(--black);
       }
 
       .ticks{
@@ -335,18 +343,18 @@ body, html {
 
       .tick-label{
         font: normal normal normal 10px/24px Roboto;
-        color: #1A1A1A;
+        color: var(--black);
       }
 
       .horizontal-divider{
-        border: 2px solid #E5E9ED;
+        border: 2px solid var(--gray);
         margin-bottom: 2em;
         margin-top: 1em;
       }
 
       .square-containers h1, .bottom-square h1{
         font: italic normal normal 20px/28px Roboto;
-        color: #0A2B57;
+        color: var(--dark-blue);
         font-weight: 500;
       }
 
@@ -358,7 +366,7 @@ body, html {
       .radio-buttons p{
         margin: 0 0 1em 0;
         font: normal normal bold 16px/24px Roboto;
-        color: #1A1A1A;
+        color: var(--black);
       }
 
       .radio-buttons div{
@@ -369,7 +377,7 @@ body, html {
       }
 
       .vertical-border{
-        border: 2px solid #E5E9ED;
+        border: 2px solid var(--gray);
       }
 
     .projection-buttons{
@@ -437,7 +445,7 @@ body, html {
         left: 0;
         width: 60%;
         margin-left: 20%;
-        border-bottom: 1px solid #e5e9ed;
+        border-bottom: 1px solid var(--gray);
         padding-bottom: 0;
         opacity: 0.5; 
         pointer-events: none;
@@ -451,7 +459,7 @@ body, html {
         left: 0;
         width: 60%; 
         margin-left: 20%; 
-        border-top: 1px solid #e5e9ed; 
+        border-top: 1px solid var(--gray); 
         opacity: 0.5; 
         pointer-events: none; 
         padding-top: 0;
@@ -459,7 +467,7 @@ body, html {
     
     .left-panel .center-container .bottom h5.active {
         background-color: #FFFFFF;
-        color: #0a2b57;
+        color: var(--dark-blue);
         font: normal normal bold 16px/18px Roboto;
         padding-top:27px;
         margin-top:0px;
@@ -479,7 +487,7 @@ body, html {
     }
 
     .bottom button{
-        background-color: #04AA6D;
+        background-color: var(--salcast-green);
         border-radius: 20em;
         color: white;
         width: 50%;
@@ -514,7 +522,7 @@ body, html {
     .long-term-radio-buttons p{
         margin: 0 0 1em 0;
         font: normal normal bold 16px/24px Roboto;
-        color: #1A1A1A;
+        color: var(--black);
     }
 
 

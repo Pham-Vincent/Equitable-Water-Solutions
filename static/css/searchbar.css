@@ -1,3 +1,12 @@
+:root{
+  --gray: #E5E9ED;
+  --salcast-green: #289D7A;
+  --black: #1A1A1A;
+  --dark-blue: #0A2B57;
+  --saltcast-light-green: #b7e2ba;
+  --white: #FFFFFF;
+  --search-gray: #d4d4d4;
+}
 
 /*styling for the search bar*/
 .search{
@@ -6,7 +15,7 @@
   align-items: center;
   padding: 10px;
   border-radius: 23px;
-  background: #ffffff;
+  background: var(--white);
   position: relative;
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -20,7 +29,7 @@
   align-items: center;
   width: 100%;
   height: auto;
-  background-color: #0A2B57;
+  background-color: var(--dark-blue);
   z-index: 2;
   padding: .5em;
   box-sizing: border-box;
@@ -30,7 +39,7 @@
 .search-wrapper p{
   font: italic normal normal 20px/28px Roboto;
   font-weight: 500;
-  color: white;
+  color: var(--white);
   margin: 0 0 0 7.4%;
 }
 
@@ -43,7 +52,7 @@
 /*Relates To The Entire Autocomplete Search Box*/ 
 .autocomplete-items {
   position: absolute;
-  border: 1px solid #d4d4d4;
+  border: 1px solid var(--search-gray);
   border-bottom: none;
   border-top: none;
   z-index: 99;
@@ -60,8 +69,8 @@
 .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--search-gray);
 }
  
 .autocomplete-items div:hover {

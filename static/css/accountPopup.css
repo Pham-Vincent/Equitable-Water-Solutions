@@ -1,3 +1,12 @@
+:root{
+    --gray: #E5E9ED;
+    --salcast-green: #289D7A;
+    --black: #1A1A1A;
+    --dark-blue: #0a2b57;
+    --saltcast-light-green: #DBEFD4;
+    --white: #FFFFFF;
+}
+
 .account-options ul {
     list-style: none;
     margin: 0;
@@ -13,14 +22,14 @@
 .account-options li a{
     cursor: pointer;
     letter-spacing: 0px;
-    color: #0A2B57;
+    color: var(--dark-blue);
     display: block; /* Makes the anchor tag take up the full width and height of the <li> */
     width: 100%;
     text-align: left; /* Align text as needed */
 }
 
 .account-options li:hover {
-    background: #DBEFD4 0% 0% no-repeat padding-box;
+    background: var(--saltcast-light-green) 0% 0% no-repeat padding-box;
     font: normal normal bold 14px/20px Roboto;
     border-radius: 5px;
     user-select: none;

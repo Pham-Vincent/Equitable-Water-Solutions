@@ -3,7 +3,12 @@ CSS for index.html to syle the landing/coming soon page
 */
 
 /* defines a flex to split to page into 2 halfs (div/img) */
-
+/* Page color variables */
+:root{
+   --salcast-green: #289D7A;
+   --black: #1A1A1A;
+   --dark-blue: #0A2B57;
+ }
 
 .page-content{
    width: 85%;
@@ -31,7 +36,7 @@ CSS for index.html to syle the landing/coming soon page
     font-size: 60px;
     color:white;
     text-align:left;
-    font: normal normal bold 50px/55px Roboto;
+    font: normal normal bold 50px/55px Radio Canada Big;
     margin:10px 0 10px 0;
 }
 
@@ -74,7 +79,7 @@ CSS for index.html to syle the landing/coming soon page
    flex-direction: column;
    width: 100%;
    height: auto;
-   color: #0A2B57;
+   color: var(--dark-blue);
    gap:3em;
  }
 
@@ -99,11 +104,11 @@ CSS for index.html to syle the landing/coming soon page
    height: auto;
    padding: 3% 3% 3% 7.5%;
    box-sizing: border-box; /* Ensures padding is included in the width */
-   color: #0A2B57;
+   color: var(--dark-blue);
  }
 
  .block-3-B{
-   background-color: #0A2B57;
+   background-color: var(--dark-blue);
    width: 50%;
    height: auto;
    padding: 3% 7.5% 3% 3%;
@@ -121,7 +126,7 @@ CSS for index.html to syle the landing/coming soon page
  .block-4-content{
    width: 100%;
    height: auto;
-   color: #0A2B57;
+   color: var(--dark-blue);
    padding: 3% 7.5% 3% 7.5%;
    box-sizing: border-box; /* Ensures padding is included in the width */
    display: flex;
@@ -150,7 +155,7 @@ CSS for index.html to syle the landing/coming soon page
  }
 
  .create-account-btn{
-   background-color: #289D7A;
+   background-color: var(--salcast-green);
    border-radius: 20%;
    border: none;
  }
@@ -204,7 +209,7 @@ CSS for index.html to syle the landing/coming soon page
 }
 
 .create-account-btn{
-   background-color: #289d7a;
+   background-color: var(--salcast-green);
    border-radius: 23px;
    border: none;
    color: white;
@@ -304,11 +309,11 @@ CSS for index.html to syle the landing/coming soon page
       height: auto;
       padding: 8%;
       box-sizing: border-box; /* Ensures padding is included in the width */
-      color: #0A2B57;
+      color: var(--dark-blue);
     }
    
     .block-3-B{
-      background-color: #0A2B57;
+      background-color: var(--dark-blue);
       width: 100%;
       height: auto;
       padding: 8%;
@@ -327,6 +332,8 @@ CSS for index.html to syle the landing/coming soon page
 
 
  }
+
+ 
 
  
 
