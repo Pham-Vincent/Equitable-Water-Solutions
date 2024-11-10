@@ -32,3 +32,6 @@ mergeDatabase.py
 builddata.py
 helpers/
 
+# Ignore MacOS DS_Store file
+.DS_Store
+**/.DS_Store
