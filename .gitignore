@@ -18,11 +18,8 @@ references
 !features_list.json
 __pycache__
 # AI ignores
-loaded/
-unloaded/
 *.txt.faiss
 *.txt.pkl
-*.pkl
 MergeTest.faiss
 statData/
 loaddocs.py
@@ -35,3 +32,6 @@ helpers/
 # Ignore MacOS DS_Store file
 .DS_Store
 **/.DS_Store
+
+# Ignore files in vectordb_data directory but keep the directory
+**/vectordb_data/*

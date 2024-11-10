@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import List, Dict
 import pandas as pd
 from langchain_openai import OpenAIEmbeddings
@@ -9,6 +9,10 @@ from langchain_community.vectorstores import FAISS
 from dotenv import load_dotenv
 import os
 import json
+from pathlib import Path
+
+# Import utility functions for finding directories
+from dir_utils import get_vector_db_dir, find_env_file, find_project_root
 
 
 class TranscriptItem(BaseModel):
@@ -224,66 +228,94 @@ class ResearchArticles(BaseModel):
         return [article.to_document() for article in self.articles]
 
 
-class VectorDBManager:
-    def __init__(self, api_key: str):
-        self.embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+class VectorDBCreator:
+    def __init__(self, api_key: str, index_type: str = "HNSW"):
+        self.embeddings = OpenAIEmbeddings(api_key=api_key)
         self.embedding_size = len(self.embeddings.embed_query("dummy embedding"))
+        self._validate_index_type(index_type)
+        self.index = self._create_index(index_type)
+        self.db = None
 
-    def create_index(self, index_type: str = "HNSW") -> faiss.Index:
+    def _create_index(self, index_type: str) -> faiss.Index:
         if index_type == "FlatL2":
-            return faiss.IndexFlatL2(self.embedding_size)
+            try:
+                return faiss.IndexFlatL2(self.embedding_size)
+            except Exception as e:
+                raise ValueError(f"Error creating FlatL2 index: {e}")
         elif index_type == "HNSW":
-            return faiss.IndexHNSWFlat(self.embedding_size, 32)
-        raise ValueError(f"Invalid index type: {index_type}")
+            try:
+                return faiss.IndexHNSWFlat(self.embedding_size, 32)
+            except Exception as e:
+                raise ValueError(f"Error creating HNSW index: {e}")
 
-    def create_db(self, index: faiss.Index) -> FAISS:
-        return FAISS(
-            embedding_function=self.embeddings,
-            index=index,
-            docstore=InMemoryDocstore(),
-            index_to_docstore_id={},
-        )
+    def _validate_index_type(self, index_type: str) -> None:
+        if index_type not in ["FlatL2", "HNSW"]:
+            raise AttributeError(f"Invalid index type: {index_type}. Must be 'FlatL2' or 'HNSW'.")
+
+    def create_db(self) -> FAISS:
+        try:
+            self.db =FAISS(
+                embedding_function=self.embeddings,
+                index=self.index,
+                docstore=InMemoryDocstore(),
+                index_to_docstore_id={},
+            )
+            return self
+        except Exception as e:
+            raise ValueError(f"Error creating FAISS database: {e}")
+    
+    def get_db(self) -> FAISS:
+        return self.db
+    
 
 
 def main() -> FAISS:
-    load_dotenv()
-    api_key = os.getenv("OPENAI_API_KEY")
+    # Get the directory of the makeVDB.py script
+    this_dir = Path(__file__).resolve()
+    
+    # Define the name of the VectorDB directory
+    vector_db_dir_name = "VectorDB"
+    
+    # Find the VectorDB directory
+    vector_db_dir = get_vector_db_dir(start_dir=this_dir, target_dir=vector_db_dir_name)
+    vector_data_dir = vector_db_dir / "vectordb_data"
+    vectordb_save_dir = vector_db_dir / "vectordb"
+    
+    # Find the .env file in the project
+    env_file = find_env_file(root_dir=find_project_root(this_dir))
+    
+    # Load the environment variables from the located .env file
+    load_dotenv(env_file)
 
-    # Initialize vector DB manager
-    vdb_manager = VectorDBManager(api_key)
-    index = vdb_manager.create_index("HNSW")
-    db = vdb_manager.create_db(index)
-
-    # Set up directories
-    this_dir = os.path.dirname(os.path.abspath(__file__))
-    unloaded_dir = os.path.join(this_dir, "unloaded")
+    # Create the vector database
+    db = VectorDBCreator(api_key=os.getenv("OPENAI_API_KEY")).create_db().get_db()
+    
 
     # Load and process interview transcripts
     transcript_files = [
-        f for f in os.listdir(unloaded_dir) if f.startswith("TRANSCRIPT_")
+        f for f in os.listdir(vector_data_dir) if f.startswith("TRANSCRIPT_")
     ]
     for file in transcript_files:
         transcript_data = TranscriptData.from_json_file(
-            os.path.join(unloaded_dir, file)
+            os.path.join(vector_data_dir, file)
         )
         print(f"\n\nTRANSCRIPT DATA:\n\n{transcript_data}\n\n")
         db.add_documents(documents=transcript_data.to_documents())
 
     # Load and process team list
-    team_list_data = TeamListData.from_csv(os.path.join(unloaded_dir, "Team_List.csv"))
+    team_list_data = TeamListData.from_csv(os.path.join(vector_data_dir, "Team_List.csv"))
     print(f"\n\nTEAM LIST DATA:\n\n{team_list_data}\n\n")
     db.add_documents(documents=team_list_data.to_documents())
 
     # Load and process research articles
     research_articles = ResearchArticles.from_csv(
-        os.path.join(unloaded_dir, "Research-Articles-Learning.csv")
+        os.path.join(vector_data_dir, "Research-Articles-Learning.csv")
     )
     print(f"\n\nRESEARCH ARTICLES:\n\n{research_articles}\n\n")
     db.add_documents(documents=research_articles.to_documents())
 
     # Save the database
-    db.save_local(os.path.join(this_dir, "TeamListVDB-HNSW"))
-    return db
+    db.save_local(vectordb_save_dir)
 
 
 if __name__ == "__main__":

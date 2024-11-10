@@ -7,7 +7,11 @@ Developers:
 """
 
 from __future__ import annotations
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
 import logging
 
 from langchain_community.cache import InMemoryCache
@@ -55,7 +59,7 @@ class Chatbot:
     def __init__(
         self,
         api_key: str,
-        project_name: str = ChatbotConfig.DEFAULT_PROJECT_NAME,
+        vector_db_dir: Path = ChatbotConfig.DEFAULT_VECTOR_DB_DIR,
         database_name: str = ChatbotConfig.DEFAULT_DATABASE_NAME,
         temperature: float = ChatbotConfig.DEFAULT_TEMPERATURE,
         model_type: str = ChatbotConfig.DEFAULT_MODEL_TYPE,
@@ -73,7 +77,7 @@ class Chatbot:
         logging.getLogger().handlers = []
 
         # Store basic config
-        self.project_name = project_name
+        self.vector_db_dir = vector_db_dir
         self.database_name = database_name
         self.api_key = api_key
         self.system_message = system_message
@@ -85,7 +89,7 @@ class Chatbot:
         )
         self.embeddings = self._initialize_embeddings(self.api_key)
         self.vectordb_manager = self._initialize_vectordb_manager(
-            self.project_name,
+            self.vector_db_dir,
             self.database_name,
             self.embeddings,
         )
@@ -281,9 +285,11 @@ class Chatbot:
 
     @staticmethod
     def _initialize_vectordb_manager(
-        project_name: str, database_name: str, embeddings: OpenAIEmbeddings
+        vector_db_dir: Path,
+        database_name: str,
+        embeddings: OpenAIEmbeddings,
     ):
-        return VectorDBManager(project_name, database_name, embeddings)
+        return VectorDBManager(vector_db_dir, database_name, embeddings)
 
     @staticmethod
     def _initialize_memory_manager(llm: ChatOpenAI):
