@@ -1,6 +1,7 @@
 
 
 
+
 //Function to update values when Short Term is Clicked 
 function shortTermChanges(saltdata,xtitleName,barchartData1,barchartData2,barchartData3,Timespan,BarChartTimeSpan){
     saltdata = [
