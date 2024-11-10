@@ -1,5 +1,11 @@
+from __future__ import annotations
+
 import os
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from typing import List
@@ -7,9 +13,9 @@ from typing import List
 
 class VectorDBManager:
     def __init__(
-        self, project_name: str, database_name: str, embeddings: OpenAIEmbeddings
+        self, vector_db_dir: Path, database_name: str, embeddings: OpenAIEmbeddings
     ):
-        self.project_name = project_name
+        self.vector_db_dir = vector_db_dir
         self.database_name = database_name
         self.embeddings = embeddings
 
@@ -47,14 +53,10 @@ class VectorDBManager:
 
     def load_database(self) -> FAISS:
         """Load the FAISS database and attach metadata schema."""
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        database_path = os.path.join(
-            script_dir, "..", "projects", self.project_name, "docs", "TeamListVDB-HNSW"
-        )
 
         try:
             db = FAISS.load_local(
-                database_path,
+                self.vector_db_dir,
                 self.embeddings,
                 self.database_name,
                 allow_dangerous_deserialization=True,
