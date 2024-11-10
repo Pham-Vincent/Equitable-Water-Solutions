@@ -135,76 +135,9 @@ export function viewMore() {
     openPopup(window.currentMarker);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-        const button = document.querySelector('.navtop .button');
-        const popup = document.querySelector('.form-popup');
-
-        button.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent click from bubbling up to document
-            button.classList.toggle('active');
-            document.getElementById("loginMenu").style.display = "block";
-        });
-
-        document.addEventListener('click', function(event) {
-            if (!button.contains(event.target) && !popup.contains(event.target)) {
-                button.classList.remove('active');
-                closeForm();
-            }
-        });
-    });
-
-    document.getElementById('overlay-login').addEventListener('click', closeForm);
-
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-        document.getElementById('overlay-login').style.display = "block";
-    }
-  
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-        document.getElementById("overlay-login").style.display = "none";
-        document.getElementById("loginMenu").style.display = "none";
-    }
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.querySelector('.navtop .button');
-      const popup = document.querySelector('.form-popup');
-
-      button.addEventListener('click', function(event) {
-          event.stopPropagation(); // Prevent click from bubbling up to document
-          button.classList.toggle('active');
-          document.getElementById("loginMenu").style.display = "block";
-      });
-
-      document.addEventListener('click', function(event) {
-          if (!button.contains(event.target) && !popup.contains(event.target)) {
-              button.classList.remove('active');
-              closeloginForm();
-          }
-      });
-  });
-
   /*                    Login related Popups                            */
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const button = document.querySelector('.navtop .button');
-    const popup = document.querySelector('.form-popup');
-
-    button.addEventListener('click', function(event) {
-        event.stopPropagation(); // Prevent click from bubbling up to document
-        button.classList.toggle('active');
-        document.getElementById("loginMenu").style.display = "block";
-    });
-
-    document.addEventListener('click', function(event) {
-        if (!button.contains(event.target) && !popup.contains(event.target)) {
-            button.classList.remove('active');
-            closeloginForm();
-        }
-    });
-});
-  document.getElementById('overlay-login').addEventListener('click', closeloginForm);
+   
+ 
 
   function openloginForm() {
       document.getElementById("myForm").style.display = "block";
@@ -214,7 +147,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function closeloginForm() {
       document.getElementById("myForm").style.display = "none";
       document.getElementById("overlay-login").style.display = "none";
-      document.getElementById("loginMenu").style.display = "none";
+      const loginMenu = document.getElementById("loginMenu");
+      if (loginMenu) {
+          loginMenu.style.display = "none";
+      }
   }
 
 //Makes functions globally available
