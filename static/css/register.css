@@ -297,3 +297,42 @@ body, html {
     color: #1a1a1a3f;
   }
 
+  .msg-box {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 80%;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #ffdddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.msg-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg {
+    color: #a94442;
+    font-size: 20px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    left: 15px; 
+    cursor: pointer;
+    font-size: 18px;
+    color: #a94442;
+    background: none;
+    border: none;
+}

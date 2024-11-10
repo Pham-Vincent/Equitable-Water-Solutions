@@ -14,6 +14,12 @@ Currently every field is required, and email is the only unique key that must be
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 	</head>
 	<body>
+		<div class="msg-box" id="msg-box" {% if msg %}style="display: block;"{% else %}style="display: none;"{% endif %}>
+			<div class="msg-content">
+				<span class="close-btn" onclick="closeMsgBox()">×</span>
+				<div class="msg">{{ msg }}</div>
+			</div>
+		</div>
 		<form action="{{ url_for('register') }}" method="post" autocomplete="off" onsubmit="return validateForm()">
 			<div class="register-form-container">
 				<div class="offset">
@@ -39,7 +45,6 @@ Currently every field is required, and email is the only unique key that must be
 						<input type="text" name="org" placeholder="Organization">
 						<input type="password" name="password-again" placeholder="Retype Password*" required>
 					</div>
-						<div class="msg">{{ msg }}</div>
 					<!-- Input End -->
 				</div>
 			</div>
@@ -167,6 +172,20 @@ Currently every field is required, and email is the only unique key that must be
 							}
 							return true;
 						}
+					</script>
+
+					<!--Register Error Popup Script-->
+					<script>
+						function closeMsgBox() {
+							document.getElementById("msg-box").style.display = "none";
+						}
+
+						window.onclick = function(event) {
+							const msgBox = document.getElementById("msg-box");
+							if (event.target !== msgBox && !msgBox.contains(event.target)) {
+								closeMsgBox();
+							}
+						};
 					</script>
 
 					<!--view features script-->
