@@ -8,7 +8,8 @@ Output: Session Variables for login
 Date:7/23/2024
 """
 from flask import Flask,render_template,request, redirect, url_for, session, flash
-from itsdangerous import URLSafeTimedSerializer
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+from dotenv import load_dotenv
 from Database import *
 from Graph import *
 from login import *
@@ -16,7 +17,54 @@ from FeatureExtraction import *
 import hashlib, re
 import smtplib
 from email.mime.text import MIMEText
-from itsdangerous import URLSafeTimedSerializer
+
+load_dotenv()
+
+# Initialize the token serializer
+serializer = URLSafeTimedSerializer(os.getenv("SECRET_KEY"))
+
+def verify_email(token):
+    try:
+        # Decode the token
+        email = serializer.loads(token, salt='email-verify', max_age=3600)  # token valid for 1 hour
+    except SignatureExpired:
+        flash('The verification link has expired. Please register again.', 'danger')
+        return redirect(url_for('register'))
+
+    # Mark the email as verified in the database
+    conn = DatabaseConn()
+    cursor = conn.cursor()
+    query = "UPDATE Accounts SET confirmed = 1 WHERE email = %s"
+    cursor.execute(query, (email,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    flash('Your email has been verified. You can now log in.', 'success')
+    return redirect(url_for('login'))
+
+
+def send_verification_email(user_email, fname, lname):
+    # Generate the verification token
+    token = serializer.dumps(user_email, salt='email-verify')
+
+    # Generate verification link
+    verification_link = url_for('verify_email', token=token, _external=True)
+    
+    # Prepare email content
+    message = f"Hello {fname} {lname},\n\nPlease verify your email by clicking the link below:\n{verification_link}\n\nThank you!"
+    msg = MIMEText(message)
+    
+    # Set email subject and recipients
+    msg['Subject'] = "Please Verify Your Email"
+    msg['From'] = "waterequitable@gmail.com"
+    msg['To'] = user_email
+
+    # Send the email
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        smtp_server.login("waterequitable@gmail.com", os.getenv('EMAIL_KEY'))
+        smtp_server.sendmail("waterequitable@gmail.com", [user_email], msg.as_string())
+
 
 
 #Controls register page functionality including validating using input and storing data inside of database
@@ -72,7 +120,8 @@ def registerFunction():
             session['id'] = account['id']
             session['username'] = account['fname']
             session['lastname'] = account['lname']
-            flash('A verification email has been sent to your email address. Please verify to complete registration.', 'info')
+            send_verification_email(email, fname, lname)
+            flash('A verification email has been sent. Please check your inbox to verify your email.', 'info')
             
         # Line To Add Blank Data into the Marker Pinning 
         #<--------------------->
@@ -139,22 +188,3 @@ def checkLogin(html):
         cursor.close()
         conn.close()
         return render_template(html, account=account)
-
-'''
-def send_verification_email(user_email):
-    token = generate_verification_token(user_email)
-    verification_url = url_for('verify_email', token=token, _external=True)
-    body = f'Please verify your email by clicking this link: {verification_url}'
-
-    # Set up MIMEText for the email
-    msg = MIMEText(body, 'plain')
-    msg['Subject'] = 'Email Verification'
-    msg['From'] = app.config['MAIL_USERNAME']
-    msg['To'] = user_email
-
-    # Send email
-    with smtplib.SMTP(app.config['MAIL_SERVER'], app.config['MAIL_PORT']) as server:
-        server.starttls()
-        server.login(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-        server.sendmail(app.config['MAIL_USERNAME'], user_email, msg.as_string())
-'''

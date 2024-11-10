@@ -25,3 +25,4 @@ pywebview
 pyinstaller
 duckduckgo-search
 arxiv
+itsdangerous
