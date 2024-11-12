@@ -9,7 +9,16 @@ scipy
 numpy
 langchain-community
 faiss-cpu
+SQLAlchemy
+uvicorn
+python-docx
+pywebview
+pyinstaller
+duckduckgo-search
+arxiv
+itsdangerous
 langchain-openai
 langchain-core
 langchain-text-splitters
 pydantic
+

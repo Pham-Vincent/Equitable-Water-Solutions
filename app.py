@@ -15,13 +15,14 @@ Date:4/25/2024
 
 #Import necessary libraries
 
-from flask import Flask,jsonify,render_template,request, redirect, url_for, session
+from flask import Flask,jsonify,render_template,request, redirect, url_for, session, flash
 
 from dotenv import load_dotenv
 import os
 import pandas as pd
 from flask_cors import CORS
 import sys
+
 sys.path.append('static/python')
 from Database import *
 from Graph import *
@@ -214,6 +215,10 @@ def override():
 @app.route('/locations-pinned',methods=['POST'])
 def pinnedLocations():
   return returnPinned(request.get_json())
+
+@app.route('/verify_email/<token>')
+def emailVer(token):
+    return verify_email(token)
 
 if __name__ == '__main__':
   app.run(debug=True)
