@@ -102,6 +102,7 @@ Date: 10/31/2024
   height: 20px;
   width: 20px;
   background-color: darkgray;
+  border-radius: .3em;
 }
 
 /*On mouse-over, add a grey background color*/

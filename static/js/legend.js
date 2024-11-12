@@ -13,16 +13,14 @@ import { markers, map, markerCluster, shown } from './script.js';
 
 //Creates Hashmap data structure - default value is true as they are shown by default
 //useTypes is general term, likely to be changed
-var states = ['Maryland', 'Virginia'];
 var tags = ['Agriculture', 'Aquaculture','Commercial','Fossil Power', 'Industrial','Irrigation','Manufacturing','Mining','Municipal','Nuclear Power','Other'];
+var SalinityZone = ['Mesohaline', 'Polyhaline', 'Euhaline', 'Oligohaline', 'Tidal Fresh'];
 
 var useTypes = new Map;
 
-// Iterates through all the states and sets each states key to true 
-states.forEach((state) => useTypes.set(state,true));
-
 // Iterates through all the tags and sets each tag key to true 
 tags.forEach((tag) => useTypes.set(tag,true));
+SalinityZone.forEach((tag) => useTypes.set(tag,true));
 
 /*
 Name: setMapOnAll
@@ -48,11 +46,11 @@ export function setMapOnAll(map, Tmarkers, id=null) {
     const markersToAdd = [];
   
     for (let i = 0; i < Tmarkers.length; i++) {
-        const stateVisible = useTypes.get(Tmarkers[i].descriptions.state);
+        const salinityVisible = useTypes.get(Tmarkers[i].descriptions.SalinityZone);
         const tagVisible = useTypes.get(Tmarkers[i].descriptions.tag);
 
         //If the state and tag are visible, then the markers within Tmarkers are shown on the map
-        if(stateVisible && tagVisible){
+        if(salinityVisible && tagVisible){
             markersToAdd.push(Tmarkers[i]);
             Tmarkers[i].setMap(map);
             //Shows revealed markers for search
@@ -76,14 +74,16 @@ Usage: Pass in an id that matches with corresponding tag associated with each ma
 export function legendFunc(id) {
     //finds checkbox id
     const checkbox = document.getElementById(id).querySelector('input[type="checkbox"]');
-    
+
     let tempMarkers;
-    if(id === "Maryland"||id === "Virginia"){
-        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.state === id);
+    // If id is baseline salinity checkbox -- Else is usetype
+    if(SalinityZone.includes(id)){
+        tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.SalinityZone === id);
     }
     else{
         tempMarkers = markers.filter(marker => marker.descriptions && marker.descriptions.tag === id);
     }
+    
     //if checked -> show markers
     if (checkbox.checked) {
         setMapOnAll(map, tempMarkers, id);
@@ -93,7 +93,7 @@ export function legendFunc(id) {
         setMapOnAll(null, tempMarkers, id);
     }
 
-    checkSelectAll(); //if all checkboxes check for States or Use Types, corresponding select all box is selected/deselected
+    checkSelectAll(); //if all checkboxes check for baseline salinity or Use Types, corresponding select all box is selected/deselected
 }
 
 /*
@@ -106,10 +106,10 @@ export function selectAll(id, source){
 
     const selectAllBox = document.getElementById(id).querySelector('input[type="checkbox"]');
 
-    //Chooses which boxes to select/unselect depending on Use Types or States
+    //Chooses which boxes to select/unselect depending on Use Types or Baseline Salinity
     let checkboxes;
-    if(id==='Select All States'){
-         checkboxes = document.getElementsByName("states");
+    if(id==='Select All Salinity'){
+         checkboxes = document.getElementsByName("salinity");
     }
     else{
          checkboxes = document.getElementsByName("type");
@@ -137,9 +137,9 @@ Name: setAllMapValuesToFalse
 Usage:If selectAll function is called, this will be a simple way to adjust all attributes
 */
 function setAllMapValues(map,id) {
-    //loops through states
-    if(id==='Select All States'){
-        states.forEach(state => useTypes.set(state, map==null?false:true));
+    //loops through baseline salinity
+    if(id==='Select All Salinity'){
+        SalinityZone.forEach(state => useTypes.set(state, map==null?false:true));
     }
     //loops through all tags
     else{
@@ -150,33 +150,48 @@ function setAllMapValues(map,id) {
 /*
 Name: checkSelectAll
 
-Usage: selecting/deselecting all checkboxes of either Use Type or States will select/deselect the corresponding select all checkbox
+Usage: selecting/deselecting all checkboxes of either Use Type or baseline salinity will select/deselect the corresponding select all checkbox
 */
 function checkSelectAll(){
     //grabs select all checkboxes by HTML id
-    const statesBox = document.getElementById("States-checkbox");
     const typeBox = document.getElementById("types-checkbox");
+    const salinityBox = document.getElementById("salinity-checkbox");
   
     let typesFalse = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === false); //if all types are false, returns true
     let typesTrue = [...useTypes.entries()].filter(([key, value]) => tags.includes(key)).every(([key, value]) => value === true); //if all types are true, returns true
-    let statesFalse = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === false); //if all states are false, returns true
-    let statesTrue = [...useTypes.entries()].filter(([key, value]) => states.includes(key)).every(([key, value]) => value === true); //if all states are true, returns true
-
-    if(statesFalse){
-        statesBox.checked = false;
-    }
-    if(statesTrue){
-        statesBox.checked = true;
-    }
+    let salinityFalse = [...useTypes.entries()].filter(([key, value]) => SalinityZone.includes(key)).every(([key, value]) => value === false); //if all baseline salinity are false, returns true
+    let salinityTrue = [...useTypes.entries()].filter(([key, value]) => SalinityZone.includes(key)).every(([key, value]) => value === true); //if all baseline salinity are true, returns true
+   
     if(typesTrue){
         typeBox.checked = true;
     }
     if(typesFalse){
         typeBox.checked = false;
     }
+    if(salinityTrue){
+        salinityBox.checked = true;
+    }
+    if(salinityFalse){
+        salinityBox.checked = false;
+    }
     
+}
+
+/*
+Name: swapBackground
+
+Usage: swaps range slider background image for short/long term forecasting on legend
+*/
+export function swapBackground(id){
+    let rangeBox = document.getElementById("range-box");
+    if(id==='long')
+        rangeBox.style.backgroundImage = 'url(../static/images/long-range.png)';
+    else{
+        rangeBox.style.backgroundImage = 'url(../static/images/short-range.png)'; 
+    }
 }
 //makes functions globally accessible
 window.legendFunc = legendFunc;
 window.setMapOnAll = setMapOnAll;
 window.selectAll = selectAll;
+window.swapBackground = swapBackground;

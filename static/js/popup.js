@@ -135,11 +135,31 @@ export function viewMore() {
     openPopup(window.currentMarker);
 }
 
+  /*                    Login related Popups                            */
+   
+ 
+
+  function openloginForm() {
+      document.getElementById("myForm").style.display = "block";
+      document.getElementById('overlay-login').style.display = "block";
+  }
+
+  function closeloginForm() {
+      document.getElementById("myForm").style.display = "none";
+      document.getElementById("overlay-login").style.display = "none";
+      const loginMenu = document.getElementById("loginMenu");
+      if (loginMenu) {
+          loginMenu.style.display = "none";
+      }
+  }
+
 //Makes functions globally available
 window.openPopup = openPopup;
 window.closePopup = closePopup;
 window.viewMore = viewMore;
 window.openInfoWindow2 = openInfoWindow2;
+window.openloginForm = openloginForm;
+window.closeloginForm = closeloginForm
 
 
 

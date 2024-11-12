@@ -50,10 +50,7 @@ CORS(app)
 app.secret_key = os.getenv('SECRET_KEY')
 
 openai_api_key = os.getenv('OPENAI_API_KEY')
-chatbot = Chatbot(
-  api_key=openai_api_key,
-  project_name="Salinity",
-)
+chatbot = Chatbot(api_key=openai_api_key)
 
 setup_routes(app, chatbot)
 

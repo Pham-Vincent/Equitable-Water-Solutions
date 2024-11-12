@@ -45,7 +45,7 @@ and allows us to access all of the associated variables for database login
   
   //Selects all information we need from VA_Permits
   //Latitude > 1.1 as some of the points we were given appeared at (0,0) in the middle of the ocean, omitted these points
-  $sql = "SELECT Hydrocode, Source_Type, Latitude, Longitude, Locality, Year_2016, Year_2017, Year_2018, Year_2019, Year_2020, Use_Type FROM VA_FINAL_V3 WHERE Latitude > 1.1";
+  $sql = "SELECT Hydrocode, Source_Type, Latitude, Longitude, Locality, Year_2016, Year_2017, Year_2018, Year_2019, Year_2020, Use_Type, SalinityZone FROM VA_FINAL_V3 WHERE Latitude > 1.1";
 
   $result = $conn->query($sql);
 

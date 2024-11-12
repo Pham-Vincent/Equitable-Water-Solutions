@@ -16,8 +16,10 @@ import config from './config.js';
 import { closePopup} from './popup.js';
 import { autocomplete } from './search.js';
 import { setMarkerIcon, addListeners, createClusterContent } from './markerFunctions.js';
-import { legendFunc, selectAll } from './legend.js';
+
+import { legendFunc, selectAll, swapBackground } from './legend.js';
 import { checkpinLocation,closeerrorPopup } from './MarkerPinning.js';
+
 export let map;
 export let markers = []; //stores markers used in search()
 export let markerCluster;
@@ -134,6 +136,7 @@ $.ajax({
         longitude = parseFloat(point.Longitude),
         locality = point.Locality,
         point1 = parseFloat(point.Year_2016), point2 = parseFloat(point.Year_2017), point3 = parseFloat(point.Year_2018), point4 = parseFloat(point.Year_2019), point5 = parseFloat(point.Year_2020),
+        salinity = point.SalinityZone,
         legendType = 'Virginia';
         
         //uses triangle.png as marker default
@@ -160,7 +163,8 @@ $.ajax({
           description1: locality,
           tag: useType,
           state: legendType,
-          visible: shown[1]
+          visible: shown[1],
+          SalinityZone: salinity
         };
 
         marker.points = {
@@ -234,6 +238,7 @@ $.ajax({
       longitude = parseFloat(point.Longitude),
       locality = point.County,
       stream = point.streamName,
+      salinity = point.SalinityZone,
       legendType = 'Maryland';
 
       //uses triangle.png as marker default
@@ -261,6 +266,7 @@ $.ajax({
         description2: stream,
         tag: desc1,
         state: legendType,
+        SalinityZone: salinity,
         visible: shown[1]
       };
 
@@ -357,6 +363,7 @@ document.getElementById('erroroverlay').addEventListener('click', closeerrorPopu
 function callFunction(id, source){
   legendFunc(id);
   selectAll(id, source);
+  swapBackground(id);
 }
 window.callFunction = callFunction;
 
