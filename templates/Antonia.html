@@ -25,81 +25,111 @@ Currently, the model applies weights to the inputs and does not use real neural 
 <script type="module" src="{{url_for('static',filename='js/neural-network.js')}}"></script>
 
 <div class="page-container">
-    <div class="content-box">
-        <div class="input-container">
-            
+
+    <div class="arrow-box">
+        <div class="input-arrows">
             <span>
-                <div class="slidecontainer">
-                    <h1>Resevoir Level</h1>
-                    <div class="grey-box"></div>
-                    <input type="range" min="0" max="100" value="100" class="slider" id="reservoirSlider">
-                    <div class="ticks">
-                        
-                        <div class="tick"><span class="tick-label">0</span></div>
-                        <div class="tick"><span class="tick-label">10</span></div>
-                        <div class="tick"><span class="tick-label">20</span></div>
-                        <div class="tick"><span class="tick-label">30</span></div>
-                        <div class="tick"><span class="tick-label">40</span></div>
-                        <div class="tick"><span class="tick-label">50</span></div>
-                        <div class="tick"><span class="tick-label">60</span></div>
-                        <div class="tick"><span class="tick-label">70</span></div>
-                        <div class="tick"><span class="tick-label">80</span></div>
-                        <div class="tick"><span class="tick-label">90</span></div>
-                        <div class="tick"><span class="tick-label">100</span></div>
-                    </div>
-                </div>
+                <div class="arrow"></div>
             </span>
-            
             <span>
-                <div class="slidecontainer">
-                    <h1>Time Index</h1>
-                    <div class="grey-box"></div>
-                    <input type="range" min="1" max="365" value="365" class="slider" id="timeIndexSlider">
-                    <div class="ticks">
-                        
-                        <div class="tick"><span class="tick-label">1</span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label"></span></div>
-                        <div class="tick"><span class="tick-label">365</span></div>
-                    </div>
-                </div>
+                <div class="arrow"></div>
             </span>
-            
         </div>
-        <div class="neural-model-container">
-            <h1>Water Release Decision Model</h1>
-            <div id="neural-model"></div>
-        </div>
-        <div class="output-container">
-            <div class="wave-container" id="balt">
-                <div id="baltimore"></div>
-                <h1>70 (ppm)</h1> <!-- output value to be updated -->
-            </div>
-            <p class="location-label">Baltimore release</p>
-            <div class="wave-container" id="chest">
-                <div id="chester"></div>
-                <h1>35 (ppm)</h1> <!-- output value to be updated -->
-            </div>
-            <p class="location-label">Chester release</p>
-            <div class="wave-container" id="power">
-                <div id="powerplant"></div>
-                <h1>89 (ppm)</h1> <!-- output value to be updated -->
-            </div>
-            <p class="location-label">Power Plant release</p>
-            <div class="wave-container" id="down">
-                <div id="downstream"></div>
-                <h1>32 (ppm)</h1> <!-- output value to be updated -->
-            </div>
-            <p class="location-label">Downstream release</p>
+    
+        <div class="output-arrows">
+            <span>
+                <div class="arrow"></div>
+            </span>
+            <span>
+                <div class="arrow"></div>
+            </span>
+            <span>
+                <div class="arrow"></div>
+            </span>
+            <span>
+                <div class="arrow"></div>
+            </span>
         </div>
     </div>
+    
+    <div class="container-wrapper">
+        <div class="content-box-labels">
+            <h1 id="label-1">Inputs</h1>
+            <h1 id="label-2">Water Release Decision Model</h1>
+            <h1 id="label-3">Outputs</h1>
+        </div>
+        <div class="content-box">
+            <div class="input-container">
+                <span id="resevoir-input">
+                    <h1>Reservoir Index</h1>
+                    <div>
+                        <div class="resevoir-container">
+                            <img src="static/images/water-guage.png" alt="Overlay Image" class="resevoir-image">
+                            <div id="resevoir"></div>
+                            <h1 id="reservoir-number">70 (ppm)</h1> <!-- output value to be updated -->
+                        </div>
+                        <div>
+                            <input type="range" orient="vertical" min="0" max="100" value="100"  id="reservoirSlider" style="transform: rotate(270deg);">
+                        </div>
+                    </div>
+                </span>
+                
+                <span>
+                    <div class="slidecontainer">
+                        <h1>Time Index</h1>
+                        <div class="grey-box"><p id="day">365</p></div>
+                        <input type="range" min="1" max="365" value="365" class="slider" id="timeIndexSlider">
+                        <div class="ticks">
+                            <div class="tick"><span class="tick-label">1</span></div>
+                            <div class="tick"><span class="tick-label">365</span></div>
+                        </div>
+                    </div>
+                </span>
+                
+            </div>
+            <div class="neural-model-container">
+                <div id="neural-model"></div>
+            </div>
+            <div class="output-container">
+                <span>
+                    <div class="wave-container" id="balt">
+                        <img src="static/images/water-guage.png" alt="Overlay Image" class="resevoir-image">
+                        <div id="baltimore"></div>
+                        <h1>70 (ppm)</h1> <!-- output value to be updated -->
+                    </div>
+                    <p>Baltimore Release</p>
+                </span>
+                
+                <span>
+                    <div class="wave-container" id="chest">
+                        <img src="static/images/water-guage.png" alt="Overlay Image" class="resevoir-image">
+                        <div id="chester"></div>
+                        <h1>35 (ppm)</h1> <!-- output value to be updated -->
+                    </div>
+                    <p>Chester Release</p>
+                </span>
+                
+                <span>
+                    <div class="wave-container" id="power">
+                        <img src="static/images/water-guage.png" alt="Overlay Image" class="resevoir-image">
+                        <div id="powerplant"></div>
+                        <h1>89 (ppm)</h1> <!-- output value to be updated -->
+                    </div>
+                    <p>Powerplant Release</p>
+                </span>
+                
+                <span>
+                    <div class="wave-container" id="down">
+                        <img src="static/images/water-guage.png" alt="Overlay Image" class="resevoir-image">
+                        <div id="downstream"></div>
+                        <h1>32 (ppm)</h1> <!-- output value to be updated -->
+                    </div>
+                    <p>Downstream Release</p>
+                </span> 
+            </div>
+        </div>
+    </div>
+    
 
     <script>
         // Get the sliders and ppm output elements
@@ -110,6 +140,9 @@ Currently, the model applies weights to the inputs and does not use real neural 
         const chesterOutput = document.querySelector('#chest h1');
         const powerPlantOutput = document.querySelector('#power h1');
         const downstreamOutput = document.querySelector('#down h1');
+
+        const reservoirSliderPPM = document.querySelector('#reservoir-number');
+        const timeIndexDay = document.querySelector('#day');
 
         // Function to calculate ppm based on slider values
         function calculatePPM() {
@@ -122,17 +155,23 @@ Currently, the model applies weights to the inputs and does not use real neural 
             const powerPlantPPM = Math.abs((reservoirLevel * 0.7) - (timeIndex * 0.15));
             const downstreamPPM = Math.abs((reservoirLevel * 0.2) + (timeIndex * 0.25));
 
+            const reservoirIndexPPM = reservoirLevel;
+
             // Update the output values
             baltimoreOutput.textContent = `${Math.round(baltimorePPM)} (ppm)`;
             chesterOutput.textContent = `${Math.round(chesterPPM)} (ppm)`;
             powerPlantOutput.textContent = `${Math.round(powerPlantPPM)} (ppm)`;
             downstreamOutput.textContent = `${Math.round(downstreamPPM)} (ppm)`;
+            reservoirSliderPPM.textContent = `${(reservoirLevel)} (ppm)`;
+            timeIndexDay.textContent = `Day ${(timeIndex)}`;
 
             // Adjust heights based on ppm values
             adjustWaveHeight('baltimore', baltimorePPM);
             adjustWaveHeight('chester', chesterPPM);
             adjustWaveHeight('powerplant', powerPlantPPM);
             adjustWaveHeight('downstream', downstreamPPM);
+
+            adjustWaveHeight('resevoir', reservoirIndexPPM)
         }
 
         // Function to adjust the height of wave containers based on PPM
