@@ -18,7 +18,8 @@ import hashlib, re
 import smtplib
 from email.mime.text import MIMEText
 
-load_dotenv()
+#Change File path depending on Device - SERVER PATH
+load_dotenv('/home/bitnami/htdocs/static/env/.env')
 
 # Initialize the token serializer
 serializer = URLSafeTimedSerializer(os.getenv("SECRET_KEY"))
@@ -49,7 +50,8 @@ def send_verification_email(user_email, fname, lname):
     token = serializer.dumps(user_email, salt='email-verify')
 
     # Generate verification link
-    verification_link = url_for('verify_email', token=token, _external=True)
+    verification_link = url_for('emailVer', token=token, _external=True)
+    verification_link = verification_link.replace('http://localhost:5000', 'https://saltcast.io')
     
     # Prepare email content
     message = f"Hello {fname} {lname},\n\nPlease verify your email by clicking the link below:\n{verification_link}\n\nThank you!"
