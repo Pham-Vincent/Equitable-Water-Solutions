@@ -46,15 +46,16 @@ Currently we do not use real data and the dashboard serves as a visualization fo
         <div class="right-container">
          
             <div id = 'Location1-container'></div>
-                
+            <div id = 'Location2-container' style="width:85%"></div>
+            <div id = 'Location3-container' style="width:85%"></div>
             </div>
            
             <script>
-                function createpanel(){
+                function createpanel(Number){
                     return `
             <div class = "pinnedlocation-container">
             <p><span style="font-weight:bold;">Dropped Pin</span> at 0 ft </p>
-            <p style="text-align: right;; padding-right: 1.7%;"><a href="https://saltcast.io/map" style=" color: #289D7A; ">Location 1</a></p>
+            <p style="text-align: right;; padding-right: 1.7%;"><a href="https://saltcast.io/map" style=" color: #289D7A; ">Location ${Number}</a></p>
            
            </div>
             <div class="square-containers">
@@ -78,7 +79,7 @@ Currently we do not use real data and the dashboard serves as a visualization fo
                     <div class="slidecontainer">
                         <p>Time Range</p>
                         <div class="grey-box">FORECAST(days)</div>
-                        <input type="range" min="1" max="60" value="60" class="slider" id="myRange">
+                        <input type="range" min="1" max="60" value="60" class="slider" id="myRange.${Number}">
                         <div class="ticks">
                             <!-- Create tick marks at increments of 5 -->
                             <div class="tick"><span class="tick-label">0</span></div>
@@ -121,9 +122,9 @@ Currently we do not use real data and the dashboard serves as a visualization fo
                 <div class="horizontal-divider"></div>
 
                 <div class ="top-salinitycharts">
-                    <div id="dashboard-saltchart" style="width: 50%; height: 400px;"></div>
+                    <div id="dashboard-saltchart${Number}" style="width: 50%; height: 400px;"></div>
                     
-                    <div id="dashboard-saltdial" style="width: 50%; height: 400px;"></div>
+                    <div id="dashboard-saltdial${Number}" style="width: 50%; height: 400px;"></div>
                 </div>
                 <div id="topchart-text"> 
                         <div class = "charttext-box">
@@ -163,7 +164,7 @@ Currently we do not use real data and the dashboard serves as a visualization fo
                     <div class="slidecontainer">
                         <p>Time Range</p>
                         <div class="grey-box">FORECAST(days)</div>
-                        <input type="range" min="1" max="100" value="100" class="slider" id="myRange2">
+                        <input type="range" min="1" max="100" value="100" class="slider" id="myRange2.${Number}">
                         <div class="ticks">
                             <!-- Create tick marks at increments of 10 -->
                             <div class="tick"><span class="tick-label">0</span></div>
@@ -184,16 +185,18 @@ Currently we do not use real data and the dashboard serves as a visualization fo
 
                 <div class="horizontal-divider"></div>
                 <div class="top-barcharts">
-                    <div id="dashboard-barchart-1"></div>
-                    <div id="dashboard-barchart-2"></div>
+                    <div id="dashboard-barchart-1.${Number}"></div>
+                    <div id="dashboard-barchart-2.${Number}"></div>
                 </div>
-                <div id="dashboard-barchart-3"></div>
+                <div id="dashboard-barchart-3.${Number}"></div>
                 </div>
                     `
                 }
                 document.addEventListener('DOMContentLoaded', function() {
             // Insert the result of createpanel() into the container
-            document.getElementById('Location1-container').innerHTML = createpanel();
+            for(let i = 1; i <4; i++)
+
+            document.getElementById(`Location${i}-container`).innerHTML = createpanel(i);
         });
             </script>
             <!-- Link to external JavaScript file -->

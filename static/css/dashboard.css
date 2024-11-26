@@ -72,6 +72,7 @@ body, html {
 
 .right-panel .right-container .square-containers, .bottom-square,
 .pinnedlocation-container{
+    
     border-radius: 5px;
     width: 85%;
     height: auto;
@@ -375,6 +376,7 @@ body, html {
         justify-content: space-between;
         padding-left: 3.39%; 
         padding-right: 3.39%;
+        margin-top: 5% ;
 
       }
 
