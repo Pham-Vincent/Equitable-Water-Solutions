@@ -70,7 +70,9 @@ body, html {
     padding-top: 4%;
 }
 
-.right-panel .right-container .square-containers, .bottom-square{
+.right-panel .right-container .square-containers, .bottom-square,
+.pinnedlocation-container{
+    
     border-radius: 5px;
     width: 85%;
     height: auto;
@@ -135,6 +137,10 @@ body, html {
     background-color: #0A2B57;
 }
 
+
+#Location1-container{
+    width:85%
+}
 .top-salinitycharts{
     display: flex;
     flex-direction: row;
@@ -356,6 +362,38 @@ body, html {
         font-weight: 500;
       }
 
+      .pinnedlocation-container{
+        margin-top: auto;
+        flex-direction:row;
+        margin-bottom: 2.5%;
+        background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+        border: 1px solid var(--unnamed-color-0a2b57);
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #0A2B57;
+        border-radius: 5px;
+        opacity: 1;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 3.39%; 
+        padding-right: 3.39%;
+        margin-top: 5% ;
+
+      }
+
+      .pinnedlocation-container p {
+      /* UI Properties */
+      font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-43) var(--unnamed-font-family-radio-canada-big);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-0a2b57);
+      text-align: left;
+      font: normal normal normal 20px/43px Roboto;
+      letter-spacing: 0px;
+      color: #0A2B57;
+        
+      }
+    
+        
+      
       .radio-buttons{
         width: 20%;
         margin-right: -13%;
@@ -522,6 +560,3 @@ body, html {
         font: normal normal bold 16px/24px Roboto;
         color: #1A1A1A;
     }
-
-
-
