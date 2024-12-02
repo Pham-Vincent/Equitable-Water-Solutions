@@ -44,7 +44,6 @@ Currently we do not use real data and the dashboard serves as a visualization fo
     <div class="right-panel">
         
         <div class="right-container">
-         
             <div id = 'Location1-container'></div>
             <div id = 'Location2-container' style="width:85%"></div>
             <div id = 'Location3-container' style="width:85%"></div>
@@ -55,7 +54,10 @@ Currently we do not use real data and the dashboard serves as a visualization fo
                     return `
             <div class = "pinnedlocation-container">
             <p><span style="font-weight:bold;">Dropped Pin</span> at 0 ft </p>
-            <p style="text-align: right;; padding-right: 1.7%;"><a href="https://saltcast.io/map" style=" color: #289D7A; ">Location ${Number}</a></p>
+            <p style="text-align: right;; padding-right: 1.7%;">
+                <a href="https://saltcast.io/map" style=" color: #289D7A; ">Location ${Number}
+                </a>
+            </p>
            
            </div>
             <div class="square-containers">
@@ -198,6 +200,7 @@ Currently we do not use real data and the dashboard serves as a visualization fo
 
             document.getElementById(`Location${i}-container`).innerHTML = createpanel(i);
         });
+       
             </script>
             <!-- Link to external JavaScript file -->
     <script type="module" src="{{url_for('static',filename='js/dashboard.js')}}"></script>
