@@ -29,7 +29,7 @@ Currently, the model applies weights to the inputs and does not use real neural 
     <div class="arrow-box">
         <div class="input-arrows">
             <span>
-                <div class="arrow"></div>
+                <div class="arrow" id="reservoir-arrow"></div>
             </span>
             <span>
                 <div class="arrow"></div>
@@ -38,16 +38,16 @@ Currently, the model applies weights to the inputs and does not use real neural 
     
         <div class="output-arrows">
             <span>
-                <div class="arrow"></div>
+                <div class="arrow" id="balt-arrow"></div>
             </span>
             <span>
-                <div class="arrow"></div>
+                <div class="arrow" id="chest-arrow"></div>
             </span>
             <span>
-                <div class="arrow"></div>
+                <div class="arrow" id="power-arrow"></div>
             </span>
             <span>
-                <div class="arrow"></div>
+                <div class="arrow" id="down-arrow"></div>
             </span>
         </div>
     </div>
@@ -154,7 +154,6 @@ Currently, the model applies weights to the inputs and does not use real neural 
             const chesterPPM = Math.abs((reservoirLevel * 0.3) + (timeIndex * 0.2));
             const powerPlantPPM = Math.abs((reservoirLevel * 0.7) - (timeIndex * 0.15));
             const downstreamPPM = Math.abs((reservoirLevel * 0.2) + (timeIndex * 0.25));
-
             const reservoirIndexPPM = reservoirLevel;
 
             // Update the output values
@@ -162,6 +161,7 @@ Currently, the model applies weights to the inputs and does not use real neural 
             chesterOutput.textContent = `${Math.round(chesterPPM)} (ppm)`;
             powerPlantOutput.textContent = `${Math.round(powerPlantPPM)} (ppm)`;
             downstreamOutput.textContent = `${Math.round(downstreamPPM)} (ppm)`;
+            // Update the input values
             reservoirSliderPPM.textContent = `${(reservoirLevel)} (ppm)`;
             timeIndexDay.textContent = `Day ${(timeIndex)}`;
 
@@ -170,8 +170,14 @@ Currently, the model applies weights to the inputs and does not use real neural 
             adjustWaveHeight('chester', chesterPPM);
             adjustWaveHeight('powerplant', powerPlantPPM);
             adjustWaveHeight('downstream', downstreamPPM);
-
             adjustWaveHeight('resevoir', reservoirIndexPPM)
+
+            // Adjust arrow height based on ppm values
+            adjustArrowHeight('reservoir-arrow', reservoirIndexPPM);
+            adjustArrowHeight('balt-arrow', baltimorePPM);
+            adjustArrowHeight('chest-arrow', chesterPPM);
+            adjustArrowHeight('power-arrow', powerPlantPPM);
+            adjustArrowHeight('down-arrow', downstreamPPM);
         }
 
         // Function to adjust the height of wave containers based on PPM
@@ -187,6 +193,20 @@ Currently, the model applies weights to the inputs and does not use real neural 
 
             // Set the height of the wave element
             waveElement.style.height = `${heightPercentage}%`;
+        }
+
+        function adjustArrowHeight(id, ppm){
+            const arrowElement = document.querySelector(`#${id}`);
+
+            // Calculate height percentage based on ppm
+            const maxPPM = 150;
+            const minHeight = 25;  // 25px
+            const maxHeight = 55;   // 40px
+
+            const heightPercentage = (ppm / maxPPM) * (maxHeight - minHeight) + minHeight;
+
+            // Set the height of the wave element
+            arrowElement.style.height = `${heightPercentage}px`;
         }
         
         // Add event listeners to both sliders
