@@ -1542,17 +1542,31 @@ function createPlotBand(from, to, color) {
 document.addEventListener('DOMContentLoaded', function() {
     const shortTermRadio = document.getElementById('shortTerm');
     const longTermRadio = document.getElementById('longTerm');
-    const vertical_bar = document.getElementById('long-term-vert-bar');
-    const climate_buttons = document.querySelector('.long-term-radio-buttons')
+    const vertical_bar = document.getElementById('long-term-vert-bar1');
+    const vertical_bar2 = document.getElementById('long-term-vert-bar2');
+    const vertical_bar3 = document.getElementById('long-term-vert-bar3');
+
+    const climate_buttons = document.getElementById('long-term-radio-buttons1');
+    const climate_buttons2 = document.getElementById('long-term-radio-buttons2');
+    const climate_buttons3 = document.getElementById('long-term-radio-buttons3');
+
   
     // Function to toggle content visibility based on the selected radio button
     function toggleContent() {
       if (longTermRadio.checked) {
         vertical_bar.style.display = 'block';
+        vertical_bar2.style.display = 'block';
+        vertical_bar3.style.display = 'block';
         climate_buttons.style.display = 'block'; 
+        climate_buttons2.style.display = 'block'; 
+        climate_buttons3.style.display = 'block'; 
       } else if (shortTermRadio.checked) {
         vertical_bar.style.display = 'none'; 
+        vertical_bar2.style.display = 'none';
+        vertical_bar3.style.display = 'none';
         climate_buttons.style.display = 'none';
+        climate_buttons2.style.display = 'none';
+        climate_buttons3.style.display = 'none';
       }
     }
   
