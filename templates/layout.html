@@ -69,7 +69,7 @@ Functionality includes login popup connected to the navbar and dropdown settings
     
         <nav class="navtop" id="nav">
             <div id="div1">
-                <h1><a href="{{ url_for('index') }}"><img src="static/images/SaltCastGreenText.svg" alt="logo"></a></h1>
+                <h1><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/SaltCastGreenText.svg') }}" alt="logo"></a></h1>
     
                 <div class="nav-options">
                     <a href="{{ url_for('index') }}"><span>Home</span></a>
@@ -111,7 +111,7 @@ Functionality includes login popup connected to the navbar and dropdown settings
     <div class="overlay-login" id="overlay-login"></div>
 
     <div class="form-popup" id="myForm">
-        <div id="close-button" onclick="closeloginForm()"><img src="static/images/close-login.png" alt="Close"></div>
+        <div id="close-button" onclick="closeloginForm()"><img src="{{ url_for('static', filename='images/close-login.png') }}" alt="Close"></div>
         <h2>Sign in or create an account</h2>
         <div class="delimeter"></div>
         <form action="{{ url_for('login') }}" method="post" class="form-container">
