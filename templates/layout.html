@@ -43,11 +43,11 @@ Functionality includes login popup connected to the navbar and dropdown settings
     <script>
         /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
         function myFunction() {
-            var x = document.getElementById("nav");
-            if (x.className === "small-bar") {
-                x.className += "-responsive";
+            var x = document.getElementById("div2");
+            if (x.style.display === "block") {
+                x.style.display = "none";
             } else {
-                x.className = "small-bar";
+                x.style.display = "block";
             }
         }
     </script>
@@ -77,8 +77,8 @@ Functionality includes login popup connected to the navbar and dropdown settings
                     <a href="{{ url_for('map') }}"><span>Map Tool</span></a>
                     <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
                     <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
-
                 </div>
+
                 <div class="grey-back">
                     <div class="login-container">
                         {% if 'loggedin' in session %}
@@ -102,6 +102,17 @@ Functionality includes login popup connected to the navbar and dropdown settings
                         <button class="button" onclick="openloginForm()"><span>Log In</span></button>
                         {% endif %}
                     </div>
+                </div>
+                <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+            <div id="div2">
+                <div id="nav-options-responsive">
+                    <a href="{{ url_for('index') }}"><span>Home</span></a>
+                    <a href="{{ url_for('research') }}"><span>Research Papers</span></a>
+                    <a href="{{ url_for('aboutus') }}"><span>Contact Us</span></a>
                 </div>
             </div>
         </nav>
