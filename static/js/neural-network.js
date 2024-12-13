@@ -51,84 +51,107 @@ function generateData() {
     return data;
 }
 
-Highcharts.chart('neural-model', {
-    chart: {
-        type: 'line',
-        parallelCoordinates: true,
-        inverted: false,
-        
-    },
-    title: false,
-    accessibility: {
-        typeDescription: 'Neural network chart',
-        point: {
-            descriptionFormat: 'node on {series.xAxis.options.custom.layers.(x).label}'
-        }
-    },
-    tooltip: false,
-    exporting:{
-        enabled:false
-    },
-    plotOptions: {
-        line: {
-            lineWidth: 0.5,
-            color: '#142A54',
-            marker: {
-                symbol: 'circle',
-                enabled: true,
-                radius: 15,
-                fillColor: '#142A54',
-                lineWidth: 2,
-                lineColor: '#142A54',
+function renderResponsiveChart() {
+    const screenWidth = window.innerWidth;
+
+    // Define width and height for different screen sizes
+    let w, h;
+    if (screenWidth > 1500) {
+        w = 700;
+        h = 550;
+    } else {
+        w = 500;
+        h = 450;
+    }
+
+    Highcharts.chart('neural-model', {
+        chart: {
+            type: 'line',
+            parallelCoordinates: true,
+            inverted: false,
+            width: w, // Set a smaller width lg-700, md-500
+            height: h, // Reduces space around the chart lg-550, md-450
+            spacing: [-10, -70, -10, -70],
+        },
+        title: false,
+        accessibility: {
+            typeDescription: 'Neural network chart',
+            point: {
+                descriptionFormat: 'node on {series.xAxis.options.custom.layers.(x).label}'
+            }
+        },
+        tooltip: false,
+        exporting:{
+            enabled:false
+        },
+        plotOptions: {
+            line: {
+                lineWidth: 1,
+                color: '#0A2B57',
+                marker: {
+                    symbol: 'circle',
+                    enabled: true,
+                    radius: 15,
+                    fillColor: '#0A2B57',
+                    lineWidth: 3,
+                    lineColor: '#0A2B57',
+                    states: {
+                        hover: {
+                            lineColor: '#0A2B57',
+                        }
+                    }
+                },
                 states: {
+                    inactive: {
+                        enabled: false
+                    },
                     hover: {
-                        lineColor: '#142A54'
+                        lineColor: '#0A2B57',
+                        lineWidthPlus: 0
                     }
                 }
+            }
+        },
+        xAxis: {
+            visible: false, // Hide the xAxis completely
+            labels: {
+                enabled: false // Disable all labels on the xAxis
             },
-            states: {
-                inactive: {
-                    enabled: false
+            lineWidth: 0, // Remove axis line
+            tickWidth: 0 // Remove ticks
+        },
+        yAxis: Array.from({ length: layers.length }, (_, i) => ({
+            type: 'category',
+            visible: false, // Hide the yAxis completely
+            labels: {
+                enabled: false // Disable all labels on the yAxis
+            },
+            gridLineWidth: 0, // Remove gridlines
+            tickWidth: 0, // Remove ticks
+            accessibility: {
+                description: `Axis for the nodes contained the layer ${layers[i].label}.`
+            }
+        })),
+        series: generateData(),
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
                 },
-                hover: {
-                    lineColor: '#142A54',
-                    lineWidthPlus: 0
+                chartOptions: {
+                    xAxis: {
+                        categories: layers.map(layer => layer.activation)
+                    }
                 }
-            }
+            }]
         }
-    },
-    xAxis: {
-        visible: false, // Hide the xAxis completely
-        labels: {
-            enabled: false // Disable all labels on the xAxis
-        },
-        lineWidth: 0, // Remove axis line
-        tickWidth: 0 // Remove ticks
-    },
-    yAxis: Array.from({ length: layers.length }, (_, i) => ({
-        type: 'category',
-        visible: false, // Hide the yAxis completely
-        labels: {
-            enabled: false // Disable all labels on the yAxis
-        },
-        gridLineWidth: 0, // Remove gridlines
-        tickWidth: 0, // Remove ticks
-        accessibility: {
-            description: `Axis for the nodes contained the layer ${layers[i].label}.`
-        }
-    })),
-    series: generateData(),
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                xAxis: {
-                    categories: layers.map(layer => layer.activation)
-                }
-            }
-        }]
-    }
-});
+    });
+
+}
+
+
+// Initial render
+renderResponsiveChart();
+// Re-render on window resize
+window.addEventListener('resize', renderResponsiveChart);
 

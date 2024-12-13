@@ -1,7 +1,12 @@
 flask
 flask-cors
+flask
+flask-cors
 pandas
 python-dotenv
+mysql-connector-python
+mysql
+mysqlclient
 mysql-connector-python
 mysql
 mysqlclient

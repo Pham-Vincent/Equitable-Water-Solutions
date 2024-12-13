@@ -16,27 +16,94 @@ Date: 10/31/2024
     margin-top: -4%; /* set page container under navbar */
 }
 
-.content-box{
+.container-wrapper{
+    display: flex;
+    flex-direction: column;
     width: 85%;
-    height: 70%;
+    height: 65%;
     margin: 4% auto 0 auto;
-    background-color: white;
+    gap: 1%;
+}
+
+.content-box-labels{
+    height: 10%;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font: normal normal bold 15px Roboto;
+    gap: 3%;
+    color: #142A54;
+}
+.content-box-labels #label-1, .content-box-labels #label-3{
+    width: 25%;
+    height: auto;
+    text-align: center;
+}
+.content-box-labels #label-2{
+    width: 50%;
+    height: auto;
+    text-align: center;
+}
+
+.content-box{
+    height: 90%;
+    width: auto;
+    background-color: rgba(255, 255, 255, 0);
     border-radius: 1em;
     display: flex;
+    gap: 3%;
 }
 
 .input-container, .output-container, .neural-model-container{
-    margin: 3%;
+    padding: 3% auto 3% auto;
     height: auto;
+    border-radius: 2%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
 }
 
 
 .input-container{
     display: flex;
     flex-direction: column;
-    width: 30%;
-    z-index: 3;
+    width: 25%;
+    background-color: white;
 }
+
+.input-container > h1{
+    margin: 0 auto;
+    font: italic normal normal 1.2rem Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+}
+
+#resevoir-input{
+    width: auto;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+   align-items: flex-start;
+   margin-left: 8%;
+}
+
+#resevoir-input h1{
+    height: 10%;
+    width: auto;
+    font: italic normal normal 1.2rem Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+    margin-bottom: -15%;
+    margin-top: 10%;
+}
+
+#resevoir-input > div{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 
 .slidecontainer h1{
     font: italic normal normal 1.2rem Roboto;
@@ -50,6 +117,7 @@ Date: 10/31/2024
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 4;
 }
 
 .neural-model-container{
@@ -57,8 +125,8 @@ Date: 10/31/2024
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transform: translateX(1em);
-    width: 30%;
+    width: 50%;
+    background-color: white;
 }
 
 .neural-model-container > .neural-model{
@@ -68,18 +136,15 @@ Date: 10/31/2024
 
 .output-container{
     height: auto;
-    width:25%;
+    width: 25%;
     display: flex;
     flex-direction: column;
-    width: 30%;
-    margin-left: 0;
-    margin-right: 0;
     gap: .2em;
     justify-content: center;     
     align-items: center; 
-    
-    gap: -2%;
+    background-color: white;
 }
+
 
 .neural-model-container h1{
     font: italic normal normal 1.5rem Roboto;
@@ -98,34 +163,105 @@ Date: 10/31/2024
     margin-bottom: 0;
 }
 
-
 .wave-container {
-    width: 40%;
-    height: 25%;
-    border: 3px solid black; 
+    width: 50%;
+    height: 100%;
     position:relative;
     justify-content: center;     
     align-items: center;         
     box-sizing: border-box;
     display: flex;
-    z-index: 100000;
-    margin-bottom: 20px;
     overflow: hidden;
+}
+
+.output-container > span > p{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: italic normal normal 20px Roboto;
+    color: #0A2B57;
+    font-weight: 600;
+}
+
+.output-container span{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 25%;
+    align-items: center;
+    justify-content: center;
+    gap: 4%;
+  }
+
+.resevoir-container{
+    width: 90%;
+    height: 65%;
+    display: flex;
+    position: relative;
+    justify-content: center;     
+    align-items: center;         
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-left: 3%;
+}
+
+#reservoirSlider{
+    width:130%;
+    height: 100%;
+}
+
+.resevoir-container #resevoir{
+    width: 100%;
+    height: 100%;
+    max-height: 250%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/wave.png');
+    background-size: 500px 200px;  
+    background-repeat: repeat-x;
+    animation: flow 10s linear infinite;
+    bottom: 0;
+    overflow: auto;
+    filter: brightness(1.2);
+}
+
+.resevoir-container > #reservoir-number{
+    font: normal normal normal 30px Roboto; 
+    color: #0A2B57;                        
+    font-weight: 600;                        
+    margin: 0;                                                    
+    text-align: center;        
+    position: absolute;                      
+    top: 25%;                                
+    left: 50%;                               
+    transform: translate(-50%, -50%);             
+}
+
+
+.resevoir-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Adjust to fit the container */
+    height: 100%; /* Adjust to fit the container */
+    z-index: 2; /* Ensures the image is on top */
+    filter: brightness(1.5);
 }
 
 .wave-container h1 {
     font: normal normal normal 1.75rem Roboto; 
     color: #0A2B57;                        
     font-weight: 600;                        
-    margin: 0;                              
-    z-index: 100001;                         
+    margin: 0;                                                    
     text-align: center;        
     position: absolute;                      
     top: 50%;                                
     left: 50%;                               
-    transform: translate(-50%, -50%);       
-    background: transparent;
-    line-height: 1;           
+    transform: translate(-50%, -50%);             
 }
 
 
@@ -134,7 +270,8 @@ Date: 10/31/2024
    max height = 275%
    Change height accordingly from 100% to 275%
 */
-.wave-container #baltimore, .wave-container #chester, .wave-container #downstream, .wave-container #powerplant{
+.wave-container #baltimore, .wave-container #chester, .wave-container #downstream, 
+.wave-container #powerplant{
     width: 100%;
     height: 100%;
     max-height: 275%;
@@ -142,26 +279,35 @@ Date: 10/31/2024
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50%;
     background-image: url('../images/wave.png');
-    background-size: contain;  
+    background-size: 300px 100px;  
     background-repeat: repeat-x;
     animation: flow 10s linear infinite;
     bottom: 0;
-    filter: brightness(1.5);
+    filter: brightness(1.2);
     overflow: auto;
 }
 
 /* background-postion: x y; change y to change height (best range for image .2em-6em) */
 @keyframes flow{
     0%{
-        background-position: 0px 3em;
+        background-position: 0px 7em;
     }
     100%{
-        background-position: 1000px 3em;
+        background-position: 1000px 7em;
     }
 }
 
+@media screen and (min-width: 1500px) {
+
+    /* change the wave min, max height for larger screens */
+    .wave-container #baltimore, .wave-container #chester, .wave-container #downstream, 
+    .wave-container #powerplant, .resevoir-container #resevoir{
+        max-height: 200%;
+        min-height: 100%;
+    }
+
+}
 .slidecontainer{
     width: 88%;
     margin: 0 auto;
@@ -207,16 +353,13 @@ Date: 10/31/2024
     display: flex;
     justify-content:flex-end;
     align-items: center;
-    background-image: linear-gradient(to left, #142A54, #50BAB6);
-    font: normal normal normal 10px/24px Roboto;
-    color: #1A1A1A;
-    height: 3em;
+    background-color: lightgray;
+    height: 25px;
     width: auto;
     margin-bottom: 1em;
   }
 
   .slidecontainer p{
-    margin: 0 0 1em 0;
     font: normal normal bold 16px/24px Roboto;
     color: #1A1A1A;
   }
@@ -233,3 +376,66 @@ Date: 10/31/2024
     color: #1A1A1A;
     user-select: none;
   }
+
+  .arrow {
+    width:100px;
+    height:35px;
+    display: flex;
+
+  }
+  .arrow:before {
+    content: "";
+    background: #0A2B57;
+    width:15px;
+    clip-path: polygon(0 10px,calc(100% - 15px) 10px,calc(100% - 15px) 0,100% 50%,calc(100% - 15px) 100%,calc(100% - 15px) calc(100% - 10px),0 calc(100% - 10px));
+    animation: a1 2s infinite linear;
+  }
+  @keyframes a1 {
+    90%,100%{flex-grow: 1}
+  }
+
+  .input-arrows{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;     
+    align-items: center; 
+  }
+
+  .output-arrows{
+    height: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;     
+    align-items: center; 
+  }
+
+  .arrow-box{
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    height: 57%;
+    margin: 8% auto 0 auto;
+    position: absolute;
+    z-index: 3;
+  }
+
+  .input-arrows > span{
+    height: 50%;
+    display: flex;
+    justify-content: center;     
+    align-items: center; 
+    margin-left: 5%;
+  }
+
+  .output-arrows > span{
+    height: 25%;
+    display: flex;
+    justify-content: center;     
+    align-items: center; 
+    margin-left: -5%;
+  }
+  
+
+  
