@@ -7,9 +7,10 @@ mysql
 mysqlclient
 scipy
 numpy
-langchain-community
 faiss-cpu
-langchain-openai
-langchain-core
-langchain-text-splitters
-pydantic
+langchain==0.3.7
+langchain_core==0.3.19
+langchain_openai==0.2.9
+langchain-community==0.3.5
+langchain-text-splitters==0.3.2
+pydantic==2.9.2
