@@ -1,3 +1,15 @@
+"""
+Exposes all modules and their publicly used functions allowing for granular imports or 
+importing all at once.
+
+Examples:
+>>> # Import all modules
+>>> from static.python import *
+>>>
+>>> # Import specific parts of a module
+>>> from static.python import aboutusFunction, contactusFunction
+"""
+
 from .About import aboutusFunction, contactusFunction
 from .Database import DatabaseConn
 from .FeatureExtraction import interpolation, AverageDailySalinity, MonthlyAverages
