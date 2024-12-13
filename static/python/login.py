@@ -24,7 +24,7 @@ import hashlib, re
 import smtplib
 from email.mime.text import MIMEText
 
-from chatbot.scripts import find_project_root, find_env_file
+from chatbot import find_project_root, find_env_file
 from .Database import DatabaseConn
 
 SERVER = False

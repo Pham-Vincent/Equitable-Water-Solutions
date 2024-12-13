@@ -60,7 +60,7 @@ from static.python import (
     overridecheck, 
     returnPinned
 )
-from chatbot.scripts import (
+from chatbot import (
   Chatbot,
   setup_routes,
   find_project_root,
