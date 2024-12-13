@@ -7,19 +7,34 @@ Functionality: This file is designed to control functionality of Login/Register.
 Output: Session Variables for login
 Date:7/23/2024
 """
-from flask import Flask,render_template,request, redirect, url_for, session, flash
+from pathlib import Path
+import os
+from flask import (
+    Flask, 
+    render_template,
+    request, 
+    redirect, 
+    url_for, 
+    session, 
+    flash
+)
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from dotenv import load_dotenv
-from Database import *
-from Graph import *
-from login import *
-from FeatureExtraction import *
 import hashlib, re
 import smtplib
 from email.mime.text import MIMEText
 
-#Change File path depending on Device - SERVER PATH
-load_dotenv('/home/bitnami/htdocs/static/env/.env')
+from chatbot.scripts import find_project_root, find_env_file
+from .Database import DatabaseConn
+
+SERVER = False
+
+# Change File path depending on Device - SERVER PATH
+if SERVER:
+    load_dotenv('/home/bitnami/htdocs/static/env/.env')
+else:
+    # Find and load the .env file dynamically
+    load_dotenv(find_env_file(find_project_root(Path(__file__))))
 
 # Initialize the token serializer
 serializer = URLSafeTimedSerializer(os.getenv("SECRET_KEY"))

@@ -18,6 +18,7 @@ def find_project_root(this_dir: Path) -> Path:
         if (this_dir / '.git').exists():
             return this_dir
         this_dir = this_dir.parent
+        
     raise FileNotFoundError("Could not find project root")
 
 def find_env_file(root_dir: Path) -> Path:

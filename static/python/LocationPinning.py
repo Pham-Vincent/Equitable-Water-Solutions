@@ -10,7 +10,7 @@ Date:10/31/2024
 
 #This File will Contain All the Functions Utilized for location Pinning 
 from flask import Flask,jsonify,render_template,request, redirect, url_for, session
-from Database import *
+from .Database import DatabaseConn
 
 
 #Utilized to get the Current Userid returns to MarkerPinning.js

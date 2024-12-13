@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 # Import utility functions for finding directories
-from dir_utils import get_vector_db_dir, find_env_file, find_project_root
+from .dir_utils import get_vector_db_dir, find_env_file, find_project_root
 
 
 class TranscriptItem(BaseModel):

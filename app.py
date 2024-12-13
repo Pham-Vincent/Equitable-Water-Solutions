@@ -1,4 +1,3 @@
-
 """ 
 Title:app.py
 Author: Vincent Pham, Nicholas Gammel
@@ -13,32 +12,63 @@ Date:4/25/2024
 """
 
 
-#Import necessary libraries
 
-from flask import Flask,jsonify,render_template,request, redirect, url_for, session, flash
-
+# Import necessary libraries
+from pathlib import Path
+from flask import (
+    Flask, 
+    jsonify, 
+    render_template, 
+    request, 
+    redirect, 
+    url_for, 
+    session, 
+    flash
+)
 from dotenv import load_dotenv
 import os
 import pandas as pd
 from flask_cors import CORS
-import sys
 
-sys.path.append('static/python')
-from Database import *
-from Graph import *
-from login import *
-from About import *
-from FeatureExtraction import *
-from LocationPinning import * 
+# Import local modules
+from static.python import (
+    # Database
+    DatabaseConn,
+    
+    # Graphs
+    Maryland_Tidal_Graph, 
+    Virginia_Tidal_Graph, 
+    MultiDepthGraphing,
+    
+    # Login
+    verify_email, 
+    registerFunction, 
+    loginFunction, 
+    checkLogin,
+    
+    # About
+    aboutusFunction, 
+    contactusFunction,
+    
+    # Feature Extraction
+    AverageDailySalinity, 
+    MonthlyAverages,
+    
+    # Location Pinning
+    retrieve_sessionid, 
+    add_pin_to_database, 
+    overridecheck, 
+    returnPinned
+)
+from chatbot.scripts import (
+  Chatbot,
+  setup_routes,
+  find_project_root,
+  find_env_file
+)
 
-# AI Imports
-from chatbot.scripts.chatbot import Chatbot
-from chatbot.scripts.routes import setup_routes
-
-#Path To Env File
-dotenv_path='static/env/.env'
-#Opens Env File
-load_dotenv(dotenv_path=dotenv_path)
+# Dynamically find and load the .env file
+load_dotenv(find_env_file(find_project_root(Path(__file__))))
 
 #Flask Instance
 app = Flask(__name__)
@@ -49,8 +79,7 @@ CORS(app)
 #Secret Key used for Hashing
 app.secret_key = os.getenv('SECRET_KEY')
 
-openai_api_key = os.getenv('OPENAI_API_KEY')
-chatbot = Chatbot(api_key=openai_api_key)
+chatbot = Chatbot(api_key=os.getenv('OPENAI_API_KEY'))
 
 setup_routes(app, chatbot)
 
@@ -71,7 +100,7 @@ def create_MultiDepth_graph():
   #Establishes Connection With DB 
   conn = DatabaseConn()
 
-  #Query For SQL
+  # Query For SQL
   mycursor = conn.cursor()
 
   Query = "SELECT Time, `Depth:0`,`Depth:5`,`Depth:10`,`Depth:15`,`Depth:20`,`Depth:25`,`Depth:30` FROM Maryland_Salinity_Depth WHERE PermitNumber = \"" + str(marker_title) + "\""
@@ -89,20 +118,20 @@ def create_MultiDepth_graph():
 # Route to graph surface salinity of Maryland points
 @app.route('/create_MD_graph',methods=['GET','POST'])
 def create_MD_graph():
-  #Gets Marker Title Of current Info Window From Ajax 
+  # Gets Marker Title Of current Info Window From Ajax 
   marker_title = request.values
-  #Gets Marker Title Name  
+  # Gets Marker Title Name  
   marker_title = list(marker_title.keys())[0]
 
-  #Establishes Connection With DB 
+  # Establishes Connection With DB 
   conn = DatabaseConn()
   mycursor = conn.cursor()
-  #Query For SQL
+  # Query For SQL
   Query = "SELECT Time, `Depth:0` FROM Maryland_Salinity_Depth WHERE PermitNumber = \"" + str(marker_title) + "\""
-  #Executes The Query
+  # Executes The Query
   mycursor.execute(Query)
 
-  #Get The Results of The Query
+  # Get The Results of The Query
   myresult = mycursor.fetchall()
   Salinity_data = [[Time,Salinity] for Time,Salinity in (myresult)]
   Salinity_df= pd.DataFrame(Salinity_data,columns=['Time','Salinity'])
@@ -110,42 +139,42 @@ def create_MD_graph():
   return(Maryland_Tidal_Graph(str(marker_title),Salinity_df))
 
   
-#Whenever a create_graph signal is sent will run this function
+# Whenever a create_graph signal is sent will run this function
 @app.route('/create_VA_graph',methods=['GET', 'POST'])
 def create_graph():
-  #Getting the JSON values from current Marker that is being graphed 
+  # Getting the JSON values from current Marker that is being graphed 
   WithdrawValues = list(request.form.values())
   return Virginia_Tidal_Graph(WithdrawValues)
 
 
-#This will Render Our "HomePage" aka our Map 
+# This will Render Our "HomePage" aka our Map 
 @app.route('/',methods=['GET', 'POST'])
-#Returns homepage with session variables
+# Returns homepage with session variables
 def index():
   if 'loggedin' in session:
       return render_template('index.html', username = session['username'])
   return render_template('index.html')
   
 @app.route('/map', methods=['GET', 'POST'])
-#Returns Map webpage
+# Returns Map webpage
 def map():
     checkLogin('map.html')
     return render_template('map.html')
 
-#register page route
+# register page route
 @app.route('/register', methods=['GET', 'POST'])
-#Registers user and adds information to database
+# Registers user and adds information to database
 def register():
     return registerFunction()
 
-#login page route
+# login page route
 @app.route('/login', methods=['GET', 'POST'])
-#Logs user in using information from database
+# Logs user in using information from database
 def login():
     return loginFunction()
 
 @app.route('/profile')
-#Sets up profile page only when logged in
+# Sets up profile page only when logged in
 def profile():
     if 'loggedin' in session:
         conn = DatabaseConn()
@@ -159,14 +188,14 @@ def profile():
     return render_template('index.html')
 
 @app.route('/dashboard')
-#Sets up dashboard page only when logged in
+# Sets up dashboard page only when logged in
 def dashboard():
     checkLogin('dashboard.html')
     return render_template('dashboard.html')
 
 
 @app.route('/logout')
-#deletes session variables
+# deletes session variables
 def logout():
     # Remove session data, this will log the user out
    session.pop('loggedin', None)
@@ -178,16 +207,16 @@ def logout():
    return redirect(referrer or url_for('index'))
 
 
-#Routing for the about us page
+# Routing for the about us page
 @app.route('/aboutus', methods=['GET', 'POST'])
-#Function leads to about us page, sets up function call for the contact us section
+# Function leads to about us page, sets up function call for the contact us section
 def aboutus():
    return aboutusFunction()
 
 def contactus():
    return contactusFunction()
 
-#Routing for research paper page
+# Routing for research paper page
 @app.route('/researchpapers')
 def research():
     checkLogin('research.html')
@@ -196,12 +225,12 @@ def research():
 @app.route('/antonia')
 def antonia():
    return render_template('Antonia.html')
-#returns the  information of the logged in user
+# returns the  information of the logged in user
 @app.route('/session-data')
 def sessionData():
   return(retrieve_sessionid())
 
-#Utilized to Pin location into the Database
+# Utilized to Pin location into the Database
 @app.route('/pin-location',methods=['POST'])
 def pinLocation():
   return(add_pin_to_database(request.get_json()))
