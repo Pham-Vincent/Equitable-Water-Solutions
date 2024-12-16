@@ -41,8 +41,9 @@ def verify_email(token):
     cursor.close()
     conn.close()
 
-    flash('Your email has been verified. You can now log in.', 'success')
-    return redirect(url_for('login'))
+    msg='Your email has been verified. You can now log in.'
+    flash(msg, 'success')
+    return render_template('index.html', msg=msg)
 
 
 def send_verification_email(user_email, fname, lname):
