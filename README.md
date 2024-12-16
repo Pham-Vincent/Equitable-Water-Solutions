@@ -2,6 +2,8 @@
 
 ## Authors: Nicholas Gammel, Vincent Pham, William Lamuth
 
+### Special Thanks For Creating and Integrating Chatbot: Spencer Presley
+
 ## Build Instructions
 
 ### Step 1: pip install -r requirements.txt
