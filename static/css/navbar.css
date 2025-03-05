@@ -62,7 +62,7 @@ Date: 10/31/2024
 }
 
 /* highlight the current page on the nav bar */
-.navtop .nav-options .active{
+.navtop .nav-options .active, .navtop #nav-options-responsive .active{
     background-color: #DBEFD4;
     border-radius: 5px;
     width: auto;
@@ -163,35 +163,27 @@ Date: 10/31/2024
 
 
 /* Hide the link that should open and close the topnav on small screens */
-.nav-options .icon, .small-bar a span{
+.navtop .icon{
     display: none;
 }
 
-.small-bar-responsive{
+#div2{
     display: none;
-    padding: 10px;
-}
-
-.small-bar-responsive a{
-    text-decoration: none;
-    padding: 15px;
-    color: #1A1A1A;
-    font: normal normal normal 14px/24px Roboto;
-}
-
-.small-bar-responsive a span:hover{
-    background-color: #DBEFD4;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.small-bar-responsive .active{
-    background-color: #DBEFD4;
-    border-radius: 5px;
     width: auto;
-    height: auto;
-    color:  #1A1A1A;
-    font: normal normal bold 14px/24px Roboto;
+    height: 200%;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+#div2 a{ 
+    display: block;
+    text-align: center;
+    padding: 2%;
+}
+
+#div2 span{
+    padding: 1% 2% 1% 2%;
 }
 
 .fa{
@@ -201,6 +193,7 @@ Date: 10/31/2024
 .fa-bars{
     color: #2cac86; 
     cursor: pointer; 
+    margin-right: 8%;
 }
 
 
@@ -214,7 +207,7 @@ Date: 10/31/2024
         display: none;
     }
 
-    .nav-options a.icon {
+    .navtop a.icon {
         display: contents;
     }
 
@@ -227,33 +220,11 @@ Date: 10/31/2024
         display: none;
     }
 
-
-}
-@media screen and (max-width: 600px) {
-    .navtop .small-bar a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    
-    .navtop .small-bar-responsive a span{
-        padding: 10px 20px;
-    }
-
-    .navtop .small-bar-responsive{
-        background-color: white;
-        height: 150px;
-        width: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content:center;
-        align-items: center;
-        padding: 20px;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-    }
     .small-bar a span{
         display: none;
     }
+
+    
 
 }
 
@@ -280,6 +251,7 @@ body{
     width: auto;
     height: auto;
     margin-top: 60px;
+    overflow-x: hidden;
   }
 
 
