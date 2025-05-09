@@ -12,6 +12,7 @@ Currently, the model applies weights to the inputs and does not use real neural 
 
 {% block content %}
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/antoniaPage.css') }}">
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/navigator.js"> </script>
@@ -218,5 +219,15 @@ Currently, the model applies weights to the inputs and does not use real neural 
     </script>
     
 </div>
-
+<!-- Start: Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-left">
+            <p>The website was designed and developed by Salisbury University Computer Science Department <br>COSC 425/426 Software Engineering Capstone Team (2024): Nicholas Gammel, Vincent Pham, William Lamuth<br>Faculty Mentors: Dr. Shuangquan (Peter) Wang and Dr. Xiaohong (Sophie) Wang</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 SaltCast. All rights reserved.</p>
+    </div>
+<!-- End: Footer-->
 {% endblock %}

@@ -1,0 +1,42 @@
+/* General footer styling */
+footer {
+    background-color: #0a2b57; /* Dark background */
+    color: #ecf0f1; /* Light text color */
+    padding: 20px 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Footer content container */
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Footer left section */
+.footer-left {
+    max-width: 100%;
+    text-align: center;
+}
+
+.footer-left h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.footer-left p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Footer bottom section */
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    border-top: 1px solid #34495e;
+    padding-top: 10px;
+}

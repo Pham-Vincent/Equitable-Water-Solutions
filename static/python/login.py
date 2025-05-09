@@ -19,7 +19,11 @@ import smtplib
 from email.mime.text import MIMEText
 
 #Change File path depending on Device - SERVER PATH
-load_dotenv('/home/bitnami/htdocs/static/env/.env')
+#Server
+#load_dotenv('/home/bitnami/htdocs/static/env/.env')
+
+#Local
+load_dotenv('static\env\.env')
 
 # Initialize the token serializer
 serializer = URLSafeTimedSerializer(os.getenv("SECRET_KEY"))
